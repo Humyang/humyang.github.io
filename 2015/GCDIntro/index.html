@@ -1,0 +1,946 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> iOS GCD 的简单实用介绍2 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              iOS GCD 的简单实用介绍2
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-19
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/笔记/">笔记</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/GCDIntro/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/GCDIntro/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>一篇介绍 GCD 博客的笔记sdfsdf</p>
+<a id="more"></a>
+<hr>
+<h1 id="正文">正文</h1><p><a href="http://jeffreysambells.com/2013/03/01/asynchronous-operations-in-ios-with-grand-central-dispatch" target="_blank" rel="external">原文地址</a></p>
+<blockquote>
+<p>使用 GCD 可以轻松的在 iOS 执行异步操作。<br>当执行长时间的运算而不想界面卡死时可以用到 GCD</p>
+</blockquote>
+<p>Grand Central Dispatch, or GCD for short, is a <strong>C API</strong> that makes it exceptionally easy to <strong>perform asynchronous operations in iOS</strong>. Asynchronous operations are a fundamental part of every iOS app when you want to <strong>perform long operations without freezing or blocking the user interface</strong>. You can image that if your entire app froze without warning then your users would get quite irritated.。</p>
+<ul>
+<li>blocks 或 operations 会分配到其它线程执行任务。</li>
+<li>主 UI 线程可以继续执行它的任务，如 UI 响应和手势检测。</li>
+<li>GCD 队列可以并发执行或串联执行(一个完成后接着另一个继续执行)</li>
+<li>dispatch_get_main_queue 对于使用 UIKit 方法更新 iOS 应用程序的 UI 非常有用，但不是线程安全的，所以任何你所做的更新 UI 元素的调用必须始终在 main queue 中完成。</li>
+<li>一旦 block 被分配到 queue 中，它将不可能被暂停，在它执行完成之前你什么都做不了。如果你有长时间运行的任务，如加载 URL，你应该在每个步骤之间添加逻辑检测判断它是否应该继续执行。</li>
+</ul>
+<p>With GCD, you can <strong>line up blocks of code</strong> in a queue for the system to execute as necessary. These blocks or operations, will be dispatched in the queue to <strong>another thread</strong>, <strong>leaving your main UI thread</strong> to continue its tasks. It’s important to know that GCD will use separate threads for it’s operations but which thread it isn’t important to you. All that matters is that your long running process in a separate thread outside the main thread where your UI and gestures are running.</p>
+<p>GCD queues can be concurrent or serial but serial queues (where there is one queue and each item is executed one after the other in order) are easier to understand so we’ll look at those.</p>
+<p>The more important functions you’ll need are for creating the queue:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#21019;&#24314;&#19968;&#20010; queue&#10;dispatch_queue_t dispatch_queue_create(const char *label, dispatch_queue_attr_t attr);</span><br></pre></td></tr></table></figure>
+<p>and adding blocks to the queue:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#21521; queue &#20998;&#37197; block&#10;void dispatch_async(dispatch_queue_t queue, dispatch_block_t block);</span><br></pre></td></tr></table></figure>
+<p>There’s also a couple helper functions for retrieving specific queues such as:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#20004;&#20010;&#36741;&#21161;&#20351;&#29992;&#30340;&#29305;&#27530; queue&#10;dispatch_queue_t dispatch_get_current_queue(void);//&#23558; block &#20998;&#37197;&#21040;&#24403;&#21069;&#30340;&#38431;&#21015;&#10;dispatch_queue_t dispatch_get_main_queue(void);// &#23558; block &#20998;&#37197;&#21040; UI &#20027;&#32447;&#31243;</span><br></pre></td></tr></table></figure>
+<p>The <code>dispatch_get_current_queue</code> function will return the current queue from which the block is dispatched and the <code>dispatch_get_main_queue</code> function will return the main queue where your UI is running.</p>
+<p>The <code>dispatch_get_main_queue</code> function is <strong>very useful for updating the iOS app’s UI as UIKit methods are not thread safe</strong> (with a few exceptions) so any calls you make to update UI elements <strong>must always be done </strong>from the main queue.</p>
+<p>A typical GCD call would look something like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;// Doing something on the main thread&#10;&#10;//&#21019;&#24314;&#33258;&#23450;&#20041; queue&#10;dispatch_queue_t myQueue = dispatch_queue_create(&#34;My Queue&#34;,NULL);&#10;dispatch_async(myQueue, ^&#123;&#10;    // Perform long running process&#10;    &#10;    //&#22312;&#20027; UI queue &#26356;&#26032;&#30028;&#38754;&#10;    dispatch_async(dispatch_get_main_queue(), ^&#123;&#10;        // Update the UI&#10;        &#10;    &#125;);&#10;&#125;); &#10;&#10;// Continue doing other stuff on the &#10;// main thread while process is running.</span><br></pre></td></tr></table></figure>
+<p>GCD relies on block so it has a really nice, readable syntax. It becomes clear what happes in the background thread and the main thread. For example, here’s how you might load a few images</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#22312; background thread &#21152;&#36733;&#22270;&#29255;&#65292;&#21152;&#36733;&#23436;&#25104;&#21518;&#20351;&#29992; dispatch_get_main_queue &#26356;&#26032; main UI &#30028;&#38754;&#10;NSArray *images = @[@&#34;http://example.com/image1.png&#34;,&#10;                 @&#34;http://example.com/image2.png&#34;,&#10;                 @&#34;http://example.com/image3.png&#34;,&#10;                 @&#34;http://example.com/image4.png&#34;];&#10;&#10;dispatch_queue_t imageQueue = dispatch_queue_create(&#34;Image Queue&#34;,NULL);&#10;&#10;for (NSString *urlString in images) &#123;&#10;    dispatch_async(imageQueue, ^&#123;&#10;        &#10;        NSURL *url = [NSURL URLWithString:urlString];&#10;        NSData *imageData = [NSData dataWithContentsOfURL:url];&#10;        UIImage *image = [UIImage imageWithData:imageData];&#10;&#10;        NSUInteger imageIndex = [images indexOfObject:urlString];&#10;        UIImageView *imageVIew = (UIImageView *)[self.view viewWithTag:imageIndex];&#10;        &#10;        if (!imageView) return;&#10;        &#10;        dispatch_async(dispatch_get_main_queue(), ^&#123;&#10;            // Update the UI&#10;            [imageVIew setImage:image];&#10;        &#125;);&#10;        &#10;    &#125;); &#10;&#125;&#10;&#10;// Continue doing other stuff while images load.</span><br></pre></td></tr></table></figure>
+<p>You’ll notice I check for imageView before dispatching to the main thread. This avoids the main queue dispatch if the network request took a long time and the imageView is no longer there for one reason or another. <strong>Once a block has been dispatched onto a queue, it’s not possible to stop it. </strong>The block will execute to completion and there’s nothing you can do. If you have a very long running process, such as loading a URL, you should add logic between each step to check to see if it should continue and if it’s still appropriate to finish the operation.</p>
+<h1 id="Aside:_Concurrency">Aside: Concurrency</h1><p>If you want to run a single independent queued operation and you’re not concerned with other concurrent operations, you can use the global concurrent queue:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t globalConcurrentQueue =&#10;dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)</span><br></pre></td></tr></table></figure>
+<p>This will return a concurrent queue with the given priority as outlined in the documentation:</p>
+<p> MARCH 01, 2013<br> PERMALINK<br>Grand Central Dispatch, or GCD for short, is a C API that makes it exceptionally easy to perform asynchronous operations in iOS. Asynchronous operations are a fundamental part of every iOS app when you want to perform long operations without freezing or blocking the user interface. You can image that if your entire app froze without warning then your users would get quite irritated.</p>
+<p>With GCD, you can line up blocks of code in a queue for the system to execute as necessary. These blocks or operations, will be dispatched in the queue to another thread, leaving your main UI thread to continue its tasks. It’s important to know that GCD will use separate threads for it’s operations but which thread it isn’t important to you. All that matters is that your long running process in a separate thread outside the main thread where your UI and gestures are running.</p>
+<p>GCD queues can be concurrent or serial but serial queues (where there is one queue and each item is executed one after the other in order) are easier to understand so we’ll look at those.</p>
+<p>The more important functions you’ll need are for creating the queue:</p>
+<p>dispatch_queue_t dispatch_queue_create(const char *label, dispatch_queue_attr_t attr);<br>and adding blocks to the queue:</p>
+<p>void dispatch_async(dispatch_queue_t queue, dispatch_block_t block);<br>There’s also a couple helper functions for retrieving specific queues such as:</p>
+<p>dispatch_queue_t dispatch_get_current_queue(void);<br>dispatch_queue_t dispatch_get_main_queue(void);<br>The dispatch_get_current_queue function will return the current queue from which the block is dispatched and the dispatch_get_main_queue function will return the main queue where your UI is running.</p>
+<p>The dispatch_get_main_queue function is very useful for updating the iOS app’s UI as UIKit methods are not thread safe (with a few exceptions) so any calls you make to update UI elements must always be done from the main queue.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;A typical GCD call would look something like this:&#10;&#10;// Doing something on the main thread&#10;&#10;dispatch_queue_t myQueue = dispatch_queue_create(&#34;My Queue&#34;,NULL);&#10;dispatch_async(myQueue, ^&#123;&#10;    // Perform long running process&#10;    &#10;    dispatch_async(dispatch_get_main_queue(), ^&#123;&#10;        // Update the UI&#10;        &#10;    &#125;);&#10;&#125;); &#10;&#10;// Continue doing other stuff on the &#10;// main thread while process is running.</span><br></pre></td></tr></table></figure>
+<p>GCD relies on block so it has a really nice, readable syntax. It becomes clear what happes in the background thread and the main thread. For example, here’s how you might load a few images:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;NSArray *images = @[@&#34;http://example.com/image1.png&#34;,&#10;                 @&#34;http://example.com/image2.png&#34;,&#10;                 @&#34;http://example.com/image3.png&#34;,&#10;                 @&#34;http://example.com/image4.png&#34;];&#10;&#10;dispatch_queue_t imageQueue = dispatch_queue_create(&#34;Image Queue&#34;,NULL);&#10;&#10;for (NSString *urlString in images) &#123;&#10;    dispatch_async(imageQueue, ^&#123;&#10;        &#10;        NSURL *url = [NSURL URLWithString:urlString];&#10;        NSData *imageData = [NSData dataWithContentsOfURL:url];&#10;        UIImage *image = [UIImage imageWithData:imageData];&#10;&#10;        NSUInteger imageIndex = [images indexOfObject:urlString];&#10;        UIImageView *imageVIew = (UIImageView *)[self.view viewWithTag:imageIndex];&#10;        &#10;        if (!imageView) return;&#10;        &#10;        dispatch_async(dispatch_get_main_queue(), ^&#123;&#10;            // Update the UI&#10;            [imageVIew setImage:image];&#10;        &#125;);&#10;        &#10;    &#125;); &#10;&#125;&#10;&#10;// Continue doing other stuff while images load.</span><br></pre></td></tr></table></figure>
+<p>You’ll notice I check for imageView before dispatching to the main thread. This avoids the main queue dispatch if the network request took a long time and the imageView is no longer there for one reason or another. Once a block has been dispatched onto a queue, it’s not possible to stop it. The block will execute to completion and there’s nothing you can do. If you have a very long running process, such as loading a URL, you should add logic between each step to check to see if it should continue and if it’s still appropriate to finish the operation.</p>
+<p>That’s it. Start build queues and making your UI more responsive.</p>
+<h3 id="Aside:_Concurrency-1">Aside: Concurrency</h3><p>If you want to run a single independent queued operation and you’re not concerned with other concurrent operations, you can use the global concurrent queue:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;dispatch_queue_t globalConcurrentQueue =&#10;dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)</span><br></pre></td></tr></table></figure>
+<p>This will return a concurrent queue with the given priority as outlined in the documentation:</p>
+<blockquote>
+<p><strong>DISPATCH_QUEUE_PRIORITY_HIGH</strong> Items dispatched to the queue will run at high priority, i.e. the queue will be scheduled for execution before any default priority or low priority queue.</p>
+<p><strong>DISPATCH_QUEUE_PRIORITY_DEFAULT</strong> Items dispatched to the queue will run at the default priority, i.e. the queue will be scheduled for execution after all high priority queues have been scheduled, but before any low priority queues have been scheduled.</p>
+<p><strong>DISPATCH_QUEUE_PRIORITY_LOW</strong> Items dispatched to the queue will run at low priority, i.e. the queue will be scheduled for execution after all default priority and high priority queues have been scheduled.</p>
+<p><strong>DISPATCH_QUEUE_PRIORITY_BACKGROUND</strong> Items dispatched to the queue will run at background priority, i.e. the queue will be scheduled for execution after all higher priority queues have been scheduled and the system will run items on this queue on a thread with background status as per setpriority(2) (i.e. disk I/O is throttled and the thread’s scheduling priority is set to lowest value).</p>
+<p>from queue.h</p>
+</blockquote>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/iOS-Swift-Base/">iOS Swift 基础</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/GCDIntro/"
+               data-title="iOS GCD 的简单实用介绍2" data-url="http://yoursite.com/2015/GCDIntro/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">1.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Aside:_Concurrency"><span class="nav-number">2.</span> <span class="nav-text">Aside: Concurrency</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Aside:_Concurrency-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">Aside: Concurrency</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62263979-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>

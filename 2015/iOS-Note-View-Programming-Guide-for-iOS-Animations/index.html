@@ -1,0 +1,1101 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> iOS 笔记 《View Programming Guide for iOS：Animations》 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              iOS 笔记 《View Programming Guide for iOS：Animations》
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-05-12
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/翻译/">翻译</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/iOS-Note-View-Programming-Guide-for-iOS-Animations/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/iOS-Note-View-Programming-Guide-for-iOS-Animations/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>记录关于学习过的 iOS 文档</p>
+<a id="more"></a>
+<p><a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009503-CH1-SW2" target="_blank" rel="external">原文地址</a></p>
+<hr>
+<h1 id="动画效果">动画效果</h1><p>动画效果提供用户界面不同状态之间提供流体视觉过渡。在 iOS 中，动画效果在重新定位视图，更改视图的尺寸，从视图层次结构移除视图，和隐藏视图中广泛使用。你可以使用动画效果对用户传递反馈或实现有趣的视觉效果。</p>
+<p>在 iOS 中，创建复杂的动画效果不需要你写任何绘制代码。这个章节描述的所有动画效果技术是使用 Core Animation 提供的内置支持。你要做的只是触发动画效果并让 Core Animation 处理单个框架的渲染。只需要简单的几行代码就可以创建非常复杂的动画效果。</p>
+<h2 id="什么可以动画？">什么可以动画？</h2><p>UIKit 和 Core Animation 都提供了动画效果的支持，但每个技术所提供支持的级别都有变化。在 UIKit 中，动画效果是使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView" target="_blank" rel="external">UIView</a> 对象执行。视图支持的动画效果基础集合覆盖许多常用任务。例如，你可以动画更改视图的属性或使用过渡动画效果把一个视图集合替换为另一个。</p>
+<p>表 4-1 列出可动画的属性－有内置的动画效果支持的属性－由 UIView 类支持。可动画不意味着<br>动画效果会自动发生。更改这些属性的值正常的只会立刻更新属性 (和视图) 而没有动画效果。需要以动画更改，你必须在动画块内部更改属性的值。这在 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW3" target="_blank" rel="external">Animating Property Changes in a View</a> 中描述。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>你能做的更改</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/frame" target="_blank" rel="external">frame</a></td>
+<td>修改这个属性更改视图的尺寸和相对它的父视图的坐标系统的位置。(如果 transform 属性不包含恒等转换，修改 bounds 或 center 属性作为替代。)</td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/bounds" target="_blank" rel="external">bounds</a></td>
+<td>修改这个属性更改视图的尺寸。</td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/center" target="_blank" rel="external">center</a></td>
+<td>修改这个属性更改视图相对于它的父视图的坐标系统的位置。</td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/transform" target="_blank" rel="external">transform</a></td>
+<td>修改这个属性相对于视图的中心点拉伸，旋转，或翻转。这个属性的转换效果总是在 2D 空间执行。(要执行 3D 的转换效果，你必须使用 Core Animation 动画视图的层对象。)</td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/alpha" target="_blank" rel="external">alpha</a></td>
+<td>修改这个属性渐变视图的透明度。</td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/backgroundColor" target="_blank" rel="external">backgroundColor</a></td>
+<td>修改这个属性更改视图的背景颜色。</td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/contentStretch" target="_blank" rel="external">contentStretch</a></td>
+<td>修改这个属性更改视图的内容拉伸填充可用空间时的方式。</td>
+</tr>
+</tbody>
+</table>
+<p>动画视图过渡是让你更改视图层次结构一种的方式，它在视图控制器提供的方式之外。尽管你应该使用视图控制器管理简明的视图层次结构，但许多时候你想替换视图层次结构的所有或一部分。在这种情况下，你可以使用基于视图的过渡效果动画视图的添加或移除。</p>
+<p>在你想执行更复杂的动画效果的地方，或 UIView 类不支持的动画效果，你可以使用 Core Animation 和类的底层的层来创建动画效果。因为视图和层对象是紧密关联在一起的，更改视图的层会影响到视图它自己。使用 Core Animation，你可以为你的视图的层动画以下类型的变更：</p>
+<ul>
+<li>层的尺寸和位置</li>
+<li>在执行过渡效果时被用到的中心点</li>
+<li>在 3D 空间过渡层或子层</li>
+<li>从层的层次结构添加或移除层</li>
+<li>层相对于兄弟层的 Z 字序。</li>
+<li>层的阴影</li>
+<li>层的边界 (包含层的边角是否为圆角)</li>
+<li>调整尺寸操作期间拉伸层的一部分</li>
+<li>层的不透明度</li>
+<li>位于层的边界外部的子层的裁剪行为</li>
+<li>当前的层内容</li>
+<li>层的光栅化行为</li>
+</ul>
+<blockquote>
+<p><strong>说明：</strong> 如果你的视图承载自定义层对象－意思是，层对象没有关联的视图－你必须使用 Core Animation 对它们动画更改。</p>
+</blockquote>
+<p>虽然该章节涉及少数 Core Animation 行为，它只涉及到从视图的代码中初始化它们。更多完整的关于如何使用 Core Animation 动画层的信息，见 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40004514" target="_blank" rel="external"><em>Core Animation Programming Guide</em></a> 和 <em>Core Animations Cookbook</em>。</p>
+<h2 id="在视图中动画更改属性">在视图中动画更改属性</h2><p>为了动画更改 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView" target="_blank" rel="external">UIView</a> 类的属性，你必须在动画效果块内部包裹这些更改。术语动画效果块 (<em>animation block</em>) 一般指代指定动画变化的代码。在 iOS 4 和以后版本，你可以使用块对象创建一个动画效果块。在早期的 iOS 版本，是使用 UIView 类指定的类方法标记动画效果块的开始和结束。这些技术都支持同样的配置选项和提供相同控制数量的动画执行过程。不管怎样，基于块的方法有可能的情况下是首选的。</p>
+<p>下面章节的焦点在为了动画更改视图属性而使用的代码。关于如何在视图之间创建动画过渡效果，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW9" target="_blank" rel="external">Creating Animated Transitions Between Views</a>。</p>
+<h3 id="使用基于块的方法开始动画">使用基于块的方法开始动画</h3><p>在 iOS 4 之后的版本，可以使用基于块的类方法开始动画效果。这里是几个为动画效果块提供了不同配置级别的基于块的方法。</p>
+<ul>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/animateWithDuration:animations:" target="_blank" rel="external">animateWithDuration:animations:</a></li>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/animateWithDuration:animations:completion:" target="_blank" rel="external">animateWithDuration:animations:completion:</a></li>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/animateWithDuration:delay:options:animations:completion:" target="_blank" rel="external">animateWithDuration:delay:options:animations:completion:</a></li>
+</ul>
+<p>因为这些是类方法，这些动画效果块创建后是没绑定到单个视图的。因此，你可以使用这些方法创建涉及多个视图更改的单个动画效果。例如，清单 4-1 的代码用超过一秒的时间周期在淡出另一个视图同时淡入一个视图。当这个代码执行时，指定的动画效果立刻在另一个线程开始以避免锁定当前线程或应用程序主线程。</p>
+<p><strong>清单 4-1</strong> 执行简单的基于块的动画效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[UIView animateWithDuration:1.0 animations:^&#123;&#10;        firstView.alpha = 0.0;&#10;        secondView.alpha = 1.0;&#10;&#125;];</span><br></pre></td></tr></table></figure>
+<p>上面例子中的动画效果只执行一次使用 Easy-in,Easy-out 的动画效果曲线。如果你想更改默认动画效果参数，你必须使用 animateWithDuration:delay:options:animations:completion: 方法执行你的动画效果。这个方法让你自定义下面的动画效果参数：</p>
+<ul>
+<li>开始动画效果之前延迟使用</li>
+<li>动画效果期间使用的时间曲线类型</li>
+<li>动画效果应该重复的时间数字</li>
+<li>当动画效果结束后是否应当自动倒转它自己</li>
+<li>当动画效果正在处理时触摸事件是否应当发出</li>
+<li>动画效果在开始之前是应该打断正在处理的动画效果或等待执行完成</li>
+</ul>
+<p>其它的 animateWithDuration:animations:completion: 和 animateWithDuration:delay:options:animations:completion: 方法可以指定完后的处理块。你可以使用完成处理为你的应用程序指定动画效果完成后的操作。完成处理也是连结单个动画效果到一起的一种方式。</p>
+<p>清单 4-2 显示第一个动画执行完成之后使用完成处理初始化新的动画效果的例子。首先调用 animateWithDuration:delay:options:animations:completion: 设置淡出动画效果和配置一些自定义选项。当动画效果完成时，它的完成处理开始运行并设置第二半动画效果，延迟之后淡回视图。</p>
+<p>使用完成处理时连结多个动画效果的主要方式。</p>
+<p><strong>清单 4-2</strong> 创建一个动画效果块和自定义选项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;- (IBAction)showHideView:(id)sender&#10;&#123;&#10;    // Fade out the view right away&#10;    [UIView animateWithDuration:1.0&#10;        delay: 0.0&#10;        options: UIViewAnimationOptionCurveEaseIn&#10;        animations:^&#123;&#10;             thirdView.alpha = 0.0;&#10;        &#125;&#10;        completion:^(BOOL finished)&#123;&#10;            // Wait one second and then fade in the view&#10;            [UIView animateWithDuration:1.0&#10;                 delay: 1.0&#10;                 options:UIViewAnimationOptionCurveEaseOut&#10;                 animations:^&#123;&#10;                    thirdView.alpha = 1.0;&#10;                 &#125;&#10;                 completion:nil];&#10;        &#125;];&#10;&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>重要提示:</strong>修改一个属性的值而属性涉及到的动画效果已经在处理中它不会停止当前的动画效果。而且，当前的动画效果会继续并且会动画到你已分配给属性的新值。</p>
+</blockquote>
+<h3 id="使用_begin/commit_方法开始动画效果">使用 begin/commit 方法开始动画效果</h3><p>如果你的应用程序运行在 iOS 3.2 之前的版本，你必须使用 UIView 的类方法 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/beginAnimations:context:" target="_blank" rel="external">beginAnimations:context:</a> 和 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/commitAnimations" target="_blank" rel="external">commitAnimations</a> 定义你的动画效果块。这些方法标记了你的动画效果块的开始和结束。在 commitAnimations 方法调用之后在这些方法之间修改的属性会动画成新值。动画效果的执行在次要的线程中避免锁定当前线程或应用程序的主线程。</p>
+<blockquote>
+<p><strong>说明：</strong>如果你在 iOS 4 或之后的版本，你应该使用基于块的方法动画你的内容。关于如何使用这些方法，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW4" target="_blank" rel="external">Starting Animations Using the Block-based Methods</a>。</p>
+</blockquote>
+<p>清单 4-3 显示的代码实现与清单 4-1 相同的行为但使用的是 begin/commit 方法。如清单 4-1，这个代码用超过一秒的时间在另一个视图淡出时淡入一个视图。不管怎样，在这个例子中，你必须使用单独的方法设置动画的长短。</p>
+<p><strong>清单 4-3</strong> 执行一个简单的 begin/commit 动画效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[UIView beginAnimations:@&#34;ToggleViews&#34; context:nil];&#10;[UIView setAnimationDuration:1.0];&#10; &#10;// Make the animatable changes.&#10;firstView.alpha = 0.0;&#10;secondView.alpha = 1.0;&#10; &#10;// Commit the changes and perform the animation.&#10;[UIView commitAnimations];</span><br></pre></td></tr></table></figure>
+<p>默认情况下，所有可动画的属性在动画效果块内的更改都会被动画。如果你只想动画一些更改但其他的不动画，使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationsEnabled:" target="_blank" rel="external">setAnimationsEnabled:</a> 方法暂时禁用动画效果，更改你不想被动画的属性，然后再次调用 setAnimationsEnabled: 重新启用动画效果。你可以调用类方法 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/areAnimationsEnabled" target="_blank" rel="external">areAnimationsEnabled</a> 判断动画效果当前是否启用。</p>
+<blockquote>
+<p><strong>说明：</strong>修改一个属性的值而属性涉及到的动画效果已经在处理中它不会停止当前的动画效果。而且，当前的动画效果会继续并且会动画到你已分配给属性的新值。</p>
+</blockquote>
+<h4 id="配置_Begin/Commit_动画效果参数">配置 Begin/Commit 动画效果参数</h4><p>要为 begin/commit 动画效果块配置动画效果参数，你可以任意使用几个 UIView 的类方法。表 4-2 列出这些方法和描述如何使用它们配置你的动画效果。大多数这些方法只能从 begin/commit 动画效果内部被调用但一些也可以被基于块的动画效果使用。如果你没在动画效果中调用这些方法中的一个，相应的属性会使用默认值。更多关于每个方法关联的默认值，见 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/doc/uid/TP40006816" target="_blank" rel="external">UIView Class Reference</a> 中这些方法的描述。</p>
+<p><strong>表 4-2</strong>配置动画效果块的方法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>用途 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationStartDate:" target="_blank" rel="external">setAnimationStartDate:</a> <br> <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationDelay:" target="_blank" rel="external">setAnimationDelay:</a></td>
+<td>使用这些方法中的一个指定执行过程什么时候开始执行。如果指定的开始时间已经超过 (或延时为 0)，动画效果会尽可能早开始。</td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationDuration:" target="_blank" rel="external">setAnimationDuration:</a></td>
+<td>使用这个方法设置在执行动画效果时的时间周期</td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationCurve:" target="_blank" rel="external">setAnimationCurve:</a></td>
+<td>使用这个方法设置动画效果的时间曲线。这个控制动画效果是否线性执行或在某些时候改变速度。</td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationRepeatCount:" target="_blank" rel="external">setAnimationRepeatCount:</a> <br> <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationRepeatAutoreverses:" target="_blank" rel="external">setAnimationRepeatAutoreverses:</a></td>
+<td>使用这个方法设置动画效果的重复时间的数字和每次动画效果的完整周期结束是否逆转执行。更多关于使用这些方法的信息，见  <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW15" target="_blank" rel="external">Implementing Animations That Reverse Themselves</a>。</td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationDelegate:" target="_blank" rel="external">setAnimationDelegate:</a> <br><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationWillStartSelector:" target="_blank" rel="external">setAnimationWillStartSelector:</a> <br><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationDidStopSelector:" target="_blank" rel="external">setAnimationDidStopSelector:</a></td>
+<td>使用这些方法在动画效果之前或之后立即执行代码。更多关于使用委托的信息，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW8" target="_blank" rel="external">Configuring an Animation Delegate</a></td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationBeginsFromCurrentState:" target="_blank" rel="external">setAnimationBeginsFromCurrentState:</a></td>
+<td>使用这个方法立刻停止所有之前的动画效果并从停止的地方开始新的动画效果。如果你传入 NO 到方法中，而不是 YES，新的动画效果不会立刻开始执行直到之前的动画效果停止。</td>
+</tr>
+</tbody>
+</table>
+<p>清单 4-4 显示的代码被用作实现与清单 4-2 中的代码的相同的行为但使用 begin/commit 方法。如前，代码淡出一个视图，等待一秒，然后淡化它回来。为了实现动画效果的第二部分，代码设置动画效果委托和实现停止处理方法。这个处理方法然后设置动画效果的第二部分然后运行它。</p>
+<p><strong>清单 4-4</strong> 使用 begin/commit 方法配置动画效果参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// This method begins the first animation.&#10;- (IBAction)showHideView:(id)sender&#10;&#123;&#10;    [UIView beginAnimations:@&#34;ShowHideView&#34; context:nil];&#10;    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];&#10;    [UIView setAnimationDuration:1.0];&#10;    [UIView setAnimationDelegate:self];&#10;    [UIView setAnimationDidStopSelector:@selector(showHideDidStop:finished:context:)];&#10; &#10;    // Make the animatable changes.&#10;    thirdView.alpha = 0.0;&#10; &#10;    // Commit the changes and perform the animation.&#10;    [UIView commitAnimations];&#10;&#125;&#10; &#10;// Called at the end of the preceding animation.&#10;- (void)showHideDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context&#10;&#123;&#10;    [UIView beginAnimations:@&#34;ShowHideView2&#34; context:nil];&#10;    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];&#10;    [UIView setAnimationDuration:1.0];&#10;    [UIView setAnimationDelay:1.0];&#10; &#10;    thirdView.alpha = 1.0;&#10; &#10;    [UIView commitAnimations];&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="配置动画效果委托">配置动画效果委托</h4><p>如果你想在动画效果之前或之后立即执行一些代码，你必须为你的 begin/commit 动画效果块关联一个委托对象和一个开始或停止选择器。使用 UIVIew 的类方法 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationDelegate:" target="_blank" rel="external">setAnimationDelegate:</a> 设置委托对象和用类方法 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationWillStartSelector:" target="_blank" rel="external">setAnimationWillSelector:</a> 和 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationDidStopSelector:" target="_blank" rel="external">setAnimationDidStopSelector:</a> 设置开始和停止选择器。在动画效果的期间，动画效果系统在相应的时间调用你的委托对象给你机会执行你的代码。</p>
+<p>你的动画效果委托方法特征需要像下面一样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)animationWillStart:(NSString *)animationID context:(void *)context;&#10;- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;</span><br></pre></td></tr></table></figure>
+<p>两个方法中的参数 <em>animationID</em> 和 <em>context</em> 都是你在动画效果块开始时传递给 beginAnimations:context: 的相同参数：</p>
+<ul>
+<li><em>animationID</em>－应用程序提供的字符串用来标识一个动画效果。</li>
+<li><em>context</em>－应用程序提供的对象你可以对委托传递额外的信息。</li>
+</ul>
+<p>setAnimationDidStopSelector: 选择器方法有一个额外的参数－一个布尔值如果是 YES 动画效果会运行完成。如果这个参数的值是 NO，动画效果会过早的被另一个动画效果取消或停止。</p>
+<blockquote>
+<p><strong>说明：</strong> 尽管动画效果委托能用在基于块的方法中，但那里通常不需要使用它们。作为代替，把想在动画效果之前运行的代码放置在块的开始和把想在动画效果结束后运行的代码放置在完成处理。</p>
+</blockquote>
+<h3 id="嵌套动画效果块">嵌套动画效果块</h3><p>你可以对动画效果块的一部分指定不同的计时和配置选项通过嵌套额外的动画效果块。如名称所示，嵌入动画效果块是在已有的动画效果块内部创建一个新的动画效果块。已嵌入的动画效果与它的父动画效果同时开始但根据它自己的配置选项运行 (大部分)。默认情况下，嵌套动画效果继承父辈的持续时间和动画曲线但即使是这些选项也可以按需要重写。</p>
+<p>清单 4-5 的说明如何使用嵌套动画效果修改计时，持续时间，和一些动画效果在整个组中的行为。在这个例子中，两个视图开始淡化直到完全透明，但 anotherView 对象的透明度在最终隐藏之前会来回变更一段时间。<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewAnimationOptionOverrideInheritedCurve" target="_blank" rel="external">UiViewAnimationOptionOverrideInheritedCurve</a> 和 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewAnimationOptionOverrideInheritedDuration" target="_blank" rel="external">UIViewAnimationOptionOverrideInheritedDuration</a> 键用作在嵌套动画效果块中允许第一个动画效果的曲线和持续时间值被第二个动画效果修改。如果没有这些键，外部动画效果块的持续时间和曲线值会被用作代替。</p>
+<p><strong>清单 4-5</strong> 拥有不同配置信息的嵌套动画效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[UIView animateWithDuration:1.0&#10;        delay: 1.0&#10;        options:UIViewAnimationOptionCurveEaseOut&#10;        animations:^&#123;&#10;            aView.alpha = 0.0;&#10; &#10;            // Create a nested animation that has a different&#10;            // duration, timing curve, and configuration.&#10;            [UIView animateWithDuration:0.2&#10;                 delay:0.0&#10;                 options: UIViewAnimationOptionOverrideInheritedCurve |&#10;                          UIViewAnimationOptionCurveLinear |&#10;                          UIViewAnimationOptionOverrideInheritedDuration |&#10;                          UIViewAnimationOptionRepeat |&#10;                          UIViewAnimationOptionAutoreverse&#10;                 animations:^&#123;&#10;                      [UIView setAnimationRepeatCount:2.5];&#10;                      anotherView.alpha = 0.0;&#10;                 &#125;&#10;                 completion:nil];&#10; &#10;        &#125;&#10;        completion:nil];</span><br></pre></td></tr></table></figure>
+<p>如果你使用 begin/commit方法创建你的动画效果，嵌套的工作与基于块的方法非常相似。每个连续调用 beginAnimations:context: 内已经打开一个动画效果块你可以按需要进行配置创建新的嵌套动画效果块。任何配置的更改都会在最近打开的动画效果块中应用。所有动画效果块在提交和执行之前都必须闭合和调用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/commitAnimations" target="_blank" rel="external">commitAnimations</a>。</p>
+<h3 id="实现逆转它自己的动画效果">实现逆转它自己的动画效果</h3><p>当创建与重复计数关联的可逆转动画效果时，考虑为重复计数指定一个非整数值。对于一个自动逆转的动画效果，动画效果的每一个完整周期包含动画原始值到新值然后再返回。如果你想动画效果在新值结束，添加 0.5 到重复计数使动画效果完成所需的额外一半周期在新值结束。如果不包含这一半的步骤，你的动画效果将在原始值与新值之间重复，这可能不是你想要的视觉效果。</p>
+<h2 id="创建视图之间的动画过渡效果">创建视图之间的动画过渡效果</h2><p>视图过渡效果帮助你掩盖视图层次结构中与增加，移除，隐藏或显示视图关联的突然变化。使用视图过渡效果实现下面类型的变更：</p>
+<ul>
+<li><strong>更改已有视图的子视图可见性。</strong>当你想对已有的视图时做相对较小的更改时通常选择这个选项。</li>
+<li><strong>替换视图层次结构中的一个视图成不同的视图。</strong>当你想替换屏幕上所有的或大部分的视图层次结构时通常选择这个选项。</li>
+</ul>
+<blockquote>
+<p><strong>重要提示：</strong>视图的过渡效果不能与视图控制器开始的过渡效果混淆，例如模态视图控制器的呈现或推新的视图控制器到导航堆栈之上。视图过渡效果只影响到视图层次结构，而视图控制器过渡效果还能更改活跃的视图控制器。因此，对于视图过渡效果，当你开始过渡效果时视图控制器是活跃，当过渡效果完成时会保留活跃。<br> 更多关于如何使用视图控制器呈现新的内容，见 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457" target="_blank" rel="external"><em>View Controller Programming Guide for iOS</em></a>。</p>
+</blockquote>
+<h3 id="更改视图的子视图">更改视图的子视图</h3><p>更改视图的子视图使你可以对视图做适度的修改。例如，你可以通过添加或移除子视图切换父视图两个不同状态之间。动画效果完成时，显示的是同样的视图但它的内容是不同的。</p>
+<p>在 iOS 4 和之后，使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/transitionWithView:duration:options:animations:completion:" target="_blank" rel="external">transitionWithView:duration:options:animations:completion:</a> 方法开始对视图的过渡动画效果。在动画效果块中传递这个方法，这个方法只会更改正常的动画与子视图相关的显示，隐藏，添加，或移除。动画效果的这个限制使视图可以创建动画前和动画后的视图快照版本并在在两个图像之间动画，这样更高效。如果你需要动画其他更改，当调用这个方法时你可以包含 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewAnimationOptionAllowAnimatedContent" target="_blank" rel="external">UIVIewAnimationOptionAllowAnimatedContent</a> 选项。包含这个选项防止视图创建快照并直接动画所有更改。</p>
+<p>清单 4-6 例子说明如何使用过度动画效果使它看起来像已经添加一个新的文本输入页面。在这个例子中，主视图包含两个嵌入式文本视图。文本视图使用相同的配置，但一个视图可见时其它总是隐藏。当用户触击按钮创建新页面时，这个方法切换两个视图的可见性，对用户显示一个新的空页面和一个空的文本视图准备接收文本。过渡效果完成之后，视图使用一个私有方法从旧页面保存文本并重置当前隐藏的文本视图使它可以稍后重用。视图然后整理它的指针当如果用户仍需要其他新页面时它可以做同样的事情。</p>
+<p><strong>清单 4-6</strong>将已存在的文本视图交换为空文本视图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (IBAction)displayNewPage:(id)sender&#10;&#123;&#10;    [UIView transitionWithView:self.view&#10;        duration:1.0&#10;        options:UIViewAnimationOptionTransitionCurlUp&#10;        animations:^&#123;&#10;            currentTextView.hidden = YES;&#10;            swapTextView.hidden = NO;&#10;        &#125;&#10;        completion:^(BOOL finished)&#123;&#10;            // Save the old text and then swap the views.&#10;            [self saveNotes:temp];&#10; &#10;            UIView*    temp = currentTextView;&#10;            currentTextView = swapTextView;&#10;            swapTextView = temp;&#10;        &#125;];&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你需要在 iOS 3.2 或更早版本执行视图过渡效果，你可以使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationTransition:forView:cache:" target="_blank" rel="external">setAnimationTransition:forView:cache:</a> 方法为转换效果指定参数。你为这个方法传递的视图与传递给 transitionWithView:duration:options:animations:completion: 方法的第一个参数是相同一个。清单 4-7 显示你所需要创建的动画效果块的基础结构。注意实现完整的块在清单 4-6 中显示，你将需要配置一个动画效果委托与 did-stop 的处理，在 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW8" target="_blank" rel="external">Configuring an Animation Delegate</a> 中描述。</p>
+<p><strong>清单 4-7</strong>使用 begin/commit 方法更改子视图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[UIView beginAnimations:@&#34;ToggleSiblings&#34; context:nil];&#10;[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];&#10;[UIView setAnimationDuration:1.0];&#10; &#10;// Make your changes&#10; &#10;[UIView commitAnimations];</span><br></pre></td></tr></table></figure>
+<h3 id="将视图替换成不同视图">将视图替换成不同视图</h3><p>当你想界面发生显著变化时可以使用替换视图。因为这个技术只交换视图 (不是视图控制器)，你需要负责设计你的应用程序的相应的控制器对象。这个技术使用一些标准的过渡效果用简单的方式快速呈现新视图。</p>
+<p>在 iOS 4 和之后，使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/transitionFromView:toView:duration:options:completion:" target="_blank" rel="external">transitionFromView:toView:duration:options:completion:</a> 方法过渡两个视图之间。这个方法实际上从你的视图层次结构移除第一个视图并插入其他的，因此如果你想保持第一个视图你应该确认有对它的引用。如果你想隐藏视图而不是从视图层次结构移除它们，传入 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewAnimationOptionShowHideTransitionViews" target="_blank" rel="external">UIViewAnimationOptionShowHideTransitionViews</a> 键作为选项之一。</p>
+<p>清单 4-8 的代码用作交换被单独视图控制器管理的两个主视图之间。在这个例子中视图控制器的根视图总是显示两个子视图中的一个 (primaryView 或 secondaryView)。每个视图都呈现同样的内容但都以不同的方式。视图控制器使用成员变量 displayingPrimary (一个布尔值) 追踪在给定时间显示哪一个视图是显示的。翻转方向的更改根据哪个视图正在显示。</p>
+<p><strong>清单 4-8</strong>在视图控制器中的两个视图之间切换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;- (IBAction)toggleMainViews:(id)sender &#123;&#10;    [UIView transitionFromView:(displayingPrimary ? primaryView : secondaryView)&#10;        toView:(displayingPrimary ? secondaryView : primaryView)&#10;        duration:1.0&#10;        options:(displayingPrimary ? UIViewAnimationOptionTransitionFlipFromRight :&#10;                    UIViewAnimationOptionTransitionFlipFromLeft)&#10;        completion:^(BOOL finished) &#123;&#10;            if (finished) &#123;&#10;                displayingPrimary = !displayingPrimary;&#10;            &#125;&#10;    &#125;];&#10;&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>说明：</strong>除了交换视图外，你的视图控制器代码还需要管理主视图和次视图的读取和卸载。关于如何使用视通控制器加载和卸载，见 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457" target="_blank" rel="external"><em>View Controller Programming Guide for iOS</em></a>。</p>
+</blockquote>
+<h2 id="连结多个动画效果到一起">连结多个动画效果到一起</h2><p>UIView 动画效果接口提供连结单个动画效果块的支持使它们能按顺序执行替代同时执行。如何处理连结动画效果块取决于你是使用基于块的动画效果方法或 begin/commit 方法：</p>
+<ul>
+<li>对使用基于块的动画效果，使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/animateWithDuration:animations:completion:" target="_blank" rel="external">animateWithDuration:animations:completion:</a> 和<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/animateWithDuration:delay:options:animations:completion:" target="_blank" rel="external">animateWithDuration:delay:options:animations:completion:</a> 方法提供的完成处理执行任意后续动画效果。</li>
+<li>对使用 begin/commit 动画效果，对动画效果分配一个委托对象和一个 did-stop 选择器。关于如何对你的动画效果分配委托对象，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW8" target="_blank" rel="external">Configuring an Animation Delegate</a>。</li>
+</ul>
+<p>一个替代连结多个动画效果到一起的方式是使用嵌套动画效果设置不同的延迟系数在不同时间开始动画效果。更多关于如何嵌套动画效果的信息，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW11" target="_blank" rel="external">Nesting Animation Blocks</a>。</p>
+<h2 id="一起动画视图和层的更改">一起动画视图和层的更改</h2><p>应用程序可以按需要自由的混合基于视图和基于层的动画效果代码但处理动画效果参数的配置取决于谁是层的拥有者。更改视图拥有的层等于更改视图它自己，任何你对层的属性应用的动画效果都遵从当前基于视图的动画效果块的动画效果参数。如果是自己创建的层这说法不正确。自定义层对象忽略基于视图的动画效果块的参数并使用默认的核心动画效果参数作为替代。</p>
+<p>如果你想为你创建的层自定义动画效果参数，你必须直接使用 Core Animation。通常，使用 Core Animation 制作层动画涉及到创建 <a href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CABasicAnimation_class/index.html#//apple_ref/occ/cl/CABasicAnimation" target="_blank" rel="external">CABasicAnimation</a> 对象或 <a href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CAAnimation_class/index.html#//apple_ref/occ/cl/CAAnimation" target="_blank" rel="external">CAAnimation</a> 的具体子类。然后添加动画效果到相应的层。你可以在基于视图的动画效果块的外部或内部应用这个动画效果。</p>
+<p>清单 4-9 显示在同一时间修改视图和自定义层的动画效果。视图在这个例子中包含一个在它的边界的中心的自定义 <a href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CALayer_class/index.html#//apple_ref/occ/cl/CALayer" target="_blank" rel="external">CALayer</a> 对象。这个动画以逆时针旋转视图而层以顺时针旋转。因为是以相反方向旋转，层保存相对屏幕的原始方向并且不会出现明显旋转。视图在层的下面旋转 360 度并返回它的原始方向。这个例子主要演示如何混合视图和层的动画效果。这个类型的混合不应该用在需要精确定时的情景下。</p>
+<p><strong>清单 4-9</strong> 混合视图和层的动画效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;[UIView animateWithDuration:1.0&#10;    delay:0.0&#10;    options: UIViewAnimationOptionCurveLinear&#10;    animations:^&#123;&#10;        // Animate the first half of the view rotation.&#10;        CGAffineTransform  xform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-180));&#10;        backingView.transform = xform;&#10; &#10;        // Rotate the embedded CALayer in the opposite direction.&#10;        CABasicAnimation*    layerAnimation = [CABasicAnimation animationWithKeyPath:@&#34;transform&#34;];&#10;        layerAnimation.duration = 2.0;&#10;        layerAnimation.beginTime = 0; //CACurrentMediaTime() + 1;&#10;        layerAnimation.valueFunction = [CAValueFunction functionWithName:kCAValueFunctionRotateZ];&#10;        layerAnimation.timingFunction = [CAMediaTimingFunction&#10;                        functionWithName:kCAMediaTimingFunctionLinear];&#10;        layerAnimation.fromValue = [NSNumber numberWithFloat:0.0];&#10;        layerAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(360.0)];&#10;        layerAnimation.byValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(180.0)];&#10;        [manLayer addAnimation:layerAnimation forKey:@&#34;layerAnimation&#34;];&#10;    &#125;&#10;    completion:^(BOOL finished)&#123;&#10;        // Now do the second half of the view rotation.&#10;        [UIView animateWithDuration:1.0&#10;             delay: 0.0&#10;             options: UIViewAnimationOptionCurveLinear&#10;             animations:^&#123;&#10;                 CGAffineTransform  xform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-359));&#10;                 backingView.transform = xform;&#10;             &#125;&#10;             completion:^(BOOL finished)&#123;&#10;                 backingView.transform = CGAffineTransformIdentity;&#10;         &#125;];&#10;&#125;];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>说明：</strong>在清单 4-9 中，你也可以在基于视图的动画效果块外部创建和应用 CABasicAnimation 对象实现同样的结果。所有的动画效果最终依靠 Core Animatino 为它们执行。因此，如果它们提交的时间大约相同，它们会一起运行。</p>
+</blockquote>
+<p>如果需要精确定时基于视图与层之间的动画效果，推荐你使用 Core Animation 创建全部动画效果。你可能找到一些使用 Core Animation 更容易执行的动画效果。例如，在清单 4-9 中基于视图的旋转中需要多个步骤实现超过 180 度的旋转，而在 Core Animation 的部分使用旋转值函数通过一个中间值完成开始到结束的旋转。</p>
+<p>更多关于如何使用 Core Animation 创建和配置动画效果的信息，见 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40004514" target="_blank" rel="external"><em>Core Animation Programming Guide</em></a> 和 <strong>Core Animation Cookbook</strong>。</p>
+<hr>
+<p>系列文章</p>
+<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-Introduction"><em>iOS 笔记 《View Programming Guide for iOS：Introduction》</em></a> </p>
+<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture"><em>iOS 笔记 《View Programming Guide for iOS：View and Window Architecture》</em></a> </p>
+<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-Windows"><em>iOS 笔记 《View Programming Guide for iOS：Windows》</em></a> </p>
+<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-Views"><em>iOS 笔记 《View Programming Guide for iOS：Views》</em> </a> </p>
+<p><em>iOS 笔记 《View Programming Guide for iOS：Animations》</em></p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/VCP0/">iOS 翻译 《View Controller Programming Guide for iOS：Introduction》</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/Git-flow/">【转载】 Git 协作流程</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/iOS-Note-View-Programming-Guide-for-iOS-Animations/"
+               data-title="iOS 笔记 《View Programming Guide for iOS：Animations》" data-url="http://yoursite.com/2015/iOS-Note-View-Programming-Guide-for-iOS-Animations/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#动画效果"><span class="nav-number">1.</span> <span class="nav-text">动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么可以动画？"><span class="nav-number">1.1.</span> <span class="nav-text">什么可以动画？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在视图中动画更改属性"><span class="nav-number">1.2.</span> <span class="nav-text">在视图中动画更改属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用基于块的方法开始动画"><span class="nav-number">1.2.1.</span> <span class="nav-text">使用基于块的方法开始动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用_begin/commit_方法开始动画效果"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用 begin/commit 方法开始动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置_Begin/Commit_动画效果参数"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">配置 Begin/Commit 动画效果参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置动画效果委托"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">配置动画效果委托</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套动画效果块"><span class="nav-number">1.2.3.</span> <span class="nav-text">嵌套动画效果块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现逆转它自己的动画效果"><span class="nav-number">1.2.4.</span> <span class="nav-text">实现逆转它自己的动画效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建视图之间的动画过渡效果"><span class="nav-number">1.3.</span> <span class="nav-text">创建视图之间的动画过渡效果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更改视图的子视图"><span class="nav-number">1.3.1.</span> <span class="nav-text">更改视图的子视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将视图替换成不同视图"><span class="nav-number">1.3.2.</span> <span class="nav-text">将视图替换成不同视图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连结多个动画效果到一起"><span class="nav-number">1.4.</span> <span class="nav-text">连结多个动画效果到一起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一起动画视图和层的更改"><span class="nav-number">1.5.</span> <span class="nav-text">一起动画视图和层的更改</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62263979-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>

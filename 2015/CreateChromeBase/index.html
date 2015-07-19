@@ -1,0 +1,983 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> Chrome 拓展基础 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              Chrome 拓展基础
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-05-30
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/Chrome-拓展/">Chrome 拓展</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/CreateChromeBase/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/CreateChromeBase/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>完成了入门例子后，继续学习入门例子推荐的后续文章，开始迈向拓展大师的第一步。</p>
+<a id="more"></a>
+<p><a href="https://developer.chrome.com/extensions/overview" target="_blank" rel="external">原文地址</a></p>
+<h1 id="总览">总览</h1><p>一旦完成本页面和<a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">入门指南</a>，你就可以开始写属于你的拓展了。</p>
+<h2 id="基础">基础</h2><p>拓展是一个文件的压缩包，由 HTML，JavaScript，图片，和其它你需要的文件组成，对 Chrome 浏览器的功能进行拓展。拓展实质上是一个网页，它们可以使用所有<a href="https://developer.chrome.com/extensions/api_other" target="_blank" rel="external">浏览器对网页提供的 APIs</a>，从 XMLHttpRequest 到 JSON 到 HTML5。</p>
+<p>拓展可以使用 <a href="https://developer.chrome.com/extensions/content_scripts" target="_blank" rel="external">content scripts</a> 或 <a href="https://developer.chrome.com/extensions/xhr" target="_blank" rel="external">跨域 XMLHttpRequests</a> 与 web 页面或服务器交互。拓展也可以以编程方式与浏览器功能交互例如<a href="https://developer.chrome.com/extensions/bookmarks" target="_blank" rel="external">书签</a>和<a href="https://developer.chrome.com/extensions/tabs" target="_blank" rel="external">标签</a>。</p>
+<h3 id="拓展的界面">拓展的界面</h3><p>许多拓展 (非 Chrome 应用程序) 会添加界面到 Google Chrome 中，以 <a href="https://developer.chrome.com/extensions/browserAction" target="_blank" rel="external">browser actions</a> 方式或 <a href="https://developer.chrome.com/extensions/pageAction" target="_blank" rel="external">page actions</a> 方式。每个拓展最多可以有一个 <strong>browser action</strong> 或 <strong>page action</strong>。当拓展对大部分页面有用时选择 <strong>browser action</strong>，当拓展对某些页面显示，不显示，依赖时选择 <strong>page action</strong>。</p>
+<table>
+<thead>
+<tr>
+<th><img src="./browser-action.png" alt=""></th>
+<th><img src="./page-action.png" alt=""></th>
+<th><img src="./browser-action-with-popup.png" alt=""> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.chrome.com/extensions/samples#google-mail-checker" target="_blank" rel="external">Google Mail Checker 拓展</a>使用 <em>browser action</em> (图标在工具栏中)</td>
+<td><a href="https://developer.chrome.com/extensions/samples#mappy" target="_blank" rel="external">Mappy 拓展</a>使用 <em>page action</em> (图标在地址栏中) 和 <em>content script</em> (代码注入网页)</td>
+<td><a href="https://developer.chrome.com/extensions/samples#news-reader" target="_blank" rel="external">New Reader 拓展</a> 拥有一个 <em>browser action</em>，当点击后，显示一个弹出框。 </td>
+</tr>
+</tbody>
+</table>
+<p>拓展 (和 Chrome 应用程序) 也能以其它方式呈现界面，例如添加到 Chrome 右键菜单，或提供一个选项页面，或使用 content script 更改页面的外观。见 <a href="https://developer.chrome.com/extensions/devguide" target="_blank" rel="external">Developer‘s Guide</a> 中完整的拓展功能列表，它会实现每一个的细节。</p>
+<h2 id="文件">文件</h2><p>每一个拓展都有下面的文件：</p>
+<ul>
+<li><strong>manifest</strong> 文件</li>
+<li>一个或多个 <strong>HTML 文件</strong> (除非拓展是主题)</li>
+<li>可选：一个或多个 <strong>JavaScript 文件</strong></li>
+<li>可选：拓展需要的其它文件－例如，图像文件</li>
+</ul>
+<p>当开发拓展时，把这些文件放入一个单独的文件夹。发布拓展时，文件的内容会打包成一个特定后缀 <code>.crx</code> 的ZIP 文件。如果将拓展上传到 <a href="https://chrome.google.com/webstore/developer/dashboard" target="_blank" rel="external">Chrome Developer Dashboard</a>，它会为你创建 <code>.crx</code> 文件。发布拓展的细节，见 <a href="https://developer.chrome.com/extensions/hosting" target="_blank" rel="external">Hosting</a>。</p>
+<h3 id="引用文件">引用文件</h3><p>你可以将任意文件链接到拓展中，但实际如何操作呢？通常，可以使用相对 URL 引用文件，就像普通 HTML 页面一样，这里有一个例子引用子目录 <code>images</code> 的 <code>myimage.png</code> 文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;img src=&#34;images/myimage.png&#34;&#62;</span><br></pre></td></tr></table></figure>
+<p>你可能注意到使用 Google Chrome 调试时，拓展的每个文件都可以通过绝对路径访问：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chrome-extension://&#60;extensionID&#62;/&#60;pathToFile&#62;</span><br></pre></td></tr></table></figure>
+<p>在这个 URL 中， <extensionid> 是系统为每个拓展生成的唯一标识。你可以进入 URL： <strong>chrome-extension</strong> 看到所有已加载的拓展 ID。 <pathtofile> 是拓展的顶部文件夹之下的文件位置；如相对 URL。</pathtofile></extensionid></p>
+<p>当开发拓展时 (打包之前)，拓展的 ID 可以更改。特别注意，未打包的拓展如果从不同目录加载那么它的 ID 将会改变；当拓展打包后 ID 将会再次改变。如果拓展代码需要指定文件的完整路径，可以使用<a href="https://developer.chrome.com/extensions/i18n#overview-predefined" target="_blank" rel="external">predefined message</a> <code>@@extension_id</code> 避免在开发期间使用硬编码 ID。</p>
+<p>当打包拓展时 (通常，通过将它上传到 dashboard)，拓展会获得一个永久 ID，甚至更新拓展后也会保留。一旦拥有永久 ID 后，你可以把所有使用 @@extension_id 的位置替换为真实 ID。</p>
+<h3 id="manifest_文件">manifest 文件</h3><p>manifest 文件，名为 <code>manifest.json</code>，提供有关拓展的信息，例如大部分重要文件和拓展用到的功能。这里是一个典型的 manifest 文件，从 google.com 获取信息的 browser action。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#123;&#10;  &#34;name&#34;: &#34;My Extension&#34;,&#10;  &#34;version&#34;: &#34;2.1&#34;,&#10;  &#34;description&#34;: &#34;Gets information from Google.&#34;,&#10;  &#34;icons&#34;: &#123; &#34;128&#34;: &#34;icon_128.png&#34; &#125;,&#10;  &#34;background&#34;: &#123;&#10;    &#34;persistent&#34;: false,&#10;    &#34;scripts&#34;: [&#34;bg.js&#34;]&#10;  &#125;,&#10;  &#34;permissions&#34;: [&#34;http://*.google.com/&#34;, &#34;https://*.google.com/&#34;],&#10;  &#34;browser_action&#34;: &#123;&#10;    &#34;default_title&#34;: &#34;&#34;,&#10;    &#34;default_icon&#34;: &#34;icon_19.png&#34;,&#10;    &#34;default_popup&#34;: &#34;popup.html&#34;&#10;  &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>更多细节，见 <a href="https://developer.chrome.com/extensions/manifest" target="_blank" rel="external">Manifest Files</a>。</p>
+<h2 id="架构">架构</h2><p>许多拓展都有一个 <em>background page</em>，一个保持拓展主要逻辑的不可见页面。拓展也可以包含其它呈现拓展界面的页面。如果拓展需要与由用户加载网页 (包含拓展的页面) 交互，那么拓展必须使用 content script。 </p>
+<h3 id="background_page">background page</h3><p>下面的图展示了至少安装了两个拓展的浏览器：一个 browser action (黄色图标) 和 page action (蓝色图标)。browser action 和 page action 都有 background page。这个图展示了 browser action 的 background page，在这两个窗口中它由 <code>background.html</code> 定义并拥有控制 browser action 行为的 JavaScript 代码。</p>
+<p><img src="./arch-1.gif" alt=""></p>
+<p>这里有两种类型的 background page ：<a href="https://developer.chrome.com/extensions/background_pages" target="_blank" rel="external">persistent background pages</a>，和 <a href="https://developer.chrome.com/extensions/event_pages" target="_blank" rel="external">event pages</a>。Persistent background pages，如名称所示，总是打开的。Event pages 会在需要时打开或关闭。除非你一定需要 background page 一直运行，否则最好使用 event page。</p>
+<p>更多 <a href="https://developer.chrome.com/extensions/event_pages" target="_blank" rel="external">Event Pages</a> 和 <a href="https://developer.chrome.com/extensions/background_pages" target="_blank" rel="external">Background Pages</a> 的细节。</p>
+<h3 id="UI_pages">UI pages</h3><p>拓展可以包含显示拓展界面的常规 HTML 页面，例如，browser action 可以弹出窗口，它是通过一个 HTML 文件实现的。任何拓展都可以有一个 options 页面，它可以让用户自定义拓展如何工作。另一个特殊页面类型是从重写页面。最后，你可以使用 <a href="https://developer.chrome.com/extensions/tabs#method-create" target="_blank" rel="external">tabs.create</a> 或 <code>window.open()</code> 显示任何其它拓展中的 HTML 文件。</p>
+<p>拓展内部的 HTML 页面可以互相访问 DOMs，和互相调用它们的函数。</p>
+<p>下面的图例展示 browser action 的弹出窗口的架构。弹出的内容定义在一个 HTML 文件中 (<code>popup.html</code>)。这个拓展也有一个 background page (<code>background.html</code>)。弹出窗口不需要复制 background page 的代码因为它可以调用 background page 的函数。</p>
+<p><img src="./arch-2.gif" alt=""></p>
+<p>见 <a href="https://developer.chrome.com/extensions/browserAction" target="_blank" rel="external">Browser Actions</a>，<a href="https://developer.chrome.com/extensions/options" target="_blank" rel="external">Options</a>，<a href="https://developer.chrome.com/extensions/override" target="_blank" rel="external">Override Pages</a>，和 <a href="https://developer.chrome.com/extensions/overview#pageComm" target="_blank" rel="external">Communication between pages</a> 等章节了解更多细节。</p>
+<h3 id="Content_scripts">Content scripts</h3><p>如果你的拓展需要与 web 页面交互，那么要用到 <em>content script</em>。content script 是在已经加载到浏览器的网页的上下文中执行的一些 JavaScript 代码。可以认为 content script 是已加载页面的一部分，而不是拓展的一部分 (它的父拓展)。</p>
+<p>Content script 可以读取浏览器所访问的网页细节，可以对这个页面更改。在下面的图中，content script 可以读取和修改已显示的网页的 DOM，但它不能修改它的父拓展的 background page 的 DOM。</p>
+<p><img src="./arch-3.gif" alt=""></p>
+<p>content script 不完全与它的父拓展切断关系，content script 可以与它的父拓展交换信息，如图中显示的箭头。例如，content script 可以发送一个是否在浏览器页面找到 RSS 订阅的信息。或 background page 可以发送信息要求 content script 更改浏览器页面的外观。</p>
+<p><img src="./arch-cs.gif" alt=""></p>
+<p>更多信息，见 <a href="https://developer.chrome.com/extensions/content_scripts" target="_blank" rel="external">Content Script</a>。</p>
+<h2 id="使用_chrome-*_APIs">使用 chrome.* APIs</h2><p>除了可以访问所有网页和可用的应用程序的 APIs，拓展也可以使用与浏览器紧密关联的只在 Chrome 使用的 API。例如，任何拓展或 web 应用程序可以使用标准的 <code>window.open()</code> 方法打开 URL。但如果你想在指定的窗口中打开，拓展只能在 Chrome 使用 <a href="https://developer.chrome.com/extensions/tabs#method-create" target="_blank" rel="external">tabs.create</a> 方法。</p>
+<h3 id="异步_vs_同步方法">异步 vs 同步方法</h3><p>大多数 chrome.<em>APIs 方法是<em>*异步</em></em>立即返回的，不需要等待操作完成。如果你需要获得操作的结果，你可以传入回调函数到方法中。回调会在不久后执行 (可能很久)，至少会在方法返回之后。这里是一个异步方法的签名：</p>
+<p><code>chrome.tabs.create(object createProperties, function callback)</code></p>
+<p>其它 chrome.<em> 方法是<em>*同步</em></em>的，同步方法永远不需要回调函数因为它们直到任务完成后才会返回。通常，同步方法有一个返回类型。如 <a href="https://developer.chrome.com/extensions/runtime#method-getURL" target="_blank" rel="external">runtime.getURL</a> 方法：</p>
+<p><code>string chrome.runtime.getURL()</code></p>
+<p>这个方法没有回调并返回 string 类型因为它同步返回 URL 且不执行其他异步的工作。</p>
+<h3 id="例子：使用回调">例子：使用回调</h3><p>如果要将用户当前选择的标签导航到新的 URL，你需要获取当前标签的 ID (使用 <a href="https://developer.chrome.com/extensions/tabs#method-query" target="_blank" rel="external">tabs.query</a>) 然后使标签进入新的 URL (使用 <a href="https://developer.chrome.com/extensions/tabs#method-update" target="_blank" rel="external">tabs.update</a>)。</p>
+<p>如果 <code>query()</code> 是同步的，你可以写这样的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;//THIS CODE DOESN&#39;T WORK&#10;var tab = chrome.tabs.query(&#123;&#39;active&#39;: true&#125;); //WRONG!!!&#10;chrome.tabs.update(tab.id, &#123;url:newUrl&#125;);&#10;someOtherFunction();</span><br></pre></td></tr></table></figure>
+<p>但这是错误的因为 <code>query()</code> 是异步的。它直接返回不会等待工作完成，它甚至不会返回值 (尽管一些异步方法可以)。你可以从方法的签名中的 <em>callback</em> 参数知道 <code>query()</code> 是异步的。</p>
+<p><code>chrome.tabs.query(object queryInfo, function callback)</code></p>
+<p>要修复上面的代码，你必须使用回调参数。下面的代码展示如何使用回调方法从 <code>query()</code> 获取结果 (有一个名为 <code>tabs</code> 的参数) 并调用 <code>update()</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;//THIS CODE WORKS&#10;chrome.tabs.query(&#123;&#39;active&#39;: true&#125;, function(tabs) &#123;&#10;  chrome.tabs.update(tabs[0].id, &#123;url: newUrl&#125;);&#10;&#125;);&#10;someOtherFunction();</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，行号按这个顺序执行：1，4，2。指定到 <code>query()</code> 的回调函数只有在当前标签是活动的才调用，这个时间在 <code>query()</code> 返回之后。尽管 <code>update()</code> 是异步的，但这个例子中未使用回调参数，因为我们不需要任何有关更新的结果。</p>
+<h3 id="更多细节">更多细节</h3><p>更多信息，见 <a href="https://developer.chrome.com/extensions/api_index" target="_blank" rel="external">chrome.* API docs</a> 和观看视频。。。</p>
+<h2 id="页面之间通信">页面之间通信</h2><p>HTML 页面与拓展通常都需要通信。因为所有拓展的页面在同一个线程同一个处理中执行，页面彼此之间可以直接调用函数。</p>
+<p>要在拓展中寻找页面，使用 <a href="https://developer.chrome.com/extensions/extension" target="_blank" rel="external">chrome.extension</a> 方法例如 <code>getViews()</code> 和 <code>getBackgroundPage()</code>。一旦页面引用到拓展内其它页面，第一个页面可以调用其它页面的函数，和修改它们的 DOMs。 </p>
+<h2 id="保存数据和匿名模式">保存数据和匿名模式</h2><p>拓展可以使用 API <a href="https://developer.chrome.com/extensions/storage" target="_blank" rel="external">storage</a> 保存数据，HTML 5 <a href="http://dev.w3.org/html5/webstorage/" target="_blank" rel="external">web storage API</a> (例如 <code>localStorage</code>) 或通过向服务器投递请求保存数据。每当你想保存时，首先要考虑窗口是否处于匿名模式。默认情况，拓展不会运行于匿名窗口。你需要考虑当浏览器是匿名模式时用户期望拓展执行什么。</p>
+<p><em>匿名模式</em> 承诺不会保留窗口踪迹。当处理匿名窗口的数据时，你最好尊循这个约定。例如，如果你的拓展通常将浏览历史保存在云中，但不要保存匿名窗口的历史纪录。在其它的处理中，你可以在任意窗口或匿名窗口保存拓展的设置，或不保存。</p>
+<blockquote>
+<p><strong>经验之谈：</strong>如果数据是说明用户访问了什么网页，或完成了什么操作的信息，那么不要在匿名窗口保存它们。</p>
+</blockquote>
+<p>要判断窗口是否匿名模式，检测 <a href="https://developer.chrome.com/extensions/tabs#type-Tab" target="_blank" rel="external">tabs.Tab</a> 的 <code>incognito</code> 属性或 <a href="https://developer.chrome.com/extensions/windows#type-Window" target="_blank" rel="external">windows.Window</a> 对象。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;function saveTabData(tab, data) &#123;&#10;  if (tab.incognito) &#123;&#10;    chrome.runtime.getBackgroundPage(function(bgPage) &#123;&#10;      bgPage[tab.url] = data;      // Persist data ONLY in memory&#10;    &#125;);&#10;  &#125; else &#123;&#10;    localStorage[tab.url] = data;  // OK to store data&#10;  &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="后续">后续</h2><p>现在已经完成拓展的介绍，你应该开始写一个属于你的拓展。这里是一些下一步的建议：</p>
+<ul>
+<li><a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">Tutorial: Getting Started</a></li>
+<li><a href="https://developer.chrome.com/extensions/tut_debugging" target="_blank" rel="external">Tutorial: Debugging</a></li>
+<li><a href="https://developer.chrome.com/extensions/devguide" target="_blank" rel="external">Developer’s Guide</a></li>
+<li><a href="https://developer.chrome.com/extensions/samples" target="_blank" rel="external">Samples</a></li>
+<li><a href="http://www.youtube.com/view_play_list?p=CA101D6A85FE9D4B" target="_blank" rel="external">Videos</a>, 如 <a href="http://www.youtube.com/watch?v=B4M_a7xejYI&amp;feature=PlayList&amp;p=CA101D6A85FE9D4B&amp;index=6" target="_blank" rel="external">Extension Message Passing</a></li>
+</ul>
+<hr>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/VCP3/">iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/VCP2/">iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in Your App》</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/CreateChromeBase/"
+               data-title="Chrome 拓展基础" data-url="http://yoursite.com/2015/CreateChromeBase/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总览"><span class="nav-number">1.</span> <span class="nav-text">总览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拓展的界面"><span class="nav-number">1.1.1.</span> <span class="nav-text">拓展的界面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">1.2.</span> <span class="nav-text">文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用文件"><span class="nav-number">1.2.1.</span> <span class="nav-text">引用文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#manifest_文件"><span class="nav-number">1.2.2.</span> <span class="nav-text">manifest 文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">1.3.</span> <span class="nav-text">架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#background_page"><span class="nav-number">1.3.1.</span> <span class="nav-text">background page</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UI_pages"><span class="nav-number">1.3.2.</span> <span class="nav-text">UI pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Content_scripts"><span class="nav-number">1.3.3.</span> <span class="nav-text">Content scripts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用_chrome-*_APIs"><span class="nav-number">1.4.</span> <span class="nav-text">使用 chrome.* APIs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步_vs_同步方法"><span class="nav-number">1.4.1.</span> <span class="nav-text">异步 vs 同步方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子：使用回调"><span class="nav-number">1.4.2.</span> <span class="nav-text">例子：使用回调</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更多细节"><span class="nav-number">1.4.3.</span> <span class="nav-text">更多细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面之间通信"><span class="nav-number">1.5.</span> <span class="nav-text">页面之间通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存数据和匿名模式"><span class="nav-number">1.6.</span> <span class="nav-text">保存数据和匿名模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续"><span class="nav-number">1.7.</span> <span class="nav-text">后续</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62263979-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>

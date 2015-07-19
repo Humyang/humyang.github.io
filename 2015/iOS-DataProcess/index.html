@@ -1,0 +1,954 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> iOS 数据操作 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              iOS 数据操作
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-08
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/备忘/">备忘</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/iOS-DataProcess/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/iOS-DataProcess/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>记录了 iOS 中数据操作相关的知识点，包括 SandBox 的概念，XML 数据处理，JSON 数据处理，SQLite 增删改查，plist 文件。</p>
+<a id="more"></a>
+<h1 id="iOS_数据操作">iOS 数据操作</h1><h2 id="SandBox">SandBox</h2><p><a href="https://developer.apple.com/library/mac/documentation/Security/Conceptual/AppSandboxDesignGuide/AppSandboxInDepth/AppSandboxInDepth.html" target="_blank" rel="external">文章地址</a></p>
+<p>沙盒概念使用于 iOS 和 OS X，当应用程序采用了 SandBox，你的应用程序可以访问以下目录：</p>
+<ul>
+<li><strong>应用程序容器目录。</strong> 应用程序第一次运行时，操作系统会为你的应用程序创建特定的目录，并且只属于你的应用程序，它称为<em>容器</em>。你的应用程序可以不受约束的读写容器目录。</li>
+<li><strong>应用程序分组的容器目录。</strong> 沙盒应用程序可以指定让它访问一个或多个应用程序分组的容器目录，在分配的权限的应用程序之间彼此可以互相访问。</li>
+<li><strong>用户指定的文件。</strong> 拥有沙盒的应用程序可以访问明确由用户打开的文件或拖动到应用程序中的文件，无论文件处于什么位置。</li>
+<li><strong>相关联的文件。</strong> 跟应用程序同名但是拓展名称不相同的文件。使用情景见下方。</li>
+<li><strong>临时目录，命令行工具目录，指定的全局可读目录。</strong></li>
+</ul>
+<blockquote>
+<p>相关联的文件的使用情景：In both scenarios, you must make a small change to the application’s Info.plist file. Your app should already declare a Document Types (CFBundleDocumentTypes) array that declares the file types your app can open.</p>
+<p>For each file type dictionary in that array, if that file type should be treated as a potentially related type for open and save purposes, add the key NSIsRelatedItemType with a boolean value of YES.（<a href="http://stackoverflow.com/questions/13178285/where-can-i-find-more-information-about-the-related-items-feature-for-sandboxe" target="_blank" rel="external">http://stackoverflow.com/</a>）</p>
+</blockquote>
+<h2 id="写出文件">写出文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#9;&#9;var sp = &#9;NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)&#10;        &#10;        if sp.count &#62; 0&#123;&#10;            var url = NSURL(fileURLWithPath: &#34;\(sp[0])/data.txt&#34;)&#10;            &#10;//            println(url)&#10;            &#10;            var data = NSMutableData()&#10;            &#10;            data.appendData(&#34;Hello Swift\n&#34;.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!)&#10;            &#10;            data.writeToFile(url!.path!, atomically: true)&#10;            &#10;        &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="读取文件">读取文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;//            &#20004;&#31181;&#21152;&#36733;&#25991;&#20214;&#26041;&#24335;&#10;            var Loaddata = NSData(contentsOfFile: url!.path!)&#10;            var str = NSString(data: data, encoding: NSUTF8StringEncoding)&#10;            &#10;            var str1 = NSString(contentsOfURL: url!, encoding: NSUTF8StringEncoding, error: nil)&#10;            &#10;            println(&#34;load data : \(str) and \(str1)&#34;)</span><br></pre></td></tr></table></figure>
+<h2 id="应用程序首选项数据">应用程序首选项数据</h2><p>应用程序首选项数据可以方便的保存一些较小的数据，它不能存储很大的数据。</p>
+<p>它以 key/value 方式存储数据，所以特别简单快捷。</p>
+<h3 id="存储首选项数据">存储首选项数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;@IBOutlet weak var inputText: UITextView!&#10;   &#10;   &#10;   @IBAction func saveBtn(sender: AnyObject) &#123;&#10;       &#10;       var ud = NSUserDefaults.standardUserDefaults()&#10;       &#10;       ud.setObject(inputText.text, forKey: &#34;data&#34;)&#10;       &#10;       println(&#34;Saved&#34;)&#10;   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="读取首选项数据">读取首选项数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;@IBOutlet weak var inputText: UITextView!&#10;   &#10;   //&#23450;&#20041;&#21464;&#37327;&#10;   var ud:NSUserDefaults!&#10;   &#10;   @IBAction func saveBtn(sender: AnyObject) &#123;&#10;       &#10;       //&#35774;&#32622;&#10;       ud.setObject(inputText.text, forKey: &#34;data&#34;)&#10;       &#10;       println(&#34;Saved&#34;)&#10;   &#125;&#10;   &#10;   &#10;   override func viewDidLoad() &#123;&#10;       super.viewDidLoad()&#10;       &#10;       //&#21021;&#22987;&#21270;&#21464;&#37327;&#10;       ud = NSUserDefaults.standardUserDefaults()&#10;       &#10;       //&#35835;&#21462;&#24182;&#21028;&#26029;&#10;       if let value:AnyObject = ud.objectForKey(&#34;data&#34;)&#123;&#10;           inputText.text = value as! String&#10;       &#125;else&#123;&#10;           inputText.text = &#34;No value&#34;&#10;       &#125;&#10;   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="操作_XML_数据">操作 XML 数据</h2><h3 id="XMl_格式">XMl 格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#60;data&#62;&#10;    &#60;person age=&#34;15&#34;&#62;ZhangSan&#60;/person&#62;&#10;    &#60;person age=&#34;2&#34;&#62;jike&#60;/person&#62;&#10;    &#10;    &#60;a&#62;&#10;        &#60;b&#62;&#10;            &#60;c&#62; data &#60;/c&#62;&#10;        &#60;/b&#62;&#10;    &#60;/a&#62;&#10;&#60;/data&#62;</span><br></pre></td></tr></table></figure>
+<h3 id="swift_解析_XML">swift 解析 XML</h3><p>类采用协议</p>
+<p><code>class ViewController: UIViewController,NSXMLParserDelegate</code></p>
+<p>在 viewDidLoad 读取数据，分配委托对象，并解析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var parser = NSXMLParser(contentsOfURL: NSURL(fileURLWithPath: &#9;&#9;&#10;NSBundle.mainBundle().pathForResource(&#34;data&#34;, ofType: &#34;xml&#34;)!))&#10;      &#10;      &#10;     //&#20998;&#37197;&#22996;&#25176;&#23545;&#35937;&#65292;&#27599;&#20010;&#22996;&#25176;&#26041;&#27861;&#36127;&#36131;&#22788;&#29702;&#30456;&#24212;&#30340;&#21151;&#33021;&#65292;&#35299;&#26512; XML &#25991;&#20214;&#30340;&#39034;&#24207;&#26159;&#25353;&#29031;&#20174;&#21069;&#24448;&#21518;&#10;     parser!.delegate = self&#10;      &#10;     //&#24320;&#22987;&#35299;&#26512;&#10;     parser!.parse()</span><br></pre></td></tr></table></figure>
+<p>实现委托方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;    var currentNodeName:String!&#10;    &#10;    //&#27599;&#20010;&#20803;&#32032;&#30340;&#22788;&#29702;&#10;    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject])&#10;    &#123;&#10;        &#10;        //println(elementName)&#10;        currentNodeName = elementName&#10;        &#10;        &#10;        &#10;        if elementName == &#34;person&#34;&#123;&#10;            &#10;//            &#22914;&#26524;&#27809;&#26377; age &#23646;&#24615;&#65292;&#36827;&#34892;&#24378;&#21046;&#35299;&#21253;&#20250;&#20986;&#29616;&#24322;&#24120;&#65292;&#25152;&#20197;&#38656;&#35201;&#21028;&#26029;&#19968;&#19979;&#10;//            var age: AnyObject? = attributeDict[&#34;age&#34;]&#10;            &#10;//            println(&#34;age : \(age!)&#34;)&#10;            &#10;//            &#20351;&#29992;&#36825;&#20010;&#26041;&#24335;&#19981;&#20250;&#20986;&#29616;&#19978;&#38754;&#30340;&#38382;&#39064;&#10;            if let age: AnyObject = attributeDict[&#34;age&#34;]&#123;&#10;                println(&#34;age: \(age)&#34;)&#10;                &#10;                &#10;            &#125;&#10;            &#10;        &#125;&#10;    &#125;&#10;&#10;&#9;//&#27599;&#20010;&#33410;&#28857;&#20869;&#23481;&#10;    func parser(parser: NSXMLParser, foundCharacters string: String?) &#123;&#10;        //println(string!)&#10;        &#10;        var str = string?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())&#10;        &#10;        if str != &#34;&#34;&#123;&#10;            println(&#34;current Node \(str!)&#34;)&#10;        &#125;&#10;    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="JSON_数据">JSON 数据</h2><h3 id="格式">格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1,3,7,&#34;jike&#34;,&#123;&#34;name&#34;:&#34;ZhangSan&#34;,&#34;age&#34;:20&#125;]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#34;language&#34;:&#34;Java&#34;,&#34;type&#34;:&#34;static&#34;,&#34;arr&#34;:[2,3,4,5]&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解析_JSON">解析 JSON</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;var json:AnyObject? = NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(&#34;obj&#34;, ofType: &#34;json&#34;)!)!)!, options: NSJSONReadingOptions.allZeros, error: nil)&#10;      &#10;      //&#35775;&#38382;&#19968;&#20010;&#21487;&#36873;&#20803;&#32032;&#26102;&#65292;&#36825;&#31181;&#20889;&#27861;&#20250;&#33258;&#21160;&#25286;&#21253;&#65292;&#22914;&#26524;&#19981;&#23384;&#22312;&#36825;&#20010;&#20803;&#32032;&#65292;&#21017;&#19981;&#20250;&#25191;&#34892;&#10;      if let lang:AnyObject = json?.objectForKey(&#34;language&#34;)&#123;&#10;          println(lang)&#10;      &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Swift_生成_JSON">Swift 生成 JSON</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;var dict = [&#34;name&#34;:&#34;jikexueyuan&#34;,&#34;age&#34;:1]&#10;        &#10;        var jsonData = NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions.allZeros, error: nil)&#10;        &#10;        var str = NSString(data: jsonData!, encoding: NSUTF8StringEncoding)&#10;        &#10;        println(str!)</span><br></pre></td></tr></table></figure>
+<h2 id="Plist数据">Plist数据</h2><h3 id="介绍">介绍</h3><p>是苹果平台的配置文件，基于 XML 格式，能方便的配合苹果产品使用。iOS 的 API 和 OS X 的 API可以方便的将 plist 数据读取成数组或者字典。</p>
+<p>Root 节点的类型可以为 Array 或者 Dictionary，决定了读取成字典还是数组。</p>
+<h3 id="创建和编写_plist_文件">创建和编写 plist 文件</h3><p>在 Xcode 中直接创建 Property list 文件，并手动编辑</p>
+<h3 id="解析_plist_文件">解析 plist 文件</h3><p>解析成数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var arr = NSArray(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(&#34;arr&#34;, ofType: &#34;plist&#34;)!)!)&#10;        &#10;        println(arr![0])</span><br></pre></td></tr></table></figure>
+<p>解析成字典</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;var dict = NSDictionary(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(&#34;dict&#34;, ofType: &#34;plist&#34;)!)!)&#10;      &#10;      println(dict)&#10;      &#10;      var name:String = dict![&#34;name&#34;] as! String&#10;      &#10;      println(&#34;name: \(name)&#34;)</span><br></pre></td></tr></table></figure>
+<h2 id="CoreData">CoreData</h2><p>介绍 SQLite 以及如何创建一个使用 CoreData 的项目。</p>
+<p>iOS 在 CoreData 框架中封装了关于数据库存储的操作，所以可以节省许多编写 SQL 语句的时间。</p>
+<h3 id="SQLite">SQLite</h3><p>SQLite 是一个小型的关系型数据库</p>
+<p>SQLite 介绍：<a href="http://ivanzz.blog.51cto.com/6378766/1130544" target="_blank" rel="external">http://ivanzz.blog.51cto.com/6378766/1130544</a></p>
+<p>SQLite 是开源的，并且很轻量，所以很多客户端程序都内置了 SQLite 驱动，iOS 也内置了 SQLite 驱动。</p>
+<p>SQLite 可以方便的在本地存储一段数据。</p>
+<p><a href="https://www.sqlite.org/docs.html" target="_blank" rel="external">SQLite 文档</a></p>
+<h3 id="创建数据结构">创建数据结构</h3><p>1.在创建项目时勾选 Using CoreDate</p>
+<p>2.选中 UsingData.xcdatamodeld 进行编辑，如图 1-1</p>
+<p><strong>图 1-1：</strong> 编辑 UsingData.xcdatamodeld，注意新建的 Entity 的首字母需要大写<br><img src="./CreateEntity.png" alt=""></p>
+<h3 id="插入数据">插入数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext&#10;      &#10;      &#10;      var row:AnyObject = NSEntityDescription.insertNewObjectForEntityForName(&#34;Users&#34;, inManagedObjectContext: context!)&#10;      &#10;      row.setValue(&#34;jiekexueyuan&#34;, forKey: &#34;name&#34;)&#10;      row.setValue(1, forKey: &#34;age&#34;)&#10;      &#10;      context?.save(nil)&#10;      &#10;      println(&#34;Run Here&#34;)</span><br></pre></td></tr></table></figure>
+<p>可以在 AppDelegate 中的委托 azy var persistentStoreCoordinator: NSPersistentStoreCoordinator 中 println(url) 输出数据库存放的位置，然后使用 SQLite 工具直接浏览操作数据库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = &#123;&#10;        // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.&#10;        // Create the coordinator and store&#10;        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)&#10;        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(&#34;UsingData.sqlite&#34;)&#10;        &#10;        println(url) //&#25171;&#21360;&#25968;&#25454;&#24211;&#22320;&#22336;&#10;        &#10;        var error: NSError? = nil&#10;        var failureReason = &#34;There was an error creating or loading the application&#39;s saved data.&#34;&#10;        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &#38;error) == nil &#123;&#10;            coordinator = nil&#10;            // Report any error we got.&#10;            var dict = [String: AnyObject]()&#10;            dict[NSLocalizedDescriptionKey] = &#34;Failed to initialize the application&#39;s saved data&#34;&#10;            dict[NSLocalizedFailureReasonErrorKey] = failureReason&#10;            dict[NSUnderlyingErrorKey] = error&#10;            error = NSError(domain: &#34;YOUR_ERROR_DOMAIN&#34;, code: 9999, userInfo: dict)&#10;            // Replace this with code to handle the error appropriately.&#10;            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.&#10;            NSLog(&#34;Unresolved error \(error), \(error!.userInfo)&#34;)&#10;            abort()&#10;        &#125;&#10;        &#10;        return coordinator&#10;    &#125;()</span><br></pre></td></tr></table></figure>
+<h3 id="读取数据">读取数据</h3><p>定义变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var dataArr:Array&#60;AnyObject&#62; = []&#10;var context:NSManagedObjectContext!</span><br></pre></td></tr></table></figure>
+<p>读取数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext&#10;      &#10;var f = NSFetchRequest(entityName:&#34;Users&#34;);&#10;      &#10;dataArr = context.executeFetchRequest(f, error: nil)!</span><br></pre></td></tr></table></figure>
+<p>渲染界面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;let cell = tableView.dequeueReusableCellWithIdentifier(&#34;cell&#34;, forIndexPath: indexPath) as! UITableViewCell&#10;&#10;// Configure the cell...&#10;&#10;var label = cell.viewWithTag(2) as! UILabel&#10;&#10;var name = dataArr[indexPath.row].valueForKey(&#34;name&#34;) as! String&#10;&#10;var age = dataArr[indexPath.row].valueForKey(&#34;age&#34;)&#10;&#10;label.text = &#34;name: \(name),age:\(age!)&#34;&#10;&#10;&#10;return cell</span><br></pre></td></tr></table></figure>
+<h3 id="修改数据">修改数据</h3><p>从数据库获取指定数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;//UsersTableViewController:&#10;&#10;&#9;&#9;var data = dataArr[indexPath.row] as! NSManagedObject&#10;        &#10;&#10;//vc.data &#22312; UserContentViewController.m &#20013;&#23450;&#20041;&#65306;var data:NSManagedObject!&#10;&#10;        var vc = storyboard?.instantiateViewControllerWithIdentifier(&#34;UserContent&#34;) as! UserContentViewController&#10;        &#10;        vc.data = data</span><br></pre></td></tr></table></figure>
+<p>将修改后的值保存到数据库中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;//UserContentViewController.m:&#10;&#10;&#9;&#9;data.setValue(tfName.text, forKey: &#34;name&#34;)&#10;       &#10;&#9;&#9;data.setValue(tfAge.text.toInt(), forKey: &#34;age&#34;)&#10;        &#10;       &#9;data.managedObjectContext?.save(nil)</span><br></pre></td></tr></table></figure>
+<h3 id="删除数据">删除数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;//&#27880;&#24847;&#19982; deletedObjects &#30340;&#21306;&#21035;&#10;&#9;&#9;&#9;context.deleteObject(dataArr[indexPath.row] as! NSManagedObject)&#10;            &#10;            context.save(nil)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/iOS-Swift-Base/">iOS Swift 基础</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/iOS-DEMO-SPH/">iOS DEMO 项目：SPHChatCollectionView 分析</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/iOS-DataProcess/"
+               data-title="iOS 数据操作" data-url="http://yoursite.com/2015/iOS-DataProcess/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iOS_数据操作"><span class="nav-number">1.</span> <span class="nav-text">iOS 数据操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SandBox"><span class="nav-number">1.1.</span> <span class="nav-text">SandBox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写出文件"><span class="nav-number">1.2.</span> <span class="nav-text">写出文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取文件"><span class="nav-number">1.3.</span> <span class="nav-text">读取文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用程序首选项数据"><span class="nav-number">1.4.</span> <span class="nav-text">应用程序首选项数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储首选项数据"><span class="nav-number">1.4.1.</span> <span class="nav-text">存储首选项数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取首选项数据"><span class="nav-number">1.4.2.</span> <span class="nav-text">读取首选项数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作_XML_数据"><span class="nav-number">1.5.</span> <span class="nav-text">操作 XML 数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XMl_格式"><span class="nav-number">1.5.1.</span> <span class="nav-text">XMl 格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swift_解析_XML"><span class="nav-number">1.5.2.</span> <span class="nav-text">swift 解析 XML</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON_数据"><span class="nav-number">1.6.</span> <span class="nav-text">JSON 数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式"><span class="nav-number">1.6.1.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析_JSON"><span class="nav-number">1.6.2.</span> <span class="nav-text">解析 JSON</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift_生成_JSON"><span class="nav-number">1.6.3.</span> <span class="nav-text">Swift 生成 JSON</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plist数据"><span class="nav-number">1.7.</span> <span class="nav-text">Plist数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">1.7.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建和编写_plist_文件"><span class="nav-number">1.7.2.</span> <span class="nav-text">创建和编写 plist 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析_plist_文件"><span class="nav-number">1.7.3.</span> <span class="nav-text">解析 plist 文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CoreData"><span class="nav-number">1.8.</span> <span class="nav-text">CoreData</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQLite"><span class="nav-number">1.8.1.</span> <span class="nav-text">SQLite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据结构"><span class="nav-number">1.8.2.</span> <span class="nav-text">创建数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入数据"><span class="nav-number">1.8.3.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取数据"><span class="nav-number">1.8.4.</span> <span class="nav-text">读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改数据"><span class="nav-number">1.8.5.</span> <span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据"><span class="nav-number">1.8.6.</span> <span class="nav-text">删除数据</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62263979-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>
