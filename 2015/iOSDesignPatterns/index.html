@@ -1,0 +1,1014 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> iOS 设计模式笔记 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              iOS 设计模式笔记
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-08-01
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/笔记/">笔记</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/笔记/备忘/">备忘</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/iOSDesignPatterns/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/iOSDesignPatterns/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>iOS Design Patterns 的阅读笔记。</p>
+<a id="more"></a>
+<hr>
+<h1 id="正文">正文</h1><p>这篇 blog 是我对原文阅读后的整理，推荐去阅读完整原文：<a href="http://www.raywenderlich.com/46988/ios-design-patterns" target="_blank" rel="external">iOS Design Patterns</a>。</p>
+<p>原文中例子代码使用 Objective-C，但我使用 Swift 来实现，加深对 Swift 的掌握。<a href="">Swift 例子下载</a></p>
+<h2 id="MVC">MVC</h2><ul>
+<li><strong>Model:</strong> The object that holds your application data and defines how to manipulate it. For example, in your application the Model is your Album class.</li>
+<li><strong>View:</strong> The objects that are in charge of the visual representation of the Model and the controls the user can interact with; basically, all the UIViews and their subclasses. In your application the View is represented by your AlbumView class.</li>
+<li><strong>Controller:</strong> The controller is the mediator that coordinates all the work. It accesses the data from the model and displays it with the views, listens to events and manipulates the data as necessary. Can you guess which class is your controller? That’s right: ViewController.</li>
+</ul>
+<p><img src="./mvc0.png" alt=""></p>
+<p>MVC 的概念很短，但是实际应用起来需要很多设计模式支撑运行，原文介绍了许多 iOS 中重要的设计模式，例如 category 和 delegate，KVO 等等。</p>
+<h2 id="Facade_design_pattern">Facade design pattern</h2><p>Facade design pattern 暴露统一的接口，背后隐藏着复杂的子类，接口调用者完全不需要知道接口内部的实现，要做的只有传递参数和获取数据。</p>
+<blockquote>
+<p>原文：The Facade design pattern provides a single interface to a complex subsystem. Instead of exposing the user to a set of classes and their APIs, you only expose one simple unified API.</p>
+<p>This pattern is ideal when working with a large number of classes, particularly when they are complicated to use or difficult to understand.</p>
+</blockquote>
+<p><img src="./facade2.png" alt=""></p>
+<h2 id="The_Adapter_Pattern">The Adapter Pattern</h2><p>Adapter Pattern 使拥有不同接口的类共同工作。</p>
+<blockquote>
+<p>原文：An Adapter allows classes with incompatible interfaces to work together.It wraps itself around an object and exposes a standard interface to interact with that object.</p>
+</blockquote>
+<p>Apple 的实现方式是通过 protocol ，例如 NSCopying 协议，任何类都可以通过实现这个协议从而提供标准的 <code>copy</code> 方法。 </p>
+<p>下面的章节 <a href="#Delegation">Delegation</a> 中有一个例子演示 protocol 如何协调不同的类共同工作。</p>
+<h2 id="The_Decorator_Design_Pattern">The Decorator Design Pattern</h2><blockquote>
+<p>Decorator pattern 是一种可以将行为和职责动态添加到对象中而不需要修改源代码的模式。</p>
+<p>有两种常用的方式实现 Decorator Pattern: <strong>Category</strong> 和 <strong>Delegation</strong></p>
+</blockquote>
+<p>The Decorator pattern <strong>dynamically adds behaviors and responsibilities to an object without modifying its code.</strong> It’s an alternative to subclassing where you modify a class’ behavior by wrapping it with another object.<br>In Objective-C there are two very common implementations of this pattern: Category and Delegation.</p>
+<h3 id="Category">Category</h3><p>Category 是一个强大的拓展机制，允许你添加方法到已有的类中而不用修改类的源代码，它不是使用继承的方法实现。</p>
+<p>在 Category 中的方法与其他方法的使用方式是一样的。Category 与 decorator pattern 的所描述的类定义略有不同，因为不能在 Category 中定义属性。</p>
+<h4 id="创建方式">创建方式</h4><p>在 Objective-C 中，可以直接在 Xcode 的 File 菜单中：“New－&gt;File－&gt;Objective-C File－&gt;File Type 选择 Category” 创建 category，Xcode 会自动生成文件名 classname+categoryname.oc。</p>
+<p>在 swfit 中，使用 extension 实现 Category，Category 文件名称也与 Objective-C 一样 classname+categoryname.swift</p>
+<p>我们在 extension 中定义了一个方法，前缀是 tr_，代表 TableRepresentation。需要注意 extension 中的方法名称，如果跟你说拓展的类或父类名称发生冲突，那么在程序运行时使用该方法时会出现 undefined 错误。可能在你自己的类中使用没问题，当如果方法名称与标准的 Cocoa 或 Cocoa Touch 类的名称重复则有可能会对其它框架造成很大的影响。</p>
+<h3 id="Delegation">Delegation</h3><p> Decorator design pattern 的另一个实现方式是 Delegation，可以使一个对象的行为暴露给另一个对象实现。例如使用 UITableView 时必须实现 tableView:numberOfRowInSection: 设置表格 section 数量。</p>
+<p>例如下图 UITableView 与 delegation 工作的过程。</p>
+<p><img src="./delegate.png" alt=""></p>
+<p>类可以通过协议获取需要实现的 Delegation。</p>
+<p>添加协议后，协议定义有要求一定要实现的方法，如果没有实现则会出现错误：</p>
+<p><code>ViewController.swift:11:1: Type &#39;ViewController&#39; does not conform to protocol &#39;UITableViewDataSource&#39;</code></p>
+<p>协议还定义了可选的 Delegation，swift 中使用 optional 声明：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">optional <span class="func"><span class="keyword">func</span> <span class="title">numberOfSectionsInTableView</span><span class="params">(tableView: UITableView)</span></span> -&gt; <span class="type">Int</span> <span class="comment">// Default is 1 if not implemented</span></span><br></pre></td></tr></table></figure>
+<h4 id="实践说明">实践说明</h4><p>作者给出了一个例子 HorizontalScroller 详细说明了如何通过 Delegation 创建一个与数据分离的和可重用的滚动视图。</p>
+<h5 id="在自定义视图_HorizontalScroller_中">在自定义视图 HorizontalScroller 中</h5><p>下面会说明 HorizontalScroller 如何通过 delegate 获取数据，和如何定义协议。</p>
+<p>这里是 HorizontalScroller 类的一部分代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//自定义视图类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HorizontalScroller</span>: <span class="title">UIView</span>,<span class="title">UIScrollViewDelegate</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	 <span class="keyword">var</span> scroller:<span class="type">UIScrollView</span>!</span><br><span class="line"></span><br><span class="line">    <span class="keyword">weak</span> <span class="keyword">var</span> delegate:<span class="type">HorizontalScrollerDelegate</span>!</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">override</span> <span class="keyword">init</span>(frame: <span class="type">CGRect</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(frame: frame)</span><br><span class="line">        scroller = <span class="type">UIScrollView</span>(frame: <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, frame.size.width, frame.size.height))</span><br><span class="line">        scroller.delegate = <span class="keyword">self</span></span><br><span class="line">        <span class="keyword">self</span>.addSubview(scroller)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//注意 action 需要 ":" 号</span></span><br><span class="line">        <span class="keyword">var</span> tapRecognizer:<span class="type">UITapGestureRecognizer</span>=<span class="type">UITapGestureRecognizer</span>(target: <span class="keyword">self</span>, action: <span class="string">"scrollerTapped:"</span>)</span><br><span class="line">        scroller.addGestureRecognizer(tapRecognizer)</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span><br><span class="line">    响应 UITapGestureRecognizer 动作</span><br><span class="line">    </span><br><span class="line">    :param: gesture 由 GestureRecognizer 传递的相关参数</span><br><span class="line">    */</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">scrollerTapped</span><span class="params">(gesture:UITapGestureRecognizer)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> location:<span class="type">CGPoint</span> = gesture.locationInView(gesture.view)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> index:<span class="type">Int</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> index = <span class="number">0</span>;index &lt; <span class="keyword">self</span>.delegate?.numberOfViewsForHorizontalScroller(<span class="keyword">self</span>);index++</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//遍历每个子视图，检测按下的是哪个子视图，检测完成就发送 delelgate  horizontalScroller:clickedViewAtIndex: 消息</span></span><br><span class="line"><span class="comment">//            在跳出循环之前，被点中的视图位置会在 scroll view 中间。</span></span><br><span class="line">            <span class="keyword">var</span> view:<span class="type">UIView</span> = scroller.subviews[index] <span class="keyword">as</span>! <span class="type">UIView</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="type">CGRectContainsPoint</span>(view.frame, location))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">self</span>.delegate?.horizontalScroller(<span class="keyword">self</span>, clickedViewIndex: index)</span><br><span class="line">                </span><br><span class="line">                scroller.setContentOffset(<span class="type">CGPointMake</span>(view.frame.origin.x-<span class="keyword">self</span>.frame.size.width/<span class="number">2</span>+view.frame.size.width/<span class="number">2</span>, <span class="number">0</span>), animated: <span class="literal">true</span>)</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">reload</span><span class="params">()</span></span></span><br><span class="line">    &#123;</span><br><span class="line">    	...</span><br><span class="line">    	</span><br><span class="line">    	 <span class="keyword">if</span> <span class="keyword">self</span>.delegate == <span class="literal">nil</span>&#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">    	</span><br><span class="line">    	...</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//定义协议</span></span><br><span class="line"><span class="preprocessor">@objc</span> <span class="class"><span class="keyword">protocol</span> <span class="title">HorizontalScrollerDelegate</span>:<span class="title">NSObjectProtocol</span></span>&#123;</span><br><span class="line">    <span class="comment">//ask the delegate how many view he wants present inside the horizontal scroller</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">numberOfViewsForHorizontalScroller</span><span class="params">(scroller:HorizontalScroller)</span></span>-&gt;<span class="type">NSInteger</span></span><br><span class="line">    <span class="comment">//ask the delegate to reuturn the view that should appear at &lt;index&gt;</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">horizontalScroller</span><span class="params">(scroller:HorizontalScroller,viewAtIndex:Int)</span></span>-&gt;<span class="type">UIView</span></span><br><span class="line">    <span class="comment">//inform the delegate what the view at &lt;index&gt; has been clicked</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">horizontalScroller</span><span class="params">(scroller:HorizontalScroller,clickedViewIndex:Int)</span></span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//    ask the delegate for the index of the inital view to display.this method is optional</span></span><br><span class="line"><span class="comment">//    and default to 0 if it's not implemented by the delegate</span></span><br><span class="line">    optional <span class="func"><span class="keyword">func</span> <span class="title">initialViewIndexForHorizontalScroller</span><span class="params">(scroller:HorizontalScroller)</span></span>-&gt;<span class="type">NSInteger</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面定义了一个协议 HorizontalScrollerDelegate，协议声明了三个必需实现的方法和一个可选实现的方法。<br>该协议是从 NSObjectProtocol 继承的，所以可以通过 NSObject 中的定义发送消息到 HorizontalScroller 的 delegate 中，例如 <code>func horizontalScroller(scroller:HorizontalScroller,clickedViewIndex:Int)</code> 就是由 HorizontalScroller 发出点击事件通知 ViewController 进行处理。</p>
+<p>注意在 HorizontalScroller 的实现中定义了一个 delegate：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在 HorizontalScroller 中定义 delegate</span></span><br><span class="line"><span class="keyword">weak</span> <span class="keyword">var</span> delegate:<span class="type">HorizontalScrollerDelegate</span>!</span><br></pre></td></tr></table></figure>
+<p>这个属性是用来执行相关的 Delegate 操作，下面代码就用到了这个属性：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//HorizontalScroller 通过 delegate 获取控制器传递的数据：</span></span><br><span class="line">index &lt; <span class="keyword">self</span>.delegate?.numberOfViewsForHorizontalScroller(<span class="keyword">self</span>);</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//对协议实现者发送消息：</span></span><br><span class="line"><span class="comment">//当 HorizontalScroller 内部的视图被点击时，HorizontalScroller 通过 delegate 通知控制器点击事件已经发送。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">self</span>.delegate?.horizontalScroller(<span class="keyword">self</span>, clickedViewIndex: index)</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取用来显示协议的 用来显示专辑的 UIView。</span></span><br><span class="line"><span class="comment">//这个方法就像 TabelViewController 中的 cellForRowAtIndexPath</span></span><br><span class="line">            <span class="keyword">var</span> view:<span class="type">UIView</span> = <span class="keyword">self</span>.delegate!.horizontalScroller(<span class="keyword">self</span>, viewAtIndex: i)</span><br><span class="line">            </span><br><span class="line">            view.frame = <span class="type">CGRectMake</span>(xValue, <span class="type">VIEW_PADDING</span>, <span class="type">VIEW_DIMENSIONS</span>, <span class="type">VIEW_DIMENSIONS</span>)</span><br><span class="line">            scroller.addSubview(view)</span><br><span class="line">            </span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//对于可选方法，还可以经过判断后调用</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">self</span>.delegate?.respondsToSelector(<span class="string">"initialViewIndexForHorizontalScroller:"</span>) != <span class="literal">false</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> initialView:<span class="type">CGFloat</span> = <span class="type">CGFloat</span>(<span class="keyword">self</span>.delegate.initialViewIndexForHorizontalScroller!(<span class="keyword">self</span>))</span><br><span class="line">            </span><br><span class="line">            scroller.setContentOffset(<span class="type">CGPointMake</span>(initialView * (<span class="type">VIEW_DIMENSIONS</span> + (<span class="number">2</span> * <span class="type">VIEW_PADDING</span>)), <span class="number">0</span>), animated: <span class="literal">true</span>)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>这里就是 HorizontalScroller 大部分关于 delegate 的操作了，配合 ViewController 继续了解 delegate。</p>
+<h5 id="在_ViewController_中">在 ViewController 中</h5><p>ViewController 的一部分代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>:<span class="title">UIViewController</span>,<span class="title">UITableViewDelegate</span>,<span class="title">UITableViewDataSource</span>,<span class="title">HorizontalScrollerDelegate</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">var</span> scroller:<span class="type">HorizontalScroller</span>!</span><br><span class="line"><span class="comment">//MARK:  HorizontalScrollerDelegate methods</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">horizontalScroller</span><span class="params">(scroller: HorizontalScroller, clickedViewIndex: Int)</span></span> &#123;</span><br><span class="line">        currentAlbumIndex = clickedViewIndex</span><br><span class="line">        <span class="keyword">self</span>.showDataForAlbumAtIndex(clickedViewIndex)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">numberOfViewsForHorizontalScroller</span><span class="params">(scroller: HorizontalScroller)</span></span> -&gt; <span class="type">NSInteger</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> allAlbums.<span class="built_in">count</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">horizontalScroller</span><span class="params">(scroller: HorizontalScroller, viewAtIndex: Int)</span></span> -&gt; <span class="type">UIView</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> album:<span class="type">Album</span> = allAlbums[viewAtIndex] <span class="keyword">as</span>! <span class="type">Album</span></span><br><span class="line">        <span class="keyword">return</span> <span class="type">AlbumView</span>(frame: <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>), ablumCover: album.coverUrl)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> </span><br><span class="line">    &#123;</span><br><span class="line">    	...</span><br><span class="line">    </span><br><span class="line">    	<span class="comment">//MARK: add scroller</span></span><br><span class="line">        scroller = <span class="type">HorizontalScroller</span>(frame: <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="keyword">self</span>.view.frame.size.width, <span class="number">120</span>))</span><br><span class="line">        scroller.backgroundColor = <span class="type">UIColor</span>(red: <span class="number">0.24</span>, green: <span class="number">0.35</span>, blue: <span class="number">0.49</span>, alpha: <span class="number">1</span>)</span><br><span class="line">        scroller.delegate = <span class="keyword">self</span></span><br><span class="line">        <span class="keyword">self</span>.view.addSubview(scroller)</span><br><span class="line">        </span><br><span class="line">        ...</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先是在 viewDidLoad 中有一行 <code>scroller.delegate = self</code>，如果把这一行注释了，那么就算类没有实现 HorizontalScrollerDelegate 协议的委托方法程序也能编译，但是运行结果当然是什么都看不到了。因为在 HorizontalScroller 的 reload 方法中有这样一个判断：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">reload</span><span class="params">()</span></span></span><br><span class="line">    &#123;</span><br><span class="line">    	...</span><br><span class="line">    	</span><br><span class="line">    	 <span class="keyword">if</span> <span class="keyword">self</span>.delegate == <span class="literal">nil</span>&#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">    	</span><br><span class="line">    	...</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>scroller.delegate = self</code> 的作用是将 ViewController 类分配给 HorizontalScroller 的 <code>delegate</code> 属性。我们注意到 <code>self.delegate</code> 需要的类型是 <code>HorizontalScrollerDelegate</code>，与 ViewController 类的类型不一致，那为什么 ViewController 可以分配给它呢？因为 ViewController 实现了 HorizontalScrollerDelegate 协议：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>:<span class="title">UIViewController</span>,<span class="title">UITableViewDelegate</span>,<span class="title">UITableViewDataSource</span>,<span class="title">HorizontalScrollerDelegate</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	.....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一旦将 <code>HorizontalScrollerDelegate</code> 协议注释掉后会出现错误：</p>
+<p><code>Cannot assign a value of type &#39;ViewController&#39; to a value of type &#39;HorizontalScrollerDelegate!&#39;</code></p>
+<p>因为 ViewController 声明了它会实现 HorizontalScrollerDelegate 协议，所以它必须实现协议指定的方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">horizontalScroller</span><span class="params">(scroller: HorizontalScroller, clickedViewIndex: Int)</span></span> &#123;</span><br><span class="line">        currentAlbumIndex = clickedViewIndex</span><br><span class="line">        <span class="keyword">self</span>.showDataForAlbumAtIndex(clickedViewIndex)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">numberOfViewsForHorizontalScroller</span><span class="params">(scroller: HorizontalScroller)</span></span> -&gt; <span class="type">NSInteger</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> allAlbums.<span class="built_in">count</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">horizontalScroller</span><span class="params">(scroller: HorizontalScroller, viewAtIndex: Int)</span></span> -&gt; <span class="type">UIView</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> album:<span class="type">Album</span> = allAlbums[viewAtIndex] <span class="keyword">as</span>! <span class="type">Album</span></span><br><span class="line">        <span class="keyword">return</span> <span class="type">AlbumView</span>(frame: <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>), ablumCover: album.coverUrl)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>总结：</p>
+<p>自定义类 HorizontalScroller 可以使用 delegate 向协议实现者索取数据，实现数据分离。</p>
+<p>自定义类 HorizontalScroller 可以使用 delegate 向协议实现者发送消息，协议需要从 NSObject 继承。</p>
+<p>自定义类中可以使用 self.delegate?.respondsToSelector(“Method”) 进行判断是否拥有该方法，实现可选的 optional 方法。</p>
+<h2 id="The_Observer_Pattern">The Observer Pattern</h2><p>在 Observer pattern 中，对象在它的状态改变时通知其它对象，该对象不需要知道哪些对象会被通知，这种设计是为了解藕。最常见的地方是在属性值发生更改后通知其它感兴趣的对象。</p>
+<p>Cocoa 使用两种方式实现 Observer Pattern：Notifications 和 Key-Value Observing(KVO)。</p>
+<h3 id="Notifications">Notifications</h3><p>注意 Notifications 不是 Push 或 Local 推送通知。Notifications 是一种基于 “订阅者-发布者” 的模型，允许一个对象(发布者) 发送消息到另一个对象(订阅者)。发布者永远不需要知道任何关于订阅者的信息。 </p>
+<p>Notifications 在 Apple 生态中大量使用，例如当键盘隐藏或显示时，系统会分别发送 UIKeyboardWillShowNotification 和 UIKeyboardWillHideNotification。你也可以在工程目录的 UIApplication 中看到超过 20 个由系统发送的消息。 </p>
+<h4 id="使用方式">使用方式</h4><p>下面用一个加载图片的例子演示 Notifications，需要加载图片时就发送通知，然后有通知接收者进行处理</p>
+<p>在 AlbumView 的 init 方法中发送 <code>BLDownloadImageNotification</code> 消息，通知消息接收者进行下载图片操作。userInfo 是附加参数，把需要加载图片的 UIImageView 传递进去，另外一个参数 URL 当没有本地缓存时作为图片的网络地址。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSNotificationCenter</span>.defaultCenter().postNotificationName(<span class="string">"BLDownloadImageNotification"</span>, object: <span class="keyword">self</span>, userInfo: [<span class="string">"imageView"</span>:coverImage,<span class="string">"coverUrl"</span>:ablumCover])</span><br></pre></td></tr></table></figure>
+<p>在 LibraryAPI 的 init 方法中注册成订阅者接收通知，用 downloadImage 方法处理通知，进行图片下载。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSNotificationCenter</span>.defaultCenter().addObserver(<span class="keyword">self</span>, selector: <span class="string">"downloadImage:"</span>, name: <span class="string">"BLDownloadImageNotification"</span>, object: <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
+<p><code>downloadImage</code> 方法的实现：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">downloadImage</span><span class="params">(notification:NSNotification)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> info = notification.userInfo <span class="keyword">as</span>? <span class="type">Dictionary</span>&lt;<span class="type">String</span>,<span class="type">AnyObject</span>&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">let</span> imageView:<span class="type">UIImageView</span> = info[<span class="string">"imageView"</span>] <span class="keyword">as</span>? <span class="type">UIImageView</span></span><br><span class="line">            &#123;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">let</span> coverUrl:<span class="type">String</span> = info[<span class="string">"coverUrl"</span>] <span class="keyword">as</span>? <span class="type">String</span></span><br><span class="line">                &#123;</span><br><span class="line">                    </span><br><span class="line">                    <span class="keyword">if</span> <span class="keyword">let</span> image = persistencyManager.getImage(coverUrl.lastPathComponent)</span><br><span class="line">                    &#123;</span><br><span class="line"><span class="comment">//                        如果本地已经缓存图片，则加载本地图片</span></span><br><span class="line">                        imageView.image = image</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span></span><br><span class="line">                    &#123;</span><br><span class="line"><span class="comment">//                        如果本地没有缓存图片，则从网上下载，并保存图片到本地。dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), &#123; () -&gt; Void in</span></span><br><span class="line">                            <span class="keyword">var</span> image:<span class="type">UIImage</span> = <span class="keyword">self</span>.httpClient.downloadImage(coverUrl)</span><br><span class="line">                            </span><br><span class="line">                            dispatch_async(dispatch_get_main_queue(), &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">                                imageView.image = image</span><br><span class="line">                                <span class="keyword">self</span>.persistencyManager.saveImage(image, fileName: coverUrl.lastPathComponent)</span><br><span class="line">                            &#125;)</span><br><span class="line">                        &#125;)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Key-Value_Observing(KVO)">Key-Value Observing(KVO)</h3><p>在 KVO 模式中，一个对象可以在另一个特定的属性发生改变时获得通知，无论这个属性是自己的或则是其其它对象的。</p>
+<p>更加深入学习的资料：<a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueObserving/KeyValueObserving.html" target="_blank" rel="external">Apple’s KVO Programming Guide</a>。</p>
+<p>Apple 文档中介绍了在 Swift 中使用 KVO 的方法：<a href="https://developer.apple.com/library/mac/documentation/Swift/Conceptual/BuildingCocoaApps/AdoptingCocoaDesignPatterns.html#//apple_ref/doc/uid/TP40014216-CH7-XID_8" target="_blank" rel="external">Using Swift with Cocoa and Objective-C</a>。</p>
+<h4 id="使用方式-1">使用方式</h4><p>上面给出了 Apple 官方的使用例子，这里的例子是原文作者中的例子。</p>
+<p>Swift 中需要使用 dynamic，这里是 <a href="https://developer.apple.com/library/mac/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-XID_39" target="_blank" rel="external">dynamic</a> 的详细介绍</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在 AlbumView.swift 中</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">//1. 需要添加 dynamic 标识，否则会编译会出错。</span></span><br><span class="line"> 	 dynamic private <span class="keyword">var</span> coverImage:<span class="type">UIImageView</span>!</span><br><span class="line">    private <span class="keyword">var</span> myContext = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">init</span>(frame: <span class="type">CGRect</span>,ablumCover:<span class="type">String</span>) &#123;</span><br><span class="line">		</span><br><span class="line">		...</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//2. 注册需要观测的属性</span></span><br><span class="line">		<span class="comment">//	  self 表明当前类， image 表明 coverImage.image 属性</span></span><br><span class="line">        coverImage.addObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"image"</span>, options: <span class="type">NSKeyValueObservingOptions</span>.<span class="type">New</span>, context: &amp;myContext)</span><br><span class="line"></span><br><span class="line">		...</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3. 重写 observeValueForKeyPath，这里是属性值变化时的响应方法。</span></span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">observeValueForKeyPath</span><span class="params">(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer&lt;Void&gt;)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> context == &amp;myContext</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> keyPath == <span class="string">"image"</span></span><br><span class="line">            &#123;</span><br><span class="line">                indicator.stopAnimating()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//4. 注意一定要在 deinit 中 removeObserver，否则 APP 可能会尝试向不存在的 observers 发送消息，造成崩溃。</span></span><br><span class="line">    <span class="keyword">deinit</span>&#123;</span><br><span class="line">        coverImage.removeObserver(<span class="keyword">self</span>, forKeyPath: <span class="string">"image"</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="The_Memento_Pattern">The Memento Pattern</h2><p>Memento Pattern 将对象的状态捕获并存放在外部，换句话说，它将应用程序状态保存在其它地方。以便将来状态可以在程序中重新恢复。</p>
+<h3 id="使用方式-2">使用方式</h3><p>可以使用 NSUserDefault 实现 Memento Pattern。<br>NSUSerDefault 适合保存少量数据，下面是使用 NSUSerDefault 处理数据两个函数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">saveCurrentState</span><span class="params">()</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">NSUserDefaults</span>.standardUserDefaults().setInteger(currentAlbumIndex, forKey: <span class="string">"currentAlbumIndex"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">loadPreviousState</span><span class="params">()</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        currentAlbumIndex = <span class="type">NSUserDefaults</span>.standardUserDefaults().integerForKey(<span class="string">"currentAlbumIndex"</span>)</span><br><span class="line">        <span class="keyword">self</span>.showDataForAlbumAtIndex(currentAlbumIndex)</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>需要读取状态时在 ViewController 的 viewDidLoad 调用 self.loadPreviousState()。</p>
+<p>当程序进入 background 时会发出这个消息 <code>UIApplicationDidEnterBackgroundNotification</code>，使用 NSNotification 注册观察 <code>UIApplicationDidEnterBackgroundNotification</code> ，在处理方法中进行状态保存。</p>
+<p>在 ViewDidLoad 添加：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">NSNotificationCenter</span>.defaultCenter().addObserver(<span class="keyword">self</span>, selector: <span class="string">"saveCurrentState"</span>, name: <span class="type">UIApplicationDidEnterBackgroundNotification</span>, object: <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
+<p>这时在模拟器按下两次 Command+Shift+H 杀死应用程序后再次打开，显示了想要的效果，但是封面图片却始终显示第一张。这是因为滚动视图的协议中提供了可选方法 <code>initialViewIndexForHorizontalScroller</code>，如果没有实现这个方法则初始化时始终显示第一张。下面在 ViewController 实现这个方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">initialViewIndexForHorizontalScroller</span><span class="params">(scroller: HorizontalScroller)</span></span> -&gt; <span class="type">NSInteger</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> currentAlbumIndex</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>这样滚动视图的图片也显示正确了。</p>
+<h3 id="Archiving">Archiving</h3><p>Apple 指定的另一种实现 Memento pattern 的方式是 Archiving。它将对象转换为 stream 使其得以保存并重新恢复，而且不用将对象的私有属性暴露给外部方法。更多的细节可以阅读 iOS 6 by Tutorials 中第十六章。或者 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Archiving/Archiving.html" target="_blank" rel="external">Apple’s Archives and Serializations Programming Guide</a>。</p>
+<h4 id="使用_Archiving">使用 Archiving</h4><p>首先需要 Model 中的 Album 类实现 NSCoding 协议：<br>encodeWithCoder 是必须实现的 delegate 方法，另外添加了一个初始化方法通过特定数据初始化 Album 类。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Album</span>: <span class="title">NSObject</span>,<span class="title">NSCoding</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//MARK:conform NSCoding</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">encodeWithCoder</span><span class="params">(aCoder: NSCoder)</span></span> &#123;</span><br><span class="line">        aCoder.encodeObject(<span class="keyword">self</span>.year, forKey: <span class="string">"year"</span>)</span><br><span class="line">        aCoder.encodeObject(<span class="keyword">self</span>.title, forKey: <span class="string">"album"</span>)</span><br><span class="line">        aCoder.encodeObject(<span class="keyword">self</span>.artist, forKey: <span class="string">"artist"</span>)</span><br><span class="line">        aCoder.encodeObject(<span class="keyword">self</span>.coverUrl, forKey: <span class="string">"cover_url"</span>)</span><br><span class="line">        aCoder.encodeObject(<span class="keyword">self</span>.genre, forKey: <span class="string">"genre"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">     required <span class="keyword">init</span>(coder aDecoder: <span class="type">NSCoder</span>) &#123;</span><br><span class="line">        year = aDecoder.decodeObjectForKey(<span class="string">"year"</span>) <span class="keyword">as</span>! <span class="type">String</span></span><br><span class="line">        title = aDecoder.decodeObjectForKey(<span class="string">"title"</span>) <span class="keyword">as</span>! <span class="type">String</span></span><br><span class="line">        artist = aDecoder.decodeObjectForKey(<span class="string">"artist"</span>) <span class="keyword">as</span>! <span class="type">String</span></span><br><span class="line">        coverUrl = aDecoder.decodeObjectForKey(<span class="string">"coverUrl"</span>) <span class="keyword">as</span>! <span class="type">String</span></span><br><span class="line">        genre = aDecoder.decodeObjectForKey(<span class="string">"genre"</span>) <span class="keyword">as</span>! <span class="type">String</span></span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">接着在应用程序保存持久数据的类 <span class="type">PersistencyManager</span>.<span class="built_in">swift</span> 中添加方法将数据保存成文件：</span><br><span class="line"></span><br><span class="line">```<span class="built_in">swift</span></span><br><span class="line"><span class="comment">//MARK:Archiving</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">saveAlbums</span><span class="params">()</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> filename:<span class="type">String</span> = <span class="type">NSHomeDirectory</span>() + <span class="string">"/Documents/albums.bin"</span></span><br><span class="line">        <span class="keyword">var</span> data = <span class="type">NSKeyedArchiver</span>.archivedDataWithRootObject(albums)</span><br><span class="line">        data.writeToFile(filename, atomically: <span class="literal">true</span>)</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">修改 <span class="type">PersistencyManager</span>.<span class="built_in">swift</span> 的 <span class="keyword">init</span> 方法：</span><br><span class="line">如果制定路径保存了数据，则直接加载，否则指定固定的数据。</span><br><span class="line">```<span class="built_in">swift</span></span><br><span class="line"><span class="keyword">override</span> <span class="keyword">init</span>()&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line">        </span><br><span class="line">       <span class="keyword">if</span> <span class="keyword">let</span> data = <span class="type">NSData</span>(contentsOfFile: <span class="type">NSHomeDirectory</span>()+<span class="string">"/Documents/albums.bin"</span>)</span><br><span class="line">       &#123;</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">let</span> archivingData: <span class="type">AnyObject</span> = <span class="type">NSKeyedUnarchiver</span>.unarchiveObjectWithData(data)</span><br><span class="line">            &#123;</span><br><span class="line">                albums = archivingData <span class="keyword">as</span>! <span class="type">NSMutableArray</span></span><br><span class="line">                <span class="built_in">println</span>(<span class="string">"success"</span>)</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">println</span>(<span class="string">"unarchivie fail"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        albums = <span class="type">NSMutableArray</span>(array: [</span><br><span class="line">            <span class="type">Album</span>(title: <span class="string">"Best of Bowie"</span>, artist: <span class="string">"David bowie"</span>, coverUrl: <span class="string">"http://www.coversproject.com/static/thumbs/album/album_david%20bowie_best%20of%20bowie.png"</span>, year: <span class="string">"1992"</span>),</span><br><span class="line">            <span class="type">Album</span>(title: <span class="string">"It's My Life"</span>, artist: <span class="string">"No Doubt"</span>, coverUrl: <span class="string">"http://www.coversproject.com/static/thumbs/album/album_no%20doubt_its%20my%20life%20%20bathwater.png"</span>, year: <span class="string">"2003"</span>),</span><br><span class="line">            <span class="type">Album</span>(title: <span class="string">"Nothing Like The Sun"</span>, artist: <span class="string">"String"</span>, coverUrl: <span class="string">"http://www.coversproject.com/static/thumbs/album/album_sting_nothing%20like%20the%20sun.png"</span>, year: <span class="string">"1999"</span>),</span><br><span class="line">            <span class="type">Album</span>(title: <span class="string">"Staring at the Sun"</span>, artist: <span class="string">"U2"</span>, coverUrl: <span class="string">"http://www.coversproject.com/static/thumbs/album/album_u2_staring%20at%20the%20sun.png"</span>, year: <span class="string">"2000"</span>),</span><br><span class="line">            <span class="type">Album</span>(title: <span class="string">"American Pie"</span>, artist: <span class="string">"Madonna"</span>, coverUrl: <span class="string">"http://www.coversproject.com/static/thumbs/album/album_madonna_american%20pie.png"</span>, year: <span class="string">"2000"</span>),</span><br><span class="line">            ])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span>.saveAlbums()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果还想进一步完善数据保存，在程序每次进入 background 时保存，那么在 LibraryAPI 中添加一个保存方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//MARK:archiving</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">saveAlbums</span><span class="params">()</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        persistencyManager.saveAlbums()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>然后在 ViewController.swift 中的方法 saveCurrentState 中添加：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">saveCurrentState</span><span class="params">()</span></span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="type">LibraryAPI</span>.sharedInstance.saveAlbums()</span><br><span class="line">       </span><br><span class="line">       <span class="type">NSUserDefaults</span>.standardUserDefaults().setInteger(currentAlbumIndex, forKey: <span class="string">"currentAlbumIndex"</span>)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>这样应用程序每次进入 background 时就会保存当前数据。</p>
+<h2 id="The_Command_Pattern">The Command Pattern</h2><p>Command Design pattern 将操作请求封装成对象，这个对象包括一系列方法，和相应的函数。封装后的对象可以立即执行，也可以稍后执行。你也可以传递这些对象或者动态修改对象或把对象存储起来。</p>
+<p>我们可以对封装后的对象执行这些操作：对象之间传递，存储，动态修改，放置到队列中。</p>
+<p>可以在 Apple 的文档 <a href="https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaEncyclopedia/Target-Action/Target-Action.html" target="_blank" rel="external">Target-Action</a> 了解更详细的资料。</p>
+<p>Objective-C 中使用 Target-Action 和 Invocation 实现这个机制。实现 Invocation 的是 NSInvocation 类，该类包含了目标对象，指定方法和方法所需要的参数。NSInvocation 对象可以动态更改并且在需要的时候执行。</p>
+<p>但是在 Swift 中 NSInvocation 已经不可使用，所以需要用另外的方式实现。</p>
+<h3 id="实现方式">实现方式</h3><p>例子中以一个撤销功能演示 Command Pattern，具体思路是在删除专辑时把指定的添加请求保存到 UNDO 堆栈中，当需要撤销时，直接执行 UNDO 堆栈中所保存的指令。</p>
+<p>下面是程序实现方式：</p>
+<p>首先创建一个工具栏，并在上面放置撤销按钮和删除按钮，然后把工具栏放在应用程序底部：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//1.</span></span><br><span class="line"> <span class="keyword">var</span> toolbar:<span class="type">UIToolbar</span>!</span><br><span class="line"></span><br><span class="line">   <span class="keyword">typealias</span> undoClosure = () -&gt; <span class="type">Void</span></span><br><span class="line">   <span class="comment">//创建一个 undoClosure 类型的数组，用于保存执行撤销操作的指令。 </span></span><br><span class="line">   <span class="keyword">var</span> undoStack = [undoClosure]()</span><br><span class="line">   </span><br><span class="line">   <span class="comment">//2.</span></span><br><span class="line">   <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">       </span><br><span class="line">       ...</span><br><span class="line">       </span><br><span class="line">       <span class="comment">//创建工具栏</span></span><br><span class="line">       toolbar = <span class="type">UIToolbar</span>()</span><br><span class="line">       <span class="keyword">var</span> undoItem = <span class="type">UIBarButtonItem</span>(barButtonSystemItem: <span class="type">UIBarButtonSystemItem</span>.<span class="type">Undo</span>, target: <span class="keyword">self</span>, action: <span class="string">"undoAction"</span>)</span><br><span class="line">       undoItem.enabled = <span class="literal">false</span></span><br><span class="line">       <span class="keyword">var</span> space = <span class="type">UIBarButtonItem</span>(barButtonSystemItem: <span class="type">UIBarButtonSystemItem</span>.<span class="type">FlexibleSpace</span>, target: <span class="literal">nil</span>, action: <span class="literal">nil</span>)</span><br><span class="line">       <span class="keyword">var</span> deleteItem = <span class="type">UIBarButtonItem</span>(barButtonSystemItem: <span class="type">UIBarButtonSystemItem</span>.<span class="type">Trash</span>, target: <span class="keyword">self</span>, action: <span class="string">"deleteAlbum"</span>)</span><br><span class="line">       toolbar.setItems([undoItem,space,deleteItem], animated: <span class="literal">false</span>)</span><br><span class="line">       <span class="keyword">self</span>.view.addSubview(toolbar)</span><br><span class="line">       </span><br><span class="line">       ...</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   <span class="comment">//3.注意工具栏的 frame 属性要在这里设置</span></span><br><span class="line">   <span class="comment">//因为在 ViewDidLoad 中设置的 frame 尺寸不是最终尺寸</span></span><br><span class="line">   <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewWillLayoutSubviews</span><span class="params">()</span></span> &#123;</span><br><span class="line">       toolbar.frame = <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="keyword">self</span>.view.frame.height-<span class="number">44</span>, <span class="keyword">self</span>.view.frame.size.width, <span class="number">44</span>)</span><br><span class="line">       dataTable.frame = <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">130</span>, <span class="keyword">self</span>.view.frame.size.width, <span class="keyword">self</span>.view.frame.size.height-<span class="number">200</span>)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>然后是执行撤销的操作，配置相应的方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//添加专辑函数，拥有这个函数才可以恢复已删除的</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">addAlbum</span><span class="params">(album:Album,index:Int)</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">LibraryAPI</span>.sharedInstance.addAblum(album, index: index)</span><br><span class="line">        currentAlbumIndex = index</span><br><span class="line">        <span class="keyword">self</span>.reloadScroller()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//删除专辑方法，在这个方法中实现撤销功能的主要部分</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">deleteAlbum</span><span class="params">()</span></span></span><br><span class="line">    &#123;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">        <span class="comment">//获取将要删除的专辑的数据</span></span><br><span class="line">        <span class="keyword">var</span> deleteAlbum:<span class="type">Album</span> = allAlbums[currentAlbumIndex] <span class="keyword">as</span>! <span class="type">Album</span></span><br><span class="line">        <span class="keyword">var</span> deleteAlbumIndex:<span class="type">Int</span> = <span class="keyword">self</span>.currentAlbumIndex</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//创建一个 clousure，里面存放相应的撤销指令。</span></span><br><span class="line">        <span class="keyword">let</span> undoSave = &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">var</span> currentIndex = deleteAlbumIndex</span><br><span class="line">            <span class="keyword">var</span> deletedAlbum = deleteAlbum</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">self</span>.addAlbum(deletedAlbum, index: currentIndex)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//将 clousure 添加到堆栈中</span></span><br><span class="line">        undoStack.append(undoSave)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//执行数据的删除操作</span></span><br><span class="line">        <span class="type">LibraryAPI</span>.sharedInstance.deleteAlbumAtIndex(currentAlbumIndex)</span><br><span class="line">        <span class="keyword">self</span>.reloadScroller()</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//设置撤销按钮为启用状态</span></span><br><span class="line">        <span class="keyword">var</span> undoItem:<span class="type">UIBarButtonItem</span> = toolbar.items![<span class="number">0</span>] <span class="keyword">as</span>! <span class="type">UIBarButtonItem</span></span><br><span class="line">        undoItem.enabled = <span class="literal">true</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//撤销操作</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">undoAction</span><span class="params">()</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(undoStack.<span class="built_in">count</span> &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//获取数组最后的对象并从数组中移除。</span></span><br><span class="line">            <span class="keyword">var</span> lastUndoStack = undoStack.removeLast()</span><br><span class="line">            <span class="comment">//执行撤销方法。</span></span><br><span class="line">            lastUndoStack()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(undoStack.<span class="built_in">count</span> == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> undoItem:<span class="type">UIBarButtonItem</span> = toolbar.items![<span class="number">0</span>] <span class="keyword">as</span>! <span class="type">UIBarButtonItem</span></span><br><span class="line">            undoItem.enabled = <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="其它">其它</h2><h3 id="Objective-C_私有变量">Objective-C 私有变量</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;@implementation AlbumView&#10;&#123;&#10;    UIImageView *coverImage;&#10;    UIActivityIndicatorView *indicator;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: Wondering why the private variables were defined in the implementation file and not in the interface file? This is because no class outside the AlbumView class needs to know of the existence of these variables since they are used only in the implementation of the class’s internal functionality. This convention is extremely important if you’re creating a library or framework for other developers to use.</p>
+</blockquote>
+<h3 id="swift_中的_singleton，init">swift 中的 singleton，init</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LibraryAPI</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> persistencyManager:<span class="type">PersistencyManager</span>!</span><br><span class="line">    <span class="keyword">var</span> httpClient:<span class="type">HTTPClient</span>!</span><br><span class="line">    <span class="keyword">var</span> isOnline:<span class="type">Bool</span>=<span class="literal">false</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="keyword">init</span>()&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        persistencyManager = <span class="type">PersistencyManager</span>()</span><br><span class="line">        httpClient = <span class="type">HTTPClient</span>()</span><br><span class="line">        isOnline = <span class="literal">false</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义 singleton 变量和初始化</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">let</span> sharedInstance = <span class="type">LibraryAPI</span>()</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/HTTP-data-communication/">HTTP 数据通信</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/iOSDesignPatterns/"
+               data-title="iOS 设计模式笔记" data-url="http://yoursite.com/2015/iOSDesignPatterns/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">1.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC"><span class="nav-number">1.1.</span> <span class="nav-text">MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Facade_design_pattern"><span class="nav-number">1.2.</span> <span class="nav-text">Facade design pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The_Adapter_Pattern"><span class="nav-number">1.3.</span> <span class="nav-text">The Adapter Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The_Decorator_Design_Pattern"><span class="nav-number">1.4.</span> <span class="nav-text">The Decorator Design Pattern</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Category"><span class="nav-number">1.4.1.</span> <span class="nav-text">Category</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建方式"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">创建方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Delegation"><span class="nav-number">1.4.2.</span> <span class="nav-text">Delegation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实践说明"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">实践说明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在自定义视图_HorizontalScroller_中"><span class="nav-number">1.4.2.1.1.</span> <span class="nav-text">在自定义视图 HorizontalScroller 中</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在_ViewController_中"><span class="nav-number">1.4.2.1.2.</span> <span class="nav-text">在 ViewController 中</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The_Observer_Pattern"><span class="nav-number">1.5.</span> <span class="nav-text">The Observer Pattern</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Notifications"><span class="nav-number">1.5.1.</span> <span class="nav-text">Notifications</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用方式"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">使用方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Key-Value_Observing(KVO)"><span class="nav-number">1.5.2.</span> <span class="nav-text">Key-Value Observing(KVO)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用方式-1"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">使用方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The_Memento_Pattern"><span class="nav-number">1.6.</span> <span class="nav-text">The Memento Pattern</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方式-2"><span class="nav-number">1.6.1.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Archiving"><span class="nav-number">1.6.2.</span> <span class="nav-text">Archiving</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用_Archiving"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">使用 Archiving</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The_Command_Pattern"><span class="nav-number">1.7.</span> <span class="nav-text">The Command Pattern</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现方式"><span class="nav-number">1.7.1.</span> <span class="nav-text">实现方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-number">1.8.</span> <span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Objective-C_私有变量"><span class="nav-number">1.8.1.</span> <span class="nav-text">Objective-C 私有变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swift_中的_singleton，init"><span class="nav-number">1.8.2.</span> <span class="nav-text">swift 中的 singleton，init</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62263979-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>
