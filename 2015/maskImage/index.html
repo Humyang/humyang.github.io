@@ -31,7 +31,7 @@
 
 
 
-  <title> iOS 翻译 《View Programming Guide for iOS：Introduction》 // Humyang </title>
+  <title>  // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              iOS 翻译 《View Programming Guide for iOS：Introduction》
+              
             
           
         </h1>
@@ -119,7 +119,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-04-25
+          发表于 2015-08-05
         </span>
 
         
@@ -134,7 +134,15 @@
               
 
             
-              <a href="/categories/iOS/翻译/">翻译</a>
+              <a href="/categories/iOS/实例/">实例</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/实例/图形/">图形</a>
 
               
               
@@ -147,8 +155,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/iOS-Note-View-Programming-Guide-for-iOS-Introduction/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/iOS-Note-View-Programming-Guide-for-iOS-Introduction/"></span>
+            <a href="/2015/maskImage/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/maskImage/"></span>
             </a>
           </span>
           
@@ -162,41 +170,28 @@
       
 
       
-        <p>记录关于学习过的 iOS 文档</p>
+        <p>使用 Core Graphic 实现的刮刮乐小程序。</p>
 <a id="more"></a>
-<p><a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009503-CH1-SW2" target="_blank" rel="external">原文地址</a></p>
 <hr>
-<h1 id="关于窗口和视图">关于窗口和视图</h1><p>在 iOS 中，你会用到窗口和视图在屏幕上呈现你的应用程序内容。窗口没有任何可见的样式内容但它为应用程序的视图提供了基础容器。视图定义窗口上的你想填充一些内容的部分。例如，你可以用视图显示图片，文本，形状或一些它们的组合。你也可以使用视图组织和管理其他视图。</p>
-<h2 id="一览">一览</h2><p>每个应用程序至少有一个窗口和一个视图呈现内容。UIKit 和其他系统框架提供预定义的视图让你呈现你的内容。这些视图的范围从简单按钮和文本标签到更多复杂的视图例如表格视图，选取视图，和滚动条视图。在预定义的视图无法满足你的需求的地方，你也可以自定义视图自己管理它的绘制和事件处理。</p>
-<h2 id="视图管理你的应用程序的可见内容">视图管理你的应用程序的可见内容</h2><p>视图是 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView" target="_blank" rel="external">UIView</a> 类 (或是它的子类) 的一个实例管理在你的应用程序窗口中的一个矩形区域。视图负责绘制内容，处理多点触碰事件，和管理子视图的布局。绘制用到的图形技术如 Core Graphic，OpenGL ES,或 UIKit 等在视图的矩形范围内绘制形状，图像，和文本。视图通过使用手势检测或直接处理触摸事件的方式响应矩形区域内的触摸事件。视图层次方面，父视图负责他们的子视图的定位和尺寸并且可以是动态化。子视图动态化修改的能力让你的视图适应不断变化的条件，例如界面旋转和动画效果。</p>
-<p>你可以把视图作为能构造你的用户界面的积木。相对于只使用一个视图呈现你的所有内容，通常都是使用数个视图构造视图层次。每个层次的视图呈现你的用户界面的一部分和对特定的内容类型优化。例如，UIKit 有特定的视图分别呈现图像，文本或其他内容类型。</p>
-<blockquote>
-<p>相关章节：<a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/WindowsandViews/WindowsandViews.html#//apple_ref/doc/uid/TP40009503-CH2-SW1" target="_blank" rel="external">View and Window Architecture</a> ,<a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingViews/CreatingViews.html#//apple_ref/doc/uid/TP40009503-CH5-SW1" target="_blank" rel="external">View</a></p>
-</blockquote>
-<h2 id="窗口协助视图显示">窗口协助视图显示</h2><p>窗口是 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIWindow_Class/index.html#//apple_ref/occ/cl/UIWindow" target="_blank" rel="external">UIWindow</a> 类的一个实例负责处理你的应用程序的用户界面总体呈现。窗口与视图 (或其他自己的视图控制器) 一起协作管理应用程序的互动，变更，可见的视图层次。大多数情况下，你的应用程序的窗口永远不用变更。在窗口被创建之后，它会一直保持原状并且只有通过它的变化显示视图。每一个应用程序至少有一个窗口在设备的主屏幕上显示应用程序的界面。如果有拓展显示设备连接到该设备，应用程序可以创建第二个窗口为拓展显示设备呈现内容。</p>
-<blockquote>
-<p>相关章节： <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingWindows/CreatingWindows.html#//apple_ref/doc/uid/TP40009503-CH4-SW1" target="_blank" rel="external">Windows</a></p>
-</blockquote>
-<h2 id="动画效果为用户提供界面更改可见的信息反馈">动画效果为用户提供界面更改可见的信息反馈</h2><p>动画效果为用户提供关于你的视图层次变化的可见反馈。系统为呈现模型视图和视图的不同分组之间的过渡定义了标准化的动画效果。并且，许多视图的属性也可以直接通过动画效果更改。例如你可以通过动画效果变更视图的透明度，屏幕的位置，它的尺寸，它的背景颜色，或其他属性。如果你直接对视图的底层的 Core Animation layer 对象工作，你还可以执行更多其他更好的动画效果。</p>
-<blockquote>
-<p>相关章节：<a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW1" target="_blank" rel="external">Animations</a></p>
-</blockquote>
-<h2 id="界面构造器的作用">界面构造器的作用</h2><p>界面生成器是一个让你使用图形化构造和配置你的应用程序窗口的视图的应用程序。通过使用界面生成器，你可以组合你的视图并把它们放置到 <a href="">nib 文件</a>中,nib 是一个存储冻干版的视图和其他对象的资源文件。当你在运行时加载 nib 文件，这个对象的内部会重组到实际的对象让你的代码能以编程方式操作它们。</p>
-<p>界面生成器可以非常简单的创建你的应用程序的用户界面。因为对界面生成器和 nib 文件的支持已被纳入了 iOS，只需要把一些 nib 文件合并到你的应用程序设计之中。</p>
-<p>更多关于如何使用界面生成器的信息，见 <em>Interface Builder User Guide</em>。</p>
-<p>关于如何用视图控制器管理它包含的视图的 nil 文件的信息，见 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457" target="_blank" rel="external">View Controller Programming Guide for iOS</a> 中的 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/BasicViewControllers/BasicViewControllers.html#//apple_ref/doc/uid/TP40007457-CH101" target="_blank" rel="external">Creating Custom Content View Controllers</a>。</p>
-<h2 id="其他参考资料">其他参考资料</h2><p>因为视图是非常复杂和灵活的对象，它不可能再一个文档内覆盖它的所有行为，无论如何，其他的文档可以帮助你学习关于其他管理视图方面和你的整体用户界面。</p>
-<p>视图控制器是管理你的应用程序的视图的重要一部分。在一个单一的视图层次中视图控制器管理所有的视图和在设备上呈现这些视图。更多关于视图控制器和他们扮演的角色信息，见 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457" target="_blank" rel="external"><em>View Controller Programming Guide for iOS</em></a>。</p>
-<p>视图是你的应用程序中手势和触摸事件关键的接收者。更多关于使用手势检测和直接处理触摸事件的信息，见 <a href="https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541" target="_blank" rel="external"><em>Event Handling Guide for iOS</em></a>。</p>
-<p>自定义视图必须使用可绘制技术呈现它们的内容。关于使用这些技术绘制你的视图的信息，见 <a href="https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40010156" target="_blank" rel="external"><em>Drawing and Printing Guide for iOS</em></a>。</p>
-<p>在标准化视图动画效果不能满足你的需求时，你可以使用 Core Animation。关于使用 Core Animation 实现动画效果的信息，见 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40004514" target="_blank" rel="external"><em>Core Animation Programming Guide</em></a>。</p>
+<h1 id="刮刮乐小程序">刮刮乐小程序</h1><p>源码地址：<a href="https://github.com/Humyang/CoreGraphicMaskImage" target="_blank" rel="external">Github</a></p>
+<h2 id="主要代码">主要代码</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">UIKit</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">maskImage</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    private <span class="keyword">var</span> imageSource:<span class="type">CGImageRef</span>!</span><br><span class="line">    </span><br><span class="line">    private <span class="keyword">var</span> customMaskImage:<span class="type">CGImageRef</span> = <span class="type">UIImage</span>(named: <span class="string">"mask2.png"</span>)!.<span class="type">CGImage</span></span><br><span class="line">    private <span class="keyword">var</span> maskBlack:<span class="type">CGImageRef</span> = <span class="type">UIImage</span>(named: <span class="string">"maskblack.png"</span>)!.<span class="type">CGImage</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span><br><span class="line">    http://stackoverflow.com/questions/24339145/how-do-i-write-a-custom-init-for-a-uiview-subclass-in-swift</span><br><span class="line">    </span><br><span class="line">    The init(frame:) version is the default initializer. You must call it only after initializing your instance variables. If this view is being reconstituted from a Nib then your custom initializer will not be called, and instead the init(coder:) version will be called. Since Swift now requires an implementation of the required init(coder:), I have updated the example below and changed the let variable declarations to var and optional. In this case, you would initialize them in awakeFromNib() or at some later time.</span><br><span class="line">    */</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(frame: <span class="type">CGRect</span>,image:<span class="type">CGImageRef</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(frame: frame)</span><br><span class="line">        </span><br><span class="line">        imageSource = image</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    required <span class="keyword">init</span>(coder aDecoder: <span class="type">NSCoder</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(coder: aDecoder)</span><br><span class="line">        imageSource = <span class="type">UIImage</span>(named: <span class="string">"images.jpeg"</span>)?.<span class="type">CGImage</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Only override drawRect: if you perform custom drawing.</span></span><br><span class="line">    <span class="comment">// An empty implementation adversely affects performance during animation.</span></span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">drawRect</span><span class="params">(rect: CGRect)</span></span> &#123;</span><br><span class="line">        <span class="comment">// Drawing code</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//1.</span></span><br><span class="line">        <span class="comment">//开辟一个临时图像上下文，用于生成绘制路径</span></span><br><span class="line">        <span class="type">UIGraphicsBeginImageContext</span>(<span class="keyword">self</span>.frame.size)</span><br><span class="line">        <span class="keyword">var</span> imageContext = <span class="type">UIGraphicsGetCurrentContext</span>()</span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextDrawImage</span>(imageContext, <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="keyword">self</span>.frame.width, height: <span class="keyword">self</span>.frame.height), maskBlack)</span><br><span class="line">        <span class="type">CGContextSetRGBStrokeColor</span>(imageContext, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="type">CGContextSetLineWidth</span>(imageContext, <span class="number">20</span>)</span><br><span class="line">        <span class="type">CGContextAddPath</span>(imageContext, path)</span><br><span class="line">        <span class="type">CGContextStrokePath</span>(imageContext)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> maskImage:<span class="type">CGImageRef</span> = <span class="type">CGBitmapContextCreateImage</span>(imageContext)</span><br><span class="line">        <span class="type">UIGraphicsEndImageContext</span>()</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> context = <span class="type">UIGraphicsGetCurrentContext</span>()</span><br><span class="line">        <span class="type">CGContextSaveGState</span>(context)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//2.</span></span><br><span class="line">        <span class="comment">//进行坐标转化</span></span><br><span class="line">        <span class="type">CGContextTranslateCTM</span>(context, <span class="number">0</span>,<span class="keyword">self</span>.frame.height)</span><br><span class="line">        <span class="type">CGContextScaleCTM</span>(context, <span class="number">1</span>, -<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">//3.</span></span><br><span class="line">        <span class="keyword">var</span> mask:<span class="type">CGImageRef</span> = <span class="type">CGImageMaskCreate</span>(<span class="type">CGImageGetWidth</span>(maskImage),</span><br><span class="line">            <span class="type">CGImageGetHeight</span>(maskImage),</span><br><span class="line">            <span class="type">CGImageGetBitsPerComponent</span>(maskImage),</span><br><span class="line">            <span class="type">CGImageGetBitsPerPixel</span>(maskImage),</span><br><span class="line">            <span class="type">CGImageGetBytesPerRow</span>(maskImage),</span><br><span class="line">            <span class="type">CGImageGetDataProvider</span>(maskImage), <span class="literal">nil</span>, <span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">var</span> newImageContent = <span class="type">CGImageCreateWithMask</span>(customMaskImage, mask)</span><br><span class="line">        <span class="number">4</span>.</span><br><span class="line">        <span class="type">CGContextDrawImage</span>(context, <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="keyword">self</span>.frame.width, height: <span class="keyword">self</span>.frame.height), imageSource)</span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextDrawImage</span>(context, <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="keyword">self</span>.frame.width, height: <span class="keyword">self</span>.frame.height), newImageContent)</span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextRestoreGState</span>(context)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> path = <span class="type">CGPathCreateMutable</span>()</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">touchesBegan</span><span class="params">(touches: Set&lt;NSObject&gt;, withEvent event: UIEvent)</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> p =  (touches.first <span class="keyword">as</span>! <span class="type">UITouch</span>).locationInView(<span class="keyword">self</span>)</span><br><span class="line">        <span class="type">CGPathMoveToPoint</span>(path, <span class="literal">nil</span>, p.x, p.y)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">touchesMoved</span><span class="params">(touches: Set&lt;NSObject&gt;, withEvent event: UIEvent)</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> p =  (touches.first <span class="keyword">as</span>! <span class="type">UITouch</span>).locationInView(<span class="keyword">self</span>)</span><br><span class="line">        <span class="type">CGPathAddLineToPoint</span>(path, <span class="literal">nil</span>, p.x, p.y)</span><br><span class="line">        setNeedsDisplay()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="说明">说明</h3><p>在 <code>drawRect</code> 中：</p>
+<p>1.开辟一个临时的图像设备上线文，首先设置该设备上线文的 RGB 线条颜色为白色，然后绘制一张黑色图片，然后继续在该设备上下文绘制现在，接着将该设备上线文生成一张图像，现在拥有了一个黑色背景白色线条的图像 <code>maskImage</code>，这张图像将会用于与显示的遮罩层 (遮盖图片的灰色图像) 进行 mask 运算。</p>
+<p>2.进行坐标转换，下面有详细介绍。</p>
+<p>3.使用 <code>CGImageMaskCreate</code> 生成图像 <code>mask</code>，内容由 <code>maskImage</code> 提供，然后使用 <code>CGImageCreateWithMask</code> 函数将灰色遮罩层图像与 <code>mask</code> 进行合成，这样就生成了线条路径是透明的图片，其余部分由灰色填充。</p>
+<p>4.首先在设备上下文绘制需要实际显示的图片，然后绘制路径是透明的图片，这样就达成了刮刮乐的效果。</p>
+<h2 id="坐标转换">坐标转换</h2><p>使用 Core Graphic 读取的图片直接显示到屏幕上会出现一张相反的图片，这时就需要进行坐标转换，分别用到的函数是：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> context = <span class="type">UIGraphicsGetCurrentContext</span>()</span><br><span class="line">     <span class="type">CGContextSaveGState</span>(context)</span><br><span class="line">     </span><br><span class="line">     ...</span><br><span class="line">     </span><br><span class="line">     <span class="type">CGContextTranslateCTM</span>(context, <span class="number">0</span>,<span class="keyword">self</span>.frame.height)</span><br><span class="line">     <span class="type">CGContextScaleCTM</span>(context, <span class="number">1</span>, -<span class="number">1</span>)</span><br><span class="line">     </span><br><span class="line">     ...</span><br><span class="line">     </span><br><span class="line">     <span class="type">CGContextRestoreGState</span>(context)</span><br></pre></td></tr></table></figure>
+<p>这里有两张图片解释这两个函数的作用：</p>
+<p><img src="./坐标系统转化.001.jpg" alt=""></p>
+<p><img src="./坐标系统转化.002.jpg" alt=""></p>
+<p>1.红线表示一条 0,0 到 100，200 XY轴图片，原始的坐标系统是从手机屏幕左上角往屏幕右下角方向画。</p>
+<p>2.执行 <code>CGContextTranslateCTM(context, self.frame.width/2, self.frame.height/2)</code> 后坐标起始点 0,0 偏移到了屏幕中心，红线变为屏幕中心点往屏幕右下角方向画。</p>
+<p>3.继续执行 <code>CGContextScaleCTM(context, 1, -1)</code> ，改变了 Y 轴的方向，红线变为屏幕中心点往屏幕右上角方向画。<br>CGContextScaleCTM 还可以改线 X 轴的方向，例如 <code>CGContextScaleCTM(context, －1, -1)</code>,那么红线的方向就会变为从屏幕中心点想屏幕左上角方向画。CGContextScaleCTM 还可以改变 X，Y 参数的大小调整 context 的缩放比例，例如 <code>CGContextScaleCTM(context, 10, 10)</code>。</p>
+<p>所以例子代码中的作用就是将图片反转，然后更改中心点位置，这样就能显示出正常的图片了。坐标转换完成后，记得使用 <code>CGContextRestoreGState(context)</code> 恢复之前坐标状态，否则会对后面的绘制造成影响。</p>
 <hr>
-<p>系列文章</p>
-<p><em>iOS 翻译 《View Programming Guide for iOS：Introduction》</em></p>
-<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture"><em>iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》</em></a> </p>
-<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-Windows"><em>iOS 翻译 《View Programming Guide for iOS：Windows》</em></a> </p>
-<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-Views"><em>iOS 翻译 《View Programming Guide for iOS：Views》</em> </a> </p>
-<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-Animations"><em>iOS 翻译 《View Programming Guide for iOS：Animations》</em></a> </p>
+<p>参考资料：<br><a href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_images/dq_images.html#//apple_ref/doc/uid/TP30001066-CH212-CJBDIJEE" target="_blank" rel="external">Quartz 2D Programming Guide</a></p>
+<p><a href="http://stackoverflow.com/questions/18939417/uiimage-masking-problems-ios-7" target="_blank" rel="external">stackoverflow</a></p>
 
       
     </div>
@@ -214,13 +209,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture/">iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/iOS-Note-About-the-iOS-Technologies-Core-OS-Layer/">iOS 笔记《About the iOS Technologies：Core OS Layer》</a>
+              <a href="/2015/iosCodeCheat/">常用代码片段备忘</a>
             
           </div>
         </div>
@@ -236,8 +229,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2015/iOS-Note-View-Programming-Guide-for-iOS-Introduction/"
-               data-title="iOS 翻译 《View Programming Guide for iOS：Introduction》" data-url="http://yoursite.com/2015/iOS-Note-View-Programming-Guide-for-iOS-Introduction/">
+          <div class="ds-thread" data-thread-key="2015/maskImage/"
+               data-title="" data-url="http://yoursite.com/2015/maskImage/">
           </div>
         
       </div>
@@ -328,7 +321,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于窗口和视图"><span class="nav-number">1.</span> <span class="nav-text">关于窗口和视图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一览"><span class="nav-number">1.1.</span> <span class="nav-text">一览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图管理你的应用程序的可见内容"><span class="nav-number">1.2.</span> <span class="nav-text">视图管理你的应用程序的可见内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#窗口协助视图显示"><span class="nav-number">1.3.</span> <span class="nav-text">窗口协助视图显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动画效果为用户提供界面更改可见的信息反馈"><span class="nav-number">1.4.</span> <span class="nav-text">动画效果为用户提供界面更改可见的信息反馈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#界面构造器的作用"><span class="nav-number">1.5.</span> <span class="nav-text">界面构造器的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他参考资料"><span class="nav-number">1.6.</span> <span class="nav-text">其他参考资料</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#刮刮乐小程序"><span class="nav-number">1.</span> <span class="nav-text">刮刮乐小程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要代码"><span class="nav-number">1.1.</span> <span class="nav-text">主要代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">1.1.1.</span> <span class="nav-text">说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坐标转换"><span class="nav-number">1.2.</span> <span class="nav-text">坐标转换</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
