@@ -173,7 +173,7 @@
 <p><strong>图 10-1</strong> 日历应用程序中被呈现的视图。</p>
 <p><img src="./connections_made_when_a_controller_is_presented_2x.png" alt=""></p>
 <p>任何视图控制器对象都可以在同一时间内呈现一个单独的视图控制器，即使视图控制器它们自己就是通过其它视图控制器呈现的。换句话说，你可以以队列的方式呈现的视图控制器，根据需要在其它视图控制器的顶部呈现新的视图控制器。图 10-2 是队列的过程和触发的动作的可视化展示。在这个例子中，当用户点击相机视图中的图标时，应用程序会呈现带有用户照片的视图控制器。点击图像库的工具栏中的动作按钮会提示用户选择相应的动作然后对该动作呈现另一个视图控制器 (这里是人员选取器)。选择联系人后 (或点击取消后) 会退出该界面并回到图像库中。点击完成按钮会退出图像库并回到相机界面。</p>
-<p><strong>图 10-2</strong> 创建模态视图控制器的队列<br><img src="./modal_chains.png" alt=""></p>
+<p><strong>图 10-2</strong> 创建模态视图控制器的队列<br><img src="./modal_chains.jpg" alt=""></p>
 <p>在呈现视图控制器的队列中的每个视图控制器都有指它在向队列中周围的其它对象。换句话说，呈现其它视图控制器的被呈现视图控制器的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instp/UIViewController/presentingViewController" target="_blank" rel="external">presentingViewController</a> 和 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instp/UIViewController/presentedViewController" target="_blank" rel="external">presentedViewController</a> 属性都拥有有效对象。你可以根据需要使用这些关系追踪队列中的视图控制器。例如，如果用户取消当前的操作，你可以通过解散第一个被呈现的视图控制器来移除队列中的所有对象。解散视图控制器时所解散的不仅仅是视图控制器，也会解散所有由它呈现的视图控制器。</p>
 <p>在图 10-2 中，值得提到的一点是被呈现的视图控制器都是导航控制器。你可以使用与呈现的内容视图控制器相同的方式呈现 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UINavigationController_Class/index.html#//apple_ref/occ/cl/UINavigationController" target="_blank" rel="external">UINavigationController</a> 对象。</p>
 <p>当呈现导航控制器时，你需要呈现的总是 <code>UINavigationController</code> 对象本身，而不是呈现位于导航堆栈的视图控制器。但是，个别位于导航堆栈的视图控制器可能会呈现其它视图控制器，包括导航控制器。图 10-3 展示在前面涉及的例子中更详细的对象。如你所见，人员选择器不是被图像库的导航控制器呈现而是通过导航堆栈 (图像库的导航堆栈) 中的一个内容视图控制器呈现。</p>
