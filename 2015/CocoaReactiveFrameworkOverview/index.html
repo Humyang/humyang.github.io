@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="CocoaReactive,iOS," />
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-  <title> HTTP 数据通信 // Humyang </title>
+  <title> CocoaReactive Framework Overview // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              HTTP 数据通信
+              CocoaReactive Framework Overview
             
           
         </h1>
@@ -119,7 +119,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-07-19
+          发表于 2015-10-15
         </span>
 
         
@@ -134,7 +134,7 @@
               
 
             
-              <a href="/categories/iOS/备忘/">备忘</a>
+              <a href="/categories/iOS/翻译/">翻译</a>
 
               
               
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/HTTP-data-communication/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/HTTP-data-communication/"></span>
+            <a href="/2015/CocoaReactiveFrameworkOverview/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/CocoaReactiveFrameworkOverview/"></span>
             </a>
           </span>
           
@@ -162,22 +162,68 @@
       
 
       
-        <p>记录了如何读取网页数据，如何与服务器交互。</p>
+        <p>没校验，暂时放上来。</p>
 <a id="more"></a>
+<p><a href="https://github.com/ReactiveCocoa/ReactiveCocoa/blob/master/Documentation/FrameworkOverview.md" target="_blank" rel="external">原文地址</a></p>
 <hr>
-<h1 id="HTTP_数据通信">HTTP 数据通信</h1><h2 id="读取网页的数据">读取网页的数据</h2><h3 id="读取网页数据保存为字符串">读取网页数据保存为字符串</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//将网页内容读取成字符串</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="type">NSString</span>(contentsOfURL: <span class="type">NSURL</span>(string:<span class="string">"http://www.jikexueyuan.com"</span>)!, encoding: <span class="type">NSUTF8StringEncoding</span>, error: <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">println</span>(str)</span><br></pre></td></tr></table></figure>
-<h3 id="读取网页数据保存为二进制数据">读取网页数据保存为二进制数据</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//        将网页内容读取成二进制</span></span><br><span class="line">        <span class="keyword">var</span> data = <span class="type">NSData</span>(contentsOfURL: <span class="type">NSURL</span>(string: <span class="string">"http://www.jiekexueyuan.com"</span>)!)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">println</span>(data)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//解码为字符串</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">println</span>(<span class="type">NSString</span>(data: data!, encoding: <span class="type">NSUTF8StringEncoding</span>))</span><br></pre></td></tr></table></figure>
-<h3 id="NSURLConnection">NSURLConnection</h3><p>上面的两种通信方式只适用于快速读取数据，因为它们工作方式是同步的，读取数据时用户界面会处于卡死状态，上面两种方式一般用于读取本地的资源。</p>
-<h4 id="同步加载">同步加载</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> resp:<span class="type">NSURLResponse</span>?</span><br><span class="line">      <span class="keyword">var</span> error:<span class="type">NSError</span>?</span><br><span class="line">      </span><br><span class="line">      <span class="comment">//同步读取数据</span></span><br><span class="line">      <span class="keyword">var</span> data = <span class="type">NSURLConnection</span>.sendSynchronousRequest(<span class="type">NSURLRequest</span>(<span class="type">URL</span>: <span class="type">NSURL</span>(string: <span class="string">"http://www.jikexueyuan.com"</span>)!), returningResponse:&amp;resp,error:<span class="literal">nil</span>)</span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">let</span> d = data&#123;</span><br><span class="line">          </span><br><span class="line">      <span class="comment">//    println(resp)</span></span><br><span class="line">      </span><br><span class="line">          <span class="comment">//转换成字符串数据</span></span><br><span class="line">          <span class="built_in">println</span>(<span class="type">NSString</span>(data: d, encoding: <span class="type">NSUTF8StringEncoding</span>))</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      <span class="comment">//错误处理</span></span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">let</span> e = error&#123;</span><br><span class="line">          <span class="built_in">println</span>(e)</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="异步加载">异步加载</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//异步加载网络数据</span></span><br><span class="line">        </span><br><span class="line">        <span class="type">NSURLConnection</span>.sendAsynchronousRequest(<span class="type">NSURLRequest</span>(<span class="type">URL</span>: <span class="type">NSURL</span>(string: <span class="string">"http://jikexueyuan.com"</span>)!), queue: <span class="type">NSOperationQueue</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                (resp:<span class="type">NSURLResponse</span>!, data:<span class="type">NSData</span>!, error:<span class="type">NSError</span>!) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">            </span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">let</span> e = error&#123;</span><br><span class="line">                    <span class="built_in">println</span>(<span class="string">"发生了错误"</span>)</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="built_in">println</span>(<span class="type">NSString</span>(data: data, encoding: <span class="type">NSUTF8StringEncoding</span>))</span><br><span class="line">                &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="与服务器通信">与服务器通信</h2><h3 id="GET_方式">GET 方式</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">NSURLConnection</span>.sendAsynchronousRequest(<span class="type">NSURLRequest</span>(<span class="type">URL</span>:<span class="type">NSURL</span>(string: <span class="string">"http://www.jikexueyuan/index.heml?name=example"</span>)!), queue: <span class="type">NSOperationQueue</span>(), completionHandler: &#123; (resp:<span class="type">NSURLResponse</span>!, data:<span class="type">NSData</span>!, error:<span class="type">NSError</span>!) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">          </span><br><span class="line">          </span><br><span class="line">          </span><br><span class="line">          </span><br><span class="line">          <span class="keyword">if</span> <span class="keyword">let</span> d = data&#123;</span><br><span class="line">              </span><br><span class="line">              <span class="comment">/*</span><br><span class="line">              </span><br><span class="line">              如果 queue: 参数传递的是 NSOperationQueue.mainQueue() 主线程，</span><br><span class="line">              就可以直接使用下面的写法。但是如果任务是耗时的则会造成界面卡顿，不建议使用这种方式。</span><br><span class="line">              </span><br><span class="line">              */</span></span><br><span class="line">              <span class="comment">//self.tvOut.text = NSString(data:d,encoding:NSUTF8StringEncoding)</span></span><br><span class="line">              </span><br><span class="line">              <span class="comment">/*</span><br><span class="line"></span><br><span class="line">              如果 queue: 传递的参数是 NSOperationQueue() 操作线程，那么就不能直接修改主线程的资源，需要调用 dispatch_sync 将修改主线程资源的操作发送到主线程中执行。好处是可以避免耗时的操作造成的界面卡顿。</span><br><span class="line">              </span><br><span class="line">              */</span></span><br><span class="line">              dispatch_sync(dispatch_get_main_queue(), &#123; () -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">                  <span class="comment">//self.tvOut.text = NSString(data:d,encoding:NSUTF8StringEncoding)</span></span><br><span class="line">              &#125;)</span><br><span class="line">              </span><br><span class="line">              </span><br><span class="line">          &#125;</span><br><span class="line">          </span><br><span class="line">      &#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="POST_方式">POST 方式</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//POST 方式传递数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> req = <span class="type">NSMutableURLRequest</span>(<span class="type">URL</span>: <span class="type">NSURL</span>(string: <span class="string">"http://www.jikexueyuan"</span>)!)</span><br><span class="line"></span><br><span class="line">req.<span class="type">HTTPMethod</span> = <span class="string">"POST"</span></span><br><span class="line">req.<span class="type">HTTPBody</span>=<span class="type">NSString</span>(string: <span class="string">"name=<span class="subst">\(<span class="number">0</span>)</span>"</span>).dataUsingEncoding(<span class="type">NSUTF8StringEncoding</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">NSURLConnection</span>.sendAsynchronousRequest(req, queue: <span class="type">NSOperationQueue</span>()) &#123; (rsp:<span class="type">NSURLResponse</span>!, data:<span class="type">NSData</span>!, error:<span class="type">NSError</span>!) -&gt; <span class="type">Void</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> d = data&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Framework_Overview">Framework Overview</h1><p>这个文档包含 ReactiveCocoa 框架中组件的高层次描述，并解释它们之间如何协同工作和各自职责。这意味着你需要开始学习新的模块并寻找更多制定文档。<br>需要帮助你明白什么是 RAC 的例子，请阅读 <a href="">READERME</a> 或 <a href="">Design Guidelines</a>。</p>
+<h2 id="Event">Event</h2><p><strong>Event</strong>,通过 <a href="">Event</a> 类型表示，用来说明发生了一些事情。在 ReactiveCocoa 中，event 是通信的核心。event 可能代表按钮按下，从某个 API 接收到信息的一部分，发生了错误，或者一个长时间运行的计算完成了。在这些情况中，有时是通过 signal 生成 event 并发生它们给任意数量的 observers。</p>
+<p><code>Event</code> 是枚举类型表示为值或者三个中断 event 中的一个。</p>
+<ul>
+<li><code>Next</code> event 表示来源提供了新值。</li>
+<li><code>Error</code> event 标识 signal 处理完成之前发生了错误，Event 通过参数化 <code>ErrorType</code> 类型提供，它进行判断错误出现在 event 中是否合法的，如果不合法，event 可以使用 NoError 类型防止发生。</li>
+<li><code>Completed</code> event 标识 signal 成功完成，将不会有任何的值从来源发送。</li>
+<li><code>Interrupted</code> event 标识 signal 已经由于取消而中断，意味着操作可能成功也可能不成功。</li>
+</ul>
+<h2 id="Signals">Signals</h2><p><strong>Signal</strong>,由 <a href="">Signal</a> 类型表示，是任何时候都可以被 observers 观测到的系列 event。</p>
+<p>Signal 通常被用作代表已经 “在处理” 的事件，例如通知，用户输入等等。在工作执行后或接收到数据，event 会通过 signal 发送，它会将 event 发送给所有observers。所有 observers 会同时接收到 event。</p>
+<p>用户必须使用 signal 的 <a href="">observe</a> 以进行 event 处理。Observing signal 不会触发任何异常效果。换句话说，signal 是完全由生产者驱动和基推送，消费者 (observers) 无法对它的生命周期造成任何影响。在观测 signal 时，用户只能根据与 signal 发出 event 相同的顺序处理，它们不会随机访问 signal 的值。</p>
+<p>可以通过 <a href="">primitives</a> 对 Signal 进行操纵，通常 primitives 操纵可以单个的 signal 例如 <code>filter</code>，<code>map</code>，和 <code>reduce</code>，以及 primitives 一次操作多个 signal (<code>zip</code>)。Primitives 运算只能在 signal 的 <code>Next</code> event。<code>|&gt;</code> 运算符将 primitive 应用在 signal 上，它也可以用作组成多个基础 primitives 到为更复杂的操作。</p>
+<p>signal 的生命周期由任意数量的 <code>Next</code> evnet 组成，跟随着一个中断 event，可能是 <code>Error</code>，<code>Completed</code>，或 <code>Interrupted</code> 中的一个 (但不会是组合)。Terminating event 不包含 signal 的值，它们必须特别处理。</p>
+<h2 id="Pipes">Pipes</h2><p><strong>Pipe</strong>，通过 <code>Signal.pipe()</code> 创建，是一个可以手动控制的 <a href="">signal</a>。</p>
+<p>这个方法返回一个 <a href="">signal</a> 和一个 <a href="">observer</a>。该 signal 可以通过发送 event 到 observer 控制。这对桥接 non-RAC 代码到  signal 的世界中非常有用。</p>
+<p>例如，要替代在登陆处理使用的 block 回调函数，block 只需要简单的发送 event 到 observer。期间，signal 可以被返回，隐藏回调函数的实现细节。</p>
+<h2 id="Signal_Producers">Signal Producers</h2><p><strong>Signal producers</strong>，由 <a href="">SignalProducer</a> 类型代表，用作创建多个 <a href="">signal</a> 和执行特殊效果。</p>
+<p>它们可以用来表示运算或任务，例如网络请求，每个地方调用的 <code>start()</code> 都会创建新的底层请求，并运行调用者 observe 结果(多个)。使用 <code>startWithSignal()</code> 变种可以访问 produced signal，如果需要，它可以观测多次。</p>
+<p>因为 <code>start()</code> 的行为，从相同 producer 创建的每个 signal 可能会见到不同顺序或版本的 event，stream 甚至会完全不同！不像简单的 signal，没有工作需要 <code>start()</code> (因此它们不会生成 event),直到有 observer 绑定进来，每个新增加的 observer 的工作都会重新启动重新开始。</p>
+<p>Signal producer 开始后会返回 <a href="">disposable</a>，它可以被用做打断或取消绑定在 produced signal 的工作。</p>
+<p>像 signal 一样，signal producer 也可能通过如 <code>map</code>，<code>filter</code>，等等操纵。每个 signal primitive 可以使用 “lifted” 替代在 signal producer 上操作 ，使用 <code>lift</code> 方法，或隐式通过 <code>|&gt;</code> 运算符。还有额外的 primitive 控制工作<em>几时</em>开始和<em>如何</em>工作，例如 <code>times</code>。</p>
+<h2 id="Buffers">Buffers</h2><p><strong>buffer</strong>,由 <code>SignalProducer.buffer()</code> 创建，它是一个 event 队列，当新的 <a href="">signals</a> 从 producer 创建会重置这些 event。</p>
+<p>与 pipe 相似，这个方法返回一个 observer。Event 发送到这个 observer 将会被添加到队列中。如果当新的值到达时 buffer 容量已经满了，最早的值(最旧的)将会被移除为新值提供空间。</p>
+<h2 id="Observers">Observers</h2><p><strong>Observer</strong> 是一个从 <a href="">signal</a> 等待 <a href="">event</a> 东西。在 RAC 内，observer 由 <code>SinkType</code> 表示，它能接收 <code>Event</code> 值。</p>
+<p>Observer 可以由基于回调版本的 <code>Signal.observe</code> 隐式创建，或者通过 SignalProducer.star 方法创建。</p>
+<h2 id="Action">Action</h2><p><strong>action</strong>，由 <code>Action</code> 类型表示，当执行输入时会做一些工作，在执行时，零或更多输出值 and/or 可能会生成错误。</p>
+<p>Action 可以对用户交互执行非常有用的特别效果，例如当一个按钮按点击后，Action 可以基于 property 自动禁用按钮，这个禁用的状态可以表现为 UI 通过禁用任意控件关联的 action。</p>
+<p>要与 <code>NSControl</code> 或 <code>UIControl</code> 交互，RAC 提供了 <code>CocoaAction</code> 类型与 Objective-C 的 action 进行桥接。</p>
+<h2 id="Properties">Properties</h2><p><strong>property</strong>，由 <code>PropertyType</code> 协议表示，用来保存值和通知 observers 相关未来对值的更改。</p>
+<p>property 当前的值可以通过 <code>value</code> getter 获取。<code>producer</code> getter 返回 <a href="">signal producer</a>，它将会发送 property 的当前值，每当以后值的更改都会发送。</p>
+<p><code>&lt;~</code> 运算符可以被用做不同的方式绑定 properties。记住下面的案例，目标必须是一个 <code>MutablePropertyType</code>。</p>
+<ul>
+<li><code>property &lt;~ signal</code> 绑定 signal 到 property，更新了 property 的值，最新的值会通过 signal 发送。</li>
+<li><code>property &lt;~ producer</code> 开启给定的 <a href="">signal producer</a>，绑定 property 的值，最新的值会在已开始的 signal 发送。</li>
+<li><code>property &lt;~ otherProperty</code> 绑定一个 property 到另一个中，因此每当来源 property 的值发生变化，目标 property 的值也会更新。</li>
+</ul>
+<p><code>DynamicProperty</code> 类型可以被用做桥接 Objective-C API 的 Key-Value Coding (KVC) 或 Key-Value Observing (KVO)，例如 NSOperation。注意大部分 AppKit 和 UIKit 属性不支持 KVO，因此观测它们的值的更改需要依赖其它机制。对于动态属性使用 <code>MutableProperty</code> 是首选。</p>
+<blockquote>
+<p>实践任务<br>自定义一个属性，绑定到一个 signal，观察属性值更改之后 signal 发出的 event。</p>
+</blockquote>
+<h2 id="Disposables">Disposables</h2><p><strong>Disposable</strong>,由 Disposable 协议代表，是一种内存管理和消除的机制。</p>
+<p>当 signal producer 开始后将会返回 disposable。disablesable 可以被用调用者用做取消已经开始了的工作 (如后台处理，网络请求等等)，清理所有临时资源，然后发送 <code>Interrupted</code> event 给特定的已经创建了 <a href="">signal</a>。</p>
+<p>Observing signal 可能也返回 disposable。Disposing 它将会防止 observer 未来从 signal 接收到任何 event，当不会对 signal 有任何影响。</p>
+<p>更多关于消除机制，见 RAC <a href="">Design Guidelines</a>。</p>
+<h2 id="Schedulers">Schedulers</h2><p><strong>scheduler</strong>，由 <code>SchedulerType</code> 协议表示，是一个串行执行队列，用做执行工作或交付结果。</p>
+<p><a href="">Signal</a> 和 <a href="">signal producers</a> 可以交付 event 给 scheduler 发出。<a href="">Signal producers</a> 可以指定由 scheduler 开始它们的工作。</p>
+<p>Schedulers 类似 Grand Central Dispatch 队列，但 schedulers 支持取消操作 (通过 disposables)，并总是连续执行。除了 <code>ImmediateScheduler</code> 外，scheduler 不提供同步执行。这有助于避免死锁，并鼓励使用 <a href="">signal</a> 和 <a href="">signal producer primitive</a> 替代 blocking。</p>
+<p>Schedulers 也有些像 <code>NSOperationQueue</code>，但 schedulers 不允许任务重新排序或者依赖其中另一个。</p>
+
       
     </div>
 
     <div class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/CocoaReactive/"> #CocoaReactive </a>
           
             <a href="/tags/iOS/"> #iOS </a>
           
@@ -188,13 +234,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/iOSDesignPatterns/">iOS 设计模式笔记</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/GCDIntro/">iOS GCD 的简单使用介绍</a>
+              <a href="/2015/SwiftClosureFunction/">Swift 的 Closure 和 Function</a>
             
           </div>
         </div>
@@ -210,8 +254,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2015/HTTP-data-communication/"
-               data-title="HTTP 数据通信" data-url="http://yoursite.com/2015/HTTP-data-communication/">
+          <div class="ds-thread" data-thread-key="2015/CocoaReactiveFrameworkOverview/"
+               data-title="CocoaReactive Framework Overview" data-url="http://yoursite.com/2015/CocoaReactiveFrameworkOverview/">
           </div>
         
       </div>
@@ -302,7 +346,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP_数据通信"><span class="nav-number">1.</span> <span class="nav-text">HTTP 数据通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#读取网页的数据"><span class="nav-number">1.1.</span> <span class="nav-text">读取网页的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#读取网页数据保存为字符串"><span class="nav-number">1.1.1.</span> <span class="nav-text">读取网页数据保存为字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取网页数据保存为二进制数据"><span class="nav-number">1.1.2.</span> <span class="nav-text">读取网页数据保存为二进制数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSURLConnection"><span class="nav-number">1.1.3.</span> <span class="nav-text">NSURLConnection</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#同步加载"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">同步加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步加载"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">异步加载</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与服务器通信"><span class="nav-number">1.2.</span> <span class="nav-text">与服务器通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GET_方式"><span class="nav-number">1.2.1.</span> <span class="nav-text">GET 方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POST_方式"><span class="nav-number">1.2.2.</span> <span class="nav-text">POST 方式</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Framework_Overview"><span class="nav-number">1.</span> <span class="nav-text">Framework Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Event"><span class="nav-number">1.1.</span> <span class="nav-text">Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Signals"><span class="nav-number">1.2.</span> <span class="nav-text">Signals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pipes"><span class="nav-number">1.3.</span> <span class="nav-text">Pipes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Signal_Producers"><span class="nav-number">1.4.</span> <span class="nav-text">Signal Producers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffers"><span class="nav-number">1.5.</span> <span class="nav-text">Buffers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Observers"><span class="nav-number">1.6.</span> <span class="nav-text">Observers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Action"><span class="nav-number">1.7.</span> <span class="nav-text">Action</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties"><span class="nav-number">1.8.</span> <span class="nav-text">Properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Disposables"><span class="nav-number">1.9.</span> <span class="nav-text">Disposables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Schedulers"><span class="nav-number">1.10.</span> <span class="nav-text">Schedulers</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
