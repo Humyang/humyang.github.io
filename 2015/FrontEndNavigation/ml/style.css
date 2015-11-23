@@ -1,0 +1,63 @@
+body {
+  position: relative;
+}
+.content {
+
+  /*padding-left: 30px;*/
+}
+.sideDirectorie {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+  position: fixed;
+}
+.nav>li.active>a {
+  background-color: rgb(228, 228, 228);
+  color: rgb(65, 65, 65);
+}
+.nav>li.active-current>a {
+  background-color: black;
+  color: white;
+}
+
+.sideDirectorie a {
+  color: #747474;
+}
+.sideDirectorie ul {
+  list-style: none;
+}
+.sideDirectorie ul a{
+    line-height: 5px;
+}
+.sideDirectorie ul .nav-H1 a {
+  padding-left: 10px;
+}
+.sideDirectorie ul .nav-H2 a {
+  padding-left: 20px;
+}
+.sideDirectorie ul .nav-H3 a {
+  padding-left: 40px;
+}
+.sideDirectorie ul .nav-H4 a {
+  padding-left: 60px;
+}
+
+/*设置目录编号*/
+
+
+h1 {
+    counter-reset: subsection;
+}
+h2 {
+    counter-reset: subsection;
+}
+h1::before {
+    counter-increment: section;
+    content: "Section " counter(section) ". ";
+}
+
+h2::before {
+    counter-increment: subsection;
+    content: counter(section) "." counter(subsection) " ";
+}
