@@ -1,0 +1,34 @@
+<h2 id="title:_Tag">title: Tag</h2><p>A tag allows users to quickly and easily insert snippets into their posts.</p>
+<h2 id="Synopsis">Synopsis</h2><pre><code class="js">hexo.extend.tag.register(name, <span class="function"><span class="keyword">function</span>(<span class="params">args, content</span>)</span>{
+  <span class="comment">// ...</span>
+}, options);
+</code></pre>
+<p>Two arguments will be passed into the tag function: <code>args</code> and <code>content</code>. <code>args</code> contains the arguments passed into the tag plugin and <code>content</code> is the wrapped content from the tag plugin.</p>
+<p>Since the introduction of asynchronous rendering in Hexo 3, we are using <a href="http://mozilla.github.io/nunjucks/">Nunjucks</a> for rendering. The behavior may be somewhat different from that in <a href="http://paularmstrong.github.io/swig/">Swig</a>.</p>
+<h2 id="Options">Options</h2><h3 id="ends">ends</h3><p>Use end tags. This option is <code>false</code> by default.</p>
+<h3 id="async">async</h3><p>Enable async mode. This option is <code>false</code> by default.</p>
+<h2 id="Examples">Examples</h2><h3 id="Without_End_Tags">Without End Tags</h3><p>Insert a Youtube video.</p>
+<pre><code class="js">hexo.extend.tag.register(<span class="string">'youtube'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">args</span>)</span>{
+  <span class="keyword">var</span> id = args[<span class="number">0</span>];
+  <span class="keyword">return</span> <span class="string">'&lt;div class="video-container"&gt;&lt;iframe width="560" height="315" src="http://www.youtube.com/embed/'</span> + id + <span class="string">'" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;'</span>;
+});
+</code></pre>
+<h3 id="With_End_Tags">With End Tags</h3><p>Insert a pull quote.</p>
+<pre><code class="js">hexo.extend.tag.register(<span class="string">'pullquote'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">args, content</span>)</span>{
+  <span class="keyword">var</span> className =  args.join(<span class="string">' '</span>);
+  <span class="keyword">return</span> <span class="string">'&lt;blockquote class="pullquote'</span> + className + <span class="string">'"&gt;'</span> + content + <span class="string">'&lt;/blockquote&gt;'</span>;
+}, {ends: <span class="literal">true</span>});
+</code></pre>
+<h3 id="Async_Rendering">Async Rendering</h3><p>Insert a file.</p>
+<pre><code class="js"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'hexo-fs'</span>);
+<span class="keyword">var</span> pathFn = <span class="built_in">require</span>(<span class="string">'path'</span>);
+
+hexo.extend.tag.register(<span class="string">'include_code'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">args</span>)</span>{
+  <span class="keyword">var</span> filename = args[<span class="number">0</span>];
+  <span class="keyword">var</span> path = pathFn.join(hexo.source_dir, filename);
+
+  <span class="keyword">return</span> fs.readFile(path).then(<span class="function"><span class="keyword">function</span>(<span class="params">content</span>)</span>{
+    <span class="keyword">return</span> <span class="string">'&lt;pre&gt;&lt;code&gt;'</span> + content + <span class="string">'&lt;/code&gt;&lt;/pre&gt;'</span>;
+  });
+}, {<span class="keyword">async</span>: <span class="literal">true</span>});
+</code></pre>

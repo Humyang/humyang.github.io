@@ -1,0 +1,45 @@
+<h2 id="title:_Troubleshooting">title: Troubleshooting</h2><p>In case you’re experiencing problems with using Hexo, here is a list of solutions to some frequently encountered issues. If this page doesn’t help you solve your problem, try doing a search on <a href="https://github.com/hexojs/hexo/issues">GitHub</a> or our <a href="https://groups.google.com/group/hexo">Google Group</a>.</p>
+<h2 id="YAML_Parsing_Error">YAML Parsing Error</h2><pre><code class="plain">JS-YAML: incomplete explicit mapping pair; a key node is missed at line 18, column 29:&#10;      last_updated: Last updated: %s
+</code></pre>
+<p>Wrap the string with quotations if it contains colons.</p>
+<pre><code class="plain">JS-YAML: bad indentation of a mapping entry at line 18, column 31:&#10;      last_updated:&#34;Last updated: %s&#34;
+</code></pre>
+<p>Make sure you are using soft tabs and add a space after colons.</p>
+<p>You can see <a href="http://www.yaml.org/spec/1.2/spec.html">YAML Spec</a> for more info.</p>
+<h2 id="EMFILE_Error">EMFILE Error</h2><pre><code class="plain">Error: EMFILE, too many open files
+</code></pre>
+<p>Though Node.js has non-blocking I/O, the maximum number of synchronous I/O is still limited by the system. You may come across an EMFILE error when trying to generate a large number of files. You can try to run the following command to increase the number of allowed synchronous I/O operations.</p>
+<pre><code class="bash">$ <span class="built_in">ulimit</span> -n <span class="number">10000</span>
+</code></pre>
+<h2 id="Git_Deployment_Problems">Git Deployment Problems</h2><pre><code class="plain">fatal: &#39;username.github.io&#39; does not appear to be a git repository
+</code></pre>
+<p>Make sure you have <a href="https://help.github.com/articles/set-up-git">set up git</a> on your computer or try to use HTTPS repository URL instead.</p>
+<h2 id="Server_Problems">Server Problems</h2><pre><code class="plain">Error: listen EADDRINUSE
+</code></pre>
+<p>You may have started two Hexo servers at the same time or there might be another application using the same port. Try to modify the <code>port</code> setting or start the Hexo server with the <code>-p</code> flag.</p>
+<pre><code class="bash">$ hexo server -p <span class="number">5000</span>
+</code></pre>
+<h2 id="Plugin_Installation_Problems">Plugin Installation Problems</h2><pre><code class="plain">npm ERR! node-waf configure build
+</code></pre>
+<p>This error may occur when trying to install a plugin written in C, C++ or another non-JavaScript language. Make sure you have installed the right compiler on your computer.</p>
+<h2 id="Error_with_DTrace_(Mac_OS_X)">Error with DTrace (Mac OS X)</h2><pre><code class="plain">{ [Error: Cannot find module &#39;./build/Release/DTraceProviderBindings&#39;] code: &#39;MODULE_NOT_FOUND&#39; }&#10;{ [Error: Cannot find module &#39;./build/default/DTraceProviderBindings&#39;] code: &#39;MODULE_NOT_FOUND&#39; }&#10;{ [Error: Cannot find module &#39;./build/Debug/DTraceProviderBindings&#39;] code: &#39;MODULE_NOT_FOUND&#39; }
+</code></pre>
+<p>DTrace install may have issue, use this:</p>
+<pre><code class="sh">$ npm install hexo --no-optional
+</code></pre>
+<p>See <a href="https://github.com/hexojs/hexo/issues/1326#issuecomment-113871796">#1326</a></p>
+<h2 id="Iterate_Data_Model_on_Jade_or_Swig">Iterate Data Model on Jade or Swig</h2><p>Hexo uses <a href="https://github.com/tommy351/warehouse">Warehouse</a> for its data model. It’s not an array so you may have to transform objects into iterables.</p>
+<pre><code><span class="xml"></span><span class="template_tag">{% <span class="keyword">for</span> post <span class="keyword">in</span> site.posts.toArray() %}</span><span class="xml">
+</span><span class="template_tag">{% <span class="keyword">endfor</span> %}</span><span class="xml"></span>
+</code></pre><h2 id="Data_Not_Updated">Data Not Updated</h2><p>Some data cannot be updated, or the newly generated files are identical to those of the last version. Clean the cache and try again.</p>
+<pre><code class="bash">$ hexo clean
+</code></pre>
+<h2 id="Escape_Contents">Escape Contents</h2><p>Hexo uses <a href="http://mozilla.github.io/nunjucks/">Nunjucks</a> to render posts (<a href="http://paularmstrong.github.io/swig/">Swig</a> was used in older version, which share a similar syntax). Content wrapped with <code>{% raw %}{{ }}{% endraw %}</code> or <code>{% raw %}{% %}{% endraw %}</code> will get parsed and may cause problems. You can wrap sensitive content with the <code>raw</code> tag plugin.</p>
+<pre><code><span class="xml"></span><span class="template_tag">{% raw %}</span><span class="xml">
+Hello </span><span class="variable">{{ sensitive }}</span><span class="xml">
+</span><span class="template_tag">{% endraw %}</span><span class="xml"></span>
+</code></pre><h2 id="ENOSPC_Error_(Linux)">ENOSPC Error (Linux)</h2><p>Sometimes when running the command <code>$ hexo server</code> it returns an error:</p>
+<pre><code><span class="attribute">Error</span>: <span class="string">watch ENOSPC ...</span>
+</code></pre><p>It can be fixed by running <code>$ npm dedupe</code> or, if that doesn’t help, try the following in the Linux console:</p>
+<pre><code>$ <span class="built_in">echo</span> fs.inotify.max_user_watches=<span class="number">524288</span> | sudo tee <span class="operator">-a</span> /etc/sysctl.conf &amp;&amp; sudo sysctl -p
+</code></pre><p>This will increase the limit for the number of files you can watch.</p>

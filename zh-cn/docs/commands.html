@@ -1,0 +1,119 @@
+<h2 id="title:_指令">title: 指令</h2><h2 id="init">init</h2><pre><code class="bash">$ hexo init [folder]
+</code></pre>
+<p>新建一个网站。如果没有设置 <code>folder</code> ，Hexo 默认在目前的文件夹建立网站。</p>
+<h2 id="new">new</h2><pre><code class="bash">$ hexo new [layout] &lt;title&gt;
+</code></pre>
+<p>新建一篇文章。如果没有设置 <code>layout</code> 的话，默认使用 <a href="configuration.html">_config.yml</a> 中的 <code>default_layout</code> 参数代替。如果标题包含空格的话，请使用引号括起来。</p>
+<h2 id="generate">generate</h2><pre><code class="bash">$ hexo generate
+</code></pre>
+<p>生成静态文件。</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-d</code>, <code>--deploy</code></td>
+<td>文件生成后立即部署网站</td>
+</tr>
+<tr>
+<td><code>-w</code>, <code>--watch</code></td>
+<td>监视文件变动</td>
+</tr>
+</tbody>
+</table>
+<h2 id="publish">publish</h2><pre><code class="bash">$ hexo publish [layout] &lt;filename&gt;
+</code></pre>
+<p>发表草稿。</p>
+<h2 id="server">server</h2><pre><code class="bash">$ hexo server
+</code></pre>
+<p>启动服务器。默认情况下，访问网址为： <code>http://localhost:4000/</code>。</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-p</code>, <code>--port</code></td>
+<td>重设端口</td>
+</tr>
+<tr>
+<td><code>-s</code>, <code>--static</code></td>
+<td>只使用静态文件</td>
+</tr>
+<tr>
+<td><code>-l</code>, <code>--log</code></td>
+<td>启动日记记录，使用覆盖记录格式</td>
+</tr>
+</tbody>
+</table>
+<h2 id="deploy">deploy</h2><pre><code class="bash">$ hexo deploy
+</code></pre>
+<p>部署网站。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-g</code>, <code>--generate</code></td>
+<td>部署之前预先生成静态文件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="render">render</h2><pre><code class="bash">$ hexo render &lt;file1&gt; [file2] ...
+</code></pre>
+<p>渲染文件。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-o</code>, <code>--output</code></td>
+<td>设置输出路径</td>
+</tr>
+</tbody>
+</table>
+<h2 id="migrate">migrate</h2><pre><code class="bash">$ hexo migrate &lt;<span class="built_in">type</span>&gt;
+</code></pre>
+<p>从其他博客系统 <a href="migration.html">迁移内容</a>。</p>
+<h2 id="clean">clean</h2><pre><code class="bash">$ hexo clean
+</code></pre>
+<p>清除缓存文件 (<code>db.json</code>) 和已生成的静态文件 (<code>public</code>)。</p>
+<h2 id="list">list</h2><pre><code class="bash">$ hexo list &lt;<span class="built_in">type</span>&gt;
+</code></pre>
+<p>列出网站资料。</p>
+<h2 id="version">version</h2><pre><code class="bash">$ hexo version
+</code></pre>
+<p>显示 Hexo 版本。</p>
+<h2 id="选项">选项</h2><h3 id="安全模式">安全模式</h3><pre><code class="bash">$ hexo --safe
+</code></pre>
+<p>在安全模式下，不会载入插件和脚本。当您在安装新插件遭遇问题时，可以尝试以安全模式重新执行。</p>
+<h3 id="调试模式">调试模式</h3><pre><code class="bash">$ hexo --debug
+</code></pre>
+<p>在终端中显示调试信息并记录到 <code>debug.log</code>。当您碰到问题时，可以尝试用调试模式重新执行一次，并 <a href="https://github.com/hexojs/hexo/issues/new">提交调试信息到 GitHub</a>。</p>
+<h3 id="简洁模式">简洁模式</h3><pre><code class="bash">$ hexo --silent
+</code></pre>
+<p>隐藏终端信息。</p>
+<h3 id="自定义配置文件的路径">自定义配置文件的路径</h3><pre><code class="bash">$ hexo --config custom.yml
+</code></pre>
+<p>自定义配置文件的路径，执行后将不再使用 <code>_config.yml</code>。</p>
+<h3 id="显示草稿">显示草稿</h3><pre><code class="bash">$ hexo --draft
+</code></pre>
+<p>显示 <code>source/_drafts</code> 文件夹中的草稿文章。</p>
+<h3 id="自定义_CWD">自定义 CWD</h3><pre><code class="bash">$ hexo --cwd /path/to/cwd
+</code></pre>
+<p>自定义当前工作目录（Current working directory）的路径。</p>

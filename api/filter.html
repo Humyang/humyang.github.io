@@ -1,0 +1,112 @@
+<h2 id="title:_Filter">title: Filter</h2><p>A filter is used to modify some specified data. Hexo passes data to filters in sequence and the filters then modify the data one after the other. This concept was borrowed from <a href="http://codex.wordpress.org/Plugin_API#Filters">WordPress</a>.</p>
+<h2 id="Synopsis">Synopsis</h2><pre><code class="js">hexo.extend.filter.register(type, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+}, priority);
+</code></pre>
+<p>You can define the <code>priority</code>. Lower <code>priority</code> means that it will be executed first. The default <code>priority</code> is 10.</p>
+<h2 id="Execute_Filters">Execute Filters</h2><pre><code class="js">hexo.extend.filter.exec(type, data, options);
+hexo.extend.filter.execSync(type, data, options);
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>context</code></td>
+<td>Context</td>
+</tr>
+<tr>
+<td><code>args</code></td>
+<td>Arguments. This must be an array.</td>
+</tr>
+</tbody>
+</table>
+<p>The first argument passed into each filter is <code>data</code>. The <code>data</code> passed into the next filter can be modified by returning a new value. If nothing is returned, the data remains unmodified. You can even use <code>args</code> to specify other arguments in filters. For example:</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data, arg1, arg2</span>)</span>{
+  <span class="comment">// data === 'some data'</span>
+  <span class="comment">// arg1 === 'foo'</span>
+  <span class="comment">// arg2 === 'bar'</span>
+
+  <span class="keyword">return</span> <span class="string">'something'</span>;
+});
+
+hexo.extend.filter.register(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data, arg1, arg2</span>)</span>{
+  <span class="comment">// data === 'something'</span>
+});
+
+hexo.extend.filter.exec(<span class="string">'test'</span>, <span class="string">'some data'</span>, {
+  args: [<span class="string">'foo'</span>, <span class="string">'bar'</span>]
+});
+</code></pre>
+<p>You can also use the following methods to execute filters:</p>
+<pre><code class="js">hexo.execFilter(type, data, options);
+hexo.execFilterSync(type, data, options);
+</code></pre>
+<h2 id="Unregister_Filters">Unregister Filters</h2><pre><code class="js">hexo.extend.filter.unregister(type, filter);
+</code></pre>
+<h2 id="Filter_List">Filter List</h2><p>Here is a list of filters used by Hexo.</p>
+<h3 id="before_post_render">before_post_render</h3><p>Executed before a post is rendered. Refer to <a href="posts.html#Render">post rendering</a> to learn the execution steps.</p>
+<p>For example, to transform the title to lower case:</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'before_post_render'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>{
+  data.title = data.title.toLowerCase();
+  <span class="keyword">return</span> data;
+});
+</code></pre>
+<h3 id="after_post_render">after_post_render</h3><p>Executed after a post is rendered. Refer to <a href="posts.html#Render">post rendering</a> to learn the execution steps.</p>
+<p>For example, to replace <code>@username</code> with a link to a Twitter profile:</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'after_post_render'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>{
+  data.content = data.content.replace(<span class="regexp">/@(\d+)/</span>, <span class="string">'&lt;a href="http://twitter.com/$1"&gt;#$1&lt;/a&gt;'</span>);
+  <span class="keyword">return</span> data;
+});
+</code></pre>
+<h3 id="before_exit">before_exit</h3><p>Executed before Hexo is about to exit — this will run right after <code>hexo.exit</code> is called.</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'before_exit'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="before_generate">before_generate</h3><p>Executed before generation begins.</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'before_generate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="after_generate">after_generate</h3><p>Executed after generation finishes.</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'after_generate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="template_locals">template_locals</h3><p>Modify <a href="../docs/variables.html">local variables</a> in templates.</p>
+<p>For example, to add the current time to the local variables of templates:</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'template_locals'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">locals</span>)</span>{
+  locals.now = <span class="built_in">Date</span>.now();
+  <span class="keyword">return</span> locals;
+});
+</code></pre>
+<h3 id="after_init">after_init</h3><p>Executed after Hexo is initialized — this will run right after <code>hexo.init</code> completes.</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'after_init'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="new_post_path">new_post_path</h3><p>Executed when creating a post to determine the path of new posts.</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'new_post_path'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data, replace</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="post_permalink">post_permalink</h3><p>Used to determine the permalink of posts.</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'post_permalink'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="after_render">after_render</h3><p>Executed after rendering finishes. You can see <a href="rendering.html#after_render_Filters">rendering</a> for more info.</p>
+<h3 id="server_middleware">server_middleware</h3><p>Add middleware to the server. <code>app</code> is a <a href="https://github.com/senchalabs/connect">Connect</a> instance.</p>
+<p>For example, to add <code>X-Powered-By: Hexo</code> to the response header:</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'server_middleware'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">app</span>)</span>{
+  app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>{
+    res.setHeader(<span class="string">'X-Powered-By'</span>, <span class="string">'Hexo'</span>);
+    next();
+  });
+});
+</code></pre>

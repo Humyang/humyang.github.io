@@ -1,0 +1,54 @@
+<h2 id="title:_Contributing">title: Contributing</h2><h2 id="Development">Development</h2><p>We welcome you to join the development of Hexo. This document will help you through the process.</p>
+<h3 id="Before_You_Start">Before You Start</h3><p>Please follow the coding style:</p>
+<ul>
+<li>Follow <a href="http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml">Google JavaScript Style Guide</a>.</li>
+<li>Use soft-tabs with a two space indent.</li>
+<li>Don’t put commas first.</li>
+</ul>
+<h3 id="Workflow">Workflow</h3><ol>
+<li>Fork <a href="https://github.com/hexojs/hexo">hexojs/hexo</a>.</li>
+<li><p>Clone the repository to your computer and install dependencies.</p>
+<p> {% code %}<br> $ git clone <a href="https://github.com/">https://github.com/</a><username>/hexo.git<br> $ cd hexo<br> $ npm install<br> $ git submodule update —init<br> {% endcode %}</p>
+</li>
+<li><p>Create a feature branch.</p>
+<p> {% code %}<br> $ git checkout -b new_feature<br> {% endcode %}</p>
+</li>
+<li><p>Start hacking.</p>
+</li>
+<li><p>Push the branch:</p>
+<p> {% code %}<br> $ git push origin new_feature<br> {% endcode %}</p>
+</li>
+<li><p>Create a pull request and describe the change.</p>
+</li>
+</ol>
+<h3 id="Notice">Notice</h3><ul>
+<li>Don’t modify version number in <code>package.json</code>.</li>
+<li><p>Your pull request will only get merged when tests passed. Don’t forget to run tests before submission.</p>
+<p>  {% code %}<br>  $ npm test<br>  {% endcode %}</p>
+</li>
+</ul>
+<h2 id="Updating_Documentation">Updating Documentation</h2><p>The Hexo documentation is open source and you can find the source code on <a href="https://github.com/hexojs/site">hexojs/site</a>. </p>
+<h3 id="Workflow-1">Workflow</h3><ol>
+<li>Fork <a href="https://github.com/hexojs/site">hexojs/site</a></li>
+<li><p>Clone the repository to your computer and install dependencies.</p>
+<p> {% code %}<br> $ git clone <a href="https://github.com/">https://github.com/</a><username>/site.git<br> $ cd site<br> $ npm install<br> {% endcode %}</p>
+</li>
+<li><p>Start editing the documentation. You can start the server for live previewing.</p>
+<p> {% code %}<br> $ hexo server<br> {% endcode %}</p>
+</li>
+<li><p>Push the branch.</p>
+</li>
+<li>Create a pull request and describe the change.</li>
+</ol>
+<h3 id="Translating">Translating</h3><ol>
+<li>Add a new language folder in <code>source</code> folder. (All lower case)</li>
+<li>Copy Markdown and template files in <code>source</code> folder to the new language folder.</li>
+<li>Add the new language to <code>source/_data/language.yml</code>.</li>
+<li>Copy <code>en.yml</code> in <code>themes/navy/languages</code> and rename to the language name (all lower case).</li>
+</ol>
+<h2 id="Reporting_Issues">Reporting Issues</h2><p>When you encounter some problems when using Hexo, you can find the solutions in <a href="troubleshooting.html">Troubleshooting</a> or ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a> or <a href="https://groups.google.com/group/hexo">Google Group</a>. If you can’t find the answer, please report it on GitHub.</p>
+<ol>
+<li>Represent the problem in <a href="commands.html#Debug_mode">debug mode</a>.</li>
+<li>Run <code>hexo version</code> and check the version info.    </li>
+<li>Post both debug message and version info on GitHub.</li>
+</ol>

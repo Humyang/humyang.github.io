@@ -1,954 +1,162 @@
-<!doctype html>
-<html class="theme-next use-motion theme-next-mist">
-<head>
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>iOS 翻译 《View Controller Programming Guide for iOS：Introduction》 | Humyang</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://yoursite.com/2015/VCP0/index.html">
+  <!-- Alternative links -->
   
-
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
-
-
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
-
-
-
-
-  <meta name="keywords" content="iOS," />
-
-
-
-
-
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
-
-
-
-
-  <title> iOS 翻译 《View Controller Programming Guide for iOS：Introduction》 // Humyang </title>
-</head>
-
-<body>
-<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
-  <div class="container one-column page-post-detail">
-    <div class="headband"></div>
-
-    <div id="header" class="header">
-      <div class="header-inner">
-        <h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand">
-      <span class="logo">
-        <i class="icon-logo"></i>
-      </span>
-      <span class="site-title">Humyang</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
-
-
-  <ul id="menu" class="menu">
-     
-    
-      
-      <li class="menu-item menu-item-home">
-        <a href="/">
-          <i class="menu-item-icon icon-home"></i> <br />
-          首页
-        </a>
-      </li>
-    
-      
-      <li class="menu-item menu-item-categories">
-        <a href="/categories">
-          <i class="menu-item-icon icon-categories"></i> <br />
-          分类
-        </a>
-      </li>
-    
-      
-      <li class="menu-item menu-item-archives">
-        <a href="/archives">
-          <i class="menu-item-icon icon-archives"></i> <br />
-          归档
-        </a>
-      </li>
-    
-      
-      <li class="menu-item menu-item-tags">
-        <a href="/tags">
-          <i class="menu-item-icon icon-tags"></i> <br />
-          标签
-        </a>
-      </li>
-    
-  </ul>
-
-
-      </div>
-    </div>
-
-    <div id="main" class="main">
-      <div class="main-inner">
-        <div id="content" class="content">
-          
-
-  <div id="posts" class="posts-expand">
-    
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              iOS 翻译 《View Controller Programming Guide for iOS：Introduction》
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2015-05-14
-        </span>
-
-        
-          <span class="post-category">
-            &nbsp; | &nbsp; 分类于
-            
-              <a href="/categories/iOS/">iOS</a>
-
-              
-              
-                ， 
-              
-
-            
-              <a href="/categories/iOS/翻译/">翻译</a>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/VCP0/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/VCP0/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        <p>iOS 视图控制器编程指南：介绍</p>
-<a id="more"></a>
-<p><a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457-CH1-SW1" target="_blank" rel="external">原文地址</a></p>
-<p>记录关于学习过的 iOS 文档</p>
-<hr>
-<h1 id="关于视图控制器">关于视图控制器</h1><p>视图控制器是连接应用程序的数据和它的视觉外观之间的重要环节。每当一个 iOS 应用程序显示用户界面，显示的内容通过一个视图控制器或一组视图控制器管理，彼此之间协调。因此，视图控制器为你构建你的应用程序提供了骨骼框架。</p>
-<p>iOS 提供了许多内置的视图控制器类对标准用户界面的支持，例如导航栏和标签栏。作为开发应用程序的一部分，你也可以实现一个或多个自定义控制器显示特定的内容。</p>
-<p><img src="./navigation_interface_2x.png" alt=""></p>
-<h2 id="一览">一览</h2><p>视图控制器在 Model-View-Controller (MVC) 设计模式中是传统的控制器对象，但它们做得更多。视图控制器对所有 iOS 应用程序提供许多常用行为。对于某些行为，基础类提供解决方案的一部分，在你的视图控制器子类实现自定义代码完成剩余部分。例如，当用户旋转设备时，标准的实现过程会尝试旋转用户界面；但是，你的子类决定用户界面是否应该旋转，如果是，应该对视图配置如何应对新方向的更改。因此，结构化基础类和与具体子类的组合使你轻松的自定义应用程序的行为同时符合平台设计准则。</p>
-<h3 id="视图控制器管理视图的集合">视图控制器管理视图的集合</h3><p>视图控制器管理你的应用程序的用户界面分离部分。根据要求，它提供可以显示或交互的视图。通常，这个视图是复杂的视图层次结构的根视图－按钮，开关，和其它在 iOS 已有实现的用户界面元素。视图控制器扮演视图层次结构的中央协调机构，处理视图和任意相应的控制器或数据对象之间的交换。</p>
-<blockquote>
-<p><strong>相关章节：</strong><a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/AboutViewControllers/AboutViewControllers.html#//apple_ref/doc/uid/TP40007457-CH112-SW10" target="_blank" rel="external">View Controller Basics</a>。</p>
-</blockquote>
-<h3 id="使用内容视图控制器管理你的内容">使用内容视图控制器管理你的内容</h3><p>要在你的应用程序呈现特别的内容，可以实现自己的内容视图控制器。通过 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/cl/UIViewController" target="_blank" rel="external">UIViewController</a> 类或 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableViewController_Class/index.html#//apple_ref/occ/cl/UITableViewController" target="_blank" rel="external">UITableViewController</a> 类的子类创建新的视图控制器类，实现所需要的呈现和控制内容的方法。</p>
-<blockquote>
-<p><strong>相关章节：</strong><a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/BasicViewControllers/BasicViewControllers.html#//apple_ref/doc/uid/TP40007457-CH101-SW1" target="_blank" rel="external">Creating Custom Content View Controllers</a></p>
-</blockquote>
-<h3 id="容器视图控制器管理其他视图控制器">容器视图控制器管理其他视图控制器</h3><p>容器视图控制器显示其它视图控制器的内容。容器与这些视图控制器是明确的父子关系。容器和内容视图控制器的组合创建了视图控制器对象与单个根视图控制器的层次结构。</p>
-<p>每一种类型的容器都定义了它自己的接口管理它的子级。容器的方法有时候会定义子级之间特别的导航关系。它也可以让它的子级视图控制器提供额外的内容用作配置容器。</p>
-<p>iOS 提供许多类型的内置容器视图控制器你可以用来组织你的用户界面。</p>
-<blockquote>
-<p><strong>相关章节：</strong><a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/BasicViewControllers/BasicViewControllers.html#//apple_ref/doc/uid/TP40007457-CH101-SW1" target="_blank" rel="external">View Controller Basics</a></p>
-</blockquote>
-<h3 id="在呈现的视图控制器中临时呈现视图">在呈现的视图控制器中临时呈现视图</h3><p>有时视图控制器想对用户显示额外的信息。也许它想用户提供额外的信息或执行一个任务。受限于 iOS 设备的屏幕空间；设备也许没有足够空间同时显示所有用户界面元素。作为解决，iOS 应用程序临时显示其它视图与用户交互。视图显示足够长的时间能让用户完成请求的操作。</p>
-<p>为了简化界面实现所需要做的工作，iOS 允许视图控制器<em>呈现</em>其它视图控制器的内容。在呈现后，新的视图控制器的视图在屏幕的一部分显示－通常是整个屏幕。当用户完成任务后，已呈现的视图控制器告诉呈现它的视图控制器任务已经完成。然后使已呈现的视图控制器退出，恢复屏幕之前的状态。</p>
-<p>视图控制器的设计必须包含呈现行为使它可以被其他视图控制器呈现。</p>
-<p><strong>相关章节：</strong><a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/ModalViewControllers/ModalViewControllers.html#//apple_ref/doc/uid/TP40007457-CH111-SW1" target="_blank" rel="external">Presenting View Controllers from Other View Controllers</a></p>
-<h3 id="Storyboards_连接用户界面元素到应用程序界面">Storyboards 连接用户界面元素到应用程序界面</h3><p>用户界面的设计非常复杂。每个视图控制器都引用许多视图，手势检测，和其他用户界面对象。反过来，这些对象需要保持对视图的引用或执行特定的代码段响应用户的动作。视图控制器很少使用。多个视图控制器之间的合作在你的应用程序定义了其他关系。简单来说，创建用户界面意味着实例化和配置许多对象和建立它们之间的关系，这种做法耗时且容易出错。</p>
-<p>作为替代，使用界面构造器创建 <em>storyboards</em>。storyboard 保持已配置的视图控制器实例和它们关联的对象。每个对象的属性可以在界面构造器配置，也可以配置它们之间的关系。</p>
-<p>在运行时，应用程序加载 storyboards 和使用它们驱动你的应用程序界面。当对象从 storyboards 加载后，它们恢复为在 stroyboards 已配置的状态。UIKit 也提供了方法重写不能直接从界面构造配置的自定义行为。</p>
-<p>通过使用 storyboards，你可以轻松的看到对象如何在应用程序的用户界面结合。你也可以写很少的代码就可以创建和配置应用程序的用户界面对象。</p>
-<p><strong>相关章节：</strong><a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/AboutViewControllers/AboutViewControllers.html#//apple_ref/doc/uid/TP40007457-CH112-SW10" target="_blank" rel="external">View Controller Basics</a>，<a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/UsingViewControllersinYourApplication/UsingViewControllersinYourApplication.html#//apple_ref/doc/uid/TP40007457-CH6-SW1" target="_blank" rel="external">Using View Controllers in Your App</a></p>
-<h2 id="如何使用该文档">如何使用该文档</h2><p>开始阅读 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/AboutViewControllers/AboutViewControllers.html#//apple_ref/doc/uid/TP40007457-CH112-SW10" target="_blank" rel="external">View Controller Basics</a>，它解释视图控制器如何创建应用程序的界面。接着，阅读 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/UsingViewControllersinYourApplication/UsingViewControllersinYourApplication.html#//apple_ref/doc/uid/TP40007457-CH6-SW1" target="_blank" rel="external">Using View Controllers in Your App</a> 弄清楚如何使用视图控制器，包括 iOS 内置的和你自己创建的。</p>
-<p>当你准备实现应用程序的自定义视图控制器时，阅读 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/BasicViewControllers/BasicViewControllers.html#//apple_ref/doc/uid/TP40007457-CH101-SW1" target="_blank" rel="external">Creating Custom Content View Controllers</a> 关于视图控制器需要执行的任务的概述，然后阅读这个文档剩余的章节学习如何实现这些行为。</p>
-<h2 id="前提条件">前提条件</h2><p>阅读这个文档之前，你应该熟悉 <a href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/index.html#//apple_ref/doc/uid/TP40011343" target="_blank" rel="external">Start Developing iOS Apps Today</a> 和 <em>Your Second iOS App：Storyboards</em> 的内容。storyboard 教程演示了许多这个文档内描述的技术，包含下面的 Cocoa 概念：</p>
-<ul>
-<li>定义新的 Objective-C 类</li>
-<li>委托对象在管理应用程序行为中的作用</li>
-<li>Model－View－Controller 范例</li>
-</ul>
-<h2 id="其他参看">其他参看</h2><p>更多信息关于 UIKit 提供的标准容器视图控制器，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewControllerCatalog/Introduction.html#//apple_ref/doc/uid/TP40011313" target="_blank" rel="external">View Controller Catalog for iOS</a>。</p>
-<p>如何在视图控制器处理视图的指南，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009503" target="_blank" rel="external">View Programming Guide for iOS</a>。</p>
-<p>如何处理视图控制器的事件的指南，见 <a href="https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541" target="_blank" rel="external">Event Handling Guide for iOS</a>。</p>
-<p>更多信息关于 iOS 应用程序的总体结构，见 <a href="https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007072" target="_blank" rel="external">App Programming GUide for iOS</a>。</p>
-<p>如何在项目中配置 storyboards 的指南。见 <a href="https://developer.apple.com/library/ios/documentation/ToolsLanguages/Conceptual/Xcode_Overview/index.html#//apple_ref/doc/uid/TP40010215" target="_blank" rel="external">Xcode Overview</a>。</p>
-<hr>
-<p>系列文章</p>
-<p><em>iOS 翻译 《View Controller Programming Guide for iOS：Introduction》</em></p>
-<p><a href="../VCP1"><em>iOS 翻译 《View Controller Programming Guide for iOS：View Controller Basics》</em></a> </p>
-<p><a href="../VCP2"><em>iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in Your App》</em></a> </p>
-<p><a href="../VCP3"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》</em></a></p>
-<p><a href="../VCP4"><em>iOS 翻译 《View Controller Programming Guide for iOS：Resource Management in View Controllers》</em></a> </p>
-<p><a href="../VCP5"><em>iOS 翻译 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》</em></a> </p>
-<p><a href="../VCP6"><em>iOS 翻译 《View Controller Programming Guide for iOS：Resizing the View Controller’s Views》</em></a> </p>
-<p><a href="../VCP7"><em>iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》</em></a> </p>
-<p><a href="../VCP8"><em>iOS 翻译 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》</em></a> </p>
-<p><a href="../VCP9"><em>iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controllers’s Perspective》</em></a> </p>
-<p><a href="../VCP10"><em>iOS 翻译 《View Controller Programming Guide for iOS：Presenting View Controllers from Other View Controllers》</em></a> </p>
-<p><a href="../VCP11"><em>iOS 翻译 《View Controller Programming Guide for iOS：Coordinating Efforts Between View Controllers》</em></a> </p>
-<p><a href="../VCP12"><em>iOS 翻译 《View Controller Programming Guide for iOS：Enabling Edit Mode in a View Controller》</em></a> </p>
-<p><a href="../VCP13"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Segues》</em></a> </p>
-<p><a href="../VCP14"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Container View Controllers》</em></a></p>
-
-      
-    </div>
-
-    <div class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/iOS/"> #iOS </a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/VCP1/">iOS 翻译 《View Controller Programming Guide for iOS：View Controller Basics》</a>
-            
-          </div>
-
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/iOS-Note-View-Programming-Guide-for-iOS-Animations/">iOS 笔记 《View Programming Guide for iOS：Animations》</a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </div>
-  </div>
-
-
-
-    
-      <div class="comments" id="comments">
-        
-          <div class="ds-thread" data-thread-key="2015/VCP0/"
-               data-title="iOS 翻译 《View Controller Programming Guide for iOS：Introduction》" data-url="http://yoursite.com/2015/VCP0/">
-          </div>
-        
-      </div>
-    
-  </div>
-
-
-        </div>
-
-        
-      </div>
-
-
-      
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/css/navy.css" type="text/css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <!-- RSS -->
+  <link rel="alternative" href="/atom.xml" title="Humyang" type="application/atom+xml">
+  <!-- Open Graph -->
+  <meta name="description" content="iOS 视图控制器编程指南：介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 翻译 《View Controller Programming Guide for iOS：Introduction》">
+<meta property="og:url" content="http://yoursite.com/2015/VCP0/index.html">
+<meta property="og:site_name" content="Humyang">
+<meta property="og:description" content="iOS 视图控制器编程指南：介绍">
+<meta property="og:image" content="http://yoursite.com/./navigation_interface_2x.png">
+<meta property="og:updated_time" content="2015-07-09T07:26:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 翻译 《View Controller Programming Guide for iOS：Introduction》">
+<meta name="twitter:description" content="iOS 视图控制器编程指南：介绍">
+  <!-- Swiftype -->
+  <meta name="st:title" content="iOS 翻译 《View Controller Programming Guide for iOS：Introduction》">
+  <!-- Google Analytics -->
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <div class="site-overview">
-        <div class="site-author motion-element">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
-          <p class="site-author-name">Humyang</p>
-        </div>
-        <p class="site-description motion-element"></p>
-        <div class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">45</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">21</span>
-              <span class="site-state-item-name">分类</span>
-              </a>
-          </div>
-
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">9</span>
-              <span class="site-state-item-name">标签</span>
-              </a>
-          </div>
-
-        </div>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
-            </span>
-            
-          
-        </div>
-
-        
-        
-
-      </div>
-
-      
-        <div class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
-          <div class="post-toc">
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于视图控制器"><span class="nav-number">1.</span> <span class="nav-text">关于视图控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一览"><span class="nav-number">1.1.</span> <span class="nav-text">一览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#视图控制器管理视图的集合"><span class="nav-number">1.1.1.</span> <span class="nav-text">视图控制器管理视图的集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用内容视图控制器管理你的内容"><span class="nav-number">1.1.2.</span> <span class="nav-text">使用内容视图控制器管理你的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器视图控制器管理其他视图控制器"><span class="nav-number">1.1.3.</span> <span class="nav-text">容器视图控制器管理其他视图控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在呈现的视图控制器中临时呈现视图"><span class="nav-number">1.1.4.</span> <span class="nav-text">在呈现的视图控制器中临时呈现视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Storyboards_连接用户界面元素到应用程序界面"><span class="nav-number">1.1.5.</span> <span class="nav-text">Storyboards 连接用户界面元素到应用程序界面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何使用该文档"><span class="nav-number">1.2.</span> <span class="nav-text">如何使用该文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前提条件"><span class="nav-number">1.3.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他参看"><span class="nav-number">1.4.</span> <span class="nav-text">其他参看</span></a></li></ol></li></ol></div>
-            
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
-        </div>
-      
-
-    </div>
-  </div>
-
-
-    </div>
-
-    <div id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">
-  
-  &copy; &nbsp; 
-  2015
-  <span class="with-love">
-    <i class="icon-heart"></i>
-  </span>
-  <span class="author">Humyang</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
-
-
-
-      </div>
-    </div>
-
-    <div class="back-to-top"></div>
-  </div>
-
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('.content img').each(function () {
-        var $image = $(this);
-        var $imageWrapLink = $image.parent('a');
-
-        if ($imageWrapLink.size() < 1) {
-          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
-        }
-        $imageWrapLink.addClass('fancybox');
-      });
-    });
-    $('.fancybox').fancybox({
-      helpers: {
-        overlay: {
-          locked: false
-        }
-      }
-    });
-  </script>
-
-
-  <script type="text/javascript">
-  function hasMobileUA () {
-    var nav = window.navigator;
-    var ua = nav.userAgent;
-    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
-
-    return pa.test(ua);
-  }
-
-  function isDesktop () {
-    return screen.width > 991 && !hasMobileUA();
-  }
-
-  function isTablet () {
-    return screen.width < 992 && screen.width > 767 && hasMobileUA();
-  }
-
-  function isMobile () {
-    return screen.width < 767 && hasMobileUA();
-  }
-
-  function escapeSelector (selector) {
-    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
-  }
-</script>
-
-  
-
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" id="motion.global">
-  $(document).ready(function () {
-    var body = $('body');
-    var isSidebarVisible = false;
-    var sidebarToggle = $('.sidebar-toggle');
-    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
-    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
-    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
-    var sidebar = $('.sidebar');
-
-    var SIDEBAR_WIDTH = '320px';
-    var SIDEBAR_DISPLAY_DURATION = 300;
-
-    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
-
-    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
-    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
-    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
-
-    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
-    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
-    var sidebarToogleLine2ndStatusClose = {opacity: 0};
-
-    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
-    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
-    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
-
-    LogoAndMenuMotion();
-    sidebatToggleMotion();
-    postsListMotion();
-    backToTopMotion();
-
-
-    $(document)
-      .on('sidebar.isShowing', function () {
-        isDesktop() && body.velocity(
-          {paddingRight: SIDEBAR_WIDTH},
-          SIDEBAR_DISPLAY_DURATION
-        );
-        sidebarContentMotion();
-      })
-      .on('sidebar.isHiding', function () {});
-
-    function LogoAndMenuMotion() {
-      $.Velocity.RunSequence([
-        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
-        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
-        
-        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
-        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
-        
-        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
-      ]);
-      $('.menu-item').velocity('transition.slideDownIn', {display: null});
-    }
-
-
-    function backToTopMotion () {
-      var b2top = $('.back-to-top');
-      b2top.on('click', function () {
-        body.velocity('scroll');
-      });
-    }
-
-    function sidebarShowMotion () {
-
-      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
-      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
-      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
-
-      sidebar.velocity({width: SIDEBAR_WIDTH}, {
-        display: 'block',
-        duration: SIDEBAR_DISPLAY_DURATION,
-        complete: function () {
-          sidebar.addClass('sidebar-active');
-          sidebar.trigger('sidebar.didShow');
-        }
-      });
-      sidebar.trigger('sidebar.isShowing');
-    }
-
-    function sidebarHideMotion () {
-      isDesktop() && body.velocity({paddingRight: 0});
-      sidebar.velocity('reverse');
-
-      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
-      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
-      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
-
-      sidebar.removeClass('sidebar-active');
-      sidebar.trigger('sidebar.isHiding');
-    };
-
-    function sidebarContentMotion () {
-      $('.sidebar .motion-element').velocity(
-        'transition.slideRightIn',
-        {stagger: 50, drag: true}
-      );
-    }
-
-    function postsListMotion () {
-      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
-      $('.post').velocity('transition.slideDownIn', postMotionOptions);
-    }
-
-    function sidebatToggleMotion () {
-      sidebarToggle.on('click', function () {
-        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
-        isSidebarVisible = !isSidebarVisible;
-      });
-
-      sidebarToggle.hover(function () {
-        if (isSidebarVisible) {return}
-        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
-        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
-        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
-      }, function () {
-        if (isSidebarVisible) {return}
-        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
-        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
-        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
-      });
-    }
-  });
-
-</script>
-
-
-
-
-
-  
-  
-<script type="text/javascript" id="bootstrap.scrollspy.custom">
-  /* ========================================================================
-  * Bootstrap: scrollspy.js v3.3.2
-  * http://getbootstrap.com/javascript/#scrollspy
-  * ========================================================================
-  * Copyright 2011-2015 Twitter, Inc.
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
-  * ======================================================================== */
-
-  /**
-   * Custom by iissnan
-   *
-   * - Add a `clear.bs.scrollspy` event.
-   * - Esacpe targets selector.
-   */
-
-
-  +function ($) {
-    'use strict';
-
-    // SCROLLSPY CLASS DEFINITION
-    // ==========================
-
-    function ScrollSpy(element, options) {
-      this.$body          = $(document.body)
-      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
-      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
-      this.selector       = (this.options.target || '') + ' .nav li > a'
-      this.offsets        = []
-      this.targets        = []
-      this.activeTarget   = null
-      this.scrollHeight   = 0
-
-      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
-      this.refresh()
-      this.process()
-    }
-
-    ScrollSpy.VERSION  = '3.3.2'
-
-    ScrollSpy.DEFAULTS = {
-      offset: 10
-    }
-
-    ScrollSpy.prototype.getScrollHeight = function () {
-      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
-    }
-
-    ScrollSpy.prototype.refresh = function () {
-      var that          = this
-      var offsetMethod  = 'offset'
-      var offsetBase    = 0
-
-      this.offsets      = []
-      this.targets      = []
-      this.scrollHeight = this.getScrollHeight()
-
-      if (!$.isWindow(this.$scrollElement[0])) {
-        offsetMethod = 'position'
-        offsetBase   = this.$scrollElement.scrollTop()
-      }
-
-      this.$body
-        .find(this.selector)
-        .map(function () {
-          var $el   = $(this)
-          var href  = $el.data('target') || $el.attr('href')
-          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
-
-          return ($href
-            && $href.length
-            && $href.is(':visible')
-            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
-        })
-        .sort(function (a, b) { return a[0] - b[0] })
-        .each(function () {
-          that.offsets.push(this[0])
-          that.targets.push(this[1])
-        })
-
-
-    }
-
-    ScrollSpy.prototype.process = function () {
-      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
-      var scrollHeight = this.getScrollHeight()
-      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
-      var offsets      = this.offsets
-      var targets      = this.targets
-      var activeTarget = this.activeTarget
-      var i
-
-      if (this.scrollHeight != scrollHeight) {
-        this.refresh()
-      }
-
-      if (scrollTop >= maxScroll) {
-        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
-      }
-
-      if (activeTarget && scrollTop < offsets[0]) {
-        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
-        this.activeTarget = null
-        return this.clear()
-      }
-
-      for (i = offsets.length; i--;) {
-        activeTarget != targets[i]
-          && scrollTop >= offsets[i]
-          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
-          && this.activate(targets[i])
-      }
-    }
-
-    ScrollSpy.prototype.activate = function (target) {
-      this.activeTarget = target
-
-      this.clear()
-
-      var selector = this.selector +
-        '[data-target="' + target + '"],' +
-        this.selector + '[href="' + target + '"]'
-
-      var active = $(selector)
-        .parents('li')
-        .addClass('active')
-
-      if (active.parent('.dropdown-menu').length) {
-        active = active
-          .closest('li.dropdown')
-          .addClass('active')
-      }
-
-      active.trigger('activate.bs.scrollspy')
-    }
-
-    ScrollSpy.prototype.clear = function () {
-      $(this.selector)
-        .parentsUntil(this.options.target, '.active')
-        .removeClass('active')
-    }
-
-
-    // SCROLLSPY PLUGIN DEFINITION
-    // ===========================
-
-    function Plugin(option) {
-      return this.each(function () {
-        var $this   = $(this)
-        var data    = $this.data('bs.scrollspy')
-        var options = typeof option == 'object' && option
-
-        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
-        if (typeof option == 'string') data[option]()
-      })
-    }
-
-    var old = $.fn.scrollspy
-
-    $.fn.scrollspy             = Plugin
-    $.fn.scrollspy.Constructor = ScrollSpy
-
-
-    // SCROLLSPY NO CONFLICT
-    // =====================
-
-    $.fn.scrollspy.noConflict = function () {
-      $.fn.scrollspy = old
-      return this
-    }
-
-
-    // SCROLLSPY DATA-API
-    // ==================
-
-    $(window).on('load.bs.scrollspy.data-api', function () {
-      $('[data-spy="scroll"]').each(function () {
-        var $spy = $(this)
-        Plugin.call($spy, $spy.data())
-      })
-    })
-
-  }(jQuery);
-</script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var $sidebarInner = $('.sidebar-inner');
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.didShow', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-          var self = this;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      $(indicator).velocity('stop').velocity({
-        opacity: action === 'show' ? 0.4 : 0
-      }, { duration: 100 });
-    }
-
-  });
-</script>
-
-
-  <script type="text/javascript" id="sidebar.nav">
-    $(document).ready(function () {
-      var html = $('html');
-
-      $('.sidebar-nav li').on('click', function () {
-        var item = $(this);
-        var activeTabClassName = 'sidebar-nav-active';
-        var activePanelClassName = 'sidebar-panel-active';
-        if (item.hasClass(activeTabClassName)) {
-          return;
-        }
-
-        var currentTarget = $('.' + activePanelClassName);
-        var target = $('.' + item.data('target'));
-
-        currentTarget.velocity('transition.slideUpOut', 200, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', 200)
-            .addClass(activePanelClassName);
-        });
-
-        item.siblings().removeClass(activeTabClassName);
-        item.addClass(activeTabClassName);
-      });
-
-      $('.post-toc a').on('click', function (e) {
-        e.preventDefault();
-        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        });
-      });
-
-      // Expand sidebar on post detail page by default, when post has a toc.
-      var $tocContent = $('.post-toc-content');
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
-        setTimeout(function () {
-          $('.sidebar-toggle').trigger('click');
-        }, 800);
-      }
-    });
-  </script>
-
-
-
-
-  
-
-  
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"humyang"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-
-
-  
-  
-  <script>
+<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-62263979-1', 'auto');
   ga('send', 'pageview');
-  </script>
+</script>
 
+</head>
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <ul>
+        
+        <li class="main-nav-item">
+          <a href="https://github.com/" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+        </li>
+      </ul>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span></span></label>
+      <select id="lang-select" data-canonical="">
+        
+      </select>
+    </div>
+    <div id="search-btn-wrap" class="main-nav-item">
+      <a id="search-btn" class="main-nav-link st-search-show-outputs"><i class="fa fa-search"></i></a>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <a id="mobile-search-btn" class="st-search-launcher"></a>
+  </div>
+</header>
+    <div id="content-wrap">
+  <div class="wrapper">
+    <div class="inner">
+      <article class="article post" itemscope itemtype="http://schema.org/Article">
+  <header class="article-header">
+    
+      <h1 class="article-title" itemprop="name" data-swiftype-name="title" data-swiftype-type="string">iOS 翻译 《View Controller Programming Guide for iOS：Introduction》</h1>
+    
+    <a href="/2015/VCP0/" class="article-date"><time datetime="2015-05-14T00:34:26.000Z">2015-05-14</time></a>
+  </header>
+  <div class="article-content" itemprop="articleBody" data-swiftype-name="body" data-swiftype-type="text">
+    
+  </div>
+  
+</article>
+    </div>
+  </div>
+</div>
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2015 <a href="https://zespia.tw/" target="_blank">Humyang</a><br>
+      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
+    </div>
+    <div id="footer-links">
+      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a href="https://github.com/" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      
+      <li class="mobile-nav-item">
+        <a href="https://github.com/" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span></span></span>
+    <select id="mobile-lang-select" data-canonical="">
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/js/lang_select.js" type="text/javascript"></script>
+<script src="/js/toc.js" type="text/javascript"></script>
+<script src="/js/mobile_nav.js" type="text/javascript"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','https://s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
 </body>
 </html>

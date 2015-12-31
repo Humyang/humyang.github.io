@@ -1,0 +1,82 @@
+<h2 id="title:_永久链接（Permalinks）">title: 永久链接（Permalinks）</h2><p>您可以在 <code>_config.yml</code> 配置中调整网站的永久链接或者在每篇文章的 Front-matter 中指定。</p>
+<h3 id="变量">变量</h3><p>除了下列变量外，您还可使用 Front-matter 中的所有属性。</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:year</code></td>
+<td>文章的发表年份（4 位数）</td>
+</tr>
+<tr>
+<td><code>:month</code></td>
+<td>文章的发表月份（2 位数）</td>
+</tr>
+<tr>
+<td><code>:i_month</code></td>
+<td>文章的发表月份（去掉开头的零）</td>
+</tr>
+<tr>
+<td><code>:day</code></td>
+<td>文章的发表日期 (2 位数)</td>
+</tr>
+<tr>
+<td><code>:i_day</code></td>
+<td>文章的发表日期（去掉开头的零）</td>
+</tr>
+<tr>
+<td><code>:title</code></td>
+<td>文件名称</td>
+</tr>
+<tr>
+<td><code>:id</code></td>
+<td>文章 ID</td>
+</tr>
+<tr>
+<td><code>:category</code></td>
+<td>分类。如果文章没有分类，则是 <code>default_category</code> 配置信息。</td>
+</tr>
+</tbody>
+</table>
+<p>您可在 <code>permalink_defaults</code> 参数下调整永久链接中各变量的默认值：</p>
+<pre><code class="yaml">permalink_defaults:&#10;  lang: en
+</code></pre>
+<h3 id="示例">示例</h3><p>假设 <code>source/_posts</code> 文件夹中有个 <code>hello-world.md</code>，包含以下内容：</p>
+<pre><code class="yaml">title: Hello World&#10;date: 2013-07-14 17:01:34&#10;categories:&#10;- foo&#10;- bar
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:year/:month/:day/:title/</code></td>
+<td>2013/07/14/hello-world</td>
+</tr>
+<tr>
+<td><code>:year-:month-:day-:title.html</code></td>
+<td>2013-07-14-hello-world.html</td>
+</tr>
+<tr>
+<td><code>:category/:title</code></td>
+<td>foo/bar/hello-world</td>
+</tr>
+</tbody>
+</table>
+<h3 id="多语种支持">多语种支持</h3><p>若要建立一个多语种的网站，您可修改 <code>new_post_name</code> 和 <code>permalink</code> 参数，如下：</p>
+<pre><code class="yaml">new_post_name: :lang/:title.md&#10;permalink: :lang/:title/
+</code></pre>
+<p>当您建立新文章时，文章会被储存到：</p>
+<pre><code class="bash">$ hexo new <span class="string">"Hello World"</span> --lang tw
+<span class="comment"># =&gt; source/_posts/tw/Hello-World.md</span>
+</code></pre>
+<p>而网址会是：</p>
+<pre><code class="plain">http://localhost:4000/tw/hello-world/
+</code></pre>

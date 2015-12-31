@@ -1,0 +1,32 @@
+<h2 id="title:_渲染">title: 渲染</h2><p>在 Hexo 中，有兩個方法可用於渲染檔案或字串，分別是非同步的 <code>hexo.render.render</code> 和同步的 <code>hexo.render.renderSync</code>，這兩個方法的使用方式十分類似，因此以下僅舉非同步的 <code>hexo.render.render</code> 為例。</p>
+<h2 id="渲染字串">渲染字串</h2><p>在渲染字串時，您必須指定 <code>engine</code>，如此一來 Hexo 才知道該選擇哪個渲染引擎來渲染。</p>
+<pre><code class="js">hexo.render.render({text: <span class="string">'example'</span>, engine: <span class="string">'swig'</span>}).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h2 id="渲染檔案">渲染檔案</h2><p>在渲染檔案時，您無須指定 <code>engine</code>，Hexo 會自動從副檔名猜測所要使用的渲染引擎，當然您也可使用 <code>engine</code> 指定。</p>
+<pre><code class="js">hexo.render.render({path: <span class="string">'path/to/file.swig'</span>}).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h2 id="渲染選項">渲染選項</h2><p>在渲染時，您可在第二個參數中代入選項。</p>
+<pre><code class="js">hexo.render.render({text: <span class="string">''</span>}, {foo: <span class="string">'foo'</span>}).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h2 id="after_render_過濾器">after_render 過濾器</h2><p>在渲染完成後，Hexo 會自動執行相對應的 <code>after_render</code> 過濾器，舉例來說，我們可透過這個功能實作 JavaScript 壓縮。</p>
+<pre><code class="js"><span class="keyword">var</span> UglifyJS = <span class="built_in">require</span>(<span class="string">'uglify-js'</span>);
+
+hexo.extend.filter.register(<span class="string">'after_render:js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">str, data</span>)</span>{
+  <span class="keyword">var</span> result = UglifyJS.minify(str);
+  <span class="keyword">return</span> result.code;
+});
+</code></pre>
+<h2 id="檢查檔案是否可被渲染">檢查檔案是否可被渲染</h2><p>您可透過 <code>isRenderable</code> 或 <code>isRenderableSync</code> 兩個方法檢查檔案路徑是否可被渲染，只有在相對應的渲染器（renderer）已註冊的情況下才會返回 true。</p>
+<pre><code class="js">hexo.render.isRenderable(<span class="string">'layout.swig'</span>) <span class="comment">// true</span>
+hexo.render.isRenderable(<span class="string">'image.png'</span>) <span class="comment">// false</span>
+</code></pre>
+<h2 id="取得檔案的輸出副檔名">取得檔案的輸出副檔名</h2><p>您可透過 <code>getOutput</code> 方法取得檔案路徑輸出後的副檔名，如果檔案無法渲染，則會返回空字串。</p>
+<pre><code class="js">hexo.render.getOutput(<span class="string">'layout.swig'</span>) <span class="comment">// html</span>
+hexo.render.getOutput(<span class="string">'image.png'</span>) <span class="comment">// '''</span>
+</code></pre>

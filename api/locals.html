@@ -1,0 +1,39 @@
+<h2 id="title:_Local_Variables">title: Local Variables</h2><p>Local variables are used for template rendering, which is the <code>site</code> variable in templates.</p>
+<h2 id="Default_Variables">Default Variables</h2><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>posts</code></td>
+<td>All posts</td>
+</tr>
+<tr>
+<td><code>pages</code></td>
+<td>All pages</td>
+</tr>
+<tr>
+<td><code>categories</code></td>
+<td>All categories</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>All tags</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Get_a_Variable">Get a Variable</h2><pre><code class="js">hexo.locals.get(<span class="string">'posts'</span>)
+</code></pre>
+<h2 id="Set_a_Variable">Set a Variable</h2><pre><code class="js">hexo.locals.set(<span class="string">'posts'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="keyword">return</span> ...
+});
+</code></pre>
+<h2 id="Remove_a_Variable">Remove a Variable</h2><pre><code class="js">hexo.locals.remove(<span class="string">'posts'</span>);
+</code></pre>
+<h2 id="Get_All_Variable">Get All Variable</h2><pre><code class="js">hexo.locals.toObject();
+</code></pre>
+<h2 id="Invalidate_the_cache">Invalidate the cache</h2><pre><code class="js">hexo.locals.invalidate();
+</code></pre>

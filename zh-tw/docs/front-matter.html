@@ -1,0 +1,63 @@
+<h2 id="title:_Front-matter">title: Front-matter</h2><p>Front-matter 是檔案最上方以 <code>---</code> 分隔的區域，用於指定個別檔案的變數，舉例來說：</p>
+<pre><code class="yaml">title: Hello World&#10;date: 2013/7/13 20:46:25&#10;---
+</code></pre>
+<p>以下是預先定義的設定，您可在模板中取得這些設定值並加以利用。</p>
+<table>
+<thead>
+<tr>
+<th>設定</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>layout</code></td>
+<td>佈局</td>
+<td></td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>標題</td>
+<td></td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>建立日期</td>
+<td>檔案建立日期</td>
+</tr>
+<tr>
+<td><code>updated</code></td>
+<td>更新日期</td>
+<td>檔案更新日期</td>
+</tr>
+<tr>
+<td><code>comments</code></td>
+<td>開啟文章的留言功能</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>標籤（不適用於分頁）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>categories</code></td>
+<td>分類（不適用於分頁）</td>
+<td></td>
+</tr>
+<tr>
+<td><code>permalink</code></td>
+<td>覆蓋文章網址</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="分類和標籤">分類和標籤</h3><p>分類和標籤只有文章才支援，您可以在 Front-matter 中設定。在其他系統中，分類和標籤可能聽起來很接近，但是在 Hexo 中有著決定性的差別：分類是有順序和階層性的，也就是說 <code>Foo, Bar</code> 不等於 <code>Bar, Foo</code>；而標籤沒有順序和階層。</p>
+<pre><code class="yaml">categories:&#10;- Diary&#10;tags:&#10;- PS3&#10;- Games
+</code></pre>
+<h3 id="JSON_Front-matter">JSON Front-matter</h3><p>除了 YAML 外，你也可利用 JSON 來撰寫 Front-matter，只要將 <code>---</code> 代換成 <code>;;;</code> 即可。</p>
+<pre><code class="json">&quot;title&quot;: &quot;Hello World&quot;,
+&quot;date&quot;: &quot;2013/7/13 20:46:25&quot;
+;;;
+</code></pre>

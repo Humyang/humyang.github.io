@@ -1,0 +1,274 @@
+<h2 id="title:_Variables">title: Variables</h2><h3 id="Global_Variables">Global Variables</h3><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>site</code></td>
+<td>Sitewide information.</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>Page specific information and custom variables set in front-matter.</td>
+</tr>
+<tr>
+<td><code>config</code></td>
+<td>Site configuration</td>
+</tr>
+<tr>
+<td><code>theme</code></td>
+<td>Theme configuration. Inherits from site configuration.</td>
+</tr>
+<tr>
+<td><code>_</code> (single underscore)</td>
+<td><a href="(http://lodash.com/)">Lodash</a> library</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>Path of current page</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>Full URL of current page</td>
+</tr>
+<tr>
+<td><code>env</code></td>
+<td>Environment variables</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Site_Variables">Site Variables</h3><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>site.posts</code></td>
+<td>All posts</td>
+</tr>
+<tr>
+<td><code>site.pages</code></td>
+<td>All pages</td>
+</tr>
+<tr>
+<td><code>site.categories</code></td>
+<td>All categories</td>
+</tr>
+<tr>
+<td><code>site.tags</code></td>
+<td>All tags</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Page_Variables">Page Variables</h3><p><strong>Article (page)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page.title</code></td>
+<td>Article title</td>
+</tr>
+<tr>
+<td><code>page.date</code></td>
+<td>Article created date (<a href="http://momentjs.com/">Moment.js</a> object)</td>
+</tr>
+<tr>
+<td><code>page.updated</code></td>
+<td>Article last updated date (<a href="http://momentjs.com/">Moment.js</a> object)</td>
+</tr>
+<tr>
+<td><code>page.comments</code></td>
+<td>Comment enabled or not</td>
+</tr>
+<tr>
+<td><code>page.layout</code></td>
+<td>Layout name</td>
+</tr>
+<tr>
+<td><code>page.content</code></td>
+<td>The full processed content of the article</td>
+</tr>
+<tr>
+<td><code>page.excerpt</code></td>
+<td>Article excerpt</td>
+</tr>
+<tr>
+<td><code>page.more</code></td>
+<td>Contents except article excerpt</td>
+</tr>
+<tr>
+<td><code>page.source</code></td>
+<td>The path of the source file</td>
+</tr>
+<tr>
+<td><code>page.full_source</code></td>
+<td>Full path of the source file</td>
+</tr>
+<tr>
+<td><code>page.path</code></td>
+<td>The URL of the article without root URL. We usually use <code>url_for(page.path)</code> in theme.</td>
+</tr>
+<tr>
+<td><code>page.permalink</code></td>
+<td>Full URL of the article</td>
+</tr>
+<tr>
+<td><code>page.prev</code></td>
+<td>The previous post, <code>null</code> if the post is the first post</td>
+</tr>
+<tr>
+<td><code>page.next</code></td>
+<td>The next post, <code>null</code> if the post is the last post</td>
+</tr>
+<tr>
+<td><code>page.raw</code></td>
+<td>The raw data of the article</td>
+</tr>
+<tr>
+<td><code>page.photos</code></td>
+<td>The photos of the article (Used in gallery posts)</td>
+</tr>
+<tr>
+<td><code>page.link</code></td>
+<td>The external link of the article (Used in link posts)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Post (post):</strong> Same as <code>page</code> layout but add the following variables.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page.published</code></td>
+<td>True if the post is not a draft</td>
+</tr>
+<tr>
+<td><code>page.categories</code></td>
+<td>All categories of the post</td>
+</tr>
+<tr>
+<td><code>page.tags</code></td>
+<td>All tags of the post</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Home (index)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page.per_page</code></td>
+<td>Posts displayed per page</td>
+</tr>
+<tr>
+<td><code>page.total</code></td>
+<td>Total number of posts</td>
+</tr>
+<tr>
+<td><code>page.current</code></td>
+<td>Current page number</td>
+</tr>
+<tr>
+<td><code>page.current_url</code></td>
+<td>The URL of current page</td>
+</tr>
+<tr>
+<td><code>page.posts</code></td>
+<td>Posts in this page ([Data Model])</td>
+</tr>
+<tr>
+<td><code>page.prev</code></td>
+<td>Previous page number. <code>0</code> if the current page is the first.</td>
+</tr>
+<tr>
+<td><code>page.prev_link</code></td>
+<td>The URL of previous page. <code>&#39;&#39;</code> if the current page is the first.</td>
+</tr>
+<tr>
+<td><code>page.next</code></td>
+<td>Next page number. <code>0</code> if the current page is the last.</td>
+</tr>
+<tr>
+<td><code>page.next_link</code></td>
+<td>The URL of next page. <code>&#39;&#39;</code> if the current page is the last.</td>
+</tr>
+<tr>
+<td><code>page.path</code></td>
+<td>The URL of current page without root URL. We usually use <code>url_for(page.path)</code> in theme.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Archive (archive):</strong> Same as <code>index</code> layout but add the following variables.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page.archive</code></td>
+<td>Equals <code>true</code></td>
+</tr>
+<tr>
+<td><code>page.year</code></td>
+<td>Archive year (4-digit)</td>
+</tr>
+<tr>
+<td><code>page.month</code></td>
+<td>Archive month (2-digit without leading zeros)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Category (category):</strong> Same as <code>index</code> layout but add the following variables.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page.category</code></td>
+<td>Category name</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tag (tag):</strong> Same as <code>index</code> layout but add the following variables.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>page.tag</code></td>
+<td>Tag name</td>
+</tr>
+</tbody>
+</table>

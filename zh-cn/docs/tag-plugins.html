@@ -1,0 +1,89 @@
+<h2 id="title:_标签插件（Tag_Plugins）">title: 标签插件（Tag Plugins）</h2><p>标签插件和 Front-matter 中的标签不同，它们是用于在文章中快速插入特定内容的插件。</p>
+<h2 id="引用块">引用块</h2><p>在文章中插入引言，可包含作者、来源和标题。</p>
+<p><strong>别号：</strong> quote</p>
+<pre><code>{% blockquote <span class="comment">[author<span class="comment">[, source]</span>]</span> <span class="comment">[link]</span> <span class="comment">[source_link_title]</span> %}
+content
+{% endblockquote %}
+</code></pre><h3 id="样例">样例</h3><p><strong>没有提供参数，则只输出普通的 blockquote</strong></p>
+<pre><code>{% blockquote %}
+Lo<span class="comment">rem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit lacus ut purus iaculis feugiat. Sed nec tempor elit, quis aliquam neque. Curabitur sed diam eget dolor fermentum semper at eu lorem.</span>
+{% endblockquote %}
+</code></pre><p>{% blockquote %}<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit lacus ut purus iaculis feugiat. Sed nec tempor elit, quis aliquam neque. Curabitur sed diam eget dolor fermentum semper at eu lorem.<br>{% endblockquote %}</p>
+<p><strong>引用书上的句子</strong></p>
+<pre><code><span class="list">{% blockquote David Levithan, Wide Awake %}</span>
+<span class="keyword">Do</span> not just seek happiness for yourself. Seek happiness for all. <span class="keyword">Through</span> kindness. <span class="keyword">Through</span> mercy.
+<span class="list">{% endblockquote %}</span>
+</code></pre><p>{% blockquote David Levithan, Wide Awake %}<br>Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.<br>{% endblockquote %}</p>
+<p><strong>引用 Twitter</strong></p>
+<pre><code>{% blockquote <span class="annotation">@DevDocs</span> <span class="string">https:</span><span class="comment">//twitter.com/devdocs/status/356095192085962752 %}</span>
+<span class="string">NEW:</span> DevDocs now comes with syntax highlighting. <span class="string">http:</span><span class="comment">//devdocs.io</span>
+{% endblockquote %}
+</code></pre><p>{% blockquote @DevDocs <a href="https://twitter.com/devdocs/status/356095192085962752">https://twitter.com/devdocs/status/356095192085962752</a> %}<br>NEW: DevDocs now comes with syntax highlighting. <a href="http://devdocs.io">http://devdocs.io</a><br>{% endblockquote %}</p>
+<p><strong>引用网络上的文章</strong></p>
+<pre><code>{% blockquote Seth Godin <span class="keyword">http</span>://sethgodin.typepad.com/seths_blog/<span class="number">2009</span>/<span class="number">07</span>/welcome-<span class="built_in">to</span>-island-marketing.html Welcome <span class="built_in">to</span> Island Marketing %}
+Every interaction is both precious <span class="operator">and</span> <span class="operator">an</span> opportunity <span class="built_in">to</span> delight.
+{% endblockquote %}
+</code></pre><p>{% blockquote Seth Godin <a href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html">http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html</a> Welcome to Island Marketing %}<br>Every interaction is both precious and an opportunity to delight.<br>{% endblockquote %}</p>
+<h2 id="代码块">代码块</h2><p>在文章中插入代码。</p>
+<p><strong>别名：</strong> code</p>
+<pre><code><span class="xml"></span><span class="template_tag">{% codeblock [title] [lang:<span class="keyword">language</span>] [<span class="keyword">url</span>] [link text] %}</span><span class="xml">
+code snippet
+</span><span class="template_tag">{% endcodeblock %}</span><span class="xml"></span>
+</code></pre><h3 id="样例-1">样例</h3><p><strong>普通的代码块</strong></p>
+<pre><code>{<span class="comment">% codeblock %}</span>
+<span class="function_or_atom">alert</span>(<span class="string">'Hello World!'</span>);
+{<span class="comment">% endcodeblock %}</span>
+</code></pre><p>{% codeblock %}<br>alert(‘Hello World!’);<br>{% endcodeblock %}</p>
+<p><strong>指定语言</strong></p>
+<pre><code>{% codeblock <span class="string">lang:</span>objc %}
+[rectangle <span class="string">setX:</span> <span class="number">10</span> <span class="string">y:</span> <span class="number">10</span> <span class="string">width:</span> <span class="number">20</span> <span class="string">height:</span> <span class="number">20</span>];
+{% endcodeblock %}
+</code></pre><p>{% codeblock lang:objc %}<br>[rectangle setX: 10 y: 10 width: 20 height: 20];<br>{% endcodeblock %}</p>
+<p><strong>附加说明</strong></p>
+<pre><code>{<span class="subst">%</span> codeblock <span class="built_in">Array</span><span class="built_in">.</span><span class="built_in">map</span> <span class="subst">%</span>}
+<span class="built_in">array</span><span class="built_in">.</span><span class="built_in">map</span>(callback<span class="preprocessor">[</span>, thisArg<span class="preprocessor">]</span><span class="markup">)
+{% endcodeblock %}</span>
+</code></pre><p>{% codeblock Array.map %}<br>array.map(callback[, thisArg])<br>{% endcodeblock %}</p>
+<p><strong>附加说明和网址</strong></p>
+<pre><code>{% codeblock <span class="number">_</span>.compact <span class="symbol">http:</span>/<span class="regexp">/underscorejs.org/</span><span class="comment">#compact Underscore.js %}</span>
+<span class="number">_</span>.compact([<span class="number">0</span>, <span class="number">1</span>, <span class="keyword">false</span>, <span class="number">2</span>, <span class="string">''</span>, <span class="number">3</span>]);
+<span class="status">=&gt;</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]
+{% endcodeblock %}
+</code></pre><p>{% codeblock <em>.compact <a href="http://underscorejs.org/#compact">http://underscorejs.org/#compact</a> Underscore.js %}
+</em>.compact([0, 1, false, 2, ‘’, 3]);<br>=&gt; [1, 2, 3]<br>{% endcodeblock %}</p>
+<h2 id="反引号代码块">反引号代码块</h2><p>另一种形式的代码块，不同的是它使用三个反引号来包裹。</p>
+<p>{% raw %}<br>&amp;#96<code>[language] [title] [url] [link text]
+code snippet
+&amp;#96;</code><br>{% endraw %}</p>
+<h2 id="Pull_Quote">Pull Quote</h2><p>在文章中插入 Pull quote。</p>
+<pre><code><span class="keyword">{</span>% pullquote [<span class="keyword"><span class="keyword">class</span>] %}</span>
+<span class="literal">content</span>
+<span class="keyword">{</span>% endpullquote %<span class="keyword">}</span>
+</code></pre><h2 id="jsFiddle">jsFiddle</h2><p>在文章中嵌入 jsFiddle。</p>
+<pre><code><span class="collection">{% jsfiddle shorttag <span class="collection">[tabs]</span> <span class="collection">[skin]</span> <span class="collection">[width]</span> <span class="collection">[height]</span> %}</span>
+</code></pre><h2 id="Gist">Gist</h2><p>在文章中嵌入 Gist。</p>
+<pre><code><span class="collection">{% gist gist_id <span class="collection">[filename]</span> %}</span>
+</code></pre><h2 id="iframe">iframe</h2><p>在文章中插入 iframe。</p>
+<pre><code><span class="collection">{% iframe url <span class="collection">[width]</span> <span class="collection">[height]</span> %}</span>
+</code></pre><h2 id="Image">Image</h2><p>在文章中插入指定大小的图片。</p>
+<pre><code><span class="collection">{% img <span class="collection">[class names]</span> /path/to/image <span class="collection">[width]</span> <span class="collection">[height]</span> <span class="collection">[title text <span class="collection">[alt text]</span>]</span> %}</span>
+</code></pre><h2 id="Link">Link</h2><p>在文章中插入链接，并自动给外部链接添加 <code>target=&quot;_blank&quot;</code> 属性。</p>
+<pre><code><span class="collection">{% link text url <span class="collection">[external]</span> <span class="collection">[title]</span> %}</span>
+</code></pre><h2 id="Include_Code">Include Code</h2><p>插入 <code>source</code> 文件夹内的代码文件。</p>
+<pre><code><span class="collection">{% include_code <span class="collection">[title]</span> <span class="collection">[lang:language]</span> path/to/file %}</span>
+</code></pre><h2 id="Youtube">Youtube</h2><p>在文章中插入 Youtube 视频。</p>
+<pre><code>{<span class="preprocessor">%</span> youtube video_id <span class="preprocessor">%</span>}
+</code></pre><h2 id="Vimeo">Vimeo</h2><p>在文章中插入 Vimeo 视频。</p>
+<pre><code>{<span class="preprocessor">%</span> vimeo video_id <span class="preprocessor">%</span>}
+</code></pre><h2 id="引用文章">引用文章</h2><p>引用其他文章的链接。</p>
+<pre><code><span class="collection">{% post_path slug %}</span>
+<span class="collection">{% post_link slug <span class="collection">[title]</span> %}</span>
+</code></pre><h2 id="引用资源">引用资源</h2><p>引用文章的资源。</p>
+<pre><code><span class="collection">{% asset_path slug %}</span>
+<span class="collection">{% asset_img slug <span class="collection">[title]</span> %}</span>
+<span class="collection">{% asset_link slug <span class="collection">[title]</span> %}</span>
+</code></pre><h2 id="Raw">Raw</h2><p>如果您想在文章中插入 Swig 标签，可以尝试使用 Raw 标签，以免发生解析异常。</p>
+<pre><code>{<span class="var_expand">% raw %</span>}
+content
+{<span class="var_expand">% endraw %</span>}
+</code></pre>

@@ -1,0 +1,87 @@
+<h2 id="title:_Generator">title: Generator</h2><p>A generator builds routes based on processed files.</p>
+<h2 id="Synopsis">Synopsis</h2><pre><code class="js">hexo.extend.generator.register(name, <span class="function"><span class="keyword">function</span>(<span class="params">locals</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<p>A <code>locals</code> argument will get passed into the function, containing the <a href="variables.html#Site_Variables">site variables</a>. You should use this argument to get the website data, thereby avoiding having to access the database directly.</p>
+<h2 id="Update_Routes">Update Routes</h2><pre><code class="js">hexo.extend.generator.register(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">locals</span>)</span>{
+  <span class="comment">// Object</span>
+  <span class="keyword">return</span> {
+    path: <span class="string">'foo'</span>,
+    data: <span class="string">'foo'</span>
+  };
+
+  <span class="comment">// Array</span>
+  <span class="keyword">return</span> [
+    {path: <span class="string">'foo'</span>, data: <span class="string">'foo'</span>},
+    {path: <span class="string">'bar'</span>, data: <span class="string">'bar'</span>}
+  ];
+});
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
+<td>Path not including the prefixing <code>/</code>.</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Data</td>
+</tr>
+<tr>
+<td><code>layout</code></td>
+<td>Layout. Specify the layouts for rendering. The value can be a string or an array. If it’s ignored then the route will return <code>data</code> directly.</td>
+</tr>
+</tbody>
+</table>
+<p>When the source files are updated, Hexo will execute all generators and rebuild the routes. <strong>Please return the data and do not access the router directly.</strong></p>
+<h2 id="Example">Example</h2><h3 id="Archive_Page">Archive Page</h3><p>Create an archive page at <code>archives/index.html</code>. We pass all posts as data to the templates. This data is equivalent to the <code>page</code> variable in templates.</p>
+<p>Next, set the <code>layout</code> attribute to render with the theme templates. We’re setting two layouts in this example: if the <code>archive</code> layout doesn’t exist, the <code>index</code> layout will be used instead.</p>
+<pre><code class="js">hexo.extend.generator.register(<span class="string">'archive'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">locals</span>)</span>{
+  <span class="keyword">return</span> {
+    path: <span class="string">'archives/index.html'</span>,
+    data: locals.posts,
+    layout: [<span class="string">'archive'</span>, <span class="string">'index'</span>]
+  }
+});
+</code></pre>
+<h3 id="Archive_Page_with_Pagination">Archive Page with Pagination</h3><p>You can use the convenient official tool <a href="https://github.com/hexojs/hexo-pagination">hexo-pagination</a> to easily build archive pages with pagination.</p>
+<pre><code class="js"><span class="keyword">var</span> pagination = <span class="built_in">require</span>(<span class="string">'hexo-pagination'</span>);
+
+hexo.extend.generator.register(<span class="string">'archive'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">locals</span>)</span>{
+  <span class="keyword">return</span> pagination(<span class="string">'archives/index.html'</span>, locals.posts, {
+    perPage: <span class="number">10</span>,
+    layout: [<span class="string">'archive'</span>, <span class="string">'index'</span>],
+    data: {}
+  });
+});
+</code></pre>
+<h3 id="Generate_All_Posts">Generate All Posts</h3><p>Iterate over all posts in <code>locals.posts</code> and create routes for all the posts.</p>
+<pre><code class="js">hexo.extend.generator.register(<span class="string">'post'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">locals</span>)</span>{
+  <span class="keyword">return</span> locals.posts.map(<span class="function"><span class="keyword">function</span>(<span class="params">post</span>)</span>{
+    <span class="keyword">return</span> {
+      path: post.path,
+      data: post,
+      layout: <span class="string">'post'</span>
+    };
+  });
+});
+</code></pre>
+<h3 id="Copy_Files">Copy Files</h3><p>This time we don’t return the data explicitly but instead set <code>data</code> to a function so the route will build <code>fs.ReadStream</code> only when needed.</p>
+<pre><code class="js"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'hexo-fs'</span>);
+
+hexo.extend.generator.register(<span class="string">'asset'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">locals</span>)</span>{
+  <span class="keyword">return</span> {
+    path: <span class="string">'file.txt'</span>,
+    data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+      <span class="keyword">return</span> fs.createReadStream(<span class="string">'path/to/file.txt'</span>)
+    }
+  };
+});
+</code></pre>

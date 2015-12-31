@@ -1,0 +1,32 @@
+<h2 id="title:_事件">title: 事件</h2><p>Hexo 继承了 <a href="http://nodejs.org/api/events.html">EventEmitter</a>，您可以用 <code>on</code> 方法监听 Hexo 所发布的事件，也可以使用 <code>emit</code> 方法对 Hexo 发布事件，更详细的说明请参阅 Node.js 的 API。</p>
+<h3 id="deployBefore">deployBefore</h3><p>在部署完成前发布。</p>
+<h3 id="deployAfter">deployAfter</h3><p>在部署成功后发布。</p>
+<h3 id="exit">exit</h3><p>在 Hexo 结束前发布。</p>
+<h3 id="generateBefore">generateBefore</h3><p>在静态文件生成前发布。</p>
+<h3 id="generateAfter">generateAfter</h3><p>在静态文件生成后发布。</p>
+<h3 id="new">new</h3><p>在文章文件建立后发布。该事件返回文章参数。</p>
+<pre><code class="js">hexo.on(<span class="string">'new'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">post</span>)</span>{
+  <span class="comment">// </span>
+});
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>资料</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>post.path</code></td>
+<td>文章文件的完整路径</td>
+</tr>
+<tr>
+<td><code>post.content</code></td>
+<td>文章文件的内容</td>
+</tr>
+</tbody>
+</table>
+<h3 id="processBefore">processBefore</h3><p>在处理原始文件前发布。此事件会返回一个地址，代表 Box（Box）的根目录。</p>
+<h3 id="processAfter">processAfter</h3><p>在原始文件处理后发布。此事件会返回一个地址，代表 Box（Box）的根目录。</p>
+<h3 id="ready">ready</h3><p>在初始化完成后发布。</p>

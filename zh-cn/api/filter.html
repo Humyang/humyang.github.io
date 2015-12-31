@@ -1,0 +1,111 @@
+<h2 id="title:_过滤器（Filter）">title: 过滤器（Filter）</h2><p>过滤器用于修改特定文件，Hexo 将这些文件依序传给过滤器，而过滤器可以针对文件进行修改，这个概念借鉴自 <a href="http://codex.wordpress.org/Plugin_API#Filters">WordPress</a>。</p>
+<h2 id="概要">概要</h2><pre><code class="js">hexo.extend.filter.register(type, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+}, priority);
+</code></pre>
+<p>您可以指定过滤器的优先级 <code>priority</code>，<code>priority</code> 值越低，过滤器会越早执行，默认的 <code>priority</code> 是 10。</p>
+<h2 id="执行过滤器">执行过滤器</h2><pre><code class="js">hexo.extend.filter.exec(type, data, options);
+hexo.extend.filter.execSync(type, data, options);
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>context</code></td>
+<td>Context</td>
+</tr>
+<tr>
+<td><code>args</code></td>
+<td>参数。必须为数组。</td>
+</tr>
+</tbody>
+</table>
+<p><code>data</code> 会作为第一个参数传入每个过滤器，而您可以在过滤器中通过返回值改变下一个过滤器中的 <code>data</code>，如果什么都没有返回的话则会保持原本的 <code>data</code>。您还可以使用 <code>args</code> 指定过滤器的其他参数。举例来说：</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data, arg1, arg2</span>)</span>{
+  <span class="comment">// data === 'some data'</span>
+  <span class="comment">// arg1 === 'foo'</span>
+  <span class="comment">// arg2 === 'bar'</span>
+
+  <span class="keyword">return</span> <span class="string">'something'</span>;
+});
+
+hexo.extend.filter.register(<span class="string">'test'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data, arg1, arg2</span>)</span>{
+  <span class="comment">// data === 'something'</span>
+});
+
+hexo.extend.filter.exec(<span class="string">'test'</span>, <span class="string">'some data'</span>, {
+  args: [<span class="string">'foo'</span>, <span class="string">'bar'</span>]
+});
+</code></pre>
+<p>您也可以使用以下方法来执行过滤器：</p>
+<pre><code class="js">hexo.execFilter(type, data, options);
+hexo.execFilterSync(type, data, options);
+</code></pre>
+<h2 id="移除过滤器">移除过滤器</h2><pre><code class="js">hexo.extend.filter.unregister(type, filter);
+</code></pre>
+<h2 id="过滤器列表">过滤器列表</h2><p>以下是 Hexo 所使用的过滤器。</p>
+<h3 id="before_post_render">before_post_render</h3><p>在文章开始渲染前执行。您可以参考 <a href="posts.html#渲染">文章渲染</a> 以了解执行顺序。</p>
+<p>举例来说，把标题转为小写：</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'before_post_render'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>{
+  data.title = data.title.toLowerCase();
+  <span class="keyword">return</span> data;
+});
+</code></pre>
+<h3 id="after_post_render">after_post_render</h3><p>在文章渲染完成后执行。您可以参考 <a href="posts.html#渲染">文章渲染</a> 以了解执行顺序。</p>
+<p>举例来说，把 <code>@username</code> 取代为 Twitter 的开发者链接。</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'after_post_render'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>{
+  data.content = data.content.replace(<span class="regexp">/@(\d+)/</span>, <span class="string">'&lt;a href="http://twitter.com/$1"&gt;#$1&lt;/a&gt;'</span>);
+  <span class="keyword">return</span> data;
+});
+</code></pre>
+<h3 id="before_exit">before_exit</h3><p>在 Hexo 即将结束时执行，也就是在 <code>hexo.exit</code> 被调用后执行。</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'before_exit'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="before_generate">before_generate</h3><p>在生成器解析前执行。</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'before_generate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="after_generate">after_generate</h3><p>在生成器解析后执行。</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'after_generate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="template_locals">template_locals</h3><p>修改模板的 <a href="../docs/variables.html">局部变量</a>。</p>
+<p>举例来说，在模板的局部变量中新增当前时间：</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'template_locals'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">locals</span>)</span>{
+  locals.now = <span class="built_in">Date</span>.now();
+  <span class="keyword">return</span> locals;
+});
+</code></pre>
+<h3 id="after_init">after_init</h3><p>在 Hexo 初始化完成后执行，也就是在 <code>hexo.init</code> 执行完成后执行。</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'after_init'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="new_post_path">new_post_path</h3><p>用来决定新建文章的路径，在建立文章时执行。</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'new_post_path'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data, replace</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="post_permalink">post_permalink</h3><p>用来决定文章的永久链接。</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'post_permalink'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h3 id="after_render">after_render</h3><p>在渲染后执行，您可以参考 <a href="rendering.html#after_render_过滤器">渲染</a> 以了解更多信息。</p>
+<h3 id="server_middleware">server_middleware</h3><p>新增服务器的 Middleware。<code>app</code> 是一个 <a href="https://github.com/senchalabs/connect">Connect</a> 实例。</p>
+<p>举例来说，在响应头中新增 <code>X-Powered-By: Hexo</code>。</p>
+<pre><code class="js">hexo.extend.filter.register(<span class="string">'server_middleware'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">app</span>)</span>{
+  app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>{
+    res.setHeader(<span class="string">'X-Powered-By'</span>, <span class="string">'Hexo'</span>);
+    next();
+  });
+});
+</code></pre>

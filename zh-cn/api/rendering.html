@@ -1,0 +1,32 @@
+<h2 id="title:_渲染">title: 渲染</h2><p>在 Hexo 中，有两个方法可用于渲染文件或字符串，分别是非同步的 <code>hexo.render.render</code> 和同步的 <code>hexo.render.renderSync</code>，这两个方法的使用方式十分类似，因此以下仅以非同步的 <code>hexo.render.render</code> 为例。</p>
+<h2 id="渲染字符串">渲染字符串</h2><p>在渲染字符串时，您必须指定 <code>engine</code>，如此一来 Hexo 才知道该使用哪个渲染引擎来渲染。</p>
+<pre><code class="js">hexo.render.render({text: <span class="string">'example'</span>, engine: <span class="string">'swig'</span>}).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h2 id="渲染文件">渲染文件</h2><p>在渲染文件时，您无须指定 <code>engine</code>，Hexo 会自动根据扩展名猜测所要使用的渲染引擎，当然您也可以使用 <code>engine</code> 指定。</p>
+<pre><code class="js">hexo.render.render({path: <span class="string">'path/to/file.swig'</span>}).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h2 id="渲染选项">渲染选项</h2><p>在渲染时，您可以向第二个参数中传入参数。</p>
+<pre><code class="js">hexo.render.render({text: <span class="string">''</span>}, {foo: <span class="string">'foo'</span>}).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h2 id="after_render_过滤器">after_render 过滤器</h2><p>在渲染完成后，Hexo 会自动执行相对应的 <code>after_render</code> 过滤器，举例来说，我们可以通过这个功能实现 JavaScript 的压缩。</p>
+<pre><code class="js"><span class="keyword">var</span> UglifyJS = <span class="built_in">require</span>(<span class="string">'uglify-js'</span>);
+
+hexo.extend.filter.register(<span class="string">'after_render:js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">str, data</span>)</span>{
+  <span class="keyword">var</span> result = UglifyJS.minify(str);
+  <span class="keyword">return</span> result.code;
+});
+</code></pre>
+<h2 id="检查文件是否可被渲染">检查文件是否可被渲染</h2><p>您可以通过 <code>isRenderable</code> 或 <code>isRenderableSync</code> 两个方法检查文件路径是否可以被渲染，只有在相对应的渲染器（renderer）已注册的情况下才会返回 true。</p>
+<pre><code class="js">hexo.render.isRenderable(<span class="string">'layout.swig'</span>) <span class="comment">// true</span>
+hexo.render.isRenderable(<span class="string">'image.png'</span>) <span class="comment">// false</span>
+</code></pre>
+<h2 id="获取文件的输出扩展名">获取文件的输出扩展名</h2><p>您可以通过 <code>getOutput</code> 方法取得文件路径输出后的扩展名，如果文件无法渲染，则会返回空字符串。</p>
+<pre><code class="js">hexo.render.getOutput(<span class="string">'layout.swig'</span>) <span class="comment">// html</span>
+hexo.render.getOutput(<span class="string">'image.png'</span>) <span class="comment">// '''</span>
+</code></pre>

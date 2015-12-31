@@ -1,0 +1,66 @@
+<h2 id="title:_渲染引擎（Renderer）">title: 渲染引擎（Renderer）</h2><p>渲染引擎用于渲染内容。</p>
+<h2 id="概要">概要</h2><pre><code class="js">hexo.extend.renderer.register(name, output, <span class="function"><span class="keyword">function</span>(<span class="params">data, options</span>)</span>{
+}, sync);
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>输入的扩展名（小写，不含开头的 <code>.</code>）</td>
+</tr>
+<tr>
+<td><code>output</code></td>
+<td>输出的扩展名（小写，不含开头的 <code>.</code>）</td>
+</tr>
+<tr>
+<td><code>sync</code></td>
+<td>同步模式</td>
+</tr>
+</tbody>
+</table>
+<p>渲染函数中会传入两个参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data</code></td>
+<td>包含两个属性：文件路径 <code>path</code> 和文件内容 <code>text</code>。<code>path</code> 不一定存在。</td>
+</tr>
+<tr>
+<td><code>option</code></td>
+<td>选项</td>
+</tr>
+</tbody>
+</table>
+<h2 id="范例">范例</h2><h3 id="非同步模式">非同步模式</h3><pre><code class="js"><span class="keyword">var</span> stylus = <span class="built_in">require</span>(<span class="string">'stylus'</span>);
+
+<span class="comment">// Callback</span>
+hexo.extend.renderer.register(<span class="string">'styl'</span>, <span class="string">'css'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data, options, callback</span>)</span>{
+  stylus(data.text).set(<span class="string">'filename'</span>, data.path).render(callback);
+});
+
+<span class="comment">// Promise</span>
+hexo.extend.renderer.register(<span class="string">'styl'</span>, <span class="string">'css'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data, options</span>)</span>{
+  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>{
+    resolve(<span class="string">'test'</span>);
+  });
+});
+</code></pre>
+<h3 id="同步模式">同步模式</h3><pre><code class="js"><span class="keyword">var</span> ejs = <span class="built_in">require</span>(<span class="string">'ejs'</span>);
+
+hexo.extend.renderer.register(<span class="string">'ejs'</span>, <span class="string">'html'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data, options</span>)</span>{
+  options.filename = data.path;
+  <span class="keyword">return</span> ejs.render(data.text, options);
+}, <span class="literal">true</span>);
+</code></pre>

@@ -1,0 +1,63 @@
+<h2 id="title:_API">title: API</h2><p>This documentation provides more detailed information about the API and will be particularly helpful for people who want to modify the Hexo source code or write new plugins. If you are interested in more basic usage of Hexo, please refer to the <a href="../docs">docs</a> instead.</p>
+<p>Please note that this documentation is only valid for Hexo 3 and above.</p>
+<h2 id="Initialize">Initialize</h2><p>First, we have to create a Hexo instance. A new instance takes two arguments: the root directory of the website, <code>base_dir</code>, and an object containing the initialization options. Next, we initialize this instance by calling the <code>init</code> method on it, which will then cause Hexo to load its configuration and plugins.</p>
+<pre><code class="js"><span class="keyword">var</span> Hexo = <span class="built_in">require</span>(<span class="string">'hexo'</span>);
+<span class="keyword">var</span> hexo = <span class="keyword">new</span> Hexo(process.cwd(), {});
+
+hexo.init().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>debug</code></td>
+<td>Enable debug mode. Display debug messages in the terminal and save <code>debug.log</code> in the root directory.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>safe</code></td>
+<td>Enable safe mode. Don’t load any plugins.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>silent</code></td>
+<td>Enable silent mode. Don’t display any messages in the terminal.</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>config</code></td>
+<td>Specify the path of the configuration file.</td>
+<td><code>_config.yml</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="Load_Files">Load Files</h2><p>Hexo provides two methods for loading files: <code>load</code> and <code>watch</code>. <code>load</code> is used for loading all files in the <code>source</code> folder as well as the theme data. <code>watch</code> does the same things <code>load</code> does, but will also start watching for file changes continuously.</p>
+<p>Both methods will load the list of files and pass them to the corresponding processors. After all files have been processed, they will call upon the generators to create the routes.</p>
+<pre><code class="js">hexo.load().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+});
+
+hexo.watch().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// You can call hexo.unwatch() later to stop watching.</span>
+});
+</code></pre>
+<h2 id="Execute_Commands">Execute Commands</h2><p>Any console command can be called explicitly using the <code>call</code> method on the Hexo instance. Such a call takes two arguments: the name of the console command, and an options argument. Different options are available for the different console commands.</p>
+<pre><code class="js">hexo.call(<span class="string">'generate'</span>, {}).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h2 id="Exit">Exit</h2><p>You should call the <code>exit</code> method upon successful or unsuccessful completion of a console command. This allows Hexo to exit gracefully and finish up important things such as saving the database.</p>
+<pre><code class="js">hexo.call(<span class="string">'generate'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="keyword">return</span> hexo.exit();
+}).catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>{
+  <span class="keyword">return</span> hexo.exit(err);
+});
+</code></pre>

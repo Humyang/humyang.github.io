@@ -1,0 +1,119 @@
+<h2 id="title:_Commands">title: Commands</h2><h2 id="init">init</h2><pre><code class="bash">$ hexo init [folder]
+</code></pre>
+<p>Initializes a website. If no <code>folder</code> is provided, Hexo will set up the website in the current directory.</p>
+<h2 id="new">new</h2><pre><code class="bash">$ hexo new [layout] &lt;title&gt;
+</code></pre>
+<p>Creates a new article. If no <code>layout</code> is provided, Hexo will use the <code>default_layout</code> from <a href="configuration.html">_config.yml</a>. If the <code>title</code> contains spaces, surround it with quotation marks.</p>
+<h2 id="generate">generate</h2><pre><code class="bash">$ hexo generate
+</code></pre>
+<p>Generates static files.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-d</code>, <code>--deploy</code></td>
+<td>Deploy after generation finishes</td>
+</tr>
+<tr>
+<td><code>-w</code>, <code>--watch</code></td>
+<td>Watch file changes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="publish">publish</h2><pre><code class="bash">$ hexo publish [layout] &lt;filename&gt;
+</code></pre>
+<p>Publishes a draft.</p>
+<h2 id="server">server</h2><pre><code class="bash">$ hexo server
+</code></pre>
+<p>Starts a local server. By default, this is at <code>http://localhost:4000/</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-p</code>, <code>--port</code></td>
+<td>Override default port</td>
+</tr>
+<tr>
+<td><code>-s</code>, <code>--static</code></td>
+<td>Only serve static files</td>
+</tr>
+<tr>
+<td><code>-l</code>, <code>--log</code></td>
+<td>Enable logger. Override logger format.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="deploy">deploy</h2><pre><code class="bash">$ hexo deploy
+</code></pre>
+<p>Deploys your website.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-g</code>, <code>--generate</code></td>
+<td>Generate before deployment</td>
+</tr>
+</tbody>
+</table>
+<h2 id="render">render</h2><pre><code class="bash">$ hexo render &lt;file1&gt; [file2] ...
+</code></pre>
+<p>Renders files.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-o</code>, <code>--output</code></td>
+<td>Output destination</td>
+</tr>
+</tbody>
+</table>
+<h2 id="migrate">migrate</h2><pre><code class="bash">$ hexo migrate &lt;<span class="built_in">type</span>&gt;
+</code></pre>
+<p><a href="migration.html">Migrates</a> content from other blog systems.</p>
+<h2 id="clean">clean</h2><pre><code class="bash">$ hexo clean
+</code></pre>
+<p>Cleans the cache file (<code>db.json</code>) and generated files (<code>public</code>).</p>
+<h2 id="list">list</h2><pre><code class="bash">$ hexo list &lt;<span class="built_in">type</span>&gt;
+</code></pre>
+<p>Lists all routes.</p>
+<h2 id="version">version</h2><pre><code class="bash">$ hexo version
+</code></pre>
+<p>Displays version information.</p>
+<h2 id="Options">Options</h2><h3 id="Safe_mode">Safe mode</h3><pre><code class="bash">$ hexo --safe
+</code></pre>
+<p>Disables loading plugins and scripts. Try this if you encounter problems after installing a new plugin.</p>
+<h3 id="Debug_mode">Debug mode</h3><pre><code class="bash">$ hexo --debug
+</code></pre>
+<p>Logs verbose messages to the terminal and to <code>debug.log</code>. Try this if you encounter any problems with Hexo. If you see errors, please <a href="https://github.com/hexojs/hexo/issues/new">raise a GitHub issue</a>.</p>
+<h3 id="Silent_mode">Silent mode</h3><pre><code class="bash">$ hexo --silent
+</code></pre>
+<p>Silences output to the terminal.</p>
+<h3 id="Customize_config_file_path">Customize config file path</h3><pre><code class="bash">$ hexo --config custom.yml
+</code></pre>
+<p>Uses a custom config file (instead of <code>_config.yml</code>).</p>
+<h3 id="Display_drafts">Display drafts</h3><pre><code class="bash">$ hexo --draft
+</code></pre>
+<p>Displays draft posts (stored in the <code>source/_drafts</code> folder).</p>
+<h3 id="Customize_CWD">Customize CWD</h3><pre><code class="bash">$ hexo --cwd /path/to/cwd
+</code></pre>
+<p>Customizes the path of current working directory.</p>

@@ -1,0 +1,195 @@
+<h2 id="title:_佈署">title: 佈署</h2><p>Hexo 提供了快速方便的一鍵佈署功能，讓您只需一個指令就能將網站佈署到伺服器上。</p>
+<pre><code class="bash">$ hexo deploy
+</code></pre>
+<p>在開始之前，您必須先在 <code>_config.yml</code> 中修改設定，一個正確的部署設定中至少要有 <code>type</code> 欄位，例如：</p>
+<pre><code class="yaml">deploy:&#10;  type: git
+</code></pre>
+<p>您可同時使用多個 deployer，Hexo 會依照順序執行每個 deployer。</p>
+<pre><code class="yaml">deploy:&#10;- type: git&#10;  repo: &#10;- type: heroku&#10;  repo:
+</code></pre>
+<h2 id="Git">Git</h2><p>安裝 <a href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a>。</p>
+<pre><code class="bash">$ npm install hexo-deployer-git --save
+</code></pre>
+<p>修改設定。</p>
+<pre><code class="yaml">deploy:&#10;  type: git&#10;  repo: &#60;repository url&#62;&#10;  branch: [branch]&#10;  message: [message]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>repo</code></td>
+<td>儲存庫（Repository）網址</td>
+</tr>
+<tr>
+<td><code>branch</code></td>
+<td>分支名稱。如果您使用的是 GitHub 或 GitCafe 的話，程式會嘗試自動偵測。</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>自定提交訊息 (預設是 <code>Site updated: {% raw %}{{ now(&#39;YYYY-MM-DD HH:mm:ss&#39;) }}{% endraw %}</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Heroku">Heroku</h2><p>安裝 <a href="https://github.com/hexojs/hexo-deployer-heroku">hexo-deployer-heroku</a>。</p>
+<pre><code class="bash">$ npm install hexo-deployer-heroku --save
+</code></pre>
+<p>修改設定。</p>
+<pre><code class="yaml">deploy:&#10;  type: heroku&#10;  repo: &#60;repository url&#62;&#10;  message: [message]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>repo</code></td>
+<td>Heroku 儲存庫（Repository）網址</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>自定提交訊息 (預設是 <code>Site updated: {% raw %}{{ now(&#39;YYYY-MM-DD HH:mm:ss&#39;) }}{% endraw %}</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Rsync">Rsync</h2><p>安裝 <a href="https://github.com/hexojs/hexo-deployer-rsync">hexo-deployer-rsync</a>。</p>
+<pre><code class="bash">$ npm install hexo-deployer-rsync --save
+</code></pre>
+<p>修改設定。</p>
+<pre><code class="yaml">deploy:&#10;  type: rsync&#10;  host: &#60;host&#62;&#10;  user: &#60;user&#62;&#10;  root: &#60;root&#62;&#10;  port: [port]&#10;  delete: [true|false]&#10;  verbose: [true|false]&#10;  ignore_errors: [true|false]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>遠端主機的位址</td>
+<td></td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>使用者名稱</td>
+<td></td>
+</tr>
+<tr>
+<td><code>root</code></td>
+<td>遠端主機的根目錄</td>
+<td></td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>連接埠</td>
+<td>22</td>
+</tr>
+<tr>
+<td><code>delete</code></td>
+<td>刪除遠端主機上的舊檔案</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>verbose</code></td>
+<td>顯示除錯訊息</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>ignore_errors</code></td>
+<td>忽略錯誤</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h2 id="OpenShift">OpenShift</h2><p>安裝 <a href="https://github.com/hexojs/hexo-deployer-openshift">hexo-deployer-openshift</a>。</p>
+<pre><code class="bash">$ npm install hexo-deployer-openshift --save
+</code></pre>
+<p>修改設定。</p>
+<pre><code class="yaml">deploy:&#10;  type: openshift&#10;  repo: &#60;repository url&#62;&#10;  message: [message]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>repo</code></td>
+<td>OpenShift 儲存庫（Repository）網址</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>自定提交訊息 (預設是 <code>Site updated: {% raw %}{{ now(&#39;YYYY-MM-DD HH:mm:ss&#39;) }}{% endraw %}</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="FTPSync">FTPSync</h2><p>安裝 <a href="https://github.com/hexojs/hexo-deployer-ftpsync">hexo-deployer-ftpsync</a>。</p>
+<pre><code class="bash">$ npm install hexo-deployer-ftpsync --save
+</code></pre>
+<p>修改設定。</p>
+<pre><code class="yaml">deploy:&#10;  type: ftpsync&#10;  host: &#60;host&#62;&#10;  user: &#60;user&#62;&#10;  pass: &#60;password&#62;&#10;  remote: [remote]&#10;  port: [port]&#10;  ignore: [ignore]&#10;  connections: [connections]&#10;  verbose: [true|false]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>遠端主機位址</td>
+<td></td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>使用者名稱</td>
+<td></td>
+</tr>
+<tr>
+<td><code>pass</code></td>
+<td>密碼</td>
+<td></td>
+</tr>
+<tr>
+<td><code>remote</code></td>
+<td>遠端主機的根目錄</td>
+<td><code>/</code></td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>連接埠</td>
+<td>21</td>
+</tr>
+<tr>
+<td><code>ignore</code></td>
+<td>忽略本機或遠端的檔案</td>
+<td></td>
+</tr>
+<tr>
+<td><code>connections</code></td>
+<td>連接數</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>verbose</code></td>
+<td>顯示除錯訊息</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h2 id="其他方法">其他方法</h2><p>Hexo 產生的所有檔案都放在 <code>public</code> 資料夾，您可以將它們拷貝到您喜歡的地方。</p>

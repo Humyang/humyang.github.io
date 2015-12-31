@@ -1,0 +1,45 @@
+<h2 id="title:_问题解答">title: 问题解答</h2><p>在使用 Hexo 时，您可能会遇到一些问题，下列的常见问题解答可能会对您有所帮助。如果您在这里找不道解答，可以在 <a href="https://github.com/hexojs/hexo/issues">GitHub</a> 或 <a href="https://groups.google.com/group/hexo">Google Group</a> 上提问。</p>
+<h2 id="YAML_解析错误">YAML 解析错误</h2><pre><code class="plain">JS-YAML: incomplete explicit mapping pair; a key node is missed at line 18, column 29:&#10;      last_updated: Last updated: %s
+</code></pre>
+<p>如果 YAML 字符串中包含冒号（<code>:</code>）的话，请加上引号。</p>
+<pre><code class="plain">JS-YAML: bad indentation of a mapping entry at line 18, column 31:&#10;      last_updated:&#34;Last updated: %s&#34;
+</code></pre>
+<p>请确认您使用空格进行缩进（Soft tab），并确认冒号后有加上一个空格。</p>
+<p>您可参阅 <a href="http://www.yaml.org/spec/1.2/spec.html">YAML 规范</a> 以取得更多信息。</p>
+<h2 id="EMFILE_错误">EMFILE 错误</h2><pre><code class="plain">Error: EMFILE, too many open files
+</code></pre>
+<p>虽然 Node.js 有非阻塞 I/O，同步 I/O 的数量仍被系统所限制，在生成大量静态文件的时候，您可能会碰到 EMFILE 错误，您可以尝试提高同步 I/O 的限制数量来解决此问题。</p>
+<pre><code class="bash">$ <span class="built_in">ulimit</span> -n <span class="number">10000</span>
+</code></pre>
+<h2 id="Git_部署问题">Git 部署问题</h2><pre><code class="plain">fatal: &#39;username.github.io&#39; does not appear to be a git repository
+</code></pre>
+<p>请确认您已经在电脑上 <a href="https://help.github.com/articles/set-up-git">配置 git</a>，或改用 HTTPS 库（repository）地址。</p>
+<h2 id="服务器问题">服务器问题</h2><pre><code class="plain">Error: listen EADDRINUSE
+</code></pre>
+<p>您可能同时开启两个 Hexo 服务器，或者有其他应用程序正在占用相同的端口，请尝试修改 <code>port</code> 参数，或是在启动 Hexo 服务器时加上 <code>-p</code> 选项。</p>
+<pre><code class="bash">$ hexo server -p <span class="number">5000</span>
+</code></pre>
+<h2 id="插件安装问题">插件安装问题</h2><pre><code class="plain">npm ERR! node-waf configure build
+</code></pre>
+<p>当您尝试安装以 C/C++ 或其他非 JavaScript 语言所编写的插件时，可能会遇到此类问题，请确认您已经在电脑上安装相对应的编译器。</p>
+<h2 id="DTrace_错误_（Mac_OS_X）">DTrace 错误 （Mac OS X）</h2><pre><code class="plain">{ [Error: Cannot find module &#39;./build/Release/DTraceProviderBindings&#39;] code: &#39;MODULE_NOT_FOUND&#39; }&#10;{ [Error: Cannot find module &#39;./build/default/DTraceProviderBindings&#39;] code: &#39;MODULE_NOT_FOUND&#39; }&#10;{ [Error: Cannot find module &#39;./build/Debug/DTraceProviderBindings&#39;] code: &#39;MODULE_NOT_FOUND&#39; }
+</code></pre>
+<p>DTrace 安装可能有错误 , 使用下列命令:</p>
+<pre><code class="sh">$ npm install hexo --no-optional
+</code></pre>
+<p>参考 <a href="https://github.com/hexojs/hexo/issues/1326#issuecomment-113871796">#1326</a></p>
+<h2 id="在_Jade_或_Swig_遍历资料">在 Jade 或 Swig 遍历资料</h2><p>Hexo 使用 <a href="https://github.com/tommy351/warehouse">Warehouse</a> 存储资料，它不是一般数组所以必须先进行类型转型才能遍历。</p>
+<pre><code><span class="xml"></span><span class="template_tag">{% <span class="keyword">for</span> post <span class="keyword">in</span> site.posts.toArray() %}</span><span class="xml">
+</span><span class="template_tag">{% <span class="keyword">endfor</span> %}</span><span class="xml"></span>
+</code></pre><h2 id="资料没有更新">资料没有更新</h2><p>有时资料可能没有被更新，或是生成的文件与修改前的相同，您可以尝试清除缓存并再执行一次。</p>
+<pre><code class="bash">$ hexo clean
+</code></pre>
+<h2 id="泄露（Escape）内容">泄露（Escape）内容</h2><p>Hexo 使用 <a href="http://mozilla.github.io/nunjucks/">Nunjucks</a> 来解析文章（旧版本使用 <a href="http://paularmstrong.github.io/swig/">Swig</a>，两者语法类似），内容若包含 <code>{% raw %}{{ }}{% endraw %}</code> 或 <code>{% raw %}{% %}{% endraw %}</code> 可能导致解析错误，您可以用 <code>raw</code> 标签包裹来避免潜在问题发生。</p>
+<pre><code><span class="xml"></span><span class="template_tag">{% raw %}</span><span class="xml">
+Hello </span><span class="variable">{{ sensitive }}</span><span class="xml">
+</span><span class="template_tag">{% endraw %}</span><span class="xml"></span>
+</code></pre><h2 id="ENOSPC_错误_（Linux）">ENOSPC 错误 （Linux）</h2><p>运行 <code>$ hexo server</code> 命令有时会返回这样的错误：</p>
+<pre><code><span class="attribute">Error</span>: <span class="string">watch ENOSPC ...</span>
+</code></pre><p>它可以用过运行 <code>$ npm dedupe</code> 来解决，如果不起作用的话，可以尝试在 Linux 终端中运行下列命令：</p>
+<pre><code>$ <span class="built_in">echo</span> fs.inotify.max_user_watches=<span class="number">524288</span> | sudo tee <span class="operator">-a</span> /etc/sysctl.conf &amp;&amp; sudo sysctl -p
+</code></pre><p>这将会提高你能监视的文件数量。</p>

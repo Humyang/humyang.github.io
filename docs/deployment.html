@@ -1,0 +1,195 @@
+<h2 id="title:_Deployment">title: Deployment</h2><p>Hexo provides a fast and easy deployment strategy. You only need one single command to deploy your site to your servers.</p>
+<pre><code class="bash">$ hexo deploy
+</code></pre>
+<p>Before your first deployment, you will have to modify some settings in <code>_config.yml</code>. A valid deployment setting must have a <code>type</code> field. For example:</p>
+<pre><code class="yaml">deploy:&#10;  type: git
+</code></pre>
+<p>You can use multiple deployers. Hexo will execute each deployer in order.</p>
+<pre><code class="yaml">deploy:&#10;- type: git&#10;  repo:&#10;- type: heroku&#10;  repo:
+</code></pre>
+<h2 id="Git">Git</h2><p>Install <a href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a>.</p>
+<pre><code class="bash">$ npm install hexo-deployer-git --save
+</code></pre>
+<p>Edit settings.</p>
+<pre><code class="yaml">deploy:&#10;  type: git&#10;  repo: &#60;repository url&#62;&#10;  branch: [branch]&#10;  message: [message]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>repo</code></td>
+<td>GitHub repository URL</td>
+</tr>
+<tr>
+<td><code>branch</code></td>
+<td>Branch name. The deployer will automatically detect the branch automatically if you are using GitHub or GitCafe.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>Customize commit message (Default to <code>Site updated: {% raw %}{{ now(&#39;YYYY-MM-DD HH:mm:ss&#39;) }}{% endraw %}</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Heroku">Heroku</h2><p>Install <a href="https://github.com/hexojs/hexo-deployer-heroku">hexo-deployer-heroku</a>.</p>
+<pre><code class="bash">$ npm install hexo-deployer-heroku --save
+</code></pre>
+<p>Edit settings.</p>
+<pre><code class="yaml">deploy:&#10;  type: heroku&#10;  repo: &#60;repository url&#62;&#10;  message: [message]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>repo</code>, <code>repository</code></td>
+<td>Heroku repository URL</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>Customize commit message (Default to <code>Site updated: {% raw %}{{ now(&#39;YYYY-MM-DD HH:mm:ss&#39;) }}{% endraw %}</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Rsync">Rsync</h2><p>Install <a href="https://github.com/hexojs/hexo-deployer-rsync">hexo-deployer-rsync</a>.</p>
+<pre><code class="bash">$ npm install hexo-deployer-rsync --save
+</code></pre>
+<p>Edit settings.</p>
+<pre><code class="yaml">deploy:&#10;  type: rsync&#10;  host: &#60;host&#62;&#10;  user: &#60;user&#62;&#10;  root: &#60;root&#62;&#10;  port: [port]&#10;  delete: [true|false]&#10;  verbose: [true|false]&#10;  ignore_errors: [true|false]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>Address of remote host</td>
+<td></td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>Username</td>
+<td></td>
+</tr>
+<tr>
+<td><code>root</code></td>
+<td>Root directory of remote host</td>
+<td></td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>Port</td>
+<td>22</td>
+</tr>
+<tr>
+<td><code>delete</code></td>
+<td>Delete old files on remote host</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>verbose</code></td>
+<td>Display verbose messages</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>ignore_errors</code></td>
+<td>Ignore errors</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h2 id="OpenShift">OpenShift</h2><p>Install <a href="https://github.com/hexojs/hexo-deployer-openshift">hexo-deployer-openshift</a>.</p>
+<pre><code class="bash">$ npm install hexo-deployer-openshift --save
+</code></pre>
+<p>Edit settings.</p>
+<pre><code class="yaml">deploy:&#10;  type: openshift&#10;  repo: &#60;repository url&#62;&#10;  message: [message]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>repo</code></td>
+<td>OpenShift repository URL</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>Customize commit message (Default to <code>Site updated: {% raw %}{{ now(&#39;YYYY-MM-DD HH:mm:ss&#39;) }}{% endraw %}</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="FTPSync">FTPSync</h2><p>Install <a href="https://github.com/hexojs/hexo-deployer-ftpsync">hexo-deployer-ftpsync</a>.</p>
+<pre><code class="bash">$ npm install hexo-deployer-ftpsync --save
+</code></pre>
+<p>Edit settings.</p>
+<pre><code class="yaml">deploy:&#10;  type: ftpsync&#10;  host: &#60;host&#62;&#10;  user: &#60;user&#62;&#10;  pass: &#60;password&#62;&#10;  remote: [remote]&#10;  port: [port]&#10;  ignore: [ignore]&#10;  connections: [connections]&#10;  verbose: [true|false]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>Address of remote host</td>
+<td></td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>Username</td>
+<td></td>
+</tr>
+<tr>
+<td><code>pass</code></td>
+<td>Password</td>
+<td></td>
+</tr>
+<tr>
+<td><code>remote</code></td>
+<td>Root directory of remote host</td>
+<td><code>/</code></td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>Port</td>
+<td>21</td>
+</tr>
+<tr>
+<td><code>ignore</code></td>
+<td>Ignore the files on either host or remote</td>
+<td></td>
+</tr>
+<tr>
+<td><code>connections</code></td>
+<td>Connections number</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>verbose</code></td>
+<td>Display verbose messages</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Other_Methods">Other Methods</h2><p>All generated files are saved in the <code>public</code> folder. You can copy them to wherever you like.</p>

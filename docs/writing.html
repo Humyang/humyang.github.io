@@ -1,0 +1,93 @@
+<h2 id="title:_Writing">title: Writing</h2><p>To create a new post, you can run the following command:</p>
+<pre><code class="bash">$ hexo new [layout] &lt;title&gt;
+</code></pre>
+<p><code>post</code> is the default <code>layout</code>, but you can supply your own. You can change the default layout by editing the <code>default_layout</code> setting in <code>_config.yml</code>.</p>
+<h3 id="Layout">Layout</h3><p>There are three default layouts in Hexo: <code>post</code>, <code>page</code> and <code>draft</code>. Each of them is saved to a different path. Custom layouts are saved to the <code>source/_posts</code> folder.</p>
+<table>
+<thead>
+<tr>
+<th>Layout</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>post</code></td>
+<td><code>source/_posts</code></td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td><code>source</code></td>
+</tr>
+<tr>
+<td><code>draft</code></td>
+<td><code>source/_drafts</code></td>
+</tr>
+</tbody>
+</table>
+<p>{% note tip Don’t process my posts! %}<br>If you don’t want your posts processed, you can set <code>layout: false</code> in front-matter.<br>{% endnote %}</p>
+<h3 id="Filename">Filename</h3><p>By default, Hexo uses the post title as its filename. You can edit the <code>new_post_name</code> setting in <code>_config.yml</code> to change the default filename. For example, <code>:year-:month-:day-:title.md</code> will prefix filenames with the post creation date. You can use the following placeholders:</p>
+<table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:title</code></td>
+<td>Post title (lower case, with spaces replaced by hyphens)</td>
+</tr>
+<tr>
+<td><code>:year</code></td>
+<td>Created year, e.g. <code>2015</code></td>
+</tr>
+<tr>
+<td><code>:month</code></td>
+<td>Created month (leading zeros), e.g. <code>04</code></td>
+</tr>
+<tr>
+<td><code>:i_month</code></td>
+<td>Created month (no leading zeros), e.g. <code>4</code></td>
+</tr>
+<tr>
+<td><code>:day</code></td>
+<td>Created day (leading zeros), e.g. <code>07</code></td>
+</tr>
+<tr>
+<td><code>:i_day</code></td>
+<td>Created day (no leading zeros), e.g. <code>7</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="Drafts">Drafts</h3><p>Previously, we mentioned a special layout in Hexo: <code>draft</code>. Posts initialized with this layout are saved to the <code>source/_drafts</code> folder. You can use the <code>publish</code> command to move drafts to the <code>source/_posts</code> folder. <code>publish</code> works in a similar way to the <code>new</code> command.</p>
+<pre><code class="bash">$ hexo publish [layout] &lt;title&gt;
+</code></pre>
+<p>Drafts are not displayed by default. You can add the <code>--draft</code> option when running Hexo or enable the <code>render_drafts</code> setting in <code>_config.yml</code> to render drafts.</p>
+<h3 id="Scaffolds">Scaffolds</h3><p>When creating posts, Hexo will build files based on the corresponding file in <code>scaffolds</code> folder. For example:</p>
+<pre><code class="bash">$ hexo new photo <span class="string">"My Gallery"</span>
+</code></pre>
+<p>When you run this command, Hexo will try to find <code>photo.md</code> in the <code>scaffolds</code> folder and build the post based on it. The following placeholders are available in scaffolds:</p>
+<table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>layout</code></td>
+<td>Layout</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>Title</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>File created date</td>
+</tr>
+</tbody>
+</table>

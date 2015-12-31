@@ -1,0 +1,42 @@
+<h2 id="title:_路由">title: 路由</h2><p>路由存储了网站中所用到的所有路径。</p>
+<h2 id="获取路径">获取路径</h2><p><code>get</code> 方法会传回一个 <a href="http://nodejs.org/api/stream.html">Stream</a>，例如把该路径的资料存储到某个指定位置。</p>
+<pre><code class="js"><span class="keyword">var</span> data = hexo.route.get(<span class="string">'index.html'</span>);
+<span class="keyword">var</span> dest = fs.createWriteStream(<span class="string">'somewhere'</span>);
+
+data.pipe(dest);
+</code></pre>
+<h2 id="设置路径">设置路径</h2><p>您可以在 <code>set</code> 方法中使用字符串、<a href="http://nodejs.org/api/buffer.html">Buffer</a> 或函数，如下：</p>
+<pre><code class="js"><span class="comment">// String</span>
+hexo.route.set(<span class="string">'index.html'</span>, <span class="string">'index'</span>)
+
+<span class="comment">// Buffer</span>
+hexo.route.set(<span class="string">'index.html'</span>, <span class="keyword">new</span> Buffer(<span class="string">'index'</span>));
+
+<span class="comment">// Function (Promise)</span>
+hexo.route.set(<span class="string">'index.html'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>{
+    resolve(<span class="string">'index'</span>);
+  });
+});
+
+<span class="comment">// Function (Callback)</span>
+hexo.route.set(<span class="string">'index.html'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>{
+  callback(<span class="literal">null</span>, <span class="string">'index'</span>);
+});
+</code></pre>
+<p>您还可以设置该路径是否更新，这样在生成文件时便能忽略未更动的文件，加快生成时间。</p>
+<pre><code class="js">hexo.route.set(<span class="string">'index.html'</span>, {
+    data: <span class="string">'index'</span>,
+    modified: <span class="literal">false</span>
+});
+
+<span class="comment">// hexo.route.isModified('index.html') =&gt; false</span>
+</code></pre>
+<h2 id="移除路径">移除路径</h2><pre><code class="js">hexo.route.remove(<span class="string">'index.html'</span>);
+</code></pre>
+<h2 id="获得路由表">获得路由表</h2><pre><code class="js">hexo.route.list();
+</code></pre>
+<h2 id="格式化路径">格式化路径</h2><p><code>format</code> 方法可将字符串转为合法的路径。</p>
+<pre><code class="js">hexo.route.format(<span class="string">'archives/'</span>);
+<span class="comment">// archives/index.html</span>
+</code></pre>

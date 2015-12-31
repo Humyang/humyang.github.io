@@ -1,0 +1,831 @@
+<h2 id="title:_輔助函數（Helpers）">title: 輔助函數（Helpers）</h2><p>輔助函數幫助您在模版中快速插入內容。</p>
+<h2 id="網址">網址</h2><h3 id="url_for">url_for</h3><p>在路徑前加上根路徑，從 Hexo 2.7 開始您應該使用此函數，避免使用 <code>config.root + path</code>。</p>
+<pre><code class="js">&lt;%- url_for(path) %&gt;
+</code></pre>
+<h3 id="relative_url">relative_url</h3><p>取得與 <code>from</code> 相對的 <code>to</code> 路徑。</p>
+<pre><code class="js">&lt;%- relative_url(from, to) %&gt;
+</code></pre>
+<h3 id="gravatar">gravatar</h3><p>插入 Gravatar 圖片。</p>
+<pre><code class="js">&lt;%- gravatar(email, [size]);
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- gravatar(<span class="string">'a@abc.com'</span>) %&gt;
+<span class="comment">// http://www.gravatar.com/avatar/b9b00e66c6b8a70f88c73cb6bdb06787</span>
+
+&lt;%- gravatar(<span class="string">'a@abc.com'</span>, <span class="number">40</span>) %&gt;
+<span class="comment">// http://www.gravatar.com/avatar/b9b00e66c6b8a70f88c73cb6bdb06787?s=40</span>
+</code></pre>
+<h2 id="HTML_標籤">HTML 標籤</h2><h3 id="css">css</h3><p>載入 CSS 檔案。<code>path</code> 可以是陣列或字串，如果 <code>path</code> 開頭不是 <code>/</code> 或任何協議，則會自動加上根路徑；如果後面沒有加上 <code>.css</code> 副檔名的話，也會自動加上。</p>
+<pre><code class="js">&lt;%- css(path, ...) %&gt;
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- css(<span class="string">'style.css'</span>) %&gt;
+<span class="comment">// &lt;link rel="stylesheet" href="/style.css" type="text/css"&gt;</span>
+
+&lt;%- css([<span class="string">'style.css'</span>, <span class="string">'screen.css'</span>]) %&gt;
+<span class="comment">// &lt;link rel="stylesheet" href="/style.css" type="text/css"&gt;</span>
+<span class="comment">// &lt;link rel="stylesheet" href="/screen.css" type="text/css"&gt;</span>
+</code></pre>
+<h3 id="js">js</h3><p>載入 JavaScript 檔案。<code>path</code> 可以是陣列或字串，如果 <code>path</code> 開頭不是 <code>/</code> 或任何協議，則會自動加上根路徑；如果後面沒有加上 <code>.js</code> 副檔名的話，也會自動加上。</p>
+<pre><code class="js">&lt;%- js(path, ...) %&gt;
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- js(<span class="string">'script.js'</span>) %&gt;
+<span class="comment">// &lt;script type="text/javascript" src="/script.js"&gt;&lt;/script&gt;</span>
+
+&lt;%- js([<span class="string">'script.js'</span>, <span class="string">'gallery.js'</span>]) %&gt;
+<span class="comment">// &lt;script type="text/javascript" src="/script.js"&gt;&lt;/script&gt;</span>
+<span class="comment">// &lt;script type="text/javascript" src="/gallery.js"&gt;&lt;/script&gt;</span>
+</code></pre>
+<h3 id="link_to">link_to</h3><p>插入連結。</p>
+<pre><code class="js">&lt;%- link_to(path, [text], [options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>external</code></td>
+<td>在新視窗開啟連結</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>Class 名稱</td>
+<td></td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>ID</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- link_to(<span class="string">'http://www.google.com'</span>) %&gt;
+<span class="comment">// &lt;a href="http://www.google.com" title="http://www.google.com"&gt;http://www.google.com&lt;/a&gt;</span>
+
+&lt;%- link_to(<span class="string">'http://www.google.com'</span>, <span class="string">'Google'</span>) %&gt;
+<span class="comment">// &lt;a href="http://www.google.com" title="Google"&gt;Google&lt;/a&gt;</span>
+
+&lt;%- link_to(<span class="string">'http://www.google.com'</span>, <span class="string">'Google'</span>, {external: <span class="literal">true</span>}) %&gt;
+<span class="comment">// &lt;a href="http://www.google.com" title="Google" target="_blank" rel="external"&gt;Google&lt;/a&gt;</span>
+</code></pre>
+<h3 id="mail_to">mail_to</h3><p>插入電子郵件連結。</p>
+<pre><code class="js">&lt;%- mail_to(path, [text], [options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class</code></td>
+<td>Class 名稱</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>ID</td>
+</tr>
+<tr>
+<td><code>subject</code></td>
+<td>郵件主旨</td>
+</tr>
+<tr>
+<td><code>cc</code></td>
+<td>副本（CC）</td>
+</tr>
+<tr>
+<td><code>bcc</code></td>
+<td>密件副本（BCC）</td>
+</tr>
+<tr>
+<td><code>body</code></td>
+<td>郵件內容</td>
+</tr>
+</tbody>
+</table>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- mail_to(<span class="string">'a@abc.com'</span>) %&gt;
+<span class="comment">// &lt;a href="mailto:a@abc.com" title="a@abc.com"&gt;a@abc.com&lt;/a&gt;</span>
+
+&lt;%- mail_to(<span class="string">'a@abc.com'</span>, <span class="string">'Email'</span>) %&gt;
+<span class="comment">// &lt;a href="mailto:a@abc.com" title="Email"&gt;Email&lt;/a&gt;</span>
+</code></pre>
+<h3 id="image_tag">image_tag</h3><p>插入圖片。</p>
+<pre><code class="js">&lt;%- image_tag(path, [options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alt</code></td>
+<td>圖片的替代文字</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>Class 名稱</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>ID</td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td>圖片寬度</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>圖片高度</td>
+</tr>
+</tbody>
+</table>
+<h3 id="favicon_tag">favicon_tag</h3><p>插入 favicon。</p>
+<pre><code class="js">&lt;%- favicon_tag(path) %&gt;
+</code></pre>
+<h3 id="feed_tag">feed_tag</h3><p>插入 feed 連結。</p>
+<pre><code class="js">&lt;%- feed_tag(path, [options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>Feed 標題</td>
+<td></td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>Feed 類型</td>
+<td>atom</td>
+</tr>
+</tbody>
+</table>
+<h2 id="判斷函數">判斷函數</h2><h3 id="is_current">is_current</h3><p>檢查 <code>path</code> 是否符合目前頁面的網址。開啟 <code>strict</code> 選項啟用嚴格比對。</p>
+<pre><code class="js">&lt;%- is_current(path, [strict]) %&gt;
+</code></pre>
+<h3 id="is_home">is_home</h3><p>檢查目前是否為首頁。</p>
+<pre><code class="js">&lt;%- is_home() %&gt;
+</code></pre>
+<h3 id="is_post">is_post</h3><p>檢查目前是否為文章。</p>
+<pre><code class="js">&lt;%- is_post() %&gt;
+</code></pre>
+<h3 id="is_archive">is_archive</h3><p>檢查目前是否為彙整頁面。</p>
+<pre><code class="js">&lt;%- is_archive() %&gt;
+</code></pre>
+<h3 id="is_year">is_year</h3><p>檢查目前是否為年度彙整頁面。</p>
+<pre><code class="js">&lt;%- is_year() %&gt;
+</code></pre>
+<h3 id="is_month">is_month</h3><p>檢查目前是否為每月彙整頁面。</p>
+<pre><code class="js">&lt;%- is_month() %&gt;
+</code></pre>
+<h3 id="is_category">is_category</h3><p>檢查目前是否為分類彙整頁面。</p>
+<pre><code class="js">&lt;%- is_category() %&gt;
+</code></pre>
+<h3 id="is_tag">is_tag</h3><p>檢查目前是否為標籤彙整頁面。</p>
+<pre><code class="js">&lt;%- is_tag() %&gt;
+</code></pre>
+<h2 id="字串處理">字串處理</h2><h3 id="trim">trim</h3><p>清除字串的開頭和結尾空白。</p>
+<pre><code class="js">&lt;%- trim(string) %&gt;
+</code></pre>
+<h3 id="strip_html">strip_html</h3><p>清除字串中的 HTML 標籤。</p>
+<pre><code class="js">&lt;%- strip_html(string) %&gt;
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- strip_html('It's not &lt;b&gt;important&lt;/b&gt; anymore!') %&gt;
+// It's not important anymore!
+</code></pre>
+<h3 id="titlecase">titlecase</h3><p>把字串轉換為正確的 Title case。</p>
+<pre><code class="js">&lt;%- titlecase(string) %&gt;
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- titlecase(<span class="string">'this is an apple'</span>) %&gt;
+# This is an Apple
+</code></pre>
+<h3 id="markdown">markdown</h3><p>使用 Markdown 渲染字串。</p>
+<pre><code class="js">&lt;%- markdown(str) %&gt;
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- markdown(<span class="string">'make me **strong**'</span>) %&gt;
+<span class="comment">// make me &lt;strong&gt;strong&lt;/strong&gt;</span>
+</code></pre>
+<h3 id="render">render</h3><p>渲染字串。</p>
+<pre><code class="js">&lt;%- render(str, engine, [options]) %&gt;
+</code></pre>
+<h3 id="word_wrap">word_wrap</h3><p>使每行的字串長度不超過 <code>length</code>。<code>length</code> 預設為 80。</p>
+<pre><code class="js">&lt;%- word_wrap(str, [length]) %&gt;
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- word_wrap(<span class="string">'Once upon a time'</span>, <span class="number">8</span>) %&gt;
+<span class="comment">// Once upon\n a time</span>
+</code></pre>
+<h3 id="truncate">truncate</h3><p>移除超過 <code>length</code> 的字串。</p>
+<pre><code class="js">&lt;%- truncate(text, length) %&gt;
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- truncate(<span class="string">'Once upon a time in a world far far away'</span>, <span class="number">16</span>) %&gt;
+<span class="comment">// Once upon a time</span>
+</code></pre>
+<h2 id="模板">模板</h2><h3 id="partial">partial</h3><p>載入其他模板檔案，您可在 <code>locals</code> 設定區域變數。</p>
+<pre><code class="js">&lt;%- partial(layout, [locals], [options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cache</code></td>
+<td>儲存快取（使用 Fragment cache）</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>only</code></td>
+<td>限制區域變數。在模板中只能使用 <code>locals</code> 中設定的變數。</td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="fragment_cache">fragment_cache</h3><p>儲存局部快取。它儲存局部內容，下次使用時就能直接使用快取。</p>
+<pre><code class="js">&lt;%- fragment_cache(id, fn);
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- fragment_cache(<span class="string">'header'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="keyword">return</span> <span class="string">'&lt;header&gt;&lt;/header&gt;'</span>;
+}) %&gt;
+</code></pre>
+<h2 id="日期與時間">日期與時間</h2><h3 id="date">date</h3><p>插入格式化的日期。<code>date</code> 可以是 UNIX 時間、ISO 字串、Date 物件或 <a href="http://momentjs.com/">Moment.js</a> 物件。<code>format</code> 預設為 <code>date_format</code> 設定。</p>
+<pre><code class="js">&lt;%- date(date, [format]) %&gt;
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- date(<span class="built_in">Date</span>.now()) %&gt;
+<span class="comment">// 2013-01-01</span>
+
+&lt;%- date(<span class="built_in">Date</span>.now(), <span class="string">'MMM D YYYY'</span>) %&gt;
+<span class="comment">// Jan 1 2013</span>
+</code></pre>
+<h3 id="date_xml">date_xml</h3><p>插入 XML 格式的日期。<code>date</code> 可以是 UNIX 時間、ISO 字串、Date 物件或 <a href="http://momentjs.com/">Moment.js</a> 物件。</p>
+<pre><code class="js">&lt;%- date_xml(date) %&gt;
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- date_xml(<span class="built_in">Date</span>.now()) %&gt;
+<span class="comment">// 2013-01-01T00:00:00.000Z</span>
+</code></pre>
+<h3 id="time">time</h3><p>插入格式化的時間。<code>date</code> 可以是 UNIX 時間、ISO 字串、Date 物件或 <a href="http://momentjs.com/">Moment.js</a> 物件。<code>format</code> 預設為 <code>time_format</code> 設定。</p>
+<pre><code class="js">&lt;%- time(date, [format]) %&gt;
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- time(<span class="built_in">Date</span>.now()) %&gt;
+<span class="comment">// 13:05:12</span>
+
+&lt;%- time(<span class="built_in">Date</span>.now(), <span class="string">'h:mm:ss a'</span>) %&gt;
+<span class="comment">// 1:05:12 pm</span>
+</code></pre>
+<h3 id="full_date">full_date</h3><p>插入格式化的日期和時間。<code>date</code> 可以是 UNIX 時間、ISO 字串、Date 物件或 <a href="http://momentjs.com/">Moment.js</a> 物件。<code>format</code> 預設為 <code>date_format + time_format</code> 設定。</p>
+<pre><code class="js">&lt;%- full_date(date, [format]) %&gt;
+</code></pre>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- full_date(<span class="keyword">new</span> <span class="built_in">Date</span>()) %&gt;
+<span class="comment">// Jan 1, 2013 0:00:00</span>
+
+&lt;%- full_date(<span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="string">'dddd, MMMM Do YYYY, h:mm:ss a'</span>) %&gt;
+<span class="comment">// Tuesday, January 1st 2013, 12:00:00 am</span>
+</code></pre>
+<h3 id="moment">moment</h3><p><a href="http://momentjs.com/">Moment.js</a> 函式庫。</p>
+<h2 id="列表">列表</h2><h3 id="list_categories">list_categories</h3><p>插入分類列表。</p>
+<pre><code class="js">&lt;%- list_categories([categories], [options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>orderby</code></td>
+<td>分類排列方式</td>
+<td>name</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>分類排列順序。<code>1</code>, <code>asc</code> 升冪；<code>-1</code>, <code>desc</code> 降冪。</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>show_count</code></td>
+<td>顯示每個分類的文章總數</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td>分類列表的顯示方式。使用 <code>list</code> 以無序列表（unordered list）方式顯示。</td>
+<td>list</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>分類間的分隔符號。只有在 <code>style</code> 不是 <code>list</code> 時有用。</td>
+<td>,</td>
+</tr>
+<tr>
+<td><code>depth</code></td>
+<td>要顯示的分類層級。<code>0</code> 顯示所有層級的分類；<code>-1</code> 和 <code>0</code> 很類似，但是顯示不分層級；<code>1</code> 只顯示第一層的分類。</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>分類列表的 class 名稱。</td>
+<td>category</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td>改變分類名稱顯示方法的函數</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="list_tags">list_tags</h3><p>插入標籤列表。</p>
+<pre><code class="js">&lt;%- list_tags([tags], [options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>orderby</code></td>
+<td>標籤排列方式</td>
+<td>name</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>標籤排列順序。<code>1</code>, <code>asc</code> 升冪；<code>-1</code>, <code>desc</code> 降冪。</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>show_count</code></td>
+<td>顯示每個標籤的文章總數</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td>標籤列表的顯示方式。使用 <code>list</code> 以無序列表（unordered list）方式顯示。</td>
+<td>list</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>標籤間的分隔符號。只有在 <code>style</code> 不是 <code>list</code> 時有用。</td>
+<td>,</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>標籤列表的 class 名稱。</td>
+<td>tag</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td>改變標籤名稱顯示方法的函數</td>
+<td></td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>要顯示的標籤數量（0 = 無限制）</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="list_archives">list_archives</h3><p>插入彙整列表。</p>
+<pre><code class="js">&lt;%- list_archives([options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>類型。此設定可為 <code>yearly</code> 或 <code>monthly</code>。</td>
+<td>monthly</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>排列順序。<code>1</code>, <code>asc</code> 升冪；<code>-1</code>, <code>desc</code> 降冪。</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>show_count</code></td>
+<td>顯示每個彙整的文章總數</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>日期格式</td>
+<td>MMMM YYYY</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td>彙整列表的顯示方式。使用 <code>list</code> 以無序列表（unordered list）方式顯示。</td>
+<td>list</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>彙整間的分隔符號。只有在 <code>style</code> 不是 <code>list</code> 時有用。</td>
+<td>,</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>彙整列表的 class 名稱。</td>
+<td>archive</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td>改變彙整名稱顯示方法的函數</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="list_posts">list_posts</h3><p>插入文章列表。</p>
+<pre><code class="js">&lt;%- list_posts([options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>orderby</code></td>
+<td>文章排列方式</td>
+<td>date</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>文章排列順序。<code>1</code>, <code>asc</code> 升冪；<code>-1</code>, <code>desc</code> 降冪。</td>
+<td>-1</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td>文章列表的顯示方式。使用 <code>list</code> 以無序列表（unordered list）方式顯示。</td>
+<td>list</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>文章間的分隔符號。只有在 <code>style</code> 不是 <code>list</code> 時有用。</td>
+<td>,</td>
+</tr>
+<tr>
+<td><code>class</code></td>
+<td>文章列表的 class 名稱。</td>
+<td>post</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>要顯示的文章數量（0 = 無限制）</td>
+<td>6</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td>改變文章名稱顯示方法的函數</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tagcloud">tagcloud</h3><p>插入標籤雲。</p>
+<pre><code class="js">&lt;%- tagcloud([tags], [options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>min_font</code></td>
+<td>最小字體尺寸</td>
+<td>10</td>
+</tr>
+<tr>
+<td><code>max_font</code></td>
+<td>最大字體尺寸</td>
+<td>20</td>
+</tr>
+<tr>
+<td><code>unit</code></td>
+<td>字體尺寸的單位</td>
+<td>px</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>標籤總量</td>
+<td>40</td>
+</tr>
+<tr>
+<td><code>orderby</code></td>
+<td>標籤排列方式</td>
+<td>name</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>標籤排列順序。<code>1</code>, <code>sac</code> 升冪；<code>-1</code>, <code>desc</code> 降冪</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td>使用顏色</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>start_color</code></td>
+<td>開始的顏色。您可使用十六進位值（<code>#b700ff</code>），rgba（<code>rgba(183, 0, 255, 1)</code>），hsla（<code>hsla(283, 100%, 50%, 1)</code>）或 <a href="http://www.w3.org/TR/css3-color/#svg-color">顏色關鍵字</a>。此選項僅在 <code>color</code> 設定開啟時才有用。</td>
+<td></td>
+</tr>
+<tr>
+<td><code>end_color</code></td>
+<td>結束的顏色。您可使用十六進位值（<code>#b700ff</code>），rgba（<code>rgba(183, 0, 255, 1)</code>），hsla（<code>hsla(283, 100%, 50%, 1)</code>）或 <a href="http://www.w3.org/TR/css3-color/#svg-color">顏色關鍵字</a>。此選項僅在 <code>color</code> 設定開啟時才有用。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="其他">其他</h2><h3 id="paginator">paginator</h3><p>插入分頁連結。</p>
+<pre><code class="js">&lt;%- paginator(options) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>base</code></td>
+<td>基礎網址</td>
+<td>/</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>網址格式</td>
+<td>page/%d/</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td>分頁總數</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>current</code></td>
+<td>目前頁數</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>prev_text</code></td>
+<td>上一頁連結的文字。僅在 <code>prev_next</code> 設定開啟時才有用。</td>
+<td>Prev</td>
+</tr>
+<tr>
+<td><code>next_text</code></td>
+<td>下一頁連結的文字。僅在 <code>prev_next</code> 設定開啟時才有用。</td>
+<td>Next</td>
+</tr>
+<tr>
+<td><code>space</code></td>
+<td>空白文字</td>
+<td>&hellp;</td>
+</tr>
+<tr>
+<td><code>prev_next</code></td>
+<td>顯示上一頁和下一頁的連結</td>
+<td>true</td>
+</tr>
+<tr>
+<td><code>end_size</code></td>
+<td>顯示於兩側的頁數</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>mid_size</code></td>
+<td>顯示於中間的頁數</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>show_all</code></td>
+<td>顯示所有頁數。如果開啟此設定的話，<code>end_size</code> 和 <code>mid_size</code> 就沒用了。</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h3 id="search_form">search_form</h3><p>插入 Google 搜尋表單。</p>
+<pre><code class="js">&lt;%- search_form(options) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class</code></td>
+<td>表單的 class name</td>
+<td>search-form</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>搜尋提示文字</td>
+<td>Search</td>
+</tr>
+<tr>
+<td><code>button</code></td>
+<td>顯示搜尋按鈕。此設定可為布林值（boolean）或字串，當設定是字串的時候，即為搜尋按鈕的文字。</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h3 id="number_format">number_format</h3><p>格式化數字。</p>
+<pre><code class="js">&lt;%- number_format(number, [options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>precision</code></td>
+<td>數字精確度。此選項可為 <code>false</code> 或非負整數。</td>
+<td>false</td>
+</tr>
+<tr>
+<td><code>delimiter</code></td>
+<td>千位數分隔符號</td>
+<td>,</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>整數和小數之間的分隔符號</td>
+<td>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- number_format(<span class="number">12345.67</span>, {precision: <span class="number">1</span>}) %&gt;
+<span class="comment">// 12,345.68</span>
+
+&lt;%- number_format(<span class="number">12345.67</span>, {precision: <span class="number">4</span>}) %&gt;
+<span class="comment">// 12,345.6700</span>
+
+&lt;%- number_format(<span class="number">12345.67</span>, {precision: <span class="number">0</span>}) %&gt;
+<span class="comment">// 12,345</span>
+
+&lt;%- number_format(<span class="number">12345.67</span>, {delimiter: <span class="string">''</span>}) %&gt;
+<span class="comment">// 12345.67</span>
+
+&lt;%- number_format(<span class="number">12345.67</span>, {separator: <span class="string">'/'</span>}) %&gt;
+<span class="comment">// 12,345/67</span>
+</code></pre>
+<h3 id="open_graph">open_graph</h3><p>插入 <a href="http://ogp.me/">Open Graph</a> 資料。</p>
+<pre><code class="js">&lt;%- open_graph([options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>頁面標題 (<code>og:title</code>)</td>
+<td><code>page.title</code></td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>頁面類型 (<code>og:type</code>)</td>
+<td>blog</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>頁面網址 (<code>og:url</code>)</td>
+<td><code>url</code></td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>頁面圖片 (<code>og:image</code>)</td>
+<td>內容中的圖片</td>
+</tr>
+<tr>
+<td><code>site_name</code></td>
+<td>網站名稱 (<code>og:site_name</code>)</td>
+<td><code>config.title</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>頁面描述 (<code>og:desription</code>)</td>
+<td>內容摘要或前 200 字</td>
+</tr>
+<tr>
+<td><code>twitter_card</code></td>
+<td>Twitter 卡片類型 (<code>twitter:card</code>)</td>
+<td>summary</td>
+</tr>
+<tr>
+<td><code>twitter_id</code></td>
+<td>Twitter ID (<code>twitter:creator</code>)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>twitter_site</code></td>
+<td>Twitter 網站 (<code>twitter:site</code>)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>google_plus</code></td>
+<td>Google+ 個人資料連結</td>
+<td></td>
+</tr>
+<tr>
+<td><code>fb_admins</code></td>
+<td>Facebook 管理者 ID</td>
+<td></td>
+</tr>
+<tr>
+<td><code>fb_app_id</code></td>
+<td>Facebook 應用程式 ID</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="toc">toc</h3><p>解析內容中的標題標籤 (h1~h6) 並插入目錄。</p>
+<pre><code class="js">&lt;%- toc(str, [options]) %&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>描述</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class</code></td>
+<td>Class 名稱</td>
+<td>toc</td>
+</tr>
+<tr>
+<td><code>list_number</code></td>
+<td>顯示編號</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<p><strong>範例：</strong></p>
+<pre><code class="js">&lt;%- toc(page.content) %&gt;
+</code></pre>

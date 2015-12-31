@@ -1,0 +1,42 @@
+<h2 id="title:_Router">title: Router</h2><p>The router saves all paths used in the site.</p>
+<h2 id="Get_a_Path">Get a Path</h2><p>The <code>get</code> method returns a <a href="http://nodejs.org/api/stream.html">Stream</a>. For example, to save the path data to a specified destination:</p>
+<pre><code class="js"><span class="keyword">var</span> data = hexo.route.get(<span class="string">'index.html'</span>);
+<span class="keyword">var</span> dest = fs.createWriteStream(<span class="string">'somewhere'</span>);
+
+data.pipe(dest);
+</code></pre>
+<h2 id="Set_a_Path">Set a Path</h2><p>The <code>set</code> method takes a string, a <a href="http://nodejs.org/api/buffer.html">Buffer</a> or a function.</p>
+<pre><code class="js"><span class="comment">// String</span>
+hexo.route.set(<span class="string">'index.html'</span>, <span class="string">'index'</span>)
+
+<span class="comment">// Buffer</span>
+hexo.route.set(<span class="string">'index.html'</span>, <span class="keyword">new</span> Buffer(<span class="string">'index'</span>));
+
+<span class="comment">// Function (Promise)</span>
+hexo.route.set(<span class="string">'index.html'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>{
+    resolve(<span class="string">'index'</span>);
+  });
+});
+
+<span class="comment">// Function (Callback)</span>
+hexo.route.set(<span class="string">'index.html'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>{
+  callback(<span class="literal">null</span>, <span class="string">'index'</span>);
+});
+</code></pre>
+<p>You can also set a boolean for whether a path has been modified or not. This can speed up file generation as it allows for ignoring the unmodified files.</p>
+<pre><code class="js">hexo.route.set(<span class="string">'index.html'</span>, {
+    data: <span class="string">'index'</span>,
+    modified: <span class="literal">false</span>
+});
+
+<span class="comment">// hexo.route.isModified('index.html') =&gt; false</span>
+</code></pre>
+<h2 id="Remove_a_Path">Remove a Path</h2><pre><code class="js">hexo.route.remove(<span class="string">'index.html'</span>);
+</code></pre>
+<h2 id="Get_the_List_of_Routes">Get the List of Routes</h2><pre><code class="js">hexo.route.list();
+</code></pre>
+<h2 id="Format_a_Path">Format a Path</h2><p>The <code>format</code> method transforms a string to a valid path.</p>
+<pre><code class="js">hexo.route.format(<span class="string">'archives/'</span>);
+<span class="comment">// archives/index.html</span>
+</code></pre>

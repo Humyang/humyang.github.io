@@ -1,0 +1,6 @@
+<h2 id="title:_佈署器（Deployer）">title: 佈署器（Deployer）</h2><p>佈署器幫助使用者快速將網站佈署到遠端伺服器上，免去複雜的指令。</p>
+<h2 id="概要">概要</h2><pre><code class="js">hexo.extend.deployer.register(name, <span class="function"><span class="keyword">function</span>(<span class="params">args</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<p>在函數中會傳入 <code>args</code> 參數，此參數包含了 <code>_config.yml</code> 中的 <code>deploy</code> 設定，及使用者在終端機所傳入的參數。</p>

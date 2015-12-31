@@ -1,0 +1,32 @@
+<h2 id="title:_Rendering">title: Rendering</h2><p>There are two methods for rendering files or strings in Hexo: the asynchronous <code>hexo.render.render</code> method and the synchronous <code>hexo.render.renderSync</code> method. Unsurprisingly, the two methods are very similar so only the asynchronous <code>hexo.render.render</code> will be further discussed in the below paragraphs.</p>
+<h2 id="Render_a_String">Render a String</h2><p>When rendering a string, you must specify an <code>engine</code> to let Hexo know which rendering engine it should use.</p>
+<pre><code class="js">hexo.render.render({text: <span class="string">'example'</span>, engine: <span class="string">'swig'</span>}).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h2 id="Render_a_File">Render a File</h2><p>When rendering a file, it’s not necessary to specify an <code>engine</code> because Hexo will detect the relevant rendering engine automatically based on the extension of the file. Of course, you are also allowed to explicitly define the <code>engine</code>.</p>
+<pre><code class="js">hexo.render.render({path: <span class="string">'path/to/file.swig'</span>}).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h2 id="Render_Options">Render Options</h2><p>You can pass in an options object as the second argument.</p>
+<pre><code class="js">hexo.render.render({text: <span class="string">''</span>}, {foo: <span class="string">'foo'</span>}).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>{
+  <span class="comment">// ...</span>
+});
+</code></pre>
+<h2 id="after_render_Filters">after_render Filters</h2><p>When rendering is complete, Hexo will execute the corresponding <code>after_render</code> filters. For example, we can use this feature to implement a JavaScript minifier.</p>
+<pre><code class="js"><span class="keyword">var</span> UglifyJS = <span class="built_in">require</span>(<span class="string">'uglify-js'</span>);
+
+hexo.extend.filter.register(<span class="string">'after_render:js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">str, data</span>)</span>{
+  <span class="keyword">var</span> result = UglifyJS.minify(str);
+  <span class="keyword">return</span> result.code;
+});
+</code></pre>
+<h2 id="Check_Whether_a_File_is_Renderable">Check Whether a File is Renderable</h2><p>You can use the <code>isRenderable</code> or <code>isRenderableSync</code> method to check whether a file path is renderable. Only when a corresponding renderer has been registered will this method return true.</p>
+<pre><code class="js">hexo.render.isRenderable(<span class="string">'layout.swig'</span>) <span class="comment">// true</span>
+hexo.render.isRenderable(<span class="string">'image.png'</span>) <span class="comment">// false</span>
+</code></pre>
+<h2 id="Get_the_Output_Extension">Get the Output Extension</h2><p>Use the <code>getOutput</code> method to get the extension of the rendered output. If a file is not renderable, the method will return an empty string.</p>
+<pre><code class="js">hexo.render.getOutput(<span class="string">'layout.swig'</span>) <span class="comment">// html</span>
+hexo.render.getOutput(<span class="string">'image.png'</span>) <span class="comment">// '''</span>
+</code></pre>

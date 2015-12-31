@@ -1,0 +1,93 @@
+<h2 id="title:_写作">title: 写作</h2><p>你可以执行下列命令来创建一篇新文章。</p>
+<pre><code class="bash">$ hexo new [layout] &lt;title&gt;
+</code></pre>
+<p>您可以在命令中指定文章的布局（layout），默认为 <code>post</code>，可以通过修改 <code>_config.yml</code> 中的 <code>default_layout</code> 参数来指定默认布局。</p>
+<h3 id="布局（Layout）">布局（Layout）</h3><p>Hexo 有三种默认布局：<code>post</code>、<code>page</code> 和 <code>draft</code>，它们分别对应不同的路径，而您自定义的其他布局和 <code>post</code> 相同，都将储存到 <code>source/_posts</code> 文件夹。</p>
+<table>
+<thead>
+<tr>
+<th>布局</th>
+<th>路径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>post</code></td>
+<td><code>source/_posts</code></td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td><code>source</code></td>
+</tr>
+<tr>
+<td><code>draft</code></td>
+<td><code>source/_drafts</code></td>
+</tr>
+</tbody>
+</table>
+<p>{% note tip 不要处理我的文章 %}<br>如果你不想你的文章被处理，你可以将 Front-Matter 中的<code>layout:</code> 设为 <code>false</code> 。<br>{% endnote %}</p>
+<h3 id="文件名称">文件名称</h3><p>Hexo 默认以标题做为文件名称，但您可编辑 <code>new_post_name</code> 参数来改变默认的文件名称，举例来说，设为 <code>:year-:month-:day-:title.md</code> 可让您更方便的通过日期来管理文章。</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:title</code></td>
+<td>标题（小写，空格将会被替换为短杠）</td>
+</tr>
+<tr>
+<td><code>:year</code></td>
+<td>建立的年份，比如， <code>2015</code></td>
+</tr>
+<tr>
+<td><code>:month</code></td>
+<td>建立的月份（有前导零），比如， <code>04</code></td>
+</tr>
+<tr>
+<td><code>:i_month</code></td>
+<td>建立的月份（无前导零），比如， <code>4</code></td>
+</tr>
+<tr>
+<td><code>:day</code></td>
+<td>建立的日期（有前导零），比如， <code>07</code></td>
+</tr>
+<tr>
+<td><code>:i_day</code></td>
+<td>建立的日期（无前导零），比如， <code>7</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="草稿">草稿</h3><p>刚刚提到了 Hexo 的一种特殊布局：<code>draft</code>，这种布局在建立时会被保存到 <code>source/_drafts</code> 文件夹，您可通过 <code>publish</code> 命令将草稿移动到 <code>source/_posts</code> 文件夹，该命令的使用方式与 <code>new</code> 十分类似，您也可在命令中指定 <code>layout</code> 来指定布局。</p>
+<pre><code class="bash">$ hexo publish [layout] &lt;title&gt;
+</code></pre>
+<p>草稿默认不会显示在页面中，您可在执行时加上 <code>--draft</code> 参数，或是把 <code>render_drafts</code> 参数设为 <code>true</code> 来预览草稿。</p>
+<h2 id="模版（Scaffold）">模版（Scaffold）</h2><p>在新建文章时，Hexo 会根据 <code>scaffolds</code> 文件夹内相对应的文件来建立文件，例如：</p>
+<pre><code class="bash">$ hexo new photo <span class="string">"My Gallery"</span>
+</code></pre>
+<p>在执行这行指令时，Hexo 会尝试在 <code>scaffolds</code> 文件夹中寻找 <code>photo.md</code>，并根据其内容建立文章，以下是您可以在模版中使用的变量：</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>layout</code></td>
+<td>布局</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>标题</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>文件建立日期</td>
+</tr>
+</tbody>
+</table>
