@@ -113,8 +113,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/ciitw7kpi000o0tsj751h2tz9/">
-                未命名
+              <a class="post-title-link" href="/2015/sdasd/">
+                前端记录
               </a>
             
           
@@ -127,13 +127,32 @@
         </span>
 
         
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/查询/">查询</a>
+
+              
+              
+
+            
+          </span>
+        
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/ciitw7kpi000o0tsj751h2tz9/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciitw7kpi000o0tsj751h2tz9/"></span>
+            <a href="/2015/sdasd/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/sdasd/"></span>
             </a>
           </span>
           
@@ -148,13 +167,23 @@
 
       
         
-          <p>Using context and childContext in React</p>
-
+          <p>记录遇到的一些问题和解决方法，和一些技巧。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/sdasd/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
       
 
       
@@ -179,8 +208,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/ciitw0d4i000c0tsjsnxs5hoh/">
-                未命名
+              <a class="post-title-link" href="/2015/reusable-components/">
+                React 重用组件
               </a>
             
           
@@ -189,17 +218,36 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-12-31
+          发表于 2015-11-29
         </span>
 
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/React/">React</a>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/ciitw0d4i000c0tsjsnxs5hoh/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciitw0d4i000c0tsjsnxs5hoh/"></span>
+            <a href="/2015/reusable-components/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/reusable-components/"></span>
             </a>
           </span>
           
@@ -214,228 +262,23 @@
 
       
         
-          <p>Webpack 官网入门</p>
-<p><a href="http://webpack.github.io/docs/motivation.html" target="_blank" rel="external">地址</a></p>
-<h1 id="作用">作用</h1><p>现在的网站都朝着 web app 发展：</p>
-<ul>
-<li>页面中越来越多的 JavaScript。</li>
-<li>可以在现在浏览器做更多事情。</li>
-<li>更少的整个页面重载，尽管页面中的代码更多了。</li>
-</ul>
-<p>这些原因导致了在客户端存在大量代码！</p>
-<p>太大的代码库需要进行组织。Module 系统能让你将代码库分隔为不同模块。</p>
-<h2 id="MODULE_SYSTEM_STYLES">MODULE SYSTEM STYLES</h2><p>这里有几种标准，定义模块之间如何依赖和导出值：</p>
-<ul>
-<li><code>&lt;script&gt;</code> 标签 (无 module system)</li>
-<li>CommonJS</li>
-<li>AMD 和它的一些方言</li>
-<li>ES6 modules</li>
-<li>更多</li>
-</ul>
-<h3 id="&lt;script&gt;_标签"><code>&lt;script&gt;</code> 标签</h3><p>如果你不使用 module system 那么你会使用这种方式模块化处理你的代码库。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;script src=<span class="string">"module1.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"module2.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"libraryA.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"module3.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>Module 导出一个接口到全局对象，即 <code>window</code> 对象。Modules 可以依赖通过全局对象访问该接口。</p>
-<p>常见的问题：</p>
-<ul>
-<li>全局对象之间冲突</li>
-<li>加载的顺序是非常重要的</li>
-<li>需要由开发者解决 modules/libraries 之间的依赖</li>
-<li>在大型项目中列表过长导致难以管理</li>
-</ul>
-<h3 id="CommonJS:同步_require">CommonJS:同步 <code>require</code></h3><p>这种方式使用同步的 <code>require</code> 方法加载依赖和返回一个 exported interface。module 可以通过添加一个属性到 <code>exports</code> 对象进行指定 exports，或者设置 <code>module.exports</code> 的值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">"module"</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">"../file.js"</span>);</span><br><span class="line">exports.doStuff = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="built_in">module</span>.exports = someValue;</span><br></pre></td></tr></table></figure>
-<p>这被用在 <code>node.js</code> 的服务端。</p>
-<p>优点</p>
-<ul>
-<li>服务端 modules 可以重用</li>
-<li>有大量的 module 使用这种方式 (npm)</li>
-<li>非常简单易用</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>堵塞调用不适合在网络使用，网络请求是异步的。</li>
-<li>多个 module 的 require 不是并行的。</li>
-</ul>
-<p>实现</p>
-<p><a href="https://nodejs.org/en/" target="_blank" rel="external">node.js</a> 服务端<br><a href="">browserify</a><br><a href="">modules-webmake</a><br><a href="">wreq</a> 客户端</p>
-<h3 id="AMD:asynchronous_require">AMD:asynchronous require</h3><p><a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="external">Asynchronous Module Definition</a></p>
-<p>其它 module 系统 (浏览器方面) 同步 <code>require</code> (CommonJs) 时会有一些问题，现在来介绍一个异步加载的版本 (和定义 modules 和导出值的方式):</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">require</span>([<span class="string">"module"</span>, <span class="string">"../file"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">module, file</span>) </span>&#123; <span class="comment">/* ... */</span> &#125;);</span><br><span class="line">define(<span class="string">"mymodule"</span>, [<span class="string">"dep1"</span>, <span class="string">"dep2"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">d1, d2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> someExportedValue;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>优点：</p>
-<ul>
-<li>适合网络使用的异步加载方式</li>
-<li>多个模块之间并行加载</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>代码开销大，相对较难阅读和书写。</li>
-<li>看起来像某种变通方法。</li>
-</ul>
-<p>实现：</p>
-<ul>
-<li>require.js 客户端</li>
-<li>curl 客户端</li>
-</ul>
-<p>了解更多 <a href="http://webpack.github.io/docs/commonjs.html" target="_blank" rel="external">CommonJs</a> 和 <a href="http://webpack.github.io/docs/amd.html" target="_blank" rel="external">AMD</a>。</p>
-<h3 id="ES6_modules">ES6 modules</h3><p>EcmaScript6 添加了一些语言构造方法到 JavaScript，形成了另一个 module system。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"jquery"</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">doStuff</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">module</span> <span class="string">"localModule"</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>优点</p>
-<ul>
-<li>静态分析非常简单</li>
-<li>作为 ES 标准，面向未来。</li>
-</ul>
-<p>不足</p>
-<ul>
-<li>浏览器原生支持还需要时间</li>
-<li>提供这种方式的模块太少</li>
-</ul>
-<h3 id="中立的解决方案">中立的解决方案</h3><p>让开发者自行选择 module 方式。让已有的代码正常工作，也能简单的添加自定义加载 module 方式。</p>
-<h2 id="传输">传输</h2><p>Modules 应该在客户端执行，因此它们必须从服务器传输到浏览器。</p>
-<p>这里有两个传递 modules 的方式：</p>
-<ul>
-<li>每个 module 对应 1 个 request</li>
-<li>所有 modules 合并到一个 request</li>
-</ul>
-<p>这两种方式都是可以使用的，但存在优先级：</p>
-<p>1 requrest 对应一个 module：</p>
-<ul>
-<li>优点：只用传输需要的 modules</li>
-<li>不足：过多 request 意味着大量开销</li>
-<li>不足：减慢应用程序启动时间，因为太多请求。</li>
-</ul>
-<p>所有 modules 合并在一个 request：</p>
-<p>优点：最少的 request 开销，最少的延迟<br>不足：不需要的 modules 也同时被传输</p>
-<h3 id="分块传输">分块传输</h3><p>获取这两种方式之间的长处是更灵活的传输方式并且效果更好。</p>
-<p>在编译所有模块时，分割所有 modules set 到多个更小 batches(chunk)。</p>
-<p>我们会得到更多更小的请求，Module Chunk 不需要被初始化，只有需要时才被请求。</p>
-<p>初始化的请求不会返回所有代码库因此更小。</p>
-<h2 id="为什么只有_JavaScript？">为什么只有 JavaScript？</h2><p>为什么 module system 只能帮助开发者处理 JavaScript？还有很多静态资源需要处理：</p>
-<ul>
-<li>样式表</li>
-<li>图片</li>
-<li>web 字体</li>
-<li>html 模版</li>
-<li>等等</li>
-</ul>
-<p>还有其它</p>
-<ul>
-<li>coffeescript → JavaScript</li>
-<li>less stylesheets → css stylesheets</li>
-<li>jade templates → javascript which generates html</li>
-<li>i18n files → something</li>
-<li>等等。</li>
-</ul>
-<p>它们应该可以简单的加载:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">require("./style.css");</span><br><span class="line">require("./style.less");</span><br><span class="line">require("./template.jade");</span><br><span class="line">require("./image.png");</span><br></pre></td></tr></table></figure>
-<h2 id="STATIC_ANALYSIS">STATIC ANALYSIS</h2><p>当编译所有 module 时会尝试进行静态分析找到所有依赖。</p>
-<p>传统方式只能简单的查找不能通过表达式，但 <code>require(&quot;./template/&quot; + templateName + &quot;.jade&quot;)</code> 也是一种常用的构造方式却不支持。</p>
-<p>许多链接库的依赖写法风格都不一样，有的写法相当怪异。</p>
-<h3 id="策略">策略</h3><p>智能解析可以保证大部分现有的代码可以运行。如果开发者使用一些怪异的写法那么它会尝试找到最兼容的解决方案。</p>
-<h1 id="为什么又需要另一个_module_打包工具？">为什么又需要另一个 module 打包工具？</h1><p>已有的 module 打包工具不适合对较大的项目使用 (较大的单页面应用程序)。最重要的原因是对于代码打包工具来说代码分割和静态资源应该可以通过模块化完美结合。</p>
-<p>作者尝试了所有现有的打包工具，但都无法同时满足这些条件。</p>
-<h2 id="目标">目标</h2><ul>
-<li>分割文件依赖树结构分配到不同块，根据需求加载内容。</li>
-<li>保持快速的初始加载时间</li>
-<li>每个静态资源都可以通当作 module 加载</li>
-<li>可以将第三方链接裤整合成 module</li>
-<li>能够自定义几乎所有的 module bundler 部分</li>
-<li>适用于大型项目</li>
-</ul>
-<h2 id="webpack_有什么不同？">webpack 有什么不同？</h2><h3 id="Code_Splitting">Code Splitting</h3><p>webpack 在依赖关系树中有两种类型的依赖：同步和异步。异步依赖意作为分割点将资源分割成不同 chunk，之后 chunk tree 会优化，文件会被每个关联的 chunk 触发。</p>
-<h3 id="Loaders">Loaders</h3><p>webpack 只能处理本地的 JavaScript，但 Loader 可以被用做转换其它资源到 JavaScript，因此所有资源都可以当作模块加载。</p>
-<h3 id="智能解析">智能解析</h3><p>webpack 可以智能解析几乎所有的第三方库。它甚至能根据这样的表达时解析依赖 <code>require(&quot;./templates/&quot; + name + &quot;.jade&quot;)</code>。它也能出来大部分常用的 module 方式 CommonJS 和 AMD。</p>
-<h3 id="Plugin_system">Plugin system</h3><p>webpack 拥有丰富的插件系统。大部分内置的功能都依赖于插件系统，它让你根据需要自定义 webpack 和作为开源代码分发常用组件。</p>
-<h1 id="使用_Loader">使用 Loader</h1><h2 id="什么是_Loader？">什么是 Loader？</h2><p>Loader 可以对应用在应用程序的资源进行转换。它们是一个 function (运行在 Node.js),把资源文件的来源作为参数传递给该 function 然后返回一个新的来源。</p>
-<p>例如，你可以使用 loader 告诉 webpack 如何加载 CoffeeScript 或 JSX。</p>
-<h3 id="Loader_的功能">Loader 的功能</h3><ul>
-<li>Loader 可以链式使用。它们以管道的形式对资源应用。最后的 Loader 预期会返回 JavaScript，其它的可以返回任意格式 (将会传递给下一个 Loader)。</li>
-<li>Loader 可以是同步或异步的。</li>
-<li>Loader 运行在 node.js 并且能做这里能做的任意事情。</li>
-<li>Loader 接受查询参数。这样可以被用做传递配置信息给 loader。</li>
-<li>可以在配置文件通过 extension/RegExps 绑定 Loader。</li>
-<li>Loader 可以通过 <code>npm</code> 发布和安装。</li>
-<li>正常的 module 出了 export <code>main</code> 之外还可以额外的 export loader，通过在 <code>package.json</code> 的 <code>loader</code> 配置。</li>
-<li>Loader 可以访问配置文件。</li>
-<li>Plguin 可以给定 loader 更多功能。</li>
-<li>Loader 可以触发任意额外的文件。</li>
-<li><a href="http://webpack.github.io/docs/loaders.html" target="_blank" rel="external">等等</a></li>
-</ul>
-<h2 id="解析_Loader">解析 Loader</h2><p>解析 Loader 的方式<a href="">与 module 类似</a>。loader module 期望需要导出一个 function 并且可以兼容 node.js 和 JavaScript。大部分情况由你管理着 npm 中的 loader，但你也可以作为文件在你的 app 加载 loader。</p>
-<h3 id="引用_loader">引用 loader</h3><p>按照惯例，虽然不是必须的，loader 通常被命名为 <code>XXX-loader</code>，<code>XXX</code> 是上下文名称，例如 <code>json-loader</code>。</p>
-<p>你可以使用全名进行引用 (<code>json-loader</code>) 或者缩略名 (<code>json</code>)。</p>
-<p>Loader 的命名约定和优先权搜索顺序是定义在 webpack 配置 API  resolveLoader.moduleTemplates 中。</p>
-<p>Loader 命名约定可能很有用，特别在 <code>require()</code> 声明内引用；见下面的用法章节。</p>
-<h3 id="安装_loader">安装 loader</h3><p>如果 loader 可以在 npm 使用，你可以通过下面方式安装：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ npm install xxx-loader --save</span><br></pre></td></tr></table></figure>
-<p>或</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ npm install xxx-loader --save-dev</span><br></pre></td></tr></table></figure>
-<h2 id="用法">用法</h2><p>这里有几种用法：</p>
-<ul>
-<li>明确使用 <code>require</code> 声明</li>
-<li>通过配置文件配置</li>
-<li>通过 CLI</li>
-</ul>
-<h3 id="使用_require">使用 <code>require</code></h3><blockquote>
-<p>注意：避免使用这个方式，如果你的 script 打算与环境无关 (node.js 和 browser)。使用配置文件的公约来指定 loaders (见下章)。</p>
-</blockquote>
-<p>可以通过 <code>require</code> (或 <code>define</code>，<code>require.ensure</code> 等)声明指定 loader。只需要通过 <code>!</code> 分割每一个 loader。每一个部分都会按照当前目录解析。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">"./loader!./dir/file.txt"</span>);</span><br><span class="line"><span class="comment">// =&gt; 使用当前目录的 "loader.js" 转换</span></span><br><span class="line"><span class="comment">//   dir 目录的 "file.txt".</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">"jade!./template.jade"</span>);</span><br><span class="line"><span class="comment">// =&gt; 使用 "jade-loader" (通过 npm 安装到 "node_modules")</span></span><br><span class="line"><span class="comment">//    转换 "template.jade" 文件</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">"!style!css!less!bootstrap/less/bootstrap.less"</span>);</span><br><span class="line"><span class="comment">// =&gt; "bootstrap" 模块中 (通过 npm 安装) less 目录的文件 "bootstrap.less" 回通过 "less-loader" 转换。结果然后经过 "css-loader" 接着经过 style-less 转换。</span></span><br></pre></td></tr></table></figure>
-<h3 id="配置文件方式">配置文件方式</h3><p>你可以通过配置正则表达式绑定 loader：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        loaders: [</span><br><span class="line">            &#123; test: <span class="regexp">/\.jade$/</span>, loader: <span class="string">"jade"</span> &#125;,</span><br><span class="line">            <span class="comment">// =&gt; "jade" loader 会对 ".jade" 文件使用</span></span><br><span class="line"></span><br><span class="line">            &#123; test: <span class="regexp">/\.css$/</span>, loader: <span class="string">"style!css"</span> &#125;,</span><br><span class="line">            <span class="comment">// =&gt; "style" and "css" loader is used for ".css" files</span></span><br><span class="line">            <span class="comment">// Alternative syntax:</span></span><br><span class="line">            &#123; test: <span class="regexp">/\.css$/</span>, loaders: [<span class="string">"style"</span>, <span class="string">"css"</span>] &#125;,</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="CLI_方式">CLI 方式</h3><p>你可以通过 CLI 拓展绑定 loader：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ webpack --<span class="built_in">module</span>-bind jade --<span class="built_in">module</span>-bind <span class="string">'css=style!css'</span></span><br></pre></td></tr></table></figure>
-<p>这里使用 <code>jade</code> loader 操作 .jade 文件和使用 <code>style</code>,<code>css</code> loader 操作 .css 文件。</p>
-<h2 id="查询参数">查询参数</h2><p>Loader 可以通过查询字符串传递查询参数 (就像 web 一样)。查询字符串附加在 loader 的 <code>?</code> 后面，如 <code>url-loader?mimetype=image/png</code>。</p>
-<p>注意：查询字符串的格式由具体 loader 决定，请看 loader 的文档。大部分 loader 都接受正常的查询格式 (<code>?key=value&amp;key2=value2</code>) 和 JSON 对象 (<code>?{&quot;key&quot;:&quot;value&quot;,&quot;key2&quot;:&quot;value2&quot;}</code>)。</p>
-<h3 id="在_require">在 <code>require</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">"url-loader?mimetype=image/png!./file.png"</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="在配置文件">在配置文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123; test: <span class="regexp">/\.png$/</span>, loader: <span class="string">"url-loader?mimetype=image/png"</span> &#125;</span><br></pre></td></tr></table></figure>
-<p>或</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    test: <span class="regexp">/\.png$/</span>,</span><br><span class="line">    loader: <span class="string">"url-loader"</span>,</span><br><span class="line">    query: &#123; mimetype: <span class="string">"image/png"</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="CLI">CLI</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">webpack --<span class="built_in">module</span>-bind <span class="string">"png=url-loader?mimetype=image/png"</span></span><br></pre></td></tr></table></figure>
-<h1 id="使用_Plugins">使用 Plugins</h1><h2 id="内置的_plugin">内置的 plugin</h2><p>通过在 webpack 配置使用 plugin 属性可以使 plugin 包含在你的 module 中。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// webpack should be in the node_modules directory, install if not.</span></span><br><span class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">"webpack"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    plugins: [</span><br><span class="line">        <span class="keyword">new</span> webpack.ResolverPlugin([</span><br><span class="line">            <span class="keyword">new</span> webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(<span class="string">"bower.json"</span>, [<span class="string">"main"</span>])</span><br><span class="line">        ], [<span class="string">"normal"</span>, <span class="string">"loader"</span>])</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="其它_plugins">其它 plugins</h2><p>其它非内置 plugin 如果已经发布则可以通过 npm 安装，如果没有也可以通过其它方式：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">npm install component-webpack-plugin</span><br></pre></td></tr></table></figure>
-<p>然后这样使用：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> ComponentPlugin = <span class="built_in">require</span>(<span class="string">"component-webpack-plugin"</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    plugins: [</span><br><span class="line">        <span class="keyword">new</span> ComponentPlugin()</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="入门例子">入门例子</h1><blockquote>
-<p>webpack 将会为你的 entry file 分析对其它文件的依赖。这些文件 (称为 module) 也会被包含到你的 <code>bundle.js</code> 文件中。webpack 将会给每个 module 单独的 <code>id</code>，并通过 id 使保存所有在 <code>bundle.js</code> 中的文件方便的访问。只有 entry module 会在启动时执行。这个小型的 runtime 提供了 <code>require</code> function 并在需要时执行依赖关系。</p>
-</blockquote>
-<h2 id="第一个_Loader">第一个 Loader</h2><p>webpack 只能处理原生 JavaScript，因此我们需要 <code>css-loader</code> Loader 处理 CSS 文件。我们也需要 style-loader 在 CSS 文件应用样式。</p>
-<p>运行 <code>npm install css-loader style-loader</code> 安装 loader (需要安装在本地路径，不要使用 <code>-g</code> 参数)。</p>
-<p>通过将 Loader 的前缀传递给 module request，loader 会以管道形式处理。这些 loader 会以特定方式转换文件内容。这些转换完成后，最终会返回一个 JavaScript module 的结果。</p>
-<h2 id="绑定_Loader">绑定 Loader</h2><p>我们不想写太长的 requires <code>require(&quot;!style!css!./style.css&quot;);</code>。<br>我们可以灵活的绑定 extensions 到 loaders 因此我们只需要写 <code>require(&quot;./style.css&quot;);</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//1.12.9 版本运行失败，官网是 1.12.2 版本，未仔细查原因，已跳过。</span></span><br><span class="line">webpack ./entry.js bundle.js --<span class="built_in">module</span>-bind <span class="string">"css=style!css"</span></span><br></pre></td></tr></table></figure>
-<h2 id="配置文件">配置文件</h2><p>我们像将配置选项移动到配置文件：</p>
-<p>添加 webpack.config.js:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    entry: <span class="string">"./entry.js"</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: __dirname,</span><br><span class="line">        filename: <span class="string">"bundle.js"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">        loaders: [</span><br><span class="line">            &#123; test: <span class="regexp">/\.css$/</span>, loader: <span class="string">"style!css"</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>现在只需要运行</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">webpack</span><br></pre></td></tr></table></figure>
-<p>webpack 命令将会尝试在当前目录寻找 <code>webpack.config.js</code>。</p>
-<h2 id="美化输出">美化输出</h2><p>一些项目编译的输出内容可能很久，因此我们想显示一些进度条，和一些颜色。。</p>
-<p>我么可以这样做 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">webpack --progress --colors</span><br></pre></td></tr></table></figure>
-<h2 id="观察模式">观察模式</h2><p>我们不想每次更改之后手动重新编译。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">webpack --progress --colors --watch</span><br></pre></td></tr></table></figure>
-<p>webpack 可以缓存未更改的 module 和输出更改文件之间的差异。</p>
-<p>当使用 watch mode，webpack 安装 file watcher 到所有文件，它会在编译过程中被使用。如果触发任意更改，它会重新运行编译。当缓存是启用时，webpack 会在内存保持每个 module 并且如果它没发生更改会重新使用它。</p>
-<h2 id="开发服务器">开发服务器</h2><p>开发服务器甚至更好。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">npm install webpack-dev-server -g</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">webpack-dev-server --progress --colors</span><br></pre></td></tr></table></figure>
-<p>这样会绑定一个小型的 express 服务在 localhost:8080，这个服务让你访问静态资源文件以及 bundle。它会在 bundle 重新编译时 (socket.io) 自动更新浏览器页面。</p>
-<blockquote>
-<p>dev server 使用了 webpack 的 watch mode。它也防止 webpack 触发更新文件到磁盘，它仍然保持从内存提取生成的文件。</p>
-</blockquote>
-<h2 id="其它">其它</h2><h2 id="webpack_与_webpack-dev-server">webpack 与 webpack-dev-server</h2><p>在练习 entryponits 时，一直用的是 webpack-dev-server 命令，发现不会在目录下生成文件，却直接能在 locakhost:8080 直接使用编译后的文件。而把命令改成 webpack 后，发现在目录下生成了各自的文件。</p>
-<p>webpack.config.js</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	<span class="comment">// entry:"./entry.js",</span></span><br><span class="line">entry: &#123;</span><br><span class="line">    bundle1: <span class="string">'./entry.js'</span>,</span><br><span class="line">    bundle2: <span class="string">'./entry2.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: __dirname,</span><br><span class="line">    filename: <span class="string">'[name].js'</span> <span class="comment">// 模版基于上边 entry 的 key</span></span><br><span class="line">  &#125;,</span><br><span class="line">	<span class="comment">// output:&#123;</span></span><br><span class="line">	<span class="comment">// 	path:__dirname,</span></span><br><span class="line">	<span class="comment">// 	filename:"bundle.js"</span></span><br><span class="line">	<span class="comment">// &#125;,</span></span><br><span class="line">	<span class="built_in">module</span>:&#123;</span><br><span class="line">		loaders:[</span><br><span class="line">			&#123;test:<span class="regexp">/\.css$/</span>,loader:<span class="string">"style!css"</span>&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>使用 webpack-dev-server 时，每次更改 js 文件后，浏览器会自动刷新网站。</p>
-
+          <p>Prop Validation，Default Prop Values，Transferring Props: A Shortcut，Single Child，Mixins，ES6 Classes，Stateless Functions。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/reusable-components/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
       
 
       
@@ -460,8 +303,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/ciitw0d5k000k0tsj23okx64o/">
-                未命名
+              <a class="post-title-link" href="/2015/Reacttutorial/">
+                React 指南
               </a>
             
           
@@ -470,17 +313,36 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-12-31
+          发表于 2015-11-29
         </span>
 
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/React/">React</a>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/ciitw0d5k000k0tsj23okx64o/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciitw0d5k000k0tsj23okx64o/"></span>
+            <a href="/2015/Reacttutorial/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/Reacttutorial/"></span>
             </a>
           </span>
           
@@ -495,14 +357,23 @@
 
       
         
-          <p>专业词汇</p>
-<p>image sprites：将多张小图片合成一张大图片，用于减少 Web 请求数量。</p>
-
+          <p>一遍翻译一遍学的 React 官方指南。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/Reacttutorial/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/"> #React </a>
+          
+        </div>
       
 
       
@@ -527,8 +398,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/ciitw0d4h000b0tsjuhxd6ozx/">
-                未命名
+              <a class="post-title-link" href="/2015/FrontEndNavigation/">
+                前端 EXAMPLE 导航
               </a>
             
           
@@ -537,17 +408,36 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-12-31
+          发表于 2015-11-16
         </span>
 
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/其它/">其它</a>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/ciitw0d4h000b0tsjuhxd6ozx/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciitw0d4h000b0tsjuhxd6ozx/"></span>
+            <a href="/2015/FrontEndNavigation/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/FrontEndNavigation/"></span>
             </a>
           </span>
           
@@ -562,22 +452,23 @@
 
       
         
-          <h1 id="Webpack">Webpack</h1><h2 id="加载模块">加载模块</h2><p>webpack 兼容大部分加载模块的语法，如 require，import，</p>
-<h2 id="Loader">Loader</h2><p>在 config 的 module 字段，配置指定后缀的文件，并指定 Loader。在源代码中使用 import，require 时，遇到适配的后缀则指定给相应的 Loader 进行加载。</p>
-<p>可以通过 Loader 加载 less，jsx 等需要转换的文件。</p>
-<p>某种文件有多个 Loader 时，按顺序执行， Loader 执行完成后按照指定格式传递给下一个 Loader，在结尾的 Loader 会返回 JavaScript。例如加载 CSS，最后的 Loader 使用 <code>document.body.write</code> 向页面输出 CSS 内容。</p>
-<p>webpack 内置 JavaScript Loader，它也是以 plugin 的形式实现。Loader 可以通过 npm 下载和发布。</p>
-<h2 id="Web_Serve">Web Serve</h2><h2 id="部署策略">部署策略</h2><h3 id="分离第三方库和代码">分离第三方库和代码</h3><p>适用情况:单个 url 地址，相通 js 内容，避免更新第三方库。</p>
-<p>在 config 配置完成分离策略后，需要将分离的文件都引入 html，否则会报错。<br>这样做是为了避免更新网站后第三方库被重复下载。</p>
-<h3 id="多重入口">多重入口</h3><p>适用情况：多个 url 地址，不同的 js 内容。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">entry: &#123;</span><br><span class="line">  app: path.resolve(__dirname, <span class="string">'app/main.js'</span>),</span><br><span class="line">  mobile: path.resolve(__dirname, <span class="string">'app/mobile.js'</span>),</span><br><span class="line">  vendors: [<span class="string">'react'</span>] <span class="comment">// 其他库</span></span><br><span class="line">&#125;,</span><br><span class="line">output: &#123;</span><br><span class="line">  path: path.resolve(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">  filename: <span class="string">'[name].js'</span> <span class="comment">// 注意我们使用了变量</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>html 根据需要引入 js 文件。</p>
-
+          <p>项目导航。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/FrontEndNavigation/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
       
 
       
@@ -602,8 +493,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/ciitw2d7w000n0tsjw8wmfvl9/">
-                未命名
+              <a class="post-title-link" href="/2015/fontCSS/">
+                CSS
               </a>
             
           
@@ -612,17 +503,36 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-12-31
+          发表于 2015-11-14
         </span>
 
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/CSS/">CSS</a>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/ciitw2d7w000n0tsjw8wmfvl9/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciitw2d7w000n0tsjw8wmfvl9/"></span>
+            <a href="/2015/fontCSS/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/fontCSS/"></span>
             </a>
           </span>
           
@@ -637,55 +547,23 @@
 
       
         
-          <h1 id="Touchstonejs_Framework">Touchstonejs Framework</h1><h2 id="Touchstonejs_模块">Touchstonejs 模块</h2><p>scr 文件夹的 app.js 是项目的入口</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react/addons'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">	Container,</span><br><span class="line">	createApp,</span><br><span class="line">	UI,</span><br><span class="line">	View,</span><br><span class="line">	ViewManager</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'touchstonejs'</span>;</span><br></pre></td></tr></table></figure>
-<p>模块之间使用 <code>export.Container = Container</code> 等方式导出，使用 import 导入模块。</p>
-<p>。</p>
-<h3 id="Container">Container</h3><p>Container 是 touchstonejs 模块中的其它 nodemodule，一层套一层，app.js 是最顶层</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">title</span>&gt;</span>Container<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"example.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">h1</span>&gt;</span>Container<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">h2</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"https://github.com/JedWatson/react-container"</span>&gt;</span>View project on GitHub<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">h2</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- the example app is rendered into this div --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"app"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"hint"</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- put any hints about your component example here --&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"footer"</span>&gt;</span></span><br><span class="line">			Copyright &amp;copy; 2015 Jed Watson.</span><br><span class="line">		<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"common.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"example.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="createApp">createApp</h3><p>touchstonejs 模块的 index.js 中定义的一个函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createApp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> app = &#123;</span><br><span class="line">		navigationBars: &#123;&#125;,</span><br><span class="line">		viewManagers: &#123;&#125;,</span><br><span class="line">		transitionTo: <span class="function"><span class="keyword">function</span> <span class="title">transitionTo</span>(<span class="params">view, opts</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">var</span> vm = <span class="string">'__default'</span>;</span><br><span class="line">			view = view.split(<span class="string">':'</span>);</span><br><span class="line">			<span class="keyword">if</span> (view.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">				vm = view.shift();</span><br><span class="line">			&#125;</span><br><span class="line">			view = view[<span class="number">0</span>];</span><br><span class="line">			app.viewManagers[vm].transitionTo(view, opts);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		childContextTypes: &#123;</span><br><span class="line">			app: React.PropTypes.object</span><br><span class="line">		&#125;,</span><br><span class="line">		getChildContext: <span class="function"><span class="keyword">function</span> <span class="title">getChildContext</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> &#123;</span><br><span class="line">				app: app</span><br><span class="line">			&#125;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="UI">UI</h3><p>是 touchstonejs 模块中 UI 文件夹的一系列模块。</p>
-<p>包含框架所有的 UI 定义。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> UI = <span class="built_in">require</span>(<span class="string">'./ui'</span>);</span><br><span class="line"></span><br><span class="line">exports.UI = UI;</span><br></pre></td></tr></table></figure>
-<h3 id="View">View</h3><p>touchstonejs 模块中 <code>./core/View.js</code> 模块。</p>
-<p>在这个模块中定义了一个 <code>View</code> 组件，传给 createClass 的对象由三个属性：</p>
-<p>displayName：在调试信息中使用，JSX 会自动设置该值。<br>propTypes：定义了两个属性，并且指定两个属性是必须的。<br>render：抛出一个异常，说明不能直接使用这个组件 (不能直接使用 <code>ReactDOM.render()</code> 渲染)。</p>
-<p>这样是无法调用 View 的：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  <span class="keyword">var</span> TextRender = React.createClass(&#123;</span><br><span class="line">    render:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'TextRender should not be rendered directly.'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> IAMBOX = React.createClass(&#123;</span><br><span class="line">    render:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="keyword">return</span>(</span><br><span class="line">          <span class="xml"><span class="tag">&lt;<span class="title">TextRender</span> /&gt;</span></span><br><span class="line">        )</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  ReactDOM.render(</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="title">IAMBOX</span> /&gt;</span>,</span><br><span class="line">    document.getElementById('example')</span><br><span class="line">);</span></span><br></pre></td></tr></table></figure>
-<h3 id="ViewManager">ViewManager</h3><p>touchstonejs 模块中 <code>./core/ViewManager.js</code> 模块。</p>
-<p>该模块用到了三个新模块</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> blacklist = <span class="built_in">require</span>(<span class="string">'blacklist'</span>);</span><br><span class="line"><span class="keyword">var</span> classNames = <span class="built_in">require</span>(<span class="string">'classnames'</span>);</span><br><span class="line"><span class="keyword">var</span> ErrorView = <span class="built_in">require</span>(<span class="string">'./ErrorView'</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="blacklist">blacklist</h4><p>可以过滤键相同的对象，可以指定过滤那些对象：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someInput = &#123; a: <span class="number">1</span>, b: <span class="number">2</span>, c: <span class="number">3</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> blacklist = <span class="built_in">require</span>(<span class="string">'blacklist'</span>)</span><br><span class="line"></span><br><span class="line">blacklist(someInput, <span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line"><span class="comment">// =&gt; &#123; a: 1 &#125;</span></span><br><span class="line"></span><br><span class="line">blacklist(someInput, &#123;</span><br><span class="line">	a: <span class="literal">true</span>,   <span class="comment">// a will not be in the result</span></span><br><span class="line">	b: <span class="literal">false</span>,  <span class="comment">// b will be in the result</span></span><br><span class="line">	c: <span class="number">1</span> &gt; <span class="number">2</span>   <span class="comment">// false, therefore c will be in the result</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// =&gt; &#123; b: 2, c: 3 &#125;</span></span><br></pre></td></tr></table></figure>
-<h4 id="classNames">classNames</h4><p>一个简单的 javascript 工具将类名组合到一起。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> classNames = <span class="built_in">require</span>(<span class="string">'classnames'</span>);</span><br><span class="line">classNames(<span class="string">'foo'</span>, <span class="string">'bar'</span>); <span class="comment">// =&gt; 'foo bar'</span></span><br></pre></td></tr></table></figure>
-<h4 id="ViewManager_如何管理_View">ViewManager 如何管理 View</h4><p>这是一段 ViewManager 管理 View 代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;div className=&#123;appWrapperClassName&#125;&gt;</span><br><span class="line">				<span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">className</span>=<span class="value">"device-silhouette hello"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">ViewManager</span> <span class="attribute">name</span>=<span class="value">"app"</span> <span class="attribute">defaultView</span>=<span class="value">"main"</span>&gt;</span></span><br><span class="line">						<span class="tag">&lt;<span class="title">View</span> <span class="attribute">name</span>=<span class="value">"main"</span> <span class="attribute">component</span>=<span class="value">&#123;MainViewController&#125;</span> /&gt;</span></span><br><span class="line">						<span class="tag">&lt;<span class="title">View</span> <span class="attribute">name</span>=<span class="value">"transitions-target-over"</span> <span class="attribute">component</span>=<span class="value">&#123;require('.</span>/<span class="attribute">views</span>/<span class="attribute">transitions-target-over</span>')&#125; /&gt;</span></span><br><span class="line">					<span class="tag">&lt;/<span class="title">ViewManager</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>通过 ViewManager 的 defalutView 属性指定默认显示的 View，要更改当前显示的 View，通过修改 ViewManager 的 <code>currentView</code> state。</p>
-<p>ViewManager 的初始化 state：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">getInitialState: <span class="function"><span class="keyword">function</span> <span class="title">getInitialState</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> &#123;</span><br><span class="line">			views: createViewsFromChildren(<span class="keyword">this</span>.props.children),<span class="comment">//遍历 children，即一系列 View。</span></span><br><span class="line">			currentView: <span class="keyword">this</span>.props.defaultView,</span><br><span class="line">			options: &#123;&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;,</span><br></pre></td></tr></table></figure>
-<p>在 View 的源代码中，只有简单的几个属性，没有其它渲染操作，并且 View 也不能独自渲染，那么 View 是如何显示的呢？</p>
-<p>是通过 ViewManager，在上面的 ViewManager 初始化的 state 中，有一个 <code>views</code> state，它的值是通过 <code>createViewsFromChildren()</code> 返回。在这个方法中遍历了 ViewManager 下所有 View，并生成一个对象，包含 <code>view</code> 的 name 属性，值是 <code>view</code> 对象本身，每个 View 对应一对 key／value 对。</p>
-<blockquote>
-<p>ViewManager 只会渲染 currentView，也就是每次只能显示一个 View。<br>更改 currentView 会使 ViewManager 重新渲染。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createViewsFromChildren</span>(<span class="params">children</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> views = &#123;&#125;;</span><br><span class="line">	React.Children.forEach(children, <span class="function"><span class="keyword">function</span> (<span class="params">view</span>) </span>&#123;</span><br><span class="line">		views[view.props.name] = view;</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="keyword">return</span> views;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个 state 会在 ViewManager 进行 render 时使用：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">render: <span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">var</span> viewContainer = <span class="keyword">this</span>.renderViewContainer(<span class="keyword">this</span>.state.currentView, &#123; viewProps: <span class="keyword">this</span>.state.currentViewProps &#125;);</span><br><span class="line"></span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p><code>this.renderViewContainer</code> 方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">renderViewContainer: <span class="function"><span class="keyword">function</span> <span class="title">renderViewContainer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> viewKey = <span class="keyword">this</span>.state.currentView;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//如果没有 currentView，返回一个空的 View，并说明没有 currentView</span></span><br><span class="line">		<span class="keyword">if</span> (!viewKey) &#123;</span><br><span class="line">			<span class="keyword">return</span> React.createElement(</span><br><span class="line">				ErrorView,</span><br><span class="line">				<span class="literal">null</span>,</span><br><span class="line">				React.createElement(</span><br><span class="line">					<span class="string">'span'</span>,</span><br><span class="line">					&#123; className: <span class="string">'ErrorView__heading'</span> &#125;,</span><br><span class="line">					<span class="string">'ViewManager: '</span>,</span><br><span class="line">					<span class="keyword">this</span>.props.name</span><br><span class="line">				),</span><br><span class="line">				React.createElement(</span><br><span class="line">					<span class="string">'span'</span>,</span><br><span class="line">					&#123; className: <span class="string">'ErrorView__text'</span> &#125;,</span><br><span class="line">					<span class="string">'Error: There is no current View.'</span></span><br><span class="line">				)</span><br><span class="line">			);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">var</span> view = <span class="keyword">this</span>.state.views[viewKey];</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//如果当前 view 不是有效 view，返回一个空的 View，并说明该 View 无效</span></span><br><span class="line">		<span class="keyword">if</span> (!view || !view.props.component) &#123;</span><br><span class="line">			<span class="keyword">return</span> React.createElement(</span><br><span class="line">				ErrorView,</span><br><span class="line">				<span class="literal">null</span>,</span><br><span class="line">				React.createElement(</span><br><span class="line">					<span class="string">'span'</span>,</span><br><span class="line">					&#123; className: <span class="string">'ErrorView__heading'</span> &#125;,</span><br><span class="line">					<span class="string">'ViewManager: "'</span>,</span><br><span class="line">					<span class="keyword">this</span>.props.name,</span><br><span class="line">					<span class="string">'"'</span></span><br><span class="line">				),</span><br><span class="line">				React.createElement(</span><br><span class="line">					<span class="string">'span'</span>,</span><br><span class="line">					&#123; className: <span class="string">'ErrorView__text'</span> &#125;,</span><br><span class="line">					<span class="string">'The View "'</span>,</span><br><span class="line">					viewKey,</span><br><span class="line">					<span class="string">'" is invalid.'</span></span><br><span class="line">				)</span><br><span class="line">			);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">var</span> options = <span class="keyword">this</span>.state.options || &#123;&#125;;</span><br><span class="line">		<span class="keyword">var</span> viewClassName = classNames(<span class="string">'View View--'</span> + viewKey, view.props.className);</span><br><span class="line">		<span class="keyword">var</span> ViewComponent = view.props.component;</span><br><span class="line">		<span class="keyword">var</span> viewProps = blacklist(view.props, <span class="string">'component'</span>, <span class="string">'className'</span>);</span><br><span class="line">		_extends(viewProps, options.viewProps);</span><br><span class="line">		<span class="keyword">var</span> viewElement = React.createElement(ViewComponent, viewProps);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.__lastRenderedView !== viewKey) &#123;</span><br><span class="line">			<span class="comment">// console.log('initialising view ' + viewKey + ' with options', options);</span></span><br><span class="line">			<span class="keyword">if</span> (viewElement.type.navigationBar &amp;&amp; viewElement.type.getNavigation) &#123;</span><br><span class="line">				<span class="keyword">var</span> app = <span class="keyword">this</span>.context.app;</span><br><span class="line">				<span class="keyword">var</span> transition = options.transition;</span><br><span class="line">				<span class="keyword">if</span> (app.viewManagerInTransition) &#123;</span><br><span class="line">					transition = app.viewManagerInTransition.activeTransitionOptions.transition;</span><br><span class="line">				&#125;</span><br><span class="line">				setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">			app.navigationBars[viewElement.type.navigationBar].updateWithTransition(viewElement.type.getNavigation(viewProps, app), transition);</span><br><span class="line">				&#125;, <span class="number">0</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">this</span>.__lastRenderedView = viewKey;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> React.createElement(</span><br><span class="line">			ViewContainer,</span><br><span class="line">			&#123; className: viewClassName, key: viewKey &#125;,</span><br><span class="line">			viewElement</span><br><span class="line">		);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="React-createElement">React.createElement</h3><p>ViewManager 的 render 使用了 <code>React.createElement</code> 作为返回值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ReactElement createElement(</span><br><span class="line">  string/ReactClass type,</span><br><span class="line">  [object props],</span><br><span class="line">  [children ...]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>根据给定的类型创建和返回一个 <code>ReactElement</code>。类型参数可以是 html 标签名 (div,span, 等) 或者是 <code>ReactClass</code> (通过 createClass 创建)。</p>
-<h1 id="过程中遇到的新东西">过程中遇到的新东西</h1><p>在 View 模块中遇到，用来直接在对象上定义属性，或者修改已有属性的值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(exports, <span class="string">'__esModule'</span>, &#123;</span><br><span class="line">	value: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
+          <p>W3SCHOOL 的基础 CSS 教程。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/fontCSS/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
       
 
       
@@ -710,8 +588,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/ciitw0d4k000d0tsja0mh21jk/">
-                未命名
+              <a class="post-title-link" href="/2015/JavaScript-Object/">
+                JavaScript Object
               </a>
             
           
@@ -720,17 +598,36 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-12-31
+          发表于 2015-11-09
         </span>
 
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/JavaScript/">JavaScript</a>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/ciitw0d4k000d0tsja0mh21jk/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciitw0d4k000d0tsja0mh21jk/"></span>
+            <a href="/2015/JavaScript-Object/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/JavaScript-Object/"></span>
             </a>
           </span>
           
@@ -745,34 +642,23 @@
 
       
         
-          <h1 id="React_模块的依赖问题。">React 模块的依赖问题。</h1><p>最近在使用 React，开发 React 模块时遇到文件依赖的问题。有时组件需要一些自定义样式，和其它一些 js 文件，那么如何把这些文件整合到组件中，使这个组件简单的用起来呢？</p>
-<p>下面参考了一些 Touchstonejs 的做法。</p>
-<p><code>touchstonejs-starter</code> 是实际的 demo 项目，在这里调用一系列 <code>touchstonejs</code> 组件。</p>
-<h2 id="js_依赖问题">js 依赖问题</h2><p><code>touchstonejs</code>，是 touchstonejs 组件模块，<code>lib</code> 中，存放组件的实现文件，和一些依赖文件，例如 <code>core</code> 中的 <code>animation.js</code>，<code>ErrorView.js</code>。</p>
-<p>这些 js 文件是通过 <code>browserify</code> 整合到一起的，<code>browserity</code> 让我们可以在 js 文件中使用 <code>require(&#39;react-container&#39;);</code> 解决依赖问题，只需要在命令行输入 <code>browserify main.js -o bundle.js</code>，<code>browserify</code> 就会解析这些文件的依赖，并生成一个新的文件。配合 <code>watchify</code> 使用,文件发生变化时自动生成新文件。</p>
-<p>最终这些 js 文件整合到 <code>touchstonejs</code> 根目录的 <code>index.js</code> 中。在 index.js 导出了几个模块，分别是 <code>exports.UI = UI;``exports.Mixins = Mixins;``exports.Container = Container;``exports.ViewManager = ViewManager;``exports.View = View;``exports.Link = Link;``exports.animation = animation;</code>。</p>
-<p><code>touchstonejs</code> 在 package.json 指定了 <code>&quot;main&quot;: &quot;lib/index.js&quot;</code> ，在 <code>touchstonejs-starter</code> 的 <code>app.js</code> 是这样使用的 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">	Container,</span><br><span class="line">	createApp,</span><br><span class="line">	UI,</span><br><span class="line">	View,</span><br><span class="line">	ViewManager</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'touchstonejs'</span>;</span><br></pre></td></tr></table></figure>
-<p>其中一段使用了 <code>ViewManager</code> 和 <code>View</code>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> MainViewController = React.createClass(&#123;</span><br><span class="line">	render () &#123;</span><br><span class="line">		<span class="keyword">return</span> (</span><br><span class="line">			<span class="xml"><span class="tag">&lt;<span class="title">Container</span>&gt;</span></span><br><span class="line"></span><br><span class="line">				<span class="tag">&lt;<span class="title">UI.NavigationBar</span> <span class="attribute">name</span>=<span class="value">"main"</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="title">ViewManager</span> <span class="attribute">name</span>=<span class="value">"main"</span> <span class="attribute">defaultView</span>=<span class="value">"tabs"</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">View</span> <span class="attribute">name</span>=<span class="value">"tabs"</span> <span class="attribute">component</span>=<span class="value">&#123;TabViewController&#125;</span> /&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">View</span> <span class="attribute">name</span>=<span class="value">"privacy"</span> <span class="attribute">component</span>=<span class="value">&#123;require('.</span>/<span class="attribute">views</span>/<span class="attribute">privacy</span>')&#125; /&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">View</span> <span class="attribute">name</span>=<span class="value">"faqsections"</span> <span class="attribute">component</span>=<span class="value">&#123;require('.</span>/<span class="attribute">views</span>/<span class="attribute">faqsections</span>')&#125; /&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">View</span> <span class="attribute">name</span>=<span class="value">"faqs"</span> <span class="attribute">component</span>=<span class="value">&#123;require('.</span>/<span class="attribute">views</span>/<span class="attribute">faqs</span>')&#125; /&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="title">View</span> <span class="attribute">name</span>=<span class="value">"gjj-balance"</span> <span class="attribute">component</span>=<span class="value">&#123;require('.</span>/<span class="attribute">views</span>/<span class="attribute">gjj-balance</span>')&#125; /&gt;</span></span><br><span class="line">					</span><br><span class="line">				<span class="tag">&lt;/<span class="title">ViewManager</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="title">Container</span>&gt;</span></span><br><span class="line">		)</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="CSS_依赖问题">CSS 依赖问题</h2><p>还是在 <code>touchstonejs</code> 中，在 <code>less</code> 文件夹存放 CSS 样式文件。其中有四个文件夹 components,core,mixins,utils。存放组件需要的样式文件和通用样式，然后在 less 下把样式，最终整合的文件是 <code>touchstone.less</code> 文件,这个文件内容是这样的：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// TouchstoneJS</span></span><br><span class="line"><span class="comment">// ==============================</span></span><br><span class="line"></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"components"</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">"core"</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">"mixins"</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">"utils"</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">"variables"</span>;</span><br></pre></td></tr></table></figure>
-<p>打开这些文件后发现也是对其它文件的引用，这些文件组合了文件夹中的样式，通过一级一级的引用解决 CSS 依赖。</p>
-<p>最终在 <code>touchstonejs-starter</code> 的 <code>css/app.less</code> 找到了对 <code>touchstone.less</code> 的引用：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"../../node_modules/touchstonejs/less/touchstone.less"</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="gulp">gulp</h2><p>js 和 css 的依赖写好后，还需要 build。</p>
-<p>browserify：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">browserify main.js -o bundle.js</span><br></pre></td></tr></table></figure>
-<p>less：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">lessc styles.less &gt; styles.css</span><br></pre></td></tr></table></figure>
-<p>但是这样做太麻烦，touchstonejs 是在 gulp 这样使用的：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">buildApp</span> (<span class="params">entries, transforms, dest, watch</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> opts = xtend(watch &amp;&amp; watchify.args, &#123;</span><br><span class="line">			entries: entries,</span><br><span class="line">			debug: process.env.NODE_ENV !== <span class="string">'production'</span></span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">var</span> app = browserify(opts);</span><br><span class="line">		<span class="keyword">var</span> react = browserify();</span><br><span class="line"></span><br><span class="line">		transforms.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">transform</span>) </span>&#123;</span><br><span class="line">			app.transform(transform);</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		[<span class="string">'react'</span>, <span class="string">'react/addons'</span>].forEach(<span class="function"><span class="keyword">function</span> (<span class="params">pkg</span>) </span>&#123;</span><br><span class="line">			app.exclude(pkg);</span><br><span class="line">			react.require(pkg);</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (watch) &#123;</span><br><span class="line">			watchBundle(app, <span class="string">'app.js'</span>, dest);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> merge(doBundle(react, <span class="string">'react.js'</span>, dest), doBundle(app, <span class="string">'app.js'</span>, dest));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">plumb</span> (<span class="params">src, transforms, dest</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> stream = gulp.src(src);</span><br><span class="line"></span><br><span class="line">		transforms.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">transform</span>) </span>&#123;</span><br><span class="line">			stream = stream.pipe(transform());</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (dest) &#123;</span><br><span class="line">			stream = stream.pipe(gulp.dest(dest))</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> stream.pipe(connect.reload());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'less'</span>, plumb.bind(<span class="literal">null</span>, <span class="string">'src/css/app.less'</span>, [less], wwwDir + <span class="string">'/css'</span>));</span><br><span class="line"></span><br><span class="line">ulp.task(<span class="string">'scripts'</span>, buildApp.bind(<span class="literal">null</span>, [<span class="string">'./src/js/app.js'</span>], [babelifyTransform, brfs], wwwDir + <span class="string">'/js'</span>, <span class="literal">false</span>));</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
+          <p>详细讲解如何创建 Object，操作 Object，和 Prototype 的使用。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/JavaScript-Object/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
       
 
       
@@ -797,8 +683,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/ciitw0d4l000e0tsjyh7oo3d3/">
-                未命名
+              <a class="post-title-link" href="/2015/WebDevelopJavaScript/">
+                JavaScript 基础知识
               </a>
             
           
@@ -807,17 +693,36 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-12-31
+          发表于 2015-11-08
         </span>
 
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/JavaScript/">JavaScript</a>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/ciitw0d4l000e0tsjyh7oo3d3/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciitw0d4l000e0tsjyh7oo3d3/"></span>
+            <a href="/2015/WebDevelopJavaScript/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/WebDevelopJavaScript/"></span>
             </a>
           </span>
           
@@ -832,74 +737,23 @@
 
       
         
-          <p><a href="http://jamesknelson.com/the-six-things-you-need-to-know-about-babel-6/" target="_blank" rel="external">原文地址</a></p>
-<h1 id="关于_Babel_6_你需要知道的_6_件事情">关于 Babel 6 你需要知道的 6 件事情</h1><blockquote>
-<p>Over the last year, Babel has become the go-to tool for transforming ES2015 and JSX into boring old JavaScript. But seemingly overnight, Babel 6 changed everything. The babel package was deprecated, running babel doesn’t actually transform ES2015 to ES5, and the old docs have basically disappeared.</p>
-</blockquote>
-<p>在过去的一年，Babel 变成了最流行的将 ES2015 和 JSX 转换成旧 JavaScript 的工具。但似乎一夜之间，Babel 6 更改了一切。<code>babel</code> 包已经被移除，运行 babel 不会将 ES2015 转换成 ES5，并且旧的文档基本已经消失了。</p>
-<blockquote>
-<p>But Don’t Panic! To get you up to speed, I’ve put together a brief list of the six most important changes. And if you need a little more help, my Complete Guide to ES6 with Babel 6 will walk you through the practical details; including the CLI, Webpack, Mocha and Gulp.</p>
-</blockquote>
-<p>但是不要惊慌，为了让你加快速度，我挑出了 6 个最重要的更改进行简要说明，如果你需要更多帮助，我的 <a href="http://jamesknelson.com/the-complete-guide-to-es6-with-babel-6/" target="_blank" rel="external">Complete Guide to ES6 with Babel 6</a> 会讲解实用的详细细节；包含 CLI，Webpack，Mocha 和 Gulp。</p>
-<blockquote>
-<p>1.The <code>babel</code> npm package no longer exists. Instead, Babel has been split into multiple packages:</p>
-<ul>
-<li>babel-cli, which contains the babel command line interface</li>
-<li>babel-core, which contains the Node API and require hook</li>
-<li>babel-polyfill, which when required, sets you up with a full ES2015-ish environment</li>
-</ul>
-<p>To avoid accidental conflicts, make sure to remove any previous Babel packages like babel, babel-core, etc. from your package.json, and then npm uninstall them.</p>
-</blockquote>
-<p>1.<strong><code>babel</code> npm 包已经不存在</strong>。作为替代，Babel 已经分割成多个包：</p>
-<p><a href="">babel-cli</a>,包含 babel 命令行接口。<br><a href="">babel-core</a>，包含 Node API 和 <code>require</code> hook<br><a href="">babel-polyfill</a>,当 <code>require</code> d (漏了内容？)，为你设置 ES2015 需要的完整环境。</p>
-<p>为了避免冲突，请你在 <code>package.json</code> 移除之前的 babel 包例如 babel,babel-core 等。然后运行 <code>npm uninstall</code> 卸载它们。</p>
-<blockquote>
-<p>2.Every single transform is now a plugin, including ES2015 and JSX. And as a result, nothing happens by default – so you’ll need to install the correct plugins. Actually, ES2015 consists of about 20 plugins. You don’t want to install each of these manually, which is why Babel has added presets.</p>
-</blockquote>
-<p>2.<strong>每个单独的转换现在都以 plugin 形式出现，包括 ES2015 和 JSX</strong>。因此，默认的 bable 什么都不发生 － 因此你需要正确的安装 plguin。但实际上，ES2015 包含了大约 20 个plugin。你不会想手动安装它们的，因此 Babel 添加了 presets 的概念。</p>
-<blockquote>
-<p>3.Babel 6 adds presets, or collections of plugins. And it provides two presets for the functionality provided by default in Babel 5:</p>
-<p>  <code>npm install babel-preset-es2015 babel-preset-react --save-dev</code></p>
-<p>But even after installing a preset, you need to tell Babel to use it.</p>
-</blockquote>
-<p>3.<strong>Babel 6 增加了 preset，或 plugin 集合</strong>。它提供了两个 Babel 5 默认提供的功能：</p>
-<p><code>npm install babel-preset-es2015 babel-preset-react --save-dev</code></p>
-<p>但即使安装了 preset 之后，你仍需要告诉 Babel 使用它。</p>
-<blockquote>
-<p>4.<code>.babelrc</code> is kinda a necessity now. Since Babel no longer uses ES2015 and React transforms by default, the require hook used by gulpfile.babel.js and mocha will not actually do anything. Fix this by creating a .babelrc in your project directory:</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [<span class="string">"es2015"</span>, <span class="string">"react"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>.babelrc</code> 现在是<strong>有点必要性</strong>，自从 Babel 默认不具备 ES2015 和 React 转换，<code>gulpfile.babel.js</code> 和 <a href="">mocha</a> 中通过 <code>require</code> hook 使用 Babel，不会进行任何操作。要修复这个问题请在你的项目目录创建一个 <code>.babelrc</code> 文件，包含这些内容：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [<span class="string">"es2015"</span>, <span class="string">"react"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>5.Stage 0 is now a separate preset, not an option. Previously, you enabled ES7 features like decorators and async/await by passing —stage 0 to babel. Now, you install and load the babel-preset-stage-0 package.</p>
-</blockquote>
-<p><strong>Stage 0 现在是单独的 preset，不再是一个选项</strong>。以前，通过传递 —stage 0 给 babel 启用 ES7 的功能例如修饰符和 <code>async</code>/<code>await</code>。现在你需要安装和加载 <code>babel-preset-stage-0</code> 包。</p>
-<blockquote>
-<p>6.The —external-helpers option is now a plugin. To avoid repeated inclusion of Babel’s helper functions, you’ll now need to install and apply the babel-plugin-transform-runtime package, and then require the babel-runtime package within your code (yes, even if you’re using the polyfill).</p>
-</blockquote>
-<p><code>-external-helpers</code> 选项现在是 plugin。为了避免反复包含 Babel 的 helper function，你现在需要安装和应用 <code>babel-plugin-transform-runtime</code> 包，然后 require <code>babel-runtion</code> 包到你的代码中 (是的，即使你在使用 polyfill)。</p>
-<blockquote>
-<p>And there you have it, you’re now up to speed on Babel 6’s packages, plugins, presets and options! But what about Webpack? What about passing presets via the CLI? I’ve tried to keep this list as succinct as possible, and to do so I’ve kept my Complete Guide to ES6 with Babel 6 as a separate series — covering the CLI, Webpack, Gulp and Mocha.</p>
-</blockquote>
-<p>现在已经快速了解了 Babel 6 的包，plugin，preset 和 option！但关于 Webpack 呢？如何通过 CLI 传递 preset？为了保持文章的简洁风格，我把这些内容写在了 <a href="http://jamesknelson.com/the-complete-guide-to-es6-with-babel-6/" target="_blank" rel="external">Complete Guide to ES6 with Babel6</a> 作为独立的系列 - 包含 CLI，Webpack，Gulp 和 Mocha。</p>
-<h2 id="But_everything_moves_so_fast-_How_will_I_keep_up_to_date?">But everything moves so fast. How will I keep up to date?</h2><p>但一切进展都那么快，我该如何才能跟上脚步呢？</p>
-<blockquote>
-<p>With ES2015 already standardised, there is no argument that Babel is a necessary tool for most JavaScript developers. But does the thought of integrating an entire platform for transforming JavaScript into every new project worry you a little bit? The speed at which the JavaScript ecosystem is growing can feel demoralising. But luckily, it doesn’t have to be that way!</p>
-</blockquote>
-<p>ES2015 已经实现标准化，没有参数的 Babel 对大部分开发者来说是必要的工具。但整合整个平台把 JavaScript 转换到新的项目你是否会有一点担心？JavaScript 生态系统的快速增长会然人感觉到有些泄气。但很幸运，不用这样做。</p>
-<blockquote>
-<p>The thing is that for most projects, scaling is a problem you’d like to have. And until you’re at that point, you’ll be more productive by focusing on a few important tools than trying to grasp everything.</p>
-</blockquote>
-<p>对于大部分项目都会遇到的伸缩问题，在你遇到这个问题时你会明白，通过关注一个最小最重要的工具你将更有效率，而不是试图抓住一切。</p>
-<p>One way to keep focussed on the tools which count is to join my Newsletter. You’ll receive one e-mail every couple weeks with information tailored to small apps using React. And in return for your e-mail, you’ll immediately receive three bonus print-optimised PDF cheatsheets – on React (see preview), ES6 and JavaScript promises. All for free!</p>
-<p>One more thing – I love hearing your questions, offers and opinions. If you have something to say, leave a comment or send me an e-mail at james@jamesknelson.com. I’m looking forward to hearing from you!</p>
-
+          <p>一些 JavaScript 的基础知识。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/WebDevelopJavaScript/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
       
 
       
@@ -924,8 +778,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/ciitw0d4m000f0tsjulbwo0zt/">
-                未命名
+              <a class="post-title-link" href="/2015/CocoaReactiveFrameworkOverview/">
+                CocoaReactive Framework Overview
               </a>
             
           
@@ -934,17 +788,36 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-12-31
+          发表于 2015-10-15
         </span>
 
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/翻译/">翻译</a>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/ciitw0d4m000f0tsjulbwo0zt/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciitw0d4m000f0tsjulbwo0zt/"></span>
+            <a href="/2015/CocoaReactiveFrameworkOverview/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/CocoaReactiveFrameworkOverview/"></span>
             </a>
           </span>
           
@@ -959,39 +832,25 @@
 
       
         
-          <h1 id="Bootstrap_学习">Bootstrap 学习</h1><p>Bootstrap 是移动设备优先的，为了确保适当的绘制和触屏缩放，需要在 <head> 之中添加 viewport 元数据标签。</head></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=device-width, initial-scale=1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>设置 meta 属性为 <code>user-scalable=no</code> 可以禁止用户使用缩放功能，使网站看起来更像原生应用的感觉。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="布局容器">布局容器</h2><p>Bootstrap 需要为页面内容和栅格系统包裹一个 .container 容器。我们提供了两个作此用处的类。注意，由于 padding 等属性的原因，这两种 容器类不能互相嵌套。</p>
-<p>.container 类用于固定宽度并支持响应式布局的容器。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container"</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>.container-fluid 类用于 100% 宽度，占据全部视口（viewport）的容器。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"container-fluid"</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="栅格系统">栅格系统</h2><p>Bootstrap 提供了一套响应式、移动设备优先的流式栅格系统，随着屏幕或视口（viewport）尺寸的增加，系统会自动分为最多12列。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">	超小屏幕 手机 (<span class="tag">&lt;<span class="title">768px)</span>	小屏幕 平板 (≥<span class="attribute">768px</span>)	中等屏幕 桌面显示器 (≥<span class="attribute">992px</span>)	大屏幕 大桌面显示器 (≥<span class="attribute">1200px</span>)</span><br><span class="line">栅格系统行为	总是水平排列	开始是堆叠在一起的，当大于这些阈值时将变为水平排列<span class="attribute">C</span></span><br><span class="line"><span class="attribute">.container</span> 最大宽度	<span class="attribute">None</span> （自动）	<span class="attribute">750px</span>	<span class="attribute">970px</span>	<span class="attribute">1170px</span></span><br><span class="line">类前缀	<span class="attribute">.col-xs-</span>	<span class="attribute">.col-sm-</span>	<span class="attribute">.col-md-</span>	<span class="attribute">.col-lg-</span></span><br><span class="line">列（<span class="attribute">column</span>）数	<span class="attribute">12</span></span><br><span class="line">最大列（<span class="attribute">column</span>）宽	自动	~<span class="attribute">62px</span>	~<span class="attribute">81px</span>	~<span class="attribute">97px</span></span><br><span class="line">槽（<span class="attribute">gutter</span>）宽	<span class="attribute">30px</span> （每列左右均有 <span class="attribute">15px</span>）</span><br><span class="line">可嵌套	是</span><br><span class="line">偏移（<span class="attribute">Offsets</span>）	是</span><br><span class="line">列排序	是</span></span><br></pre></td></tr></table></figure>
-<h3 id="col-md-*">col-md-*</h3><p><code>.col-md-1</code> 所占 container 的单位，还有 <code>col-md-2</code> <code>col-md-3</code> <code>col-md-4</code> 等,只能位于 .row 内。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-1"</span>&gt;</span>.col-md-1<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-8"</span>&gt;</span>.col-md-8<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-4"</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-4"</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-4"</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-4"</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-6"</span>&gt;</span>.col-md-6<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-6"</span>&gt;</span>.col-md-6<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="混合使用_col-*-*">混合使用 <code>col-*-*</code></h3><p>当对 cloum 使用多个 <code>col-*-*</code> class 时，系统会根据不同的屏幕尺寸选择对应样式。</p>
-<p>例如一个 row 中有两个 cloum，分别使用了 <code>.col-xs-12 .col-sm-6 .col-md-8</code> 和 <code>.col-xs-6 .col-md-4</code>。</p>
-<p>在超小屏幕，占据的宽度分别是 12 和 6。<br>在小屏幕，占据的宽度分别是 6 和 6。<br>在大屏幕，变成了 8 和 4。</p>
-<h3 id="响应式列重置">响应式列重置</h3><p>即便有上面给出的四组栅格class，你也不免会碰到一些问题，例如，在某些阈值时，某些列可能会出现比别的列高的情况。为了克服这一问题，建议联合使用 .clearfix 和 响应式工具类。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-xs-6 col-sm-3"</span>&gt;</span>.col-xs-6 .col-sm-3<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-xs-6 col-sm-3"</span>&gt;</span>.col-xs-6 .col-sm-3<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- Add the extra clearfix for only the required viewport --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"clearfix visible-xs-block"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-xs-6 col-sm-3"</span>&gt;</span>.col-xs-6 .col-sm-3<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-xs-6 col-sm-3"</span>&gt;</span>.col-xs-6 .col-sm-3<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>第三个 cloum 重置了位置，避免出现不对齐的情况。</p>
-<p>如图 <img src="./1.png" alt=""></p>
-<p>除了列在分界点清除响应， 您可能需要 重置偏移, 后推或前拉某个列。请看此<a href="http://v3.bootcss.com/examples/grid/" target="_blank" rel="external">栅格实例</a>。</p>
-<h3 id="列偏移">列偏移</h3><p>使用 <code>.col-md-offset-*</code> 类可以将列向右侧偏移。这些类实际是通过使用 * 选择器为当前元素增加了左侧的边距（margin）。例如，<code>.col-md-offset-4</code> 类将 <code>.col-md-4</code> 元素向右侧偏移了4个列（column）的宽度。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-4"</span>&gt;</span>.col-md-4<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-4 col-md-offset-4"</span>&gt;</span>.col-md-4 .col-md-offset-4<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-3 col-md-offset-3"</span>&gt;</span>.col-md-3 .col-md-offset-3<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-3 col-md-offset-3"</span>&gt;</span>.col-md-3 .col-md-offset-3<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-6 col-md-offset-3"</span>&gt;</span>.col-md-6 .col-md-offset-3<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="嵌套列">嵌套列</h3><p>为了使用内置的栅格系统将内容再次嵌套，可以通过添加一个新的 .row 元素和一系列 <code>.col-sm-*</code> 元素到已经存在的 <code>.col-sm-*</code> 元素内。被嵌套的行（row）所包含的列（column）的个数不能超过12（其实，没有要求你必须占满12列）。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-sm-9"</span>&gt;</span></span><br><span class="line">    Level 1: .col-sm-9</span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-xs-8 col-sm-6"</span>&gt;</span></span><br><span class="line">        Level 2: .col-xs-8 .col-sm-6</span><br><span class="line">      <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-xs-4 col-sm-6"</span>&gt;</span></span><br><span class="line">        Level 2: .col-xs-4 .col-sm-6</span><br><span class="line">      <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="列排序">列排序</h3><p>通过使用 <code>.col-md-push-*</code> 和 <code>.col-md-pull-*</code> 类就可以很容易的改变列（column）的顺序。</p>
-<p>例如用在不用屏幕设备上的排序。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-9 col-md-push-3"</span>&gt;</span>.col-md-9 .col-md-push-3<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-md-3 col-md-pull-9"</span>&gt;</span>.col-md-3 .col-md-pull-9<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <p>没校验，暂时放上来。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/CocoaReactiveFrameworkOverview/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CocoaReactive/"> #CocoaReactive </a>
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
       
 
       
@@ -1016,8 +875,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/ciitw0d4r000h0tsjh5htloc4/">
-                未命名
+              <a class="post-title-link" href="/2015/SwiftClosureFunction/">
+                Swift 的 Closure 和 Function
               </a>
             
           
@@ -1026,17 +885,44 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-12-31
+          发表于 2015-09-25
         </span>
 
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/Swift/">Swift</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/Swift/备忘/">备忘</a>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/ciitw0d4r000h0tsjh5htloc4/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciitw0d4r000h0tsjh5htloc4/"></span>
+            <a href="/2015/SwiftClosureFunction/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/SwiftClosureFunction/"></span>
             </a>
           </span>
           
@@ -1051,21 +937,23 @@
 
       
         
-          <p>CSS 问题记录</p>
-<h2 id="垂直居中布局">垂直居中布局</h2><h2 id="透明度被继承问题">透明度被继承问题</h2><p>解决：添加一个相同位置的 Div，其中一个没背景颜色，另一个有背景颜色并且有透明度。</p>
-<h2 id="LESS_伪类的继承">LESS 伪类的继承</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.Confirm-BTNBASE &#123;</span><br><span class="line">        &amp;:active&#123;</span><br><span class="line">          background: #d4d4d4;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">.btn1&#123;</span><br><span class="line">	.Confirm-BTNBASE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>$(“li”).css(“display”,”block”);<br>$(“#icons li”).css(“width”,”500px”);<br>$(“li”).each(function(){<br>    $(this).append(‘<span>‘+$(this).prop(‘className’)+’</span>‘);<br>});</p>
-<h2 id="React_动画效果">React 动画效果</h2><p>就是使用 ReactCSSTransitionGroup，通过简单的配置后，可以在 React 组件进入和消失时自动读取自定义的 CSS 效果。</p>
-<p><a href="http://air-2.local:57057/Dash/nwfpfmid/facebook.github.io/react/docs/animation.html#//dash_ref_6/Section/High%2Dlevel%20API%3A%20ReactCSSTransitionGroup/0" target="_blank" rel="external">link</a></p>
-<p>可能是 ReactCSSTransitionGroup</p>
-<p>ReactCSSTransitionGroup is based on ReactTransitionGroup and is an easy way to perform CSS transitions and animations when a React component enters or leaves the DOM. It’s inspired by the excellent ng-animate library.</p>
-<p>动画效果是如何实现的？纯 CSS？还是配合 JS，还是 React 的方式 (直接通过 state 删除 html)？</p>
-
+          <p>在学 ReactiveCocoa 时发现源代码大量用到 Closure 和 Function，这里记录一些知识点，方便日后查询。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/SwiftClosureFunction/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
       
 
       
@@ -1090,8 +978,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/ciitw0d4s000i0tsj7gg2l8d4/">
-                未命名
+              <a class="post-title-link" href="/2015/Objective-C-Block/">
+                Objective-C 的 Block
               </a>
             
           
@@ -1100,17 +988,44 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-12-31
+          发表于 2015-08-30
         </span>
 
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/Objective-C/">Objective-C</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/Objective-C/备忘/">备忘</a>
+
+              
+              
+
+            
+          </span>
         
 
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/ciitw0d4s000i0tsj7gg2l8d4/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciitw0d4s000i0tsj7gg2l8d4/"></span>
+            <a href="/2015/Objective-C-Block/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/Objective-C-Block/"></span>
             </a>
           </span>
           
@@ -1125,15 +1040,23 @@
 
       
         
-          <p>一些用 CSS 实现的特别效果：</p>
-<p>淘宝首页上的活动提示，类似聊天对话框一样在左边有尖角的样式。</p>
-<p>原理是设置元素 <code>border-style:solid</code>，然后设置 <code>border-widtd:6px 6px 6px 0</code>，width 和 height 设置为 0,即可获取三角形内容，然后调整位置使它位于主框左边。<br>如果要实现三角形的边框效果，需要多设置一个不同颜色的三角形，放置在另一个三角形的下方。</p>
-
+          <p>官网的 block 翻译和一些 block 使用过程的记录</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/Objective-C-Block/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
 
     <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
       
 
       
@@ -1151,7 +1074,7 @@
 
   
   <div class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
   </div>
 
 
@@ -1185,7 +1108,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
