@@ -1,9 +1,0 @@
-<h2 id="title:_資產資料夾">title: 資產資料夾</h2><p>資產（Asset）代表 <code>source</code> 資料夾中除了文章以外的所有檔案，例如圖片、CSS、JS 檔案等。Hexo 提供了一種更方便管理 Asset 的設定：<code>post_asset_folder</code>。</p>
-<pre><code class="yaml">post_asset_folder: true
-</code></pre>
-<p>當您開啟 <code>post_asset_folder</code> 設定後，在建立檔案時，Hexo 會自動建立一個與文章同名的資料夾，您可以把與該文章相關的所有資產都放到那個資料夾，如此一來，您便可以更方便的使用資產。</p>
-<h2 id="標籤外掛">標籤外掛</h2><p>Hexo 3 新增了幾個外掛，讓您更方便的在文章內引用資產。</p>
-<pre><code><span class="collection">{% asset_path slug %}</span>
-<span class="collection">{% asset_img slug <span class="collection">[title]</span> %}</span>
-<span class="collection">{% asset_link slug <span class="collection">[title]</span> %}</span>
-</code></pre>

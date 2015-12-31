@@ -1,9 +1,0 @@
-<h2 id="title:_資料檔案">title: 資料檔案</h2><p>有時您可能需要在主題中使用某些資料，而這些資料並不在文章內，或是想要重複使用，那麼您可以考慮使用 Hexo 3 新增的「資料檔案」功能。此功能會載入 <code>source/_data</code> 內的 YAML 或 JSON 檔案，如此一來您便能在網站中使用。</p>
-<p>舉例來說，在 <code>source/_data</code> 資料夾中新增 <code>menu.yml</code> 檔案：</p>
-<pre><code class="yaml">Home: /&#10;Gallery: /gallery/&#10;Archives: /archives/
-</code></pre>
-<p>您就能在模板中使用這些資料：</p>
-<pre><code><span class="xml"></span><span class="template_tag">{% <span class="keyword">for</span> link <span class="keyword">in</span> site.data.menu %}</span><span class="xml">
-  <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"</span></span></span><span class="variable">{{ link }}</span><span class="xml"><span class="tag"><span class="value">"</span>&gt;</span></span><span class="variable">{{ loop.key }}</span><span class="xml"><span class="tag">&lt;/<span class="title">a</span>&gt;</span>
-</span><span class="template_tag">{% <span class="keyword">endfor</span> %}</span><span class="xml"></span>
-</code></pre>
