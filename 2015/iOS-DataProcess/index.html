@@ -1,162 +1,954 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-<head prefix="og: http://ogp.me/ns#">
-  <meta charset="utf-8">
-  <title>iOS 数据操作 | Humyang</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2015/iOS-DataProcess/index.html">
-  <!-- Alternative links -->
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
   
-  <!-- Icon -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
-  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
-  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
-  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
-  <meta name="msapplication-TileColor" content="#2f83cd">
-  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
-  <!-- CSS -->
-  <!-- build:css build/css/navy.css -->
-  <link rel="stylesheet" href="/css/navy.css" type="text/css">
-  <!-- endbuild -->
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <!-- RSS -->
-  <link rel="alternative" href="/atom.xml" title="Humyang" type="application/atom+xml">
-  <!-- Open Graph -->
-  <meta name="description" content="记录了 iOS 中数据操作相关的知识点，包括 SandBox 的概念，XML 数据处理，JSON 数据处理，SQLite 增删改查，plist 文件。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS 数据操作">
-<meta property="og:url" content="http://yoursite.com/2015/iOS-DataProcess/index.html">
-<meta property="og:site_name" content="Humyang">
-<meta property="og:description" content="记录了 iOS 中数据操作相关的知识点，包括 SandBox 的概念，XML 数据处理，JSON 数据处理，SQLite 增删改查，plist 文件。">
-<meta property="og:image" content="http://yoursite.com/./CreateEntity.png">
-<meta property="og:updated_time" content="2015-11-25T15:39:30.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS 数据操作">
-<meta name="twitter:description" content="记录了 iOS 中数据操作相关的知识点，包括 SandBox 的概念，XML 数据处理，JSON 数据处理，SQLite 增删改查，plist 文件。">
-  <!-- Swiftype -->
-  <meta name="st:title" content="iOS 数据操作">
-  <!-- Google Analytics -->
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> iOS 数据操作 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              iOS 数据操作
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-08
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/备忘/">备忘</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/iOS-DataProcess/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/iOS-DataProcess/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>记录了 iOS 中数据操作相关的知识点，包括 SandBox 的概念，XML 数据处理，JSON 数据处理，SQLite 增删改查，plist 文件。</p>
+<a id="more"></a>
+<h1 id="iOS_数据操作">iOS 数据操作</h1><h2 id="SandBox">SandBox</h2><p><a href="https://developer.apple.com/library/mac/documentation/Security/Conceptual/AppSandboxDesignGuide/AppSandboxInDepth/AppSandboxInDepth.html" target="_blank" rel="external">文章地址</a></p>
+<p>沙盒概念使用于 iOS 和 OS X，当应用程序采用了 SandBox，你的应用程序可以访问以下目录：</p>
+<ul>
+<li><strong>应用程序容器目录。</strong> 应用程序第一次运行时，操作系统会为你的应用程序创建特定的目录，并且只属于你的应用程序，它称为<em>容器</em>。你的应用程序可以不受约束的读写容器目录。</li>
+<li><strong>应用程序分组的容器目录。</strong> 沙盒应用程序可以指定让它访问一个或多个应用程序分组的容器目录，在分配的权限的应用程序之间彼此可以互相访问。</li>
+<li><strong>用户指定的文件。</strong> 拥有沙盒的应用程序可以访问明确由用户打开的文件或拖动到应用程序中的文件，无论文件处于什么位置。</li>
+<li><strong>相关联的文件。</strong> 跟应用程序同名但是拓展名称不相同的文件。使用情景见下方。</li>
+<li><strong>临时目录，命令行工具目录，指定的全局可读目录。</strong></li>
+</ul>
+<blockquote>
+<p>相关联的文件的使用情景：In both scenarios, you must make a small change to the application’s Info.plist file. Your app should already declare a Document Types (CFBundleDocumentTypes) array that declares the file types your app can open.</p>
+<p>For each file type dictionary in that array, if that file type should be treated as a potentially related type for open and save purposes, add the key NSIsRelatedItemType with a boolean value of YES.（<a href="http://stackoverflow.com/questions/13178285/where-can-i-find-more-information-about-the-related-items-feature-for-sandboxe" target="_blank" rel="external">http://stackoverflow.com/</a>）</p>
+</blockquote>
+<h2 id="写出文件">写出文件</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">		<span class="keyword">var</span> sp = 	<span class="type">NSSearchPathForDirectoriesInDomains</span>(<span class="type">NSSearchPathDirectory</span>.<span class="type">DocumentDirectory</span>, <span class="type">NSSearchPathDomainMask</span>.<span class="type">AllDomainsMask</span>, <span class="literal">true</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> sp.<span class="built_in">count</span> &gt; <span class="number">0</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> url = <span class="type">NSURL</span>(fileURLWithPath: <span class="string">"<span class="subst">\(sp[<span class="number">0</span>])</span>/data.txt"</span>)</span><br><span class="line">            </span><br><span class="line"><span class="comment">//            println(url)</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">var</span> data = <span class="type">NSMutableData</span>()</span><br><span class="line">            </span><br><span class="line">            data.appendData(<span class="string">"Hello Swift\n"</span>.dataUsingEncoding(<span class="type">NSUTF8StringEncoding</span>, allowLossyConversion: <span class="literal">true</span>)!)</span><br><span class="line">            </span><br><span class="line">            data.writeToFile(url!.path!, atomically: <span class="literal">true</span>)</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="读取文件">读取文件</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//            两种加载文件方式</span></span><br><span class="line">            <span class="keyword">var</span> <span class="type">Loaddata</span> = <span class="type">NSData</span>(contentsOfFile: url!.path!)</span><br><span class="line">            <span class="keyword">var</span> str = <span class="type">NSString</span>(data: data, encoding: <span class="type">NSUTF8StringEncoding</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">var</span> str1 = <span class="type">NSString</span>(contentsOfURL: url!, encoding: <span class="type">NSUTF8StringEncoding</span>, error: <span class="literal">nil</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">println</span>(<span class="string">"load data : <span class="subst">\(str)</span> and <span class="subst">\(str1)</span>"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="应用程序首选项数据">应用程序首选项数据</h2><p>应用程序首选项数据可以方便的保存一些较小的数据，它不能存储很大的数据。</p>
+<p>它以 key/value 方式存储数据，所以特别简单快捷。</p>
+<h3 id="存储首选项数据">存储首选项数据</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> inputText: <span class="type">UITextView</span>!</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">saveBtn</span><span class="params">(sender: AnyObject)</span></span> &#123;</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">var</span> ud = <span class="type">NSUserDefaults</span>.standardUserDefaults()</span><br><span class="line">       </span><br><span class="line">       ud.setObject(inputText.text, forKey: <span class="string">"data"</span>)</span><br><span class="line">       </span><br><span class="line">       <span class="built_in">println</span>(<span class="string">"Saved"</span>)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="读取首选项数据">读取首选项数据</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> inputText: <span class="type">UITextView</span>!</span><br><span class="line">   </span><br><span class="line">   <span class="comment">//定义变量</span></span><br><span class="line">   <span class="keyword">var</span> ud:<span class="type">NSUserDefaults</span>!</span><br><span class="line">   </span><br><span class="line">   <span class="preprocessor">@IBAction</span> <span class="func"><span class="keyword">func</span> <span class="title">saveBtn</span><span class="params">(sender: AnyObject)</span></span> &#123;</span><br><span class="line">       </span><br><span class="line">       <span class="comment">//设置</span></span><br><span class="line">       ud.setObject(inputText.text, forKey: <span class="string">"data"</span>)</span><br><span class="line">       </span><br><span class="line">       <span class="built_in">println</span>(<span class="string">"Saved"</span>)</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">       <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">       </span><br><span class="line">       <span class="comment">//初始化变量</span></span><br><span class="line">       ud = <span class="type">NSUserDefaults</span>.standardUserDefaults()</span><br><span class="line">       </span><br><span class="line">       <span class="comment">//读取并判断</span></span><br><span class="line">       <span class="keyword">if</span> <span class="keyword">let</span> value:<span class="type">AnyObject</span> = ud.objectForKey(<span class="string">"data"</span>)&#123;</span><br><span class="line">           inputText.text = value <span class="keyword">as</span>! <span class="type">String</span></span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">           inputText.text = <span class="string">"No value"</span></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="操作_XML_数据">操作 XML 数据</h2><h3 id="XMl_格式">XMl 格式</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;data&gt;</span><br><span class="line">    &lt;person age=<span class="string">"15"</span>&gt;<span class="type">ZhangSan</span>&lt;/person&gt;</span><br><span class="line">    &lt;person age=<span class="string">"2"</span>&gt;jike&lt;/person&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;a&gt;</span><br><span class="line">        &lt;b&gt;</span><br><span class="line">            &lt;<span class="built_in">c</span>&gt; data &lt;/<span class="built_in">c</span>&gt;</span><br><span class="line">        &lt;/b&gt;</span><br><span class="line">    &lt;/a&gt;</span><br><span class="line">&lt;/data&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="swift_解析_XML">swift 解析 XML</h3><p>类采用协议</p>
+<p><code>class ViewController: UIViewController,NSXMLParserDelegate</code></p>
+<p>在 viewDidLoad 读取数据，分配委托对象，并解析</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parser = <span class="type">NSXMLParser</span>(contentsOfURL: <span class="type">NSURL</span>(fileURLWithPath: 		</span><br><span class="line"><span class="type">NSBundle</span>.mainBundle().pathForResource(<span class="string">"data"</span>, ofType: <span class="string">"xml"</span>)!))</span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line">     <span class="comment">//分配委托对象，每个委托方法负责处理相应的功能，解析 XML 文件的顺序是按照从前往后</span></span><br><span class="line">     parser!.delegate = <span class="keyword">self</span></span><br><span class="line">      </span><br><span class="line">     <span class="comment">//开始解析</span></span><br><span class="line">     parser!.parse()</span><br></pre></td></tr></table></figure>
+<p>实现委托方法</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    <span class="keyword">var</span> currentNodeName:<span class="type">String</span>!</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//每个元素的处理</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject])</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//println(elementName)</span></span><br><span class="line">        currentNodeName = elementName</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> elementName == <span class="string">"person"</span>&#123;</span><br><span class="line">            </span><br><span class="line"><span class="comment">//            如果没有 age 属性，进行强制解包会出现异常，所以需要判断一下</span></span><br><span class="line"><span class="comment">//            var age: AnyObject? = attributeDict["age"]</span></span><br><span class="line">            </span><br><span class="line"><span class="comment">//            println("age : \(age!)")</span></span><br><span class="line">            </span><br><span class="line"><span class="comment">//            使用这个方式不会出现上面的问题</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">let</span> age: <span class="type">AnyObject</span> = attributeDict[<span class="string">"age"</span>]&#123;</span><br><span class="line">                <span class="built_in">println</span>(<span class="string">"age: <span class="subst">\(age)</span>"</span>)</span><br><span class="line">                </span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//每个节点内容</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">parser</span><span class="params">(parser: NSXMLParser, foundCharacters string: String?)</span></span> &#123;</span><br><span class="line">        <span class="comment">//println(string!)</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> str = string?.stringByTrimmingCharactersInSet(<span class="type">NSCharacterSet</span>.whitespaceAndNewlineCharacterSet())</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> str != <span class="string">""</span>&#123;</span><br><span class="line">            <span class="built_in">println</span>(<span class="string">"current Node <span class="subst">\(str!)</span>"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="JSON_数据">JSON 数据</h2><h3 id="格式">格式</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="string">"jike"</span>,&#123;<span class="string">"name"</span>:<span class="string">"ZhangSan"</span>,<span class="string">"age"</span>:<span class="number">20</span>&#125;]</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"language"</span>:<span class="string">"Java"</span>,<span class="string">"type"</span>:<span class="string">"static"</span>,<span class="string">"arr"</span>:[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解析_JSON">解析 JSON</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> json:<span class="type">AnyObject</span>? = <span class="type">NSJSONSerialization</span>.<span class="type">JSONObjectWithData</span>(<span class="type">NSData</span>(contentsOfURL: <span class="type">NSURL</span>(fileURLWithPath: <span class="type">NSBundle</span>.mainBundle().pathForResource(<span class="string">"obj"</span>, ofType: <span class="string">"json"</span>)!)!)!, options: <span class="type">NSJSONReadingOptions</span>.allZeros, error: <span class="literal">nil</span>)</span><br><span class="line">      </span><br><span class="line">      <span class="comment">//访问一个可选元素时，这种写法会自动拆包，如果不存在这个元素，则不会执行</span></span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">let</span> lang:<span class="type">AnyObject</span> = json?.objectForKey(<span class="string">"language"</span>)&#123;</span><br><span class="line">          <span class="built_in">println</span>(lang)</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Swift_生成_JSON">Swift 生成 JSON</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> dict = [<span class="string">"name"</span>:<span class="string">"jikexueyuan"</span>,<span class="string">"age"</span>:<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> jsonData = <span class="type">NSJSONSerialization</span>.dataWithJSONObject(dict, options: <span class="type">NSJSONWritingOptions</span>.allZeros, error: <span class="literal">nil</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> str = <span class="type">NSString</span>(data: jsonData!, encoding: <span class="type">NSUTF8StringEncoding</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">println</span>(str!)</span><br></pre></td></tr></table></figure>
+<h2 id="Plist数据">Plist数据</h2><h3 id="介绍">介绍</h3><p>是苹果平台的配置文件，基于 XML 格式，能方便的配合苹果产品使用。iOS 的 API 和 OS X 的 API可以方便的将 plist 数据读取成数组或者字典。</p>
+<p>Root 节点的类型可以为 Array 或者 Dictionary，决定了读取成字典还是数组。</p>
+<h3 id="创建和编写_plist_文件">创建和编写 plist 文件</h3><p>在 Xcode 中直接创建 Property list 文件，并手动编辑</p>
+<h3 id="解析_plist_文件">解析 plist 文件</h3><p>解析成数组</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = <span class="type">NSArray</span>(contentsOfURL: <span class="type">NSURL</span>(fileURLWithPath: <span class="type">NSBundle</span>.mainBundle().pathForResource(<span class="string">"arr"</span>, ofType: <span class="string">"plist"</span>)!)!)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">println</span>(arr![<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<p>解析成字典</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> dict = <span class="type">NSDictionary</span>(contentsOfURL: <span class="type">NSURL</span>(fileURLWithPath: <span class="type">NSBundle</span>.mainBundle().pathForResource(<span class="string">"dict"</span>, ofType: <span class="string">"plist"</span>)!)!)</span><br><span class="line">      </span><br><span class="line">      <span class="built_in">println</span>(dict)</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">var</span> name:<span class="type">String</span> = dict![<span class="string">"name"</span>] <span class="keyword">as</span>! <span class="type">String</span></span><br><span class="line">      </span><br><span class="line">      <span class="built_in">println</span>(<span class="string">"name: <span class="subst">\(name)</span>"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="CoreData">CoreData</h2><p>介绍 SQLite 以及如何创建一个使用 CoreData 的项目。</p>
+<p>iOS 在 CoreData 框架中封装了关于数据库存储的操作，所以可以节省许多编写 SQL 语句的时间。</p>
+<h3 id="SQLite">SQLite</h3><p>SQLite 是一个小型的关系型数据库</p>
+<p>SQLite 介绍：<a href="http://ivanzz.blog.51cto.com/6378766/1130544" target="_blank" rel="external">http://ivanzz.blog.51cto.com/6378766/1130544</a></p>
+<p>SQLite 是开源的，并且很轻量，所以很多客户端程序都内置了 SQLite 驱动，iOS 也内置了 SQLite 驱动。</p>
+<p>SQLite 可以方便的在本地存储一段数据。</p>
+<p><a href="https://www.sqlite.org/docs.html" target="_blank" rel="external">SQLite 文档</a></p>
+<h3 id="创建数据结构">创建数据结构</h3><p>1.在创建项目时勾选 Using CoreDate</p>
+<p>2.选中 UsingData.xcdatamodeld 进行编辑，如图 1-1</p>
+<p><strong>图 1-1：</strong> 编辑 UsingData.xcdatamodeld，注意新建的 Entity 的首字母需要大写<br><img src="./CreateEntity.png" alt=""></p>
+<h3 id="插入数据">插入数据</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> context = (<span class="type">UIApplication</span>.sharedApplication().delegate <span class="keyword">as</span>! <span class="type">AppDelegate</span>).managedObjectContext</span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line">      <span class="keyword">var</span> row:<span class="type">AnyObject</span> = <span class="type">NSEntityDescription</span>.insertNewObjectForEntityForName(<span class="string">"Users"</span>, inManagedObjectContext: context!)</span><br><span class="line">      </span><br><span class="line">      row.setValue(<span class="string">"jiekexueyuan"</span>, forKey: <span class="string">"name"</span>)</span><br><span class="line">      row.setValue(<span class="number">1</span>, forKey: <span class="string">"age"</span>)</span><br><span class="line">      </span><br><span class="line">      context?.save(<span class="literal">nil</span>)</span><br><span class="line">      </span><br><span class="line">      <span class="built_in">println</span>(<span class="string">"Run Here"</span>)</span><br></pre></td></tr></table></figure>
+<p>可以在 AppDelegate 中的委托 azy var persistentStoreCoordinator: NSPersistentStoreCoordinator 中 println(url) 输出数据库存放的位置，然后使用 SQLite 工具直接浏览操作数据库。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">lazy <span class="keyword">var</span> persistentStoreCoordinator: <span class="type">NSPersistentStoreCoordinator</span>? = &#123;</span><br><span class="line">        <span class="comment">// The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.</span></span><br><span class="line">        <span class="comment">// Create the coordinator and store</span></span><br><span class="line">        <span class="keyword">var</span> coordinator: <span class="type">NSPersistentStoreCoordinator</span>? = <span class="type">NSPersistentStoreCoordinator</span>(managedObjectModel: <span class="keyword">self</span>.managedObjectModel)</span><br><span class="line">        <span class="keyword">let</span> url = <span class="keyword">self</span>.applicationDocumentsDirectory.<span class="type">URLByAppendingPathComponent</span>(<span class="string">"UsingData.sqlite"</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">println</span>(url) <span class="comment">//打印数据库地址</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> error: <span class="type">NSError</span>? = <span class="literal">nil</span></span><br><span class="line">        <span class="keyword">var</span> failureReason = <span class="string">"There was an error creating or loading the application's saved data."</span></span><br><span class="line">        <span class="keyword">if</span> coordinator!.addPersistentStoreWithType(<span class="type">NSSQLiteStoreType</span>, configuration: <span class="literal">nil</span>, <span class="type">URL</span>: url, options: <span class="literal">nil</span>, error: &amp;error) == <span class="literal">nil</span> &#123;</span><br><span class="line">            coordinator = <span class="literal">nil</span></span><br><span class="line">            <span class="comment">// Report any error we got.</span></span><br><span class="line">            <span class="keyword">var</span> dict = [<span class="type">String</span>: <span class="type">AnyObject</span>]()</span><br><span class="line">            dict[<span class="type">NSLocalizedDescriptionKey</span>] = <span class="string">"Failed to initialize the application's saved data"</span></span><br><span class="line">            dict[<span class="type">NSLocalizedFailureReasonErrorKey</span>] = failureReason</span><br><span class="line">            dict[<span class="type">NSUnderlyingErrorKey</span>] = error</span><br><span class="line">            error = <span class="type">NSError</span>(domain: <span class="string">"YOUR_ERROR_DOMAIN"</span>, code: <span class="number">9999</span>, userInfo: dict)</span><br><span class="line">            <span class="comment">// Replace this with code to handle the error appropriately.</span></span><br><span class="line">            <span class="comment">// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.</span></span><br><span class="line">            <span class="type">NSLog</span>(<span class="string">"Unresolved error <span class="subst">\(error)</span>, <span class="subst">\(error!.userInfo)</span>"</span>)</span><br><span class="line">            abort()</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> coordinator</span><br><span class="line">    &#125;()</span><br></pre></td></tr></table></figure>
+<h3 id="读取数据">读取数据</h3><p>定义变量</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dataArr:<span class="type">Array</span>&lt;<span class="type">AnyObject</span>&gt; = []</span><br><span class="line"><span class="keyword">var</span> context:<span class="type">NSManagedObjectContext</span>!</span><br></pre></td></tr></table></figure>
+<p>读取数据</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">context = (<span class="type">UIApplication</span>.sharedApplication().delegate <span class="keyword">as</span>! <span class="type">AppDelegate</span>).managedObjectContext</span><br><span class="line">      </span><br><span class="line"><span class="keyword">var</span> f = <span class="type">NSFetchRequest</span>(entityName:<span class="string">"Users"</span>);</span><br><span class="line">      </span><br><span class="line">dataArr = context.executeFetchRequest(f, error: <span class="literal">nil</span>)!</span><br></pre></td></tr></table></figure>
+<p>渲染界面</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> cell = tableView.dequeueReusableCellWithIdentifier(<span class="string">"cell"</span>, forIndexPath: indexPath) <span class="keyword">as</span>! <span class="type">UITableViewCell</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Configure the cell...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> label = cell.viewWithTag(<span class="number">2</span>) <span class="keyword">as</span>! <span class="type">UILabel</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = dataArr[indexPath.row].valueForKey(<span class="string">"name"</span>) <span class="keyword">as</span>! <span class="type">String</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> age = dataArr[indexPath.row].valueForKey(<span class="string">"age"</span>)</span><br><span class="line"></span><br><span class="line">label.text = <span class="string">"name: <span class="subst">\(name)</span>,age:<span class="subst">\(age!)</span>"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> cell</span><br></pre></td></tr></table></figure>
+<h3 id="修改数据">修改数据</h3><p>从数据库获取指定数据</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//UsersTableViewController:</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">var</span> data = dataArr[indexPath.row] <span class="keyword">as</span>! <span class="type">NSManagedObject</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"><span class="comment">//vc.data 在 UserContentViewController.m 中定义：var data:NSManagedObject!</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> vc = storyboard?.instantiateViewControllerWithIdentifier(<span class="string">"UserContent"</span>) <span class="keyword">as</span>! <span class="type">UserContentViewController</span></span><br><span class="line">        </span><br><span class="line">        vc.data = data</span><br></pre></td></tr></table></figure>
+<p>将修改后的值保存到数据库中</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//UserContentViewController.m:</span></span><br><span class="line"></span><br><span class="line">		data.setValue(tfName.text, forKey: <span class="string">"name"</span>)</span><br><span class="line">       </span><br><span class="line">		data.setValue(tfAge.text.toInt(), forKey: <span class="string">"age"</span>)</span><br><span class="line">        </span><br><span class="line">       	data.managedObjectContext?.save(<span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="删除数据">删除数据</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//注意与 deletedObjects 的区别</span></span><br><span class="line">			context.deleteObject(dataArr[indexPath.row] <span class="keyword">as</span>! <span class="type">NSManagedObject</span>)</span><br><span class="line">            </span><br><span class="line">            context.save(<span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/iOS-Swift-Base/">iOS Swift 基础</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/iOS-DEMO-SPH/">iOS DEMO 项目：SPHChatCollectionView 分析</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/iOS-DataProcess/"
+               data-title="iOS 数据操作" data-url="http://yoursite.com/2015/iOS-DataProcess/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
   
-<script>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#iOS_数据操作"><span class="nav-number">1.</span> <span class="nav-text">iOS 数据操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SandBox"><span class="nav-number">1.1.</span> <span class="nav-text">SandBox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写出文件"><span class="nav-number">1.2.</span> <span class="nav-text">写出文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取文件"><span class="nav-number">1.3.</span> <span class="nav-text">读取文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用程序首选项数据"><span class="nav-number">1.4.</span> <span class="nav-text">应用程序首选项数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储首选项数据"><span class="nav-number">1.4.1.</span> <span class="nav-text">存储首选项数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取首选项数据"><span class="nav-number">1.4.2.</span> <span class="nav-text">读取首选项数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作_XML_数据"><span class="nav-number">1.5.</span> <span class="nav-text">操作 XML 数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XMl_格式"><span class="nav-number">1.5.1.</span> <span class="nav-text">XMl 格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swift_解析_XML"><span class="nav-number">1.5.2.</span> <span class="nav-text">swift 解析 XML</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON_数据"><span class="nav-number">1.6.</span> <span class="nav-text">JSON 数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式"><span class="nav-number">1.6.1.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析_JSON"><span class="nav-number">1.6.2.</span> <span class="nav-text">解析 JSON</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift_生成_JSON"><span class="nav-number">1.6.3.</span> <span class="nav-text">Swift 生成 JSON</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plist数据"><span class="nav-number">1.7.</span> <span class="nav-text">Plist数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">1.7.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建和编写_plist_文件"><span class="nav-number">1.7.2.</span> <span class="nav-text">创建和编写 plist 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析_plist_文件"><span class="nav-number">1.7.3.</span> <span class="nav-text">解析 plist 文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CoreData"><span class="nav-number">1.8.</span> <span class="nav-text">CoreData</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQLite"><span class="nav-number">1.8.1.</span> <span class="nav-text">SQLite</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据结构"><span class="nav-number">1.8.2.</span> <span class="nav-text">创建数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入数据"><span class="nav-number">1.8.3.</span> <span class="nav-text">插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取数据"><span class="nav-number">1.8.4.</span> <span class="nav-text">读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改数据"><span class="nav-number">1.8.5.</span> <span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据"><span class="nav-number">1.8.6.</span> <span class="nav-text">删除数据</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-62263979-1', 'auto');
   ga('send', 'pageview');
-</script>
+  </script>
 
-</head>
-<body>
-  <div id="container">
-    <header id="header" class="wrapper">
-  <div id="header-inner" class="inner">
-    <h1 id="logo-wrap">
-      <a href="" id="logo">Hexo</a>
-    </h1>
-    <nav id="main-nav">
-      <ul>
-        
-        <li class="main-nav-item">
-          <a href="https://github.com/" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
-        </li>
-      </ul>
-    </nav>
-    <div id="lang-select-wrap">
-      <label id="lang-select-label"><i class="fa fa-globe"></i><span></span></label>
-      <select id="lang-select" data-canonical="">
-        
-      </select>
-    </div>
-    <div id="search-btn-wrap" class="main-nav-item">
-      <a id="search-btn" class="main-nav-link st-search-show-outputs"><i class="fa fa-search"></i></a>
-    </div>
-    <a id="mobile-nav-toggle">
-      <span class="mobile-nav-toggle-bar"></span>
-      <span class="mobile-nav-toggle-bar"></span>
-      <span class="mobile-nav-toggle-bar"></span>
-    </a>
-    <a id="mobile-search-btn" class="st-search-launcher"></a>
-  </div>
-</header>
-    <div id="content-wrap">
-  <div class="wrapper">
-    <div class="inner">
-      <article class="article post" itemscope itemtype="http://schema.org/Article">
-  <header class="article-header">
-    
-      <h1 class="article-title" itemprop="name" data-swiftype-name="title" data-swiftype-type="string">iOS 数据操作</h1>
-    
-    <a href="/2015/iOS-DataProcess/" class="article-date"><time datetime="2015-07-08T15:15:11.000Z">2015-07-08</time></a>
-  </header>
-  <div class="article-content" itemprop="articleBody" data-swiftype-name="body" data-swiftype-type="text">
-    
-  </div>
-  
-</article>
-    </div>
-  </div>
-</div>
-    <footer id="footer" class="wrapper">
-  <div class="inner">
-    <div id="footer-copyright">
-      &copy; 2015 <a href="https://zespia.tw/" target="_blank">Humyang</a><br>
-      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
-    </div>
-    <div id="footer-links">
-      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
-      <a href="https://github.com/" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
-    </div>
-  </div>
-</footer>
-  </div>
-  <div id="mobile-nav-dimmer"></div>
-  <nav id="mobile-nav">
-  <div id="mobile-nav-inner">
-    <ul id="mobile-nav-list">
-      
-      <li class="mobile-nav-item">
-        <a href="https://github.com/" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
-      </li>
-    </ul>
-    
-  </div>
-  <div id="mobile-lang-select-wrap">
-    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span></span></span>
-    <select id="mobile-lang-select" data-canonical="">
-      
-    </select>
-  </div>
-</nav>
-  <!-- Scripts -->
-<!-- build:js build/js/main.js -->
-<script src="/js/lang_select.js" type="text/javascript"></script>
-<script src="/js/toc.js" type="text/javascript"></script>
-<script src="/js/mobile_nav.js" type="text/javascript"></script>
-<!-- endbuild -->
-<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
-
-<!-- Swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','https://s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
 </body>
 </html>

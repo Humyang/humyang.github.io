@@ -1,168 +1,1095 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-<head prefix="og: http://ogp.me/ns#">
-  <meta charset="utf-8">
-  <title>iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》 | Humyang</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2015/iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture/index.html">
-  <!-- Alternative links -->
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
   
-  <!-- Icon -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
-  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
-  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
-  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
-  <meta name="msapplication-TileColor" content="#2f83cd">
-  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
-  <!-- CSS -->
-  <!-- build:css build/css/navy.css -->
-  <link rel="stylesheet" href="/css/navy.css" type="text/css">
-  <!-- endbuild -->
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <!-- RSS -->
-  <link rel="alternative" href="/atom.xml" title="Humyang" type="application/atom+xml">
-  <!-- Open Graph -->
-  <meta name="description" content="记录关于学习过的 iOS 文档">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》">
-<meta property="og:url" content="http://yoursite.com/2015/iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture/index.html">
-<meta property="og:site_name" content="Humyang">
-<meta property="og:description" content="记录关于学习过的 iOS 文档">
-<meta property="og:image" content="http://yoursite.com/./view-layer-store.jpg">
-<meta property="og:image" content="http://yoursite.com/./scale_aspect.jpg">
-<meta property="og:image" content="http://yoursite.com/./button_scale.jpg">
-<meta property="og:image" content="http://yoursite.com/./native_coordinate_system.jpg">
-<meta property="og:image" content="http://yoursite.com/./frame_bounds_rects.jpg">
-<meta property="og:image" content="http://yoursite.com/./xform_rotations.jpg">
-<meta property="og:image" content="http://yoursite.com/./drawing_model.jpg">
-<meta property="og:updated_time" content="2015-07-09T07:26:17.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》">
-<meta name="twitter:description" content="记录关于学习过的 iOS 文档">
-  <!-- Swiftype -->
-  <meta name="st:title" content="iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》">
-  <!-- Google Analytics -->
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-05-04
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/翻译/">翻译</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>记录关于学习过的 iOS 文档</p>
+<a id="more"></a>
+<p><a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009503-CH1-SW2" target="_blank" rel="external">原文地址</a></p>
+<p>[TOC]</p>
+<hr>
+<h1 id="视图和窗口架构">视图和窗口架构</h1><p>视图和窗口呈现应用程序的界面和处理界面的交互。UIKit 和其他系统框架提供若干个视图供你做少许修改或不做修改直接使用。当你想呈现与标准视图不一样的内容时也可以自定义视图。</p>
+<p>无论你是使用系统视图或自定义视图，你都需要清楚提供基础架构的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView" target="_blank" rel="external">UIView</a> 和 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIWindow_Class/index.html#//apple_ref/occ/cl/UIWindow" target="_blank" rel="external">UIWindows</a> 类。这些类提供精密的设施管理布局和呈现视图。明白这些设施如何工作是很重要的，当你的应用程序发生变更时可以确保你的视图有适当行为。</p>
+<h2 id="视图基础架构">视图基础架构</h2><p>大多数你想显示的事情都在视图对象上完成－<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView" target="_blank" rel="external">UIView</a> 类的一个实例。视图对象在屏幕上定义了一个矩形范围并处理这个区域的绘制和触摸事件。视图也可以充当其他视图的父视图并调整视图的位置和尺寸。<em>UIView</em>  类的大部分工作是管理这些视图之间的关系，但你也可以自定义你需要的默认行为。</p>
+<p>视图与核型动画层关联工作处理视图内容的渲染和动画效果。每一个视图在 UIKit 中被一个层对象备份 (通常是<a href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CALayer_class/index.html#//apple_ref/occ/cl/CALayer" target="_blank" rel="external">CALayer</a> 类的实例)，它管理视图备份的保存和处理视图相关的动画效果。你大多数操作应该通过 UIView 接口执行。但是，在你需要进一步的控制你的视图的渲染或动画效果行为，你可以通过它的层 (layer) 执行替代操作。</p>
+<p>为了明白了视图和层之间的关系，这里有一个帮助示例。图 1-1 表示从应用程序 <a href="https://developer.apple.com/library/ios/samplecode/ViewTransitions/Introduction/Intro.html#//apple_ref/doc/uid/DTS40007411" target="_blank" rel="external"><em>VIewTransitions</em></a> 到底层的 Core Animation 层之间的关系。这个应用程序的视图中包含一个窗口 (它也是一个视图),一个包含视图的通用 UIView 对象，一个图像视图，一个显示控制的工具栏，和栏按钮项 (它自己没有视图但可以管理视图内部)。（实际的样本应用程序 <a href="https://developer.apple.com/library/ios/samplecode/ViewTransitions/Introduction/Intro.html#//apple_ref/doc/uid/DTS40007411" target="_blank" rel="external"><em>VIewTransitions</em></a> 包含用作实现过渡效果的额外的图像视图。为简单起见，并且因为这个视图通常是隐藏的，所以它不在图 1-1 中显示。) 每个视图都有相应的层对象可以通过视图的 layer 属性访问。(因为栏按钮项不是视图，所以你不能直接访问它的层对象。) 这些层对象的背后是核心动画渲染对象并且最终被硬件缓冲区用作管理屏幕上实际的位。</p>
+<p><strong>图 1-1 案例应用程序中视图的架构</strong><br><img src="./view-layer-store.jpg" alt="图 1－1 案例应用程序中视图的架构"></p>
+<p>Core Animation 层的对象的使用对性能有很重要的影响。视图对象实际的绘制代码应该尽量减少调用次数，当代码已被调用后，该结果会被核心动画效果缓存并且尽可能久的使用。重用已渲染的内容消除经常用来更新视图的昂贵的绘制周期。重用这个内容在动画效果的过程是特别重要的，已存在的内容可以被操纵。重用内容比创建新的内容更便宜。</p>
+<h3 id="视图层次结构和子视图管理">视图层次结构和子视图管理</h3><p>除了呈现自己的内容，视图也可以作为包含其他视图的容器。当一个视图包含其他视图时，它们形成父与子的关系。它们关系中的子视图被称为 <em>subview</em> 父视图被称为 <em>superview</em>。这种关系的形成会影响应用程序的外观和应用程序的行为。</p>
+<p>视觉上看，子视图的内容会覆盖父视图的所有或一部分内容。如果子视图是完全不透明的，那么它会完全掩盖父视图的对应区域。如果子视图是半透明的，那么两个视图会混合显示在屏幕上。每一个父视图都把子视图保存在一个经过排序的数组并且数组中的排序影响着子视图的显示效果。如果两个相邻的子视图重叠了，最后添加的一个 (或被移动到子视图数组结尾位置的) 会出现在另一个上面。</p>
+<p>父视图和子视图的关系也影响了几个视图行为。改变父视图的尺寸会影响子视图的尺寸和位置也跟着变化。在改变父视图尺寸时，你可以适当的配置视图控制每一个视图的调整行为。其他方面的更改也会影响到子视图包括隐藏父视图，改变父视图 alpha (透明度),或对父视图的坐标系统应用数学变换。</p>
+<p>视图层次结构中的视图排列也决定了应用程序如何响应事件。在指定的视图内发生触摸时，系统发送一个附带触摸信息的事件对象直接在视图中处理。如果该视图不处理指定的触摸事件，它可以将事件对象传递给他的父视图。如果父视图也不做任何处理，会再次传递给它的父视图，在响应者队列层层往上传递。指定的视图也可以把事件对象传递到其中的一个响应者对象，例如视图控制器。如果没事对象处理该事件，它最终会到达应用程序对象，它通常会被抛弃。</p>
+<p>更多关于如何创建视图层次结构的信息，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingViews/CreatingViews.html#//apple_ref/doc/uid/TP40009503-CH5-SW47" target="_blank" rel="external">Cretating and Managing a View Hierarchy</a>。</p>
+<h3 id="视图的绘制周期">视图的绘制周期</h3><p><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView" target="_blank" rel="external">UIView</a> 类根据按需求绘制模型呈现内容。当视图第一次在屏幕上显示时，系统会绘制它的内容。然后系统会截取内容的快照并且使用快照作为视图的可见外观。如果你永远不改变视图的内容，那么视图的绘制代码也许永远不会再被调用。快照图像会在大多数涉及到视图的操作中重用。如果你更改了内容，你需要通知系统该视图已更改。这个视图会被重新绘制处理并且会截取新结果的快照。</p>
+<p>当你的视图的内容更改了，你不用直接重绘这些更改。而应该使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsDisplay" target="_blank" rel="external">setNeedsDisplay</a> 或 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsDisplayInRect:" target="_blank" rel="external">setNeedsDisplayInRect:</a> 方法使视图无效。这些方法告诉系统视图的内容已更改并且需要在下一次进行重绘。系统在初始化和绘制操作之前会等待直到当前运行循环结束。这个延迟给你机会使多个视图无效，一次性从你的层次结构中添加或移除视图，隐藏视图，调整视图尺寸，和重新定位视图。所有这些你坐的变更都会同时体现。</p>
+<blockquote>
+<p>注意：更改视图的形状不会自动导致系统重绘视图的内容。视图的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/contentMode" target="_blank" rel="external">contentMode</a> 决定如何应对视图形状的改变。大多数内容模式会在视图的边界内伸展或重新定位已有的快照而不会创建新的一个。更多关于在绘制周期中内容模式的影响，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/WindowsandViews/WindowsandViews.html#//apple_ref/doc/uid/TP40009503-CH2-SW2" target="_blank" rel="external">Content Modes</a>。</p>
+</blockquote>
+<p>当开始渲染视图的内容时，实际的绘制处理变化取决于视图和它的配置信息。系统视图通常实现私有的绘制方法渲染它们的内容。这些相同的系统视图通常提供接口让你可以用来配置视图实际外观。对于自定义的 <em>UIView</em> 的子类，通常重写视图的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/drawRect:" target="_blank" rel="external">drawRect:</a> 方法并使用这个方法绘制你的视图的内容。这里也有其他方式提供视图内容，例如直接设置底层 (underlying layer) 的内容，但重写 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/drawRect:" target="_blank" rel="external">drawRect:</a> 方法是最常用的技术。</p>
+<p> 更多关于如何绘制自定义视图的内容，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingViews/CreatingViews.html#//apple_ref/doc/uid/TP40009503-CH5-SW3" target="_blank" rel="external">Implementing Your Drawing Code</a>。</p>
+<h3 id="内容模式">内容模式</h3><p>每个视图都有一个控制视图在响应视图的形状更改时如何循环利用它的快照内容和是否循环利用所有内容的内容模式。当一个视图第一次显示后，它正常的渲染内容并且把结果保存在一个基本位图中。之后，视图的形状更改不会总是导致位图重建。而是由 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/contentMode" target="_blank" rel="external">contentMode</a> 属性值判断位图是否应该拉伸以适应新的边界或简单的固定钉视图的一个角落或边缘。</p>
+<p>每当你做了以下的事时会引发内容模式的应用</p>
+<ul>
+<li>更改了框架或边界矩形的宽或高。</li>
+<li>分配了包含缩放系数的 transform 给视图的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/transform" target="_blank" rel="external">transform</a> 属性。</li>
+</ul>
+<p>默认情况下，<em>contentMode</em> 属性为大多数视图设置成 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewContentModeScaleToFill" target="_blank" rel="external">UIViewContentModeScaleToFill</a> 值，它使视图的内容拉伸以适应新的框架尺寸。图 1-2 说明了一些可用的内容模式以及它们的效果。如你在图中看见的，不是所有内容模式的结果都把视图的边界填充完整，有的会使视图内容变形。</p>
+<p><strong>图 1-2 内容模式的对比</strong></p>
+<p><img src="./scale_aspect.jpg" alt="图 1-2 内容模式的对比"></p>
+<p>内容模式能很好的循环使用你的视图内容，不过当你想在你的自定义视图中以自己的方式拉伸和调整尺寸操作也可以设置内容模式为 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewContentModeRedraw" target="_blank" rel="external">UIViewContentModeRedraw</a> 值。设置这个值之后会强制系统调用你的视图的 <em>drawRect:</em> 方法响应图形变化。一般来说，你应该尽量避免使用这个值，并且不要在标准系统视图中使用这个值。</p>
+<p>更多关于可用的视图模式的信息，见 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/doc/uid/TP40006816" target="_blank" rel="external"><em>UIView Class Reference</em></a>。</p>
+<h3 id="拉伸视图">拉伸视图</h3><p>你可以划定视图的一部分作为可伸展的当视图的尺寸变更时只有划定了可伸展的部分内容会受影响。通常会对按钮或者其他定义了一部分重复图案的视图使用可伸展区域。你额可以指定可伸展区域沿着视图的一条或所有轴线伸展。当然，当沿着两个轴线伸展视图时，视图的边界必须定义重复图案避免造成失真。图 1-3 给出了视图失真的表现。每个视图的有颜色的原始像素点被复制填充到大视图的相应区域。</p>
+<p><strong>图 1-3 伸展按钮的背景</strong></p>
+<p><img src="./button_scale.jpg" alt="图 1-3 伸展按钮的背景"></p>
+<p>你可以通过使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/contentStretch" target="_blank" rel="external">contentStretch</a> 属性指定视图的可伸缩区域。这个属性接受值是标准化的范围是 0.0 到 1.0. 的矩形。当伸展视图时，系统通过视图的当前边界和拉伸系数乘以这些标准化的值决定它的像素或需要被拉伸的像素。标准化值的使用缓解了视图边界变更时都更新  <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/contentStretch" target="_blank" rel="external">contentStretch</a>  的需要。</p>
+<p>视图的内容模式也在参与到决定视图的可伸展区域如何使用。可伸展区域只有在内容模式会导致视图的内容被拉伸时才会用到。这意味着可伸展区域只支持值为 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewContentModeScaleToFill" target="_blank" rel="external">UIViewContentModeScaleToFill</a>，<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewContentModeScaleAspectFit" target="_blank" rel="external">UIViewContentModeScaleAspectFit</a>，和 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewContentModeScaleAspectFill" target="_blank" rel="external">UIViewContentModeScaleAspectFill</a> 的内容模式。如果指定的内容模式是内容钉在边缘或角落 (实际上不拉伸内容)，视图会忽略可伸展区域。</p>
+<blockquote>
+<p><strong>注意</strong>：contentStretch 属性推荐在为视图的指定背景创建可伸展的 UIImage 对象时使用。可伸展的视图完全在 Core Animation 层处理，它通常会提供更好的性能。</p>
+</blockquote>
+<h3 id="内置的动画效果支持">内置的动画效果支持</h3><p>每个视图背后都有一个层对象的好处之一是你可以轻松的使用动画完成许多视图相关的变更。动画效果是与用户沟通的有效方式在你的应用程序的设计过程中应该优先考虑。许多 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView" target="_blank" rel="external">UIView</a> 类的属性都是可动画的，就是说，半自动的支持以动画的形式从一个值变到另一个值。为这些可动画的属性执行动画效果，你只需要做：</p>
+<ol>
+<li>告诉 UIKit 你想执行的动画效果。</li>
+<li>更改属性的值。</li>
+</ol>
+<p>你可以在 UIView 对象上动画的属性：</p>
+<ul>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/frame" target="_blank" rel="external">frame</a>，用这个动画更改视图的位置和尺寸。</li>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/bounds" target="_blank" rel="external">bounds</a>，使用这个动画更改视图的尺寸。</li>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/center" target="_blank" rel="external">center</a>，为视图的位置使用这个动画。</li>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/transform" target="_blank" rel="external">transform</a>，用来旋转或缩放视图。</li>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/alpha" target="_blank" rel="external">alpha</a>，用来更改视图的透明度。</li>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/backgroundColor" target="_blank" rel="external">backgroundColor</a>，用来更改视图的背景颜色。</li>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/contentStretch" target="_blank" rel="external">contentStretch</a>，用来更改视图的内容如何伸展</li>
+</ul>
+<p>当一组视图过渡到另一组视图时动画效果是非常重要的一个地方。通常，你会使用视图控制器管理你的界面不同部位之间主要的变化相关联的动画效果。例如，涉及从高级别到低级别的信息导航界面，你通常使用导航控制器管理视图之间的转换以显示连续的数据。你也可以使用动画效果创建两组视图之间的转换来替代视图控制器，当标准视图控制器没有产生你想要的效果时你可以使用这种做法。</p>
+<p>除了使用 UIKit 类创建动画效果，你也可以使用 Core Animation 层创建动画效果。更低的层次给你更进一步控制动画效果的时间和属性。</p>
+<p>关于如何执行基于视图的动画效果细节，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW1" target="_blank" rel="external">Animations</a>。</p>
+<p>更多关于使用 Core Animation 创建动画效果的信息，见 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40004514" target="_blank" rel="external"><em>Core Animation Programming Guide</em></a> 和  <em>Core Animation Cookbook</em>。</p>
+<h2 id="视图形状和坐标系统">视图形状和坐标系统</h2><p>UIKit 的默认坐标系统的原点在左上角和有一个从原点开始向下和向右伸展的坐标轴。坐标值使用浮点数代表，它让内容精确的定位和布局而不关心底层的屏幕分辨率。图 1-4 显示在屏幕中的坐标系统。除了屏幕坐标系统，窗口和视图还定义了它们自己的本地坐标系统允许你相对视图或窗口的原点指定坐标替代相对屏幕的坐标。</p>
+<p><strong>图 1-4</strong> UIKit 内坐标系统的方向</p>
+<p><img src="./native_coordinate_system.jpg" alt="UIKit 内坐标系统的方向"></p>
+<p>因为每个视图和窗口都定义了自己的本地坐标系统，所以你需要注意坐标系统所有给定的时间的效果。每当你在绘制视图时或更改了视图的形状时，你需要相应的对坐标系统做一些事情。在绘制的情况下，需要指定相对于视图自己的坐标系统的坐标。在形状更改的情况下，需要指定相对于父视图的坐标系统的坐标。UIWindow 和 UIView 类都包含帮助你从一个坐标系统转换到另一个坐标系统的方法。</p>
+<blockquote>
+<p>重要提示：一些 iOS 技术定义的默认坐标系统原点和方向与使用 UIKit 时不一样。例如，Core Graphics 和 OpenGL ES 的坐标系统原点在视图或窗口的左下角并且 Y 轴在向上。你的代码必须考虑这些差异并且需要在绘制或创建内容时调整坐标值 (或坐标系统的默认方向)。</p>
+</blockquote>
+<h3 id="Frame,Bounds,和_Center_属性的关系">Frame,Bounds,和 Center 属性的关系</h3><p>视图对象使用它的 frame，bounds，和 center 属性追踪它的尺寸和位置：</p>
+<ul>
+<li>frame 属性包含 <em>frame rectangle</em>，它指定视图在父视图的坐标系统中的尺寸和位置。</li>
+<li>bounds 属性包含 <em>bounds rectangle</em>，它指定了在自己的本地坐标系统的视图尺寸 (和内容原点)。</li>
+<li>center 属性包含父视图的坐标系统中视图已知的中心点。</li>
+</ul>
+<p>你可以主要在操作当前视图的形状时 使用 center 和 frame 属性。例如，可以使用这些属性构建你的视图层次结构或在运行时修改视图的位置或尺寸。如果你只需要更改视图的位置 (而不是它的尺寸)，center 属性是首选。 center 属性的值总是有效的，即使缩放或旋转系数已经被添加到视图的 transform。而 frame 属性的值就确定了，如果视图的 transform 不是恒等转换则需要考虑值无效的可能。</p>
+<p>你可以主要在绘制时使用 bounds 属性 。边界矩形被表示在视图自己的本地坐标系统中。矩形的默认原点是 (0,0) ，它的尺寸和框架矩形的尺寸相匹配。任何你在这个矩形内绘制的内容都是视图可见内容的一部分。如果你更改了边界矩形的原点，任何在新的矩形内绘制的内容都会变成视图可见内容的一部分。</p>
+<p>图 1-5 说明了框架矩形和边界矩形之间的关系。在图中，图像视图左上角位于父视图坐标系统的点 (40.40) 位置并且矩形的尺寸为 240 乘 380 点。在边界矩形中，原点是 (0,0) 和矩形的尺寸同样是 240 乘  380 点。</p>
+<p><strong>图 1-5 视图的框架和边界之间的关系</strong></p>
+<p><img src="./frame_bounds_rects.jpg" alt="图 1-5 视图的框架和边界之间的关系"></p>
+<p>尽管你可以独立的更改 frame，bounds，和 center 属性，但改变其中一个属性会对其他造成影响：</p>
+<ul>
+<li>当你设置了 frame 属性是，bounds 属性内的尺寸值会相应的适配框架矩形的尺寸值。在 center 属性内的值同样改更改适配新的框架矩形的中心点。</li>
+<li>当你设置了 center 属性，frame 内的原点值跟着改变。</li>
+<li><p>当你设置了 bounds 属性的尺寸，在 frame 属性内的尺寸值同样改变适配新的边界矩形的尺寸。</p>
+<p>默认情况下，视图的框架不会被它的父视图的框架剪切。因此，任何位于父视图的框架外部的子视图都是以其整体呈现。你可以改变这个行为，通过设置父视图的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/clipsToBounds" target="_blank" rel="external">clipsToBounds</a> 属性为 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/ObjCRuntimeRef/index.html#//apple_ref/doc/c_ref/YES" target="_blank" rel="external">YES</a>。无论子视图可见部分是否被剪切，触摸事件始终遵从目标的父视图的边界矩形。换句话说，在父视图边界矩形外部的那部分视图发生的触摸事件不会发出给视图。</p>
+</li>
+</ul>
+<h3 id="坐标系统转换">坐标系统转换</h3><p>坐标系统转换提供快速和简单的方式修改视图 (或它的内容)。<em>affine transform</em> 是一个数学矩阵指定了一个坐标系统中的点如何映射到另一个坐标系统中。你可以应用仿射转换更改整个视图的尺寸，位置，或与父视图相对的轴方向。你也可以绘制代码中对单个渲染内容使用仿射转换执行相同类型的操作。具体如何应用仿射转换需要依赖上下文：</p>
+<ul>
+<li>要修改整个视图，修改视图的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/transform" target="_blank" rel="external">transform</a> 属性内的仿射转换。</li>
+<li>要修改视图的 drawRect: 方法的指定内容，修改与活动的图像上下文相关联的仿射转换。</li>
+</ul>
+<p>当你想实现动画效果时通常都是修改视图的 transform 属性。例如，你可以使用这个属性创建一个环绕视图中心点旋转的动画效果。不要使用这个属性对视图做永久的变更，例如修改它在父视图坐标空间的位置和尺寸。要进行这种类型的变更，你应该修改视图的框架矩形。</p>
+<blockquote>
+<p>注意：在修改视图的 transform 属性时，所有转换效果都是相对于视图的中心点执行。</p>
+</blockquote>
+<p>在你的视图的 drawRect: 方法中，可以使用仿射转换定位和定向你计划绘制的项。相对于把对象固定到视图的某个位置，它更简单的相对一个固定点来创建每一个对象，通常是 (0,0)，然后在绘制之前立即使用转换来定位对象。如果要改变对象在视图的定位，你所需要做的就是修改转换  (transform)，相比在新位置重新创建视图它更快更便宜。你可以使用 <a href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CGContext/index.html#//apple_ref/c/func/CGContextGetCTM" target="_blank" rel="external">CGContextGetCTM</a> 取回与仿射转换相关联的图像上下文并在绘制期间的使用相关的 Core Graphics 函数设置或修改转换 (transform)。</p>
+<p><em>current transformation matrix</em> (<em>CTM</em>) 是仿射转换的使用。当操作整个视图的形状时，CTM 被保存在视图的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/transform" target="_blank" rel="external">transform</a> 属性的仿射转换。在你的 drawRect: 方法内部，CTM 是与活动的图形上下文相关联的仿射转换。</p>
+<p>每个子视图的坐标系统建立在它的祖先坐标系统之上。因此当你修改视图的 transform 属性时，变更会影响视图和它的所有子视图。因此，这些变更会影响视图在屏幕上最终的渲染。因为每一个视图绘制它的内容布局它的子视图是相对自己的边界，它可以在绘制和布局时忽略父视图的转换。</p>
+<p>图 1-6 演示两种不同的旋转系数结合使用时呈现的外观。在视图的 drawRect: 方法的内部，施加 45 度的旋转系数给矩形结果矩形发生 45 度的旋转。另一个的施加 45 度旋系数给视图然后矩形发生 90 度旋转。矩形的相对于视图仍然是 45 度旋转，但视图旋转使它出现更多的旋转。</p>
+<p><strong>图 1-6 旋转视图和它的内容</strong></p>
+<p><img src="./xform_rotations.jpg" alt="图 1-6 旋转视图和它的内容"></p>
+<blockquote>
+<p>重要说明：如果视图的 transform 属性不是恒等转换，那么视图的 frame 属性的值是 undefined 并被忽略。当正在应用转换到视图时，你必须使用视图的 bounds 和 center 属性获取视图的尺寸和定位。任何子视图的框架矩形始终有效的因为它们是相对于视图的边界。</p>
+</blockquote>
+<p>关于在运行时修改你的视图的 transform 属性信息，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingViews/CreatingViews.html#//apple_ref/doc/uid/TP40009503-CH5-SW4" target="_blank" rel="external">Translating,Scaling,and Rotating Views</a>。</p>
+<p>关于如何在绘制期间转换内容定位的信息，见 <a href="https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40010156" target="_blank" rel="external"><em>Drawing and Printing Guide for iOS</em></a>。</p>
+<h3 id="Point_与_Pixel">Point 与 Pixel</h3><p>在 iOS 中，所有的坐标值和距离被指定使用浮点作为单位的值简称为 <em>point</em>。不同设备之间可测量的点的尺寸都不同而且差异巨大。这章主要明白 “点” 提供了绘制时用于参考的边框。</p>
+<p>表 1-1 列出了不同的 iOS 设备纵向的屏幕尺寸 (使用点测量)，左边是宽度尺寸，然后是屏幕的高度尺寸。只要你在这些屏幕尺寸内设计你的界面，你的视图就会在相应类型的设备上正确显示。</p>
+<p><strong>表 1-1 iOS 设备的屏幕尺寸</strong></p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>屏幕尺寸 (点) </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4 英寸 Retina 显示屏的 iPhone 和 iPod touch</td>
+<td>320* 568 </td>
+</tr>
+<tr>
+<td>其他的 iPhone 和 iPod touch 设备</td>
+<td>320*480</td>
+</tr>
+<tr>
+<td>iPad</td>
+<td>768*1024  </td>
+</tr>
+</tbody>
+</table>
+<p>基于点的测量系统被用在每种类型的设备中定义，它也被称作用户坐标空间 (<em>user coordinate space</em>)。这是一个标准的坐标系统几乎你的所有代码都会使用。例如，当你操纵视图的形状或调用 Core Graphics 函数绘制视图的内容时会使用点和用户坐标空间。尽管有时候用户坐标空间的点会直接映射到设备屏幕的像素点，但你可千万别认为他们是相同的。你应该记住下面一点：</p>
+<blockquote>
+<p><strong>点不需要对应屏幕上的像素点</strong></p>
+</blockquote>
+<p>在设备级别，所有视图中指定的坐标的点都必须转换成某个像素点。从用户坐标空间的点映射到设备坐标空间的像素点的操作通常由系统处理。UIKit 和 Core Graphics 主要使用基于矢量的绘制模型，所有的坐标值都通过点指定。因此如果你使用 Core Graphics 绘制曲线，你只需要指定实际的曲线值，而不用在意底层屏幕的分辨率。</p>
+<p>当你需要与图像或其他基于像素的技术如 OpenGL ES 工作时，iOS 提供了管理这些像素点的帮助。静态文件会作为资源文件保存在你的应用程序包，iOS 对图像指定不同的分辨率，并为当前屏幕分辩率加载最适合的图像。视图也提供了当前的缩放系数信息因此你可以调整基于像素的绘制代码通过手动适配高分辨率屏幕。处理不同分辨率屏幕的基于像素的内容的技术在 <a href="https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40010156" target="_blank" rel="external"><em>Drawing and Printing Guide for iOS</em></a> 中的 <a href="https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/SupportingHiResScreensInViews/SupportingHiResScreensInViews.html#//apple_ref/doc/uid/TP40010156-CH15" target="_blank" rel="external">Supporting High-Resolution Screens In Views</a> 描述。</p>
+<h1 id="视图的运行时交互模型">视图的运行时交互模型</h1><p>在用户与你的界面交互时，或使用编程方式在代码中做一些变更时，UIKit 内部使用复杂的事件任务序列处理这些交互。在序列中特定的点，UIKit 会呼叫你的视图类并给它们机会代表应用程序响应。弄明白这些呼叫的点对于弄明白你的视图是在哪融入到系统很重要。图 1-7 指示了从用户触摸屏幕开始到图像系统完成响应并更新屏幕内容结束的基本事件序列。同样的事件序列也在编程方式的执行初始化动作后发生。</p>
+<p><strong>图 1-7 UIKit 与你的视图对象交互</strong></p>
+<p><img src="./drawing_model.jpg" alt="图 1-7 UIKit 与你的视图对象交互"></p>
+<p>下面是图 1-7 的步骤分解，进一步的解释每一个阶段发生了什么和如何让应用程序应对响应。</p>
+<ol>
+<li>用户触摸屏幕。</li>
+<li>硬件对 UIKit 框架报告触摸事件。</li>
+<li>UIKit 框架把触摸事件打包到 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIEvent_Class/index.html#//apple_ref/occ/cl/UIEvent" target="_blank" rel="external">UIEvent</a> 对象中并调度它到相应的视图中。(详细说明 UIKit 如何交出事件到你的视图中，见 <a href="https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541" target="_blank" rel="external"><em>Event Handling Guide for iOS</em></a>。</li>
+<li><p>视图的事件处理代码对事件响应。你的代码可以：</p>
+<ul>
+<li>更改视图或它的子视图的属性 (frame,bounds,alphs,等等)</li>
+<li>调用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsLayout" target="_blank" rel="external">setNeedsLayout</a> 方法标记需要更新布局的视图 (或子视图)。</li>
+<li>调用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsDisplay" target="_blank" rel="external">setNeedDisplay</a> 或 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsDisplayInRect:" target="_blank" rel="external">setNeedsDisplayInRect:</a> 方法标记需要重绘的视图 (或子视图)。</li>
+<li><p>通知控制器关于一些数据块的更改。</p>
+<p>当然，是由你来决定视图应该做哪些事情和哪些方法应该调用。 </p>
+</li>
+</ul>
+</li>
+<li><p>如果视图需要修改形状，UIKit 根据以下规则更新它的子视图：</p>
+<p>  a. 如果视图已配置自动调整大小的规则，UIKit 则根据这个规则调整每一个视图。更多关于如何使用自动调整大小的规则的信息，见 <a href="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingViews/CreatingViews.html#//apple_ref/doc/uid/TP40009503-CH5-SW5" target="_blank" rel="external">Handling Layout Changes Automatically Using Autoresizing Rules</a>。</p>
+<p>  b. 如果视图实现了 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/layoutSubviews" target="_blank" rel="external">layoutSubviews</a> 方法，UIKit 会调用它。</p>
+<pre><code>你可以在自定义视图中重写这个方法并使用它调整任意子视图的位置和尺寸。例如，一个巨大的可滚动视图是由很多个子视图组成的而不是创建一个巨大的视图，那样对内存使用不健康。在这个方法的实现过程中，视图将会在屏幕外的子视图隐藏或者重新定位它们并使用它们绘制新的内容。在处理过程时，视图的布局代码可以标记需要重绘的视图使它无效 (invalidate)。<span class="tag">&lt;<span class="title">br</span>/&gt;</span>
+</code></pre></li>
+<li><p>如果视图已经被标记为需要重绘，UIKit会要求视图重绘它自己。<br><br>如果自定义视图明确定义了 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/drawRect:" target="_blank" rel="external">drawRect:</a> 方法，UIKit 会调用这个方法。这个方法的实现过程应该尽可能快的重绘视图的指定区域并且不要做其他事情。不要在这做额外的视图布局变更和更改你的应用程序数据模型。这个方法的目的是更新你的视图的可见内容。<br><br>标准系统视图通常不会实现 drawRect: 方法但会在特定时间管理它们的绘制。 <br>        </p>
+</li>
+<li>视图更新后会与应用程序的可见内容合并然后发送到图形硬件显示。</li>
+<li>图形硬件传输已渲染的内容到屏幕。</li>
+</ol>
+<blockquote>
+<p><strong>注意：</strong>前面的更新模型主要用于使用标准的系统视图和绘制技术的应用程序。使用 OpenGL ES 绘制的应用程序通常配置有一个单独的全屏幕视图并且直接在相关的 OpenGL ES 图像上下文中绘制。在这个案例中，视图仍然需要处理触摸事件，但因为它是全屏幕的，所以它不需要布局子视图。更多关于使用 OpenGL ES 的信息，见 <a href="https://developer.apple.com/library/ios/documentation/3DDrawing/Conceptual/OpenGLES_ProgrammingGuide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008793" target="_blank" rel="external"><em>OpenGL ES Programming Guide for iOS</em></a>。</p>
+</blockquote>
+<p>在前面的步骤集合中，自定义视图主要整合点是：</p>
+<ul>
+<li>事件处理方法：<ul>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIResponder_Class/index.html#//apple_ref/occ/instm/UIResponder/touchesBegan:withEvent:" target="_blank" rel="external">touchesBegan:withEvent:</a></li>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIResponder_Class/index.html#//apple_ref/occ/instm/UIResponder/touchesMoved:withEvent:" target="_blank" rel="external">touchesMoved:withEvent:</a></li>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIResponder_Class/index.html#//apple_ref/occ/instm/UIResponder/touchesEnded:withEvent:" target="_blank" rel="external">touchesEnded:withEvent:</a></li>
+<li><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIResponder_Class/index.html#//apple_ref/occ/instm/UIResponder/touchesCancelled:withEvent:" target="_blank" rel="external">touchesCancelled:withEvent:</a></li>
+</ul>
+</li>
+<li>layoutSubviews 方法</li>
+<li>drawRect: 方法</li>
+</ul>
+<p>这些是视图的最常用的重写方法也许不需要全部都重写。如果你使用手势检测处理事件，你不需要重写事件处理的方法。同样，如果你的视图不包含子视图或不改变尺寸，也就没有重写 layoutSubviews 的理由。最后，需要在运行时更改视图的内容并且使用的技术是原生的例如 UIKit 或 Core Graphics 绘制时需要重写 drawRect: 方法。</p>
+<p>同样重要是记住这些方法是虽然是主要整合点但不是唯一的。UIView 类还有几个方法也被设计为子类重写点。你应该在 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/doc/uid/TP40006816" target="_blank" rel="external"><em>UIView Class Reference</em></a> 查看这个方法的描述，看看哪些方法适合在你的自定义实现过程中重写。</p>
+<h1 id="有效的视图使用提示">有效的视图使用提示</h1><p>自定义视图在你需要绘制一些标准系统视图无法提供的内容时很有用，但你要确保你的视图有足够的性能。UIKit 做了所有它能做的优化视图相关行为并且帮助你的自定义视图实现良好的性能。然而，你可以考虑下面提示帮助 UIKit 提升你的性能。</p>
+<blockquote>
+<p>重要提示：在优化你的代码之前，你应该收集你当前性能的数据。测量当前性能让你确定真正的问题是否出现在这里，如果是，那将有一个底线能让你对照优化后的性能。</p>
+</blockquote>
+<h3 id="视图不总是有相应的视图控制器">视图不总是有相应的视图控制器</h3><p>在你的应用程序中的单个视图和视图控制器之间很少有一对一的关系。视图控制器的工作是管理视图层次结构，通常由一个以上的视图被用来实现一些一体式功能。对于 iPhone 应用程序，每个视图层次结构通常填满整个屏幕，但对于 iPad 应用程序的视图层次结构可能只填充屏幕的一部分。</p>
+<p>作为你设计的用户界面，需要重点考虑视图控制器所扮演的角色。视图控制器提供很多重要的行为，例如协调在屏幕上呈现的视图，协调从屏幕上去除这些视图，响应低内存警告时的释放内存，和响应界面方向变更时的旋转视图。忽视这些行为会导致应用程序出现未知的错误的行为。</p>
+<p>更多关于视图控制器和它在应用程序中扮演的角色的信息，见 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457" target="_blank" rel="external"><em>View Controller Programming Guide for iOS</em></a>。</p>
+<h3 id="尽量少使用自定义绘制">尽量少使用自定义绘制</h3><p>尽管自定义绘制有时候是必须的，但应该尽可能避免。已有的系统视图类不能提供你想要的外观或你需要的能力时才使用自定义绘制。当你的内容可以和已有的视图组合完成组装时，你最好组合这些视图到一个自定义视图层次结构中。</p>
+<h3 id="利用内容模式的优点">利用内容模式的优点</h3><p>内容模式最大化减少你的视图重绘所花费的时间。默认的，视图的内容模式使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewContentModeScaleToFill" target="_blank" rel="external">UIViewContentModeScaleToFill</a> 值，它会伸缩视图已有的内容以适应视图的框架矩形。你可以根据需要变更模式以不同的方式调整内容，但你应该避免使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewContentModeRedraw" target="_blank" rel="external">UIViewContentModeRedraw</a> 内容模式如果你能。无论内容模式是哪种效果，你都可以调用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsDisplay" target="_blank" rel="external">setNeedsDisplay</a> 或 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsDisplayInRect:" target="_blank" rel="external">setNeedsDisplayInRect:</a> 强迫你的视图重绘它的内容。</p>
+<h3 id="只要有可能的声明视图为不透明">只要有可能的声明视图为不透明</h3><p>UIKit 通过每个视图的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/opaque" target="_blank" rel="external">opaque</a> 属性决定视图是否可以优化合成操作。为自定义视图设置这个属性的值为 YES 会告诉 UIKit 不需要在视图背后渲染任何显示内容。更少的渲染内容可以使你的绘制代码更高效，这是被鼓励的行为。当然，如果你设置 opaque 属性为 YES，视图的边界矩形必须完全填满不透明的内容。</p>
+<h3 id="调整你的视图在滚动时的绘制行为">调整你的视图在滚动时的绘制行为</h3><p>滚动条滚动时会导致短时间内产生大量的视图更新。如果你的绘制代码没有适当的应对，视图在滚动时的性能将会迟滞。每时每刻都尝试确保视图内容是原始的做法，应该考虑在滚动操作开始时更改你的视图行为。例如，你可以暂时降低内容渲染的质量或滚动过程中更改内容模式。当滚动停止后，你可以回到视图之前的状态和按需要更新内容。</p>
+<h3 id="不要通过嵌入子视图自定义控件">不要通过嵌入子视图自定义控件</h3><p> 尽管技术上能实现添加子视图到标准系统控件中－从 UIControl 继承的对象－你应该永远不要使用这种方式自定义它们。控件提供了有清晰的功能和良好文档的控件类的接口来支持自定义控件。例如，UIButtion 类包含为按钮设置标题和背景图像的方法。使用已定义的自定义点意味着你的代码总是能正确工作。而绕过这些方法，通过嵌入自定义图像或标签到按钮中，会导致你的应用程序发生错误行为或未来按钮的实现发生更改时导致代码失效。</p>
+<hr>
+<p>系列文章</p>
+<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-Introduction"><em>iOS 翻译 《View Programming Guide for iOS：Introduction》</em></a> </p>
+<p><em>iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》</em></p>
+<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-Windows"><em>iOS 翻译 《View Programming Guide for iOS：Windows》</em></a> </p>
+<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-Views"><em>iOS 翻译 《View Programming Guide for iOS：Views》</em> </a> </p>
+<p><a href="../iOS-Note-View-Programming-Guide-for-iOS-Animations"><em>iOS 翻译 《View Programming Guide for iOS：Animations》</em></a> </p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/iOS-Note-View-Programming-Guide-for-iOS-Windows/">iOS 翻译 《View Programming Guide for iOS：Windows》</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/iOS-Note-View-Programming-Guide-for-iOS-Introduction/">iOS 翻译 《View Programming Guide for iOS：Introduction》</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture/"
+               data-title="iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》" data-url="http://yoursite.com/2015/iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
   
-<script>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#视图和窗口架构"><span class="nav-number">1.</span> <span class="nav-text">视图和窗口架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#视图基础架构"><span class="nav-number">1.1.</span> <span class="nav-text">视图基础架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#视图层次结构和子视图管理"><span class="nav-number">1.1.1.</span> <span class="nav-text">视图层次结构和子视图管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的绘制周期"><span class="nav-number">1.1.2.</span> <span class="nav-text">视图的绘制周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内容模式"><span class="nav-number">1.1.3.</span> <span class="nav-text">内容模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉伸视图"><span class="nav-number">1.1.4.</span> <span class="nav-text">拉伸视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置的动画效果支持"><span class="nav-number">1.1.5.</span> <span class="nav-text">内置的动画效果支持</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图形状和坐标系统"><span class="nav-number">1.2.</span> <span class="nav-text">视图形状和坐标系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Frame,Bounds,和_Center_属性的关系"><span class="nav-number">1.2.1.</span> <span class="nav-text">Frame,Bounds,和 Center 属性的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坐标系统转换"><span class="nav-number">1.2.2.</span> <span class="nav-text">坐标系统转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Point_与_Pixel"><span class="nav-number">1.2.3.</span> <span class="nav-text">Point 与 Pixel</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视图的运行时交互模型"><span class="nav-number">2.</span> <span class="nav-text">视图的运行时交互模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有效的视图使用提示"><span class="nav-number">3.</span> <span class="nav-text">有效的视图使用提示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#视图不总是有相应的视图控制器"><span class="nav-number">3.0.1.</span> <span class="nav-text">视图不总是有相应的视图控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尽量少使用自定义绘制"><span class="nav-number">3.0.2.</span> <span class="nav-text">尽量少使用自定义绘制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用内容模式的优点"><span class="nav-number">3.0.3.</span> <span class="nav-text">利用内容模式的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#只要有可能的声明视图为不透明"><span class="nav-number">3.0.4.</span> <span class="nav-text">只要有可能的声明视图为不透明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调整你的视图在滚动时的绘制行为"><span class="nav-number">3.0.5.</span> <span class="nav-text">调整你的视图在滚动时的绘制行为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要通过嵌入子视图自定义控件"><span class="nav-number">3.0.6.</span> <span class="nav-text">不要通过嵌入子视图自定义控件</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-62263979-1', 'auto');
   ga('send', 'pageview');
-</script>
+  </script>
 
-</head>
-<body>
-  <div id="container">
-    <header id="header" class="wrapper">
-  <div id="header-inner" class="inner">
-    <h1 id="logo-wrap">
-      <a href="" id="logo">Hexo</a>
-    </h1>
-    <nav id="main-nav">
-      <ul>
-        
-        <li class="main-nav-item">
-          <a href="https://github.com/" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
-        </li>
-      </ul>
-    </nav>
-    <div id="lang-select-wrap">
-      <label id="lang-select-label"><i class="fa fa-globe"></i><span></span></label>
-      <select id="lang-select" data-canonical="">
-        
-      </select>
-    </div>
-    <div id="search-btn-wrap" class="main-nav-item">
-      <a id="search-btn" class="main-nav-link st-search-show-outputs"><i class="fa fa-search"></i></a>
-    </div>
-    <a id="mobile-nav-toggle">
-      <span class="mobile-nav-toggle-bar"></span>
-      <span class="mobile-nav-toggle-bar"></span>
-      <span class="mobile-nav-toggle-bar"></span>
-    </a>
-    <a id="mobile-search-btn" class="st-search-launcher"></a>
-  </div>
-</header>
-    <div id="content-wrap">
-  <div class="wrapper">
-    <div class="inner">
-      <article class="article post" itemscope itemtype="http://schema.org/Article">
-  <header class="article-header">
-    
-      <h1 class="article-title" itemprop="name" data-swiftype-name="title" data-swiftype-type="string">iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》</h1>
-    
-    <a href="/2015/iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture/" class="article-date"><time datetime="2015-05-04T08:04:08.000Z">2015-05-04</time></a>
-  </header>
-  <div class="article-content" itemprop="articleBody" data-swiftype-name="body" data-swiftype-type="text">
-    
-  </div>
-  
-</article>
-    </div>
-  </div>
-</div>
-    <footer id="footer" class="wrapper">
-  <div class="inner">
-    <div id="footer-copyright">
-      &copy; 2015 <a href="https://zespia.tw/" target="_blank">Humyang</a><br>
-      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
-    </div>
-    <div id="footer-links">
-      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
-      <a href="https://github.com/" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
-    </div>
-  </div>
-</footer>
-  </div>
-  <div id="mobile-nav-dimmer"></div>
-  <nav id="mobile-nav">
-  <div id="mobile-nav-inner">
-    <ul id="mobile-nav-list">
-      
-      <li class="mobile-nav-item">
-        <a href="https://github.com/" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
-      </li>
-    </ul>
-    
-  </div>
-  <div id="mobile-lang-select-wrap">
-    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span></span></span>
-    <select id="mobile-lang-select" data-canonical="">
-      
-    </select>
-  </div>
-</nav>
-  <!-- Scripts -->
-<!-- build:js build/js/main.js -->
-<script src="/js/lang_select.js" type="text/javascript"></script>
-<script src="/js/toc.js" type="text/javascript"></script>
-<script src="/js/mobile_nav.js" type="text/javascript"></script>
-<!-- endbuild -->
-<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
-
-<!-- Swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','https://s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
 </body>
 </html>

@@ -1,161 +1,956 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-<head prefix="og: http://ogp.me/ns#">
-  <meta charset="utf-8">
-  <title>iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controller’s Perspective》 | Humyang</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2015/VCP9/index.html">
-  <!-- Alternative links -->
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
   
-  <!-- Icon -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
-  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
-  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
-  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
-  <meta name="msapplication-TileColor" content="#2f83cd">
-  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
-  <!-- CSS -->
-  <!-- build:css build/css/navy.css -->
-  <link rel="stylesheet" href="/css/navy.css" type="text/css">
-  <!-- endbuild -->
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <!-- RSS -->
-  <link rel="alternative" href="/atom.xml" title="Humyang" type="application/atom+xml">
-  <!-- Open Graph -->
-  <meta name="description" content="iOS 视图控制器编程指南：从视图控制器的角度看无障碍访问">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controller’s Perspective》">
-<meta property="og:url" content="http://yoursite.com/2015/VCP9/index.html">
-<meta property="og:site_name" content="Humyang">
-<meta property="og:description" content="iOS 视图控制器编程指南：从视图控制器的角度看无障碍访问">
-<meta property="og:updated_time" content="2015-11-25T15:39:30.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controller’s Perspective》">
-<meta name="twitter:description" content="iOS 视图控制器编程指南：从视图控制器的角度看无障碍访问">
-  <!-- Swiftype -->
-  <meta name="st:title" content="iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controller’s Perspective》">
-  <!-- Google Analytics -->
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controller’s Perspective》 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controller’s Perspective》
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-06-19
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/翻译/">翻译</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/VCP9/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/VCP9/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>iOS 视图控制器编程指南：从视图控制器的角度看无障碍访问</p>
+<a id="more"></a>
+<p><a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457-CH1-SW1" target="_blank" rel="external">原文地址</a></p>
+<p>记录关于学习过的 iOS 文档</p>
+<hr>
+<h1 id="从视图控制器的角度看无障碍访问">从视图控制器的角度看无障碍访问</h1><p>除了管理视图的行为，视图控制器也协助控制应用程序的无障碍访问。无障碍访问应用程序对每个人都可以使用，无论使用者是残疾人士或者身体功能障碍，它都可以作为有用的工具同时保持应用程序的功能和可用性。</p>
+<p>要实现无障碍访问，iOS 应用程序必须对 VoiceOver 用户提供与它的用户界面元素有关的信息。VoiceOver,是一个被设计来协助阅读障碍人士的屏幕阅读技术，它可以大声念出在屏幕上显示的文本，图像，和 UI 控件，即使不能看到也可以与这些元素交互。UIKit 对象默认提供无障碍访问，但仍然需要你从视图控制器的角度做一些事情以解决无障碍访问。也就是说，你需要确保以下的实现：</p>
+<ul>
+<li>每个可以与用户交互的用户界面元素都需要实现无障碍访问。包含仅提供信息的元素例如静态文本，以及执行动作的控件。</li>
+<li>所有无障碍访问元素都提供准确和有用的信息。</li>
+</ul>
+<p>除了这些基本方面，还可以通过编程方式设置 VoiceOver 的对焦环，响应特殊的 VoiceOver 手势，和观察无障碍访问通知，提高 VoiceOver 的用户体验。</p>
+<h2 id="移动_VoiceOver_Cursor_到指定元素">移动 VoiceOver Cursor 到指定元素</h2><p>当屏幕的布局变更时，VoiceOver 对焦环，也称为 <em>VoiceOver cursor</em>,会重置它的位置到在屏幕上从左到右，从上到下第一个显示的元素。当视图被呈现在屏幕上时你可以更改 VoiceOver cursor 所在的第一个元素。</p>
+<p>例如，当导航控制器推送一个视图控制器到导航堆栈时，VoiceOver cursor 会落在导航栏的返回按钮上。根据你的应用程序的不同，移动到导航栏的标题可能更有意义，或者其它元素。 </p>
+<p>要想这样做，调用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKitFunctionReference/index.html#//apple_ref/c/func/UIAccessibilityPostNotification" target="_blank" rel="external">UIAccessibilityPostNotification</a> 并共同使用通知 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibility_Protocol/index.html#//apple_ref/c/data/UIAccessibilityScreenChangedNotification" target="_blank" rel="external">UIAccessibilityScreenChangedNotification</a> (它告示 VoiceOver 屏幕的内容已发生变更) 和你想对焦的元素，如在清单 9-1 所示。</p>
+<p><strong>清单 9-1</strong> 投递一个无障碍访问通知更改第一个念出的元素</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">MyViewController</span></span></span><br><span class="line">- (<span class="keyword">void</span>)viewDidAppear:(<span class="built_in">BOOL</span>)animated</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidAppear:animated];</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">UIAccessibilityPostNotification</span>(<span class="built_in">UIAccessibilityScreenChangedNotification</span>,</span><br><span class="line">                                    <span class="keyword">self</span><span class="variable">.myFirstElement</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>如果只是布局的更改而不是屏幕的内容更改，例如从竖屏切换到横屏，使用通知 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibility_Protocol/index.html#//apple_ref/c/data/UIAccessibilityLayoutChangedNotification" target="_blank" rel="external">UIAccessibilityLayoutChangeNotification</a> 替代 <code>UIAccessibilityScreenChangeNotification</code>。</p>
+<blockquote>
+<p><strong>说明：</strong>设备方向旋转会触发布局更改，这会重置 VoiceOver cursor 的位置。</p>
+</blockquote>
+<h2 id="响应特定的_VoiceOver_手势">响应特定的 VoiceOver 手势</h2><p>这里有几个 VoiceOver 用户可以执行触发自定义动作的特殊手势。这些手势是特殊的因为你可以定义它们的行为，不像标准化的 VoiceOver 手势。你可以通过在视图控制器重写某些方法检测手势。</p>
+<p>手势会首先为指令检测拥有 VoiceOver cursor 的视图并沿着响应链向上遍历直到找到相应的 VoiceOver 手势方法的实现。如果没找到实现，手势会触发系统默认手势动作。例如，Magic Tap 手势如果没有从应用程序委托找到当前视图的 Magic Tap 实现，那么 Magic Tap 会从音乐应用的播放列表中播放和暂停音乐。</p>
+<p>尽管你可以提供任意你想要的自定义逻辑，但 VoiceOver 用户期望这些特殊动作能够遵循某些准则，像其它手势一样，你的 VoiceOver 手势的实现应该遵循下面的模式使用户可以直观的与无障碍访问应用程序交互。</p>
+<p>这里有五个特殊 VoiceOver 手势：</p>
+<ul>
+<li><strong>Escape。</strong>两个手指以 Z 字形扫动，退出模态窗口，或返回导航层次结构上一级。</li>
+<li><strong>Magic Tap。</strong>两个手指双击执行最有意义的动作。</li>
+<li><strong>Three-Finger Scroll。</strong>三根手指轻扫使垂直或水平的内容滚动。</li>
+<li><strong>Increment and Decrement。</strong>一个手指往上或往下轻扫在可调整的元素中增加或减去给定的值。无障碍访问应用程序中可调整的元素必须实现这些方法。</li>
+</ul>
+<blockquote>
+<p><strong>说明：</strong>所有特殊 VoiceOver 手势方法会返回用来决定是否传播到响应链的一个布尔值。要禁止传播，返回 YES；否则，返回 NO。</p>
+</blockquote>
+<h3 id="Escape">Escape</h3><p>如果你呈现了覆盖内容的视图－例如模态窗口或弹出提示，你应该重写 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibilityAction_Protocol/index.html#//apple_ref/occ/instm/NSObject/accessibilityPerformEscape" target="_blank" rel="external">accessibilityPerformEscape</a> 方法使覆盖视图退出。Escape 手势的功能与电脑键盘上 <code>ESC</code> 键的功能类似；它可以取消临时对话框或标签使主内容显示。</p>
+<p>重写 Escape 手势的另一个使用情况是返回导航层次结构的上一级。<code>UINavigationController</code> 默认实现了这个方法。如果你正在设计自己的导航控制器，你应该设置 Escape 手势使它可以在你的导航堆栈中移动一级，因为这个是 VoiceOver 用户期望的功能。</p>
+<h3 id="Magic_Tap">Magic Tap</h3><p>Magic Tap 的目的是快速执行一些常用的或最有意义的动作。例如，在图像应用程序，它可以接听或挂断电话。在时钟应用程序，它可以启动和停止秒表。如果你想通过手势触发一个动作而不管 VoiceOver cursor 是否位于视图上，你应该在你的视图控制器实现 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibilityAction_Protocol/index.html#//apple_ref/occ/instm/NSObject/accessibilityPerformMagicTap" target="_blank" rel="external">accessibilityPerformMagicTap</a> 方法。</p>
+<p>说明：如果你不喜欢 Magic Tap 手势执行与应用程序内其它位置相同的动作，最适当的方式是在应用程序委托实现 <code>accessibilityPerformMagicTap</code> 方法。</p>
+<h3 id="Three-Finger_Scroll">Three-Finger Scroll</h3><p>当 VoiceOver 用户执行三根手指滚动时会触发 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibilityAction_Protocol/index.html#//apple_ref/occ/instm/NSObject/accessibilityScroll:" target="_blank" rel="external">accessibilityScroll:</a> 方法。它会接收 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibilityAction_Protocol/index.html#//apple_ref/c/tdef/UIAccessibilityScrollDirection" target="_blank" rel="external">UIAccessibilityScrollDirection</a> 参数，你可以用来判断滚动的方向。如果你有自定义滚动视图，可能更适合在视图自身实现这个方法。</p>
+<h3 id="Increment_and_Decrement">Increment and Decrement</h3><p>可调整数值的元素需要 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibilityAction_Protocol/index.html#//apple_ref/occ/instm/NSObject/accessibilityIncrement" target="_blank" rel="external">accessibilityIncreament</a> 和 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibilityAction_Protocol/index.html#//apple_ref/occ/instm/NSObject/accessibilityDecrement" target="_blank" rel="external">accessibilityDecrement</a> 方法并应该在视图自身中实现。</p>
+<h2 id="观测无障碍访问通知">观测无障碍访问通知</h2><p>你可以监听无障碍访问通知触发回调函数。某些情况下，UIKit 会发出无障碍访问通知，你的应用程序可以观测这些通知拓展应用程序的无障碍访问功能。</p>
+<p>例如，如果你监听了 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibility_Protocol/index.html#//apple_ref/c/data/UIAccessibilityAnnouncementDidFinishNotification" target="_blank" rel="external">UIAccessibilityAnnouncementDidFinishNotification</a> 通知，你可以触发一个方法在 VoiceOver 的语音结束时执行。Apple 在 iBooks 应用程序实现了这个功能。当 VoiceOver 完成电子书的其中一行的阅读时 iBooks 会发出通知触发下一行的阅读。如果是本页的最后一行，回调中的逻辑会告诉 iBooks 让它翻页并继续阅读一旦到达文章最后一行就结束阅读。这种一行接一行的跟随执行使 VoiceOver 在导航文本的同时为用户提供了无缝，不间断的阅读体验。</p>
+<p>要注册成无障碍访问通知观测者，可以使用默认的通知中心。然后创建一个与 <code>selector</code> 参数中所提供的方法的同名方法，如清单 9-2 所示。</p>
+<p><strong>清单 9-2</strong>注册成为无障碍访问通知观测者。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">MyViewController</span></span></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line"> </span><br><span class="line">    [[<span class="built_in">NSNotificationCenter</span> defaultCenter]</span><br><span class="line">        addObserver:<span class="keyword">self</span></span><br><span class="line">           selector:<span class="keyword">@selector</span>(didFinishAnnouncement:)</span><br><span class="line">               name:<span class="built_in">UIAccessibilityAnnouncementDidFinishNotification</span></span><br><span class="line">             object:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">- (<span class="keyword">void</span>)didFinishAnnouncement:(<span class="built_in">NSNotification</span> *)dict</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *valueSpoken = [[dict userInfo] objectForKey:<span class="built_in">UIAccessibilityAnnouncementKeyStringValue</span>];</span><br><span class="line">    <span class="built_in">NSString</span> *wasSuccessful = [[dict userInfo] objectForKey:<span class="built_in">UIAccessibilityAnnouncementKeyWasSuccessful</span>];</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p><code>UIAccessibilityAnnouncementDidFinishNotification</code> 预计会有一个 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSNotification_Class/index.html#//apple_ref/occ/cl/NSNotification" target="_blank" rel="external">NSNotification</a> 字典作为参数你可以判断语音的值并判断是否已经连续的说完。语音可能会中断，例如 VoiceOver 使用者执行停止语音手势或者在语音结束之前扫到另一个元素。</p>
+<p>另一个有用的通知是 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibility_Protocol/index.html#//apple_ref/c/data/UIAccessibilityVoiceOverStatusChanged" target="_blank" rel="external">UIAccessibilityVoiceOverStatusChanged</a>。它可以检测 VoiceOver 的打开或关闭切换。如果 VoiceOver 在应用程序的外部切换开关，当你的应用程序重新回到前台时会接收到这个通知。因为 <code>UIAccessibilityVoiceOverStatusChanged</code> 不期望接收任何参数，所以在 selector 中的方法不需要附加冒号 (<code>:</code>)。</p>
+<p>需要可以观测的通知的完整列表，可以阅读 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibility_Protocol/index.html#//apple_ref/doc/uid/TP40008786" target="_blank" rel="external"><em>UIAccessibility Protocol Reference</em></a> 中的 “Notifications”。记住你可能只会观测到可以通过 UIKit 发布的通知，它是 <code>NSString</code> 对象，而没有通过你的应用程序发布的通知，它们是 <code>int</code> 类型的通知。</p>
+<hr>
+<p><a href="../VCP0"><em>iOS 翻译 《View Controller Programming Guide for iOS：Introduction》</em></a> </p>
+<p><a href="../VCP1"><em>iOS 翻译 《View Controller Programming Guide for iOS：View Controller Basics》</em></a> </p>
+<p><a href="../VCP2"><em>iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in Your App》</em></a> </p>
+<p><a href="../VCP3"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》</em></a></p>
+<p><a href="../VCP4"><em>iOS 翻译 《View Controller Programming Guide for iOS：Resource Management in View Controllers》</em></a> </p>
+<p><a href="../VCP5"><em>iOS 翻译 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》</em></a> </p>
+<p><a href="../VCP6"><em>iOS 翻译 《View Controller Programming Guide for iOS：Resizing the View Controller’s Views》</em></a> </p>
+<p><a href="../VCP7"><em>iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》</em></a> </p>
+<p><a href="../VCP8"><em>iOS 翻译 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》</em></a> </p>
+<p><em>iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controllers’s Perspective》</em></p>
+<p><a href="../VCP10"><em>iOS 翻译 《View Controller Programming Guide for iOS：Presenting View Controllers from Other View Controllers》</em></a> </p>
+<p><a href="../VCP11"><em>iOS 翻译 《View Controller Programming Guide for iOS：Coordinating Efforts Between View Controllers》</em></a> </p>
+<p><a href="../VCP12"><em>iOS 翻译 《View Controller Programming Guide for iOS：Enabling Edit Mode in a View Controller》</em></a> </p>
+<p><a href="../VCP13"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Segues》</em></a> </p>
+<p><a href="../VCP14"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Container View Controllers》</em></a></p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/VCP10/">iOS 翻译 《View Controller Programming Guide for iOS：Presenting View Controllers from Other View Controllers》</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/SDT0/">iOS 笔记 《Start Developing iOS Apps Today：Defining the Interaction》</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/VCP9/"
+               data-title="iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controller’s Perspective》" data-url="http://yoursite.com/2015/VCP9/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
   
-<script>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从视图控制器的角度看无障碍访问"><span class="nav-number">1.</span> <span class="nav-text">从视图控制器的角度看无障碍访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#移动_VoiceOver_Cursor_到指定元素"><span class="nav-number">1.1.</span> <span class="nav-text">移动 VoiceOver Cursor 到指定元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#响应特定的_VoiceOver_手势"><span class="nav-number">1.2.</span> <span class="nav-text">响应特定的 VoiceOver 手势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Escape"><span class="nav-number">1.2.1.</span> <span class="nav-text">Escape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Magic_Tap"><span class="nav-number">1.2.2.</span> <span class="nav-text">Magic Tap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Three-Finger_Scroll"><span class="nav-number">1.2.3.</span> <span class="nav-text">Three-Finger Scroll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Increment_and_Decrement"><span class="nav-number">1.2.4.</span> <span class="nav-text">Increment and Decrement</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观测无障碍访问通知"><span class="nav-number">1.3.</span> <span class="nav-text">观测无障碍访问通知</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-62263979-1', 'auto');
   ga('send', 'pageview');
-</script>
+  </script>
 
-</head>
-<body>
-  <div id="container">
-    <header id="header" class="wrapper">
-  <div id="header-inner" class="inner">
-    <h1 id="logo-wrap">
-      <a href="" id="logo">Hexo</a>
-    </h1>
-    <nav id="main-nav">
-      <ul>
-        
-        <li class="main-nav-item">
-          <a href="https://github.com/" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
-        </li>
-      </ul>
-    </nav>
-    <div id="lang-select-wrap">
-      <label id="lang-select-label"><i class="fa fa-globe"></i><span></span></label>
-      <select id="lang-select" data-canonical="">
-        
-      </select>
-    </div>
-    <div id="search-btn-wrap" class="main-nav-item">
-      <a id="search-btn" class="main-nav-link st-search-show-outputs"><i class="fa fa-search"></i></a>
-    </div>
-    <a id="mobile-nav-toggle">
-      <span class="mobile-nav-toggle-bar"></span>
-      <span class="mobile-nav-toggle-bar"></span>
-      <span class="mobile-nav-toggle-bar"></span>
-    </a>
-    <a id="mobile-search-btn" class="st-search-launcher"></a>
-  </div>
-</header>
-    <div id="content-wrap">
-  <div class="wrapper">
-    <div class="inner">
-      <article class="article post" itemscope itemtype="http://schema.org/Article">
-  <header class="article-header">
-    
-      <h1 class="article-title" itemprop="name" data-swiftype-name="title" data-swiftype-type="string">iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controller’s Perspective》</h1>
-    
-    <a href="/2015/VCP9/" class="article-date"><time datetime="2015-06-19T03:46:20.000Z">2015-06-19</time></a>
-  </header>
-  <div class="article-content" itemprop="articleBody" data-swiftype-name="body" data-swiftype-type="text">
-    
-  </div>
-  
-</article>
-    </div>
-  </div>
-</div>
-    <footer id="footer" class="wrapper">
-  <div class="inner">
-    <div id="footer-copyright">
-      &copy; 2015 <a href="https://zespia.tw/" target="_blank">Humyang</a><br>
-      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
-    </div>
-    <div id="footer-links">
-      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
-      <a href="https://github.com/" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
-    </div>
-  </div>
-</footer>
-  </div>
-  <div id="mobile-nav-dimmer"></div>
-  <nav id="mobile-nav">
-  <div id="mobile-nav-inner">
-    <ul id="mobile-nav-list">
-      
-      <li class="mobile-nav-item">
-        <a href="https://github.com/" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
-      </li>
-    </ul>
-    
-  </div>
-  <div id="mobile-lang-select-wrap">
-    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span></span></span>
-    <select id="mobile-lang-select" data-canonical="">
-      
-    </select>
-  </div>
-</nav>
-  <!-- Scripts -->
-<!-- build:js build/js/main.js -->
-<script src="/js/lang_select.js" type="text/javascript"></script>
-<script src="/js/toc.js" type="text/javascript"></script>
-<script src="/js/mobile_nav.js" type="text/javascript"></script>
-<!-- endbuild -->
-<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
-
-<!-- Swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','https://s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
 </body>
 </html>

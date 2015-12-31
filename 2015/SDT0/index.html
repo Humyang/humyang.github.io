@@ -1,164 +1,978 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-<head prefix="og: http://ogp.me/ns#">
-  <meta charset="utf-8">
-  <title>iOS 笔记 《Start Developing iOS Apps Today：Defining the Interaction》 | Humyang</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2015/SDT0/index.html">
-  <!-- Alternative links -->
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
   
-  <!-- Icon -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
-  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
-  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
-  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
-  <meta name="msapplication-TileColor" content="#2f83cd">
-  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
-  <!-- CSS -->
-  <!-- build:css build/css/navy.css -->
-  <link rel="stylesheet" href="/css/navy.css" type="text/css">
-  <!-- endbuild -->
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <!-- RSS -->
-  <link rel="alternative" href="/atom.xml" title="Humyang" type="application/atom+xml">
-  <!-- Open Graph -->
-  <meta name="description" content="讲解应用程序内视图，事件，action，Outlets 之间如何交互。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS 笔记 《Start Developing iOS Apps Today：Defining the Interaction》">
-<meta property="og:url" content="http://yoursite.com/2015/SDT0/index.html">
-<meta property="og:site_name" content="Humyang">
-<meta property="og:description" content="讲解应用程序内视图，事件，action，Outlets 之间如何交互。">
-<meta property="og:image" content="http://yoursite.com/./ModelViewController_c_2x.png">
-<meta property="og:image" content="http://yoursite.com/./view_layer_objects_2x.png">
-<meta property="og:image" content="http://yoursite.com/./segue_callout_2x.png">
-<meta property="og:updated_time" content="2015-11-25T15:39:30.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS 笔记 《Start Developing iOS Apps Today：Defining the Interaction》">
-<meta name="twitter:description" content="讲解应用程序内视图，事件，action，Outlets 之间如何交互。">
-  <!-- Swiftype -->
-  <meta name="st:title" content="iOS 笔记 《Start Developing iOS Apps Today：Defining the Interaction》">
-  <!-- Google Analytics -->
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> iOS 笔记 《Start Developing iOS Apps Today：Defining the Interaction》 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              iOS 笔记 《Start Developing iOS Apps Today：Defining the Interaction》
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-06-15
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/笔记/">笔记</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/SDT0/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/SDT0/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>讲解应用程序内视图，事件，action，Outlets 之间如何交互。</p>
+<a id="more"></a>
+<p><a href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/DefiningtheInteraction.html#//apple_ref/doc/uid/TP40011343-CH7-SW1" target="_blank" rel="external">原文地址</a></p>
+<h2 id="Defining_the_Interaction">Defining the Interaction</h2><blockquote>
+<p>应用程序是基于事件驱动编程，事件的作用，用户 action 和 response action。</p>
+<p>视图控制器定义大量事件逻辑，视图控制器是响应 view 的 action 的对象和把视图填充为内容。</p>
+<p>视图对象是一个管道，视图通过它与数据模型交互。 视图通过应用程序的控制器知道模型数据的更改。</p>
+<p>无论是响应用户 actions 或所定义的导航，由视图控制器负责实现这些行为。</p>
+</blockquote>
+<p>iOS apps are based on <strong><em>event-driven programming</em></strong>. That is, the <strong>flow of the app</strong> is determined by events: <strong>system events and user actions</strong>. The user performs actions on the interface, which trigger events in the app. These events result in the execution of the app’s logic and manipulation of its data. The app’s response to user action is then reflected back in the interface. Because the user, rather than the developer, is in control of when certain pieces of the app code get executed, you want to identify exactly which actions a user can perform and what happens in response to those actions.</p>
+<p>You <strong>define much of your event-handling logic in view controllers</strong>. <strong><em>Controllers</em></strong> are objects that <strong>support your views by responding to user actions</strong> and <strong>populating the views with content</strong>. Controller objects are a <strong>conduit</strong> through which views <strong>interact</strong> with the data model. Views are notified of changes in model data through the app’s controllers, and controllers communicate user-initiated changes—for example, text entered in a text field—to model objects. Whether they’re <strong>responding</strong> to user actions or defining navigation, <strong>controllers implement your app’s behavior</strong>.</p>
+<p><img src="./ModelViewController_c_2x.png" alt=""></p>
+<h3 id="View_Controllers">View Controllers</h3><blockquote>
+<p>视图控制器管理内容视图与它的子视图的层次结构。</p>
+<p>视图控制器不是视图层次结构的一部分，它也不是界面中的元素。它管理层次结构中的视图并提供它们的行为。</p>
+<p>每个视图层次结构都需要一个相应的视图控制器，负责管理界面元素和响应用户交互。</p>
+<p>这意味着需要为每一个内容视图层次结构写一个自定义 UIViewController 类的子类。</p>
+<p>要定义应用程序中的交互，需要使故事板中的视图控制器文件与视图进行通信。通过 actions 和 outlets 定义故事板和源代码文件之间的连接达成这个目的。</p>
+</blockquote>
+<p>After you’ve built a basic view hierarchy, your next step is to control the visual elements and respond to user input. In an iOS app, you use a <strong>view controller (UIViewController) to manage a content view with its hierarchy of subviews</strong>.</p>
+<p><img src="./view_layer_objects_2x.png" alt="image: ../Art/view_layer_objects_2x.png"></p>
+<p>A view controller <strong>isn’t part of the view hierarchy</strong>, and it’s <strong>not an element in your interface</strong>. Instead, it manages the view objects in the hierarchy and provides them with behavior. Each content view hierarchy that you build in your storyboard needs a corresponding view controller, responsible for managing the interface elements and performing tasks in response to user interaction. This usually means <strong>writing a custom UIViewController subclass</strong> for <strong>each content view hierarchy</strong>. If your app has multiple content views, you use a different custom view controller class for each content view.</p>
+<p>View controllers play many roles. They coordinate <strong>the flow of information</strong> between the <strong>app’s data model and the views that display that data</strong>, manage the <strong>life cycle of their content views</strong>, and handle <strong>orientation changes</strong> when the device is rotated. But perhaps their most obvious role is to <strong>respond to user input</strong>.</p>
+<p>You also use view controllers to implement <strong>transitions from</strong> one type of content to another. Because iOS apps have a limited amount of space in which to display content, view controllers provide the infrastructure needed to remove the views of one view controller and replace them with the views of another.</p>
+<p>To define interaction in your app, you make your view controller files communicate with the views in your storyboard. You do this by defining connections between the storyboard and source code files through actions and outlets.</p>
+<h3 id="Actions">Actions</h3><blockquote>
+<p>要定义 action，通过创建和实现一个方法，使用 IBAction 返回类型并带有一个 sender 参数。</p>
+<p>sender 参数指向负责触发 action 的对象。</p>
+<p>IBAction 是特殊关键字，类似 void，但是它可以说明该方法是 action，使你可以在界面构造器中的故事板连接它们 (这也是 IB 前缀的原因)。</p>
+</blockquote>
+<p>An <em>action</em> is a <strong>piece of code</strong> that’s <strong>linked to an event that can occur in your app</strong>. When that event <strong>takes place</strong>, the <strong>code gets executed</strong>. You can define an action to accomplish anything from manipulating a piece of data to updating the user interface. You use actions to drive the flow of your app in response to user or system events.</p>
+<p>You define an action by creating and implementing a method with an <code>IBAction</code> return type and a <code>sender</code> parameter.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">IBAction</span>)restoreDefaults:(<span class="keyword">id</span>)sender;</span><br></pre></td></tr></table></figure>
+<p>The <code>sender</code> parameter points to the <strong>object that was responsible for triggering the action</strong>. The <code>IBAction</code> return type is a special keyword; it’s like the <code>void</code> keyword, but it indicates that the method is an action that you can connect to from your storyboard in Interface Builder (which is why the keyword has the <code>IB</code> prefix). You’ll learn more about how to link an <code>IBAction</code> action to an element in your storyboard in <a href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/SecondTutorial.html#//apple_ref/doc/uid/TP40011343-CH8-SW1" target="_blank" rel="external">Tutorial: Storyboards</a>.</p>
+<h3 id="Outlets">Outlets</h3><blockquote>
+<p>Outlets 连接源文件中故事板的对象。</p>
+<p>将故事板中的对象按住 Control 拖动到视图控制器源文件中可以为你生成属性 (源代码编辑窗口)。</p>
+</blockquote>
+<p><code>Outlets</code> provide a way to <strong>reference interface objects</strong>—the objects you added to your storyboard—from source code files. To create an outlet, Control-drag from a particular object in your storyboard to a view controller file. This operation creates a property for the object in your view controller file, which lets you <strong>access and manipulate that object from code at runtime</strong>. For example, in the second tutorial, you’ll create an outlet for the text field in your ToDoList app to be able to access the text field’s contents in code.</p>
+<p>Outlets are defined as <code>IBOutlet</code> properties.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UITextField</span> *textField;</span><br></pre></td></tr></table></figure>
+<p>The <code>IBOutlet</code> keyword tells Xcode that you can connect to this property from Interface Builder. You’ll learn more about how to connect an outlet from a storyboard to source code in <a href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/SecondTutorial.html#//apple_ref/doc/uid/TP40011343-CH8-SW1" target="_blank" rel="external">Tutorial: Storyboards</a>.</p>
+<h3 id="Controls">Controls</h3><blockquote>
+<p>Controls 让你的代码可以从用户界面接收信息。</p>
+<p>用户与界面交互时，产生 control event。</p>
+<p>用户可以在 control 上做各种物理手势，产生 control event。例如上划，拖动，按下。</p>
+<p>三种常见的 control event 分类：触摸和拖动事件，编辑事件，值更改事件。</p>
+</blockquote>
+<p>A <em>control</em> is a user interface object such as a button, slider, or switch that users manipulate to interact with content, provide input, navigate within an app, and perform other actions that you define. <strong>Controls enable your code to receive messages from the user interface</strong>.</p>
+<p>When a user interacts with a control, <strong>a control event is created.</strong> A <em>control event</em> represents <strong>various physical gestures</strong> that users can make on controls, such as lifting a finger from a control, dragging a finger onto a control, and touching down within a text field.</p>
+<p>There are three general categories of control events:</p>
+<ul>
+<li><strong>Touch and drag events</strong> occur when a user interacts with a control with a touch or drag. When a user initially touches a finger on a button, for example, the Touch Down Inside event is triggered; if the user drags out of the button, the respective drag events are triggered. Touch Up Inside is sent when the user lifts a finger off the button while still within the bounds of the button’s edges. If the user has dragged a finger outside the button before lifting the finger, effectively canceling the touch, the Touch Up Outside event is triggered.</li>
+<li><strong>Editing events</strong> occur when a user edits a text field.</li>
+<li><strong>Value-changed</strong> events occur when a user manipulates a control, causing it to emit a series of different values.</li>
+</ul>
+<p>As you define the interactions, know the action that’s associated with every control in your app and then make that control’s purpose obvious to users in your interface.</p>
+<h3 id="Navigation_Controllers">Navigation Controllers</h3><blockquote>
+<p>如果应用程序有一个以上的内容视图层次结构，则需要在它们之间转换，需要用到特殊的视图控制器：navigation controller</p>
+<p>通过特殊的导航控制器管理的视图控制器集合被称为 navigation stack，是一个后进先出的自定义视图控制器对象集合。</p>
+<p>第一个被添加到导航堆栈的被称为 <em>root view controller</em>,并且它永远不会退出堆栈。</p>
+<p>导航控制器的主要工作是管理内容视图控制器的呈现。它也负责呈现属于它自己的自定义视图，如提供用户当前在堆栈中位置的屏幕顶部导航栏，包含按钮和其它你的自定义按钮。</p>
+</blockquote>
+<p>If your app has<strong> more than one</strong> content view hierarchy, you need to be able to <strong>transition between them</strong>. For this, you’ll use a <strong>specialized type</strong> of view controller: a navigation controller (<code>UINavigationController</code>). A <em>navigation controller</em> <strong>manages transitions backward and forward</strong> through a series of view controllers, such as when a user navigates through email accounts, inbox messages, and individual emails in the iOS Mail app.</p>
+<p>The set of view controllers managed by a particular navigation controller is called its <strong>navigation stack</strong>. The <em>navigation stack</em> is a last-in, first-out collection of custom view controller objects. The first item added to the stack becomes the <em>root view controller</em> and is never popped off the stack. Other view controllers can be pushed on or popped off the navigation stack.</p>
+<p>Although a navigation controller’s primary job is to manage the <strong>presentation of your content view controllers</strong>, it’s also responsible for <strong>presenting custom views of its own</strong>. Specifically, it presents a <strong>navigation bar</strong>—the view at the top of the screen that provides context about the <strong>user’s place in the navigation hierarchy</strong>—which contains a back button and other buttons you can customize. Every view controller that’s added to the navigation stack presents this navigation bar. You are <strong>responsible for configuring the navigation bar</strong>.</p>
+<p>You generally don’t have to do any work to <strong>pop a view controller off of the navigation stack</strong>; the <strong>back button</strong> provided by the navigation controller<strong> handles this for you</strong>. However, you do have to manually <strong>push a view controller onto the stack</strong>. You can do this <strong>using storyboards</strong>.</p>
+<h3 id="Use_Storyboards_to_Define_Navigation">Use Storyboards to Define Navigation</h3><blockquote>
+<p>大部分应用程序的故事板包含场景的序列 场景之间通过 segue 连接。</p>
+<p>Present modally 类型的 segue，由 presenting 视图控制器负责 dismissing 它所创建和呈现的视图控制器。</p>
+<p>除了 segues，scenes 也可能通过 relationship 连接。例如导航控制器和根视图控制器之间的关系，表示由导航控制器容纳根视图控制器的关系。</p>
+</blockquote>
+<p>So far, you’ve learned about using storyboards to create a single screen of content in your app. Now, you’ll learn about <strong>using them to define the flow between multiple scenes in your app</strong>.</p>
+<p>In the first tutorial, the storyboard you worked with had one scene. In most apps, a storyboard is <strong>composed of a sequence of scenes</strong>, each of which represents a <strong>view controller and its view hierarchy</strong>. Scenes are connected by <strong>segues</strong>, which represent a <strong>transition</strong> between two view controllers: the source and the destination.</p>
+<p><img src="./segue_callout_2x.png" alt=""></p>
+<p>There are several types of segues you can create in a storyboard:</p>
+<ul>
+<li><strong>Show.</strong> A show segue pushes <strong>new content</strong> on <strong>top of the current view controller stack</strong>. Where the content shows up depends on the layout of view controllers in the scene.</li>
+<li><strong>Show detail.</strong> A show detail segue either pushes new content on top of the current view controller stack or replaces the content that’s shown, depending on the layout of view controllers in the scene.</li>
+<li><strong>Present modally.</strong> A modal segue is <strong>one view controller</strong> presenting <strong>another controller modally</strong>, requiring a user to perform an operation on the presented controller before returning to the main flow of the app. A modal view controller <strong>isn’t added to a navigation stack</strong>; instead, it’s generally considered to be <strong>a child of the presenting view controller</strong>. The <strong>presenting view controller</strong> is responsible for <strong>dismissing the modal view controller it created and presented</strong>.</li>
+<li><strong>Popover presentation.</strong> The presented view controller is shown as a popover anchored to an existing view.</li>
+<li><strong>Custom.</strong> You can define your own custom transition by subclassing UIStoryboardSegue.</li>
+<li><strong>Unwind.</strong> An unwind segue <strong>moves backward</strong> through one or more segues to return the user to an existing instance of a view controller. You use unwind segues to implement <strong>reverse navigation</strong>.</li>
+</ul>
+<p>In addition to segues, scenes may be connected by a <em>relationship</em>. For example, there’s a relationship between the navigation controller and its root view controller. In this case, the relationship represents the containment of the root view controller by the navigation controller.</p>
+<p>Now that you’ve learned the basics of working with views and view controllers in storyboards, it’s time to incorporate this knowledge into your ToDoList app in the next tutorial.</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/VCP9/">iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controller’s Perspective》</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/VCP8/">iOS 翻译 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/SDT0/"
+               data-title="iOS 笔记 《Start Developing iOS Apps Today：Defining the Interaction》" data-url="http://yoursite.com/2015/SDT0/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
   
-<script>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Defining_the_Interaction"><span class="nav-number">1.</span> <span class="nav-text">Defining the Interaction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#View_Controllers"><span class="nav-number">1.1.</span> <span class="nav-text">View Controllers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Actions"><span class="nav-number">1.2.</span> <span class="nav-text">Actions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Outlets"><span class="nav-number">1.3.</span> <span class="nav-text">Outlets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controls"><span class="nav-number">1.4.</span> <span class="nav-text">Controls</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigation_Controllers"><span class="nav-number">1.5.</span> <span class="nav-text">Navigation Controllers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use_Storyboards_to_Define_Navigation"><span class="nav-number">1.6.</span> <span class="nav-text">Use Storyboards to Define Navigation</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-62263979-1', 'auto');
   ga('send', 'pageview');
-</script>
+  </script>
 
-</head>
-<body>
-  <div id="container">
-    <header id="header" class="wrapper">
-  <div id="header-inner" class="inner">
-    <h1 id="logo-wrap">
-      <a href="" id="logo">Hexo</a>
-    </h1>
-    <nav id="main-nav">
-      <ul>
-        
-        <li class="main-nav-item">
-          <a href="https://github.com/" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
-        </li>
-      </ul>
-    </nav>
-    <div id="lang-select-wrap">
-      <label id="lang-select-label"><i class="fa fa-globe"></i><span></span></label>
-      <select id="lang-select" data-canonical="">
-        
-      </select>
-    </div>
-    <div id="search-btn-wrap" class="main-nav-item">
-      <a id="search-btn" class="main-nav-link st-search-show-outputs"><i class="fa fa-search"></i></a>
-    </div>
-    <a id="mobile-nav-toggle">
-      <span class="mobile-nav-toggle-bar"></span>
-      <span class="mobile-nav-toggle-bar"></span>
-      <span class="mobile-nav-toggle-bar"></span>
-    </a>
-    <a id="mobile-search-btn" class="st-search-launcher"></a>
-  </div>
-</header>
-    <div id="content-wrap">
-  <div class="wrapper">
-    <div class="inner">
-      <article class="article post" itemscope itemtype="http://schema.org/Article">
-  <header class="article-header">
-    
-      <h1 class="article-title" itemprop="name" data-swiftype-name="title" data-swiftype-type="string">iOS 笔记 《Start Developing iOS Apps Today：Defining the Interaction》</h1>
-    
-    <a href="/2015/SDT0/" class="article-date"><time datetime="2015-06-15T14:39:20.000Z">2015-06-15</time></a>
-  </header>
-  <div class="article-content" itemprop="articleBody" data-swiftype-name="body" data-swiftype-type="text">
-    
-  </div>
-  
-</article>
-    </div>
-  </div>
-</div>
-    <footer id="footer" class="wrapper">
-  <div class="inner">
-    <div id="footer-copyright">
-      &copy; 2015 <a href="https://zespia.tw/" target="_blank">Humyang</a><br>
-      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
-    </div>
-    <div id="footer-links">
-      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
-      <a href="https://github.com/" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
-    </div>
-  </div>
-</footer>
-  </div>
-  <div id="mobile-nav-dimmer"></div>
-  <nav id="mobile-nav">
-  <div id="mobile-nav-inner">
-    <ul id="mobile-nav-list">
-      
-      <li class="mobile-nav-item">
-        <a href="https://github.com/" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
-      </li>
-    </ul>
-    
-  </div>
-  <div id="mobile-lang-select-wrap">
-    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span></span></span>
-    <select id="mobile-lang-select" data-canonical="">
-      
-    </select>
-  </div>
-</nav>
-  <!-- Scripts -->
-<!-- build:js build/js/main.js -->
-<script src="/js/lang_select.js" type="text/javascript"></script>
-<script src="/js/toc.js" type="text/javascript"></script>
-<script src="/js/mobile_nav.js" type="text/javascript"></script>
-<!-- endbuild -->
-<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
-
-<!-- Swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','https://s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
 </body>
 </html>

@@ -1,162 +1,949 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-<head prefix="og: http://ogp.me/ns#">
-  <meta charset="utf-8">
-  <title>iOS DEMO 项目：SPHChatCollectionView 分析 | Humyang</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2015/iOS-DEMO-SPH/index.html">
-  <!-- Alternative links -->
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
   
-  <!-- Icon -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-touch-icon-152x152.png">
-  <link rel="icon" type="image/png" href="/icon/favicon-196x196.png" sizes="196x196">
-  <link rel="icon" type="image/png" href="/icon/favicon-160x160.png" sizes="160x160">
-  <link rel="icon" type="image/png" href="/icon/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/png" href="/icon/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/icon/favicon-32x32.png" sizes="32x32">
-  <meta name="msapplication-TileColor" content="#2f83cd">
-  <meta name="msapplication-TileImage" content="/icon/mstile-144x144.png">
-  <!-- CSS -->
-  <!-- build:css build/css/navy.css -->
-  <link rel="stylesheet" href="/css/navy.css" type="text/css">
-  <!-- endbuild -->
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <!-- RSS -->
-  <link rel="alternative" href="/atom.xml" title="Humyang" type="application/atom+xml">
-  <!-- Open Graph -->
-  <meta name="description" content="网络下载的聊天程序界面 DEMO 的源代码整理，日后用到时作为参考。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS DEMO 项目：SPHChatCollectionView 分析">
-<meta property="og:url" content="http://yoursite.com/2015/iOS-DEMO-SPH/index.html">
-<meta property="og:site_name" content="Humyang">
-<meta property="og:description" content="网络下载的聊天程序界面 DEMO 的源代码整理，日后用到时作为参考。">
-<meta property="og:image" content="http://yoursite.com/./1-4capInset.png">
-<meta property="og:updated_time" content="2015-11-25T15:39:30.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS DEMO 项目：SPHChatCollectionView 分析">
-<meta name="twitter:description" content="网络下载的聊天程序界面 DEMO 的源代码整理，日后用到时作为参考。">
-  <!-- Swiftype -->
-  <meta name="st:title" content="iOS DEMO 项目：SPHChatCollectionView 分析">
-  <!-- Google Analytics -->
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> iOS DEMO 项目：SPHChatCollectionView 分析 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              iOS DEMO 项目：SPHChatCollectionView 分析
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-08
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/备忘/">备忘</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/iOS-DEMO-SPH/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/iOS-DEMO-SPH/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>网络下载的聊天程序界面 DEMO 的源代码整理，日后用到时作为参考。</p>
+<a id="more"></a>
+<p><a href="https://github.com/sibahota059/SPHChatCollectionView" target="_blank" rel="external">源文件地址</a>，项目文件名称是 SPHChatCollectionView-master。自己照着这个项目另外写了一遍，变量名称也跟着改了一些。</p>
+<h1 id="源码逻辑分析">源码逻辑分析</h1><p>1.在 AppDelegate 中初始化视图控制器并分配到根视图控制器。</p>
+<p>2.视图控制器在 viewDidLoad 中调用 SetupDummyMessages 加载数据。并注册了 CELL 的 xib 文件。视图控制器使用 collectionView:layout:sizeForItemAtIndexPath: 调整文字内容的 CELL 尺寸。</p>
+<p>3.在视图控制器的委托 collectionView:cellForItemAtIndexPath: 读取数据，实例化 CCBCollectionViewCell，调用 CCBCollectionViewCell 的 setFeedData 生成聊天界面。</p>
+<p>4.在 setFeedData 中，根据数据类型判断生成图片气泡还是文字气泡。</p>
+<p>5.生成文字气泡，使用 CCBTextBubbleView 类。生成图片气泡，使用 CCBImageBubbleView 类。</p>
+<h1 id="AppDelegate">AppDelegate</h1><h2 id="application:didFinishLaunchingWithOptions:">application:didFinishLaunchingWithOptions:</h2><p>从这个函数中分配当前视图控制器和根视图控制器，并使窗口可见，所以调试第一步从这里开始</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    <span class="comment">// Override point for customization after application launch.</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.window</span> = [[<span class="built_in">UIWindow</span> alloc] initWithFrame:[[<span class="built_in">UIScreen</span> mainScreen] bounds]];</span><br><span class="line">    <span class="comment">//初始化 CCBViewCOntroller 类，在 viewDidLoad 中执行其它操作</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.viewController</span> = [[CCBViewController alloc] initWithNibName:<span class="string">@"CCBViewController"</span> bundle:<span class="literal">nil</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.window</span><span class="variable">.rootViewController</span> = <span class="keyword">self</span><span class="variable">.viewController</span>;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.window</span> makeKeyAndVisible];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">```objc</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#CCBViewController</span></span><br><span class="line"></span><br><span class="line">这个程序只有一个视图控制器，绑定了从 <span class="built_in">UIViewController</span> 继承的 CCBViewController 类，实现了 <span class="built_in">UICollectionViewDelegate</span> 和 <span class="built_in">UICollectionViewDataSource</span> 协议。界面从 xib 文件加载，在 xib 文件中，作为视图控制器的控件是 View，使用 CollectionView 作为存放对话行的内容，对话行使用 CCBCollectionViewCell 类来自定义外观，行在视图控制器的 collectionView:cellForItemAtIndexPath 加载并设置外观。</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">##viewDidLoad</span></span><br><span class="line"></span><br><span class="line">```objc</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//在这里注册 xib 中的 CELL，经过注册的 CELL 才可以使用。</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.sphChatTable</span> registerNib:[<span class="built_in">UINib</span> nibWithNibName:<span class="string">@"Cell"</span> bundle:<span class="literal">nil</span>] forCellWithReuseIdentifier:CellIdentifier];</span><br><span class="line">    <span class="comment">//设置聊天的对话内容数据 这个函数中会调用 [self.sphChatTable reloadData]; 使 CollectionView 重新加载它的 ITEM 数据</span></span><br><span class="line">    [<span class="keyword">self</span> SetupDummyMessages];</span><br><span class="line"></span><br><span class="line">	....</span><br><span class="line">	....</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">```objc</span><br><span class="line"><span class="preprocessor">##collectionView:cellForItemAtIndexPath:</span></span><br><span class="line"></span><br><span class="line">最常用的函数，按顺序生成每一行 CELL。</span><br><span class="line"></span><br><span class="line">```objc</span><br><span class="line">- (<span class="built_in">UICollectionViewCell</span> *)collectionView:(<span class="built_in">UICollectionView</span> *)collectionView cellForItemAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">CCBCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//设置 cell 属性</span></span><br><span class="line">    cell<span class="variable">.layer</span><span class="variable">.shouldRasterize</span> = <span class="literal">YES</span>;</span><br><span class="line">    cell<span class="variable">.layer</span><span class="variable">.rasterizationScale</span> = [<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.scale</span>;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span><br><span class="line">     </span><br><span class="line">     资料地址：http://jeffreysambells.com/2013/03/01/asynchronous-operations-in-ios-with-grand-central-dispatch</span><br><span class="line">     C 语言的 API，GCD。</span><br><span class="line">     </span><br><span class="line">     代码块内的代码将会发送给第一个参数中指定的线程执行</span><br><span class="line">     </span><br><span class="line">     GCD 队列可以并发执行或者排队执行(当它们是一个队列，并且一个执行完成之后后面的接着执行)</span><br><span class="line">     </span><br><span class="line">     完整笔记地址：http://humyang.github.io/2015/GCDIntro/</span><br><span class="line">     </span><br><span class="line">     */</span></span><br><span class="line">    <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^</span><br><span class="line">                   &#123;</span><br><span class="line">                       <span class="comment">//        循环该表格行中所有子视图,将子视图从父视图中移除</span></span><br><span class="line"></span><br><span class="line">                       <span class="keyword">for</span> (<span class="built_in">UIView</span> *v <span class="keyword">in</span> [cell<span class="variable">.contentView</span> subviews])</span><br><span class="line">                           [v removeFromSuperview];      </span><br><span class="line">                                            </span><br><span class="line">                       <span class="comment">//判断该行当前是否处于可见状态</span></span><br><span class="line">                       <span class="keyword">if</span> ([<span class="keyword">self</span><span class="variable">.sphChatTable</span><span class="variable">.indexPathsForVisibleItems</span> containsObject:indexPath])</span><br><span class="line">                       &#123;</span><br><span class="line">                       <span class="comment">//根据对话内容的不同，生成不同样式的 CELL 对话界面</span></span><br><span class="line">                           [cell setFeedData:(CCB_PARAM_List*)[sphBubbledata objectAtIndex:indexPath<span class="variable">.row</span>]];</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment">//    CCB_PARAM_List *obj =(CCB_PARAM_List *)[sphBubbledata objectAtIndex:indexPath.row];</span></span><br><span class="line"><span class="comment">//    cell.ttlabel.text=obj.chat_message;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cell;</span><br><span class="line">&#125;</span><br><span class="line">```objc</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">##setFeedData:</span></span><br><span class="line"></span><br><span class="line">这个函数内是主要的设置对话界面的样式，通过 sphBubbledata<span class="variable">.chat_media_type</span> 判断如何渲染对话界面</span><br><span class="line"></span><br><span class="line">```objc</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ([feed_data<span class="variable">.chat_media_type</span> isEqualToString:kSTextByme]) </span><br><span class="line">&#123;</span><br><span class="line">	....</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> ([feed_data<span class="variable">.chat_media_type</span> isEqualToString:kSTextByOther])</span><br><span class="line">&#123;</span><br><span class="line">	....</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> ([feed_data<span class="variable">.chat_media_type</span> isEqualToString:kSImagebyme])</span><br><span class="line">&#123;</span><br><span class="line">	....</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">```objc</span><br><span class="line"></span><br><span class="line">下面是其中一个条件的执行语句</span><br><span class="line"></span><br><span class="line">```objc</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ([feed_data<span class="variable">.chat_media_type</span> isEqualToString:kSTextByme]) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//生成聊天文本气泡</span></span><br><span class="line">        CCBTextBubbleView *textMessageBubble=[[CCBTextBubbleView alloc]</span><br><span class="line">                                              initWithText:feed_data<span class="variable">.chat_message</span></span><br><span class="line">                                              withColor:GREEN_TEXT_BUBBLE_COLOR</span><br><span class="line">                                              withHighlightColor:[<span class="built_in">UIColor</span> whiteColor]</span><br><span class="line">                                              withTailDirection:MessageBubbleViewButtonTailDirectionRight</span><br><span class="line">                                              maxWidth:MAX_BUBBLE_WIDTH];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/*</span><br><span class="line">         </span><br><span class="line">         </span><br><span class="line">         -sizeToFit should not be called if you are using auto-layout. That's part of the 'old' system.</span><br><span class="line">         </span><br><span class="line">         调整聊天文本气泡内文字的位置，类重写了这个方法，自定义了一些修改。</span><br><span class="line">         */</span></span><br><span class="line">        [textMessageBubble sizeToFit];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//设置聊天文本气泡的位置和宽度感度，图 1-2 对比了修改参数后的变化 从 265 改为 200</span></span><br><span class="line">        textMessageBubble<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(<span class="number">265</span>-textMessageBubble<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="number">0</span>, textMessageBubble<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, textMessageBubble<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>+<span class="number">20</span>);</span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.contentView</span> addSubview:textMessageBubble];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//设置时间文本</span></span><br><span class="line">        <span class="built_in">UILabel</span> *timeLabel = [[<span class="built_in">UILabel</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>-<span class="number">30</span>, <span class="number">55</span>, <span class="number">20</span>)];</span><br><span class="line">        timeLabel<span class="variable">.text</span> = feed_data<span class="variable">.chat_date_time</span>;</span><br><span class="line">        timeLabel<span class="variable">.font</span> = [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">9</span>];</span><br><span class="line">        timeLabel<span class="variable">.textColor</span> = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.contentView</span> addSubview:timeLabel];</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">//设置发送状态，发送中时以一个动画表示，完成后分为成功和失败两种情况</span></span><br><span class="line">        <span class="keyword">if</span>([feed_data<span class="variable">.chat_send_status</span> isEqualToString:kSending])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//初始化一个动态指示器</span></span><br><span class="line">            <span class="built_in">UIActivityIndicatorView</span> *myIndicator = [[<span class="built_in">UIActivityIndicatorView</span> alloc] initWithActivityIndicatorStyle:<span class="built_in">UIActivityIndicatorViewStyleGray</span>];</span><br><span class="line">            [myIndicator setFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>-<span class="number">50</span>, <span class="number">20</span>, <span class="number">20</span>)];</span><br><span class="line">            [myIndicator startAnimating];</span><br><span class="line">            [<span class="keyword">self</span><span class="variable">.contentView</span> addSubview:myIndicator];</span><br><span class="line">            </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//设置发送标识</span></span><br><span class="line">            <span class="built_in">UIImageView</span> *imgView = [[<span class="built_in">UIImageView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>-<span class="number">50</span>, <span class="number">16</span>, <span class="number">16</span>)];</span><br><span class="line">            <span class="keyword">if</span>([feed_data<span class="variable">.chat_send_status</span> isEqualToString:kSent])&#123;</span><br><span class="line">                [imgView setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"sentSucess"</span>]];</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                [imgView setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"sentFailed"</span>]];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            [<span class="keyword">self</span><span class="variable">.contentView</span> addSubview:imgView];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">//设置头像</span></span><br><span class="line">        <span class="built_in">UIImageView</span> *AvatarView = [[<span class="built_in">UIImageView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">265</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>-<span class="number">50</span>, <span class="number">40</span>, <span class="number">40</span>)];</span><br><span class="line">       </span><br><span class="line">        [AvatarView setImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"person"</span>]];</span><br><span class="line">        </span><br><span class="line"><span class="comment">//        修改图像的形状 图 1-3 对比下面两行代码屏蔽后的效果</span></span><br><span class="line"><span class="comment">//        cornerRadius 为 20 刚好是圆形，设置 masksToBounds 为 YES 之后 cornetRadius 的区域会覆盖图像，类事 PS 中的蒙板。</span></span><br><span class="line">        AvatarView<span class="variable">.layer</span><span class="variable">.cornerRadius</span>  = <span class="number">20.0</span>;</span><br><span class="line">        AvatarView<span class="variable">.layer</span><span class="variable">.masksToBounds</span> = <span class="literal">YES</span>;</span><br><span class="line">        </span><br><span class="line">        AvatarView<span class="variable">.layer</span><span class="variable">.borderColor</span> = [<span class="built_in">UIColor</span> colorWithRed:<span class="number">0.1341</span> green:<span class="number">0.979</span> blue:<span class="number">0.3848</span> alpha:<span class="number">1.0</span>]<span class="variable">.CGColor</span>;<span class="comment">//边框颜色</span></span><br><span class="line">        AvatarView<span class="variable">.layer</span><span class="variable">.borderWidth</span> = <span class="number">2.0</span>;<span class="comment">//边框宽度</span></span><br><span class="line">        </span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.contentView</span> addSubview:AvatarView];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```objc</span><br><span class="line"></span><br><span class="line">**图 <span class="number">1</span>-<span class="number">2</span>** textMessageBubble<span class="variable">.frame</span> 的参数调整对比的效果</span><br><span class="line"></span><br><span class="line">![](./<span class="number">1</span>-<span class="number">2.</span>png)</span><br><span class="line"></span><br><span class="line">**图 <span class="number">1</span>-<span class="number">3</span>** 图片圆角的效果</span><br><span class="line"></span><br><span class="line">![](./<span class="number">1</span>-<span class="number">3.</span>png)</span><br><span class="line"></span><br><span class="line"><span class="preprocessor">##collectionView:layout:sizeForItemAtIndexPath:</span></span><br><span class="line"></span><br><span class="line">在这个委托中实现 CELL 尺寸的调整，使它适应文本的高度</span><br><span class="line"></span><br><span class="line">```objc</span><br><span class="line"></span><br><span class="line">CCB_PARAM_List *feed_data = [[CCB_PARAM_List alloc] init];</span><br><span class="line">    </span><br><span class="line">    feed_data =[sphBubbledata objectAtIndex:indexPath<span class="variable">.row</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ([feed_data<span class="variable">.chat_media_type</span> isEqualToString:kSTextByme] || [feed_data<span class="variable">.chat_media_type</span> isEqualToString:kSTextByOther]) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//计算文本的高度</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">NSStringDrawingContext</span> *ctx = [<span class="built_in">NSStringDrawingContext</span> new];</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">NSAttributedString</span> *aString = [[<span class="built_in">NSAttributedString</span> alloc] initWithString:feed_data<span class="variable">.chat_message</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">UITextView</span> *calculationView =[[<span class="built_in">UITextView</span> alloc] init];</span><br><span class="line">        </span><br><span class="line">        [calculationView setAttributedText:aString];</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="built_in">CGRect</span> textRect = [calculationView<span class="variable">.text</span> boundingRectWithSize:<span class="built_in">CGSizeMake</span>(TWO_THIRDS_OF_PORTRAIT_WIDTH, <span class="number">10000000</span>) options:<span class="built_in">NSStringDrawingUsesLineFragmentOrigin</span> attributes:@&#123;<span class="built_in">NSFontAttributeName</span>:calculationView<span class="variable">.font</span>&#125; context:ctx];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">CGSizeMake</span>(<span class="number">306</span>, textRect<span class="variable">.size</span><span class="variable">.height</span>+<span class="number">40</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CGSizeMake</span>(<span class="number">306</span>, <span class="number">90</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="CCBCollectionViewCell">CCBCollectionViewCell</h1><p>聊天对话 CELL 的类，CELL 的资源文件也是从 xib 文件中加载。在 ViewController 的 viewDidLoad 中加载并注册</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.sphChatTable</span> registerNib:[<span class="built_in">UINib</span> nibWithNibName:<span class="string">@"Cell"</span> bundle:<span class="literal">nil</span>] forCellWithReuseIdentifier:CellIdentifier];</span><br></pre></td></tr></table></figure>
+<h2 id="CCBTextBubbleView">CCBTextBubbleView</h2><p>生成聊天文字气泡的类</p>
+<h3 id="sizeToFit">sizeToFit</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>) sizeToFit</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> sizeToFit];</span><br><span class="line">    <span class="comment">//设置聊天文本气泡的 frame</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.frame</span> =<span class="built_in">UIEdgeInsetsInsetRect</span>(<span class="keyword">self</span><span class="variable">.frame</span>, <span class="built_in">UIedgeInsetsNegate</span>(<span class="keyword">self</span><span class="variable">.contentInsets</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置气泡的背景</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.bubbleImageView</span><span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置文本内容 label 的 frame。</span></span><br><span class="line">    <span class="built_in">CGRect</span> frm=<span class="keyword">self</span><span class="variable">.bubbleImageView</span><span class="variable">.frame</span>;</span><br><span class="line">    frm<span class="variable">.size</span><span class="variable">.width</span>-=<span class="number">10</span>;</span><br><span class="line">    frm<span class="variable">.origin</span><span class="variable">.x</span>+=x;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.myMessageTextView</span><span class="variable">.frame</span> = frm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="initWithText:withColor:withHighlightColor:withTailDirection:maxWidth:">initWithText:withColor:withHighlightColor:withTailDirection:maxWidth:</h3><p>生成聊天文字气泡的函数</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-(<span class="keyword">id</span>) initWithText:(<span class="built_in">NSString</span> *)text withColor:(<span class="built_in">UIColor</span> *)color withHighlightColor:(<span class="built_in">UIColor</span> *)highlightColor withTailDirection:(MessageBubbleViewButtonTailDirection)tailDirection maxWidth:(<span class="built_in">CGFloat</span>)maxWidth</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span><span class="variable">.textMessage</span> = text;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">UIEdgeInsets</span> imageInsets = IMAGE_I<span class="built_in">NSETS</span>;</span><br><span class="line">        <span class="built_in">UIImageOrientation</span> bubbleOrientation;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/*</span><br><span class="line">         资料来源：http://www.zhihu.com/question/26605346</span><br><span class="line">         </span><br><span class="line">         例如声明了一个叫param的property</span><br><span class="line">         @property （nonatomic， copy）NSString *param;</span><br><span class="line">         通过_param进行存取的话是不会调用该变量的setter或者getter方法的，声明的copy也就不会起作用，而通过self.param调用的话是会调用setter或者getter方法的，这样copy也就会起作用。</span><br><span class="line">         </span><br><span class="line">         */</span></span><br><span class="line">        _maxWidth = maxWidth;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//设置聊天气泡的方向</span></span><br><span class="line">        x=<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (tailDirection == MessageBubbleViewButtonTailDirectionLeft) &#123;</span><br><span class="line">            x=<span class="number">7</span>;</span><br><span class="line">            <span class="keyword">self</span><span class="variable">.contentInsets</span> = LEFT_CONTENT_I<span class="built_in">NSETS</span>;</span><br><span class="line">            bubbleOrientation = <span class="built_in">UIImageOrientationUpMirrored</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">self</span><span class="variable">.contentInsets</span> = RIGHT_CONTENT_I<span class="built_in">NSETS</span>;</span><br><span class="line">            bubbleOrientation = <span class="built_in">UIImageOrientationUp</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//加载聊天气泡的图片到 UIImage 中</span></span><br><span class="line">        <span class="built_in">UIImage</span> *coloredImage = [[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"ImageBubble@2x~iphone"</span>] maskWitColor:color];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//imageWithCGImage:scale:orientation 创建并返回一个特定伸缩系数和方向的图片，scale 指定为 1.0 时设置为图像的原本像素尺寸。</span></span><br><span class="line">        <span class="comment">//resizableImageWithCapInsets:resizingMode 创建并返回一个图像，该图像是原图像的 cap insets，并设置了 resizingMode 属性 图 1-4 说明了 cap insets 的范围</span></span><br><span class="line">        <span class="built_in">UIImage</span> *backgroundImageNormal = [[<span class="built_in">UIImage</span> imageWith<span class="built_in">CGImage</span>:coloredImage<span class="variable">.CGImage</span> scale:<span class="number">1.0</span> orientation:bubbleOrientation] resizableImageWithCapInsets:imageInsets resizingMode:<span class="built_in">UIImageResizingModeStretch</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//创建一个 capInset 大小的图像</span></span><br><span class="line">        _bubbleImageView = [[<span class="built_in">UIImageView</span> alloc] initWithImage:backgroundImageNormal];</span><br><span class="line">        _bubbleImageView<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.frame</span>;<span class="comment">//指定 frame 与聊天气泡的 frame。frame 决定了视图在它的父视图中的位置和尺寸</span></span><br><span class="line">        [<span class="keyword">self</span> addSubview:_bubbleImageView];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//设置聊天气泡内的文字</span></span><br><span class="line">        _myMessageTextView=[[<span class="built_in">UITextView</span> alloc] initWithFrame:<span class="keyword">self</span><span class="variable">.frame</span>];</span><br><span class="line">        _myMessageTextView<span class="variable">.text</span>=text;</span><br><span class="line">        _myMessageTextView<span class="variable">.backgroundColor</span>=[<span class="built_in">UIColor</span> clearColor];</span><br><span class="line">        _myMessageTextView<span class="variable">.textColor</span> = highlightColor;</span><br><span class="line">        _myMessageTextView<span class="variable">.editable</span> = <span class="literal">NO</span>;</span><br><span class="line">        _myMessageTextView<span class="variable">.scrollEnabled</span>=<span class="literal">NO</span>;</span><br><span class="line">        _myMessageTextView<span class="variable">.dataDetectorTypes</span> = <span class="built_in">UIDataDetectorTypeAll</span>;</span><br><span class="line">        _myMessageTextView<span class="variable">.font</span> = [<span class="built_in">UIFont</span> systemFontOfSize:kBubbleTextSize];</span><br><span class="line">        _myMessageTextView<span class="variable">.textAlignment</span> = <span class="built_in">NSTextAlignmentJustified</span>;</span><br><span class="line">        [<span class="keyword">self</span> addSubview:_myMessageTextView];</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span><span class="variable">.backgroundColor</span> = <span class="built_in">UIColor</span><span class="variable">.clearColor</span>;</span><br><span class="line">        </span><br><span class="line">        [<span class="keyword">self</span> autoresizesSubviews];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>图 1-4</strong>  cap insets 的范围</p>
+<p><img src="./1-4capInset.png" alt=""></p>
+<h2 id="CCBImageBubbleView">CCBImageBubbleView</h2><p>聊天图像气泡的类，从 UIView 继承。</p>
+<h3 id="initWithImage:withTailDirection:atSize:">initWithImage:withTailDirection:atSize:</h3><p>这个方法加载图片，并进行类似 PS 的蒙板处理。</p>
+<p>具体步骤是加载蒙板图片，然后调整适当大小，然后加载实际图片，然后在 <code>UIImageView *maskedImageView = [[UIImageView alloc] initWithImage:[image maskWithImage:maskImageDrawnToSize]]；</code> 把两张图片进行合并。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-(<span class="keyword">id</span>) initWithImage:(<span class="built_in">UIImage</span> *)image withTailDirection:(MessageBubbleVIewTailDirection)tailDirection atSize:(<span class="built_in">CGSize</span>)size</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">self</span> = [<span class="keyword">super</span> init])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.imageSize</span> = size;</span><br><span class="line">        <span class="built_in">UIEdgeInsets</span> imageInsets = IMAGE_I<span class="built_in">NSETS</span>;</span><br><span class="line">        <span class="built_in">UIImageOrientation</span> bubbleOrientation;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(tailDirection == MessageBubbleViewTailDirectionLeft)</span><br><span class="line">        &#123;</span><br><span class="line">            _contentInsets = LEFT_CONTENT_I<span class="built_in">NSETS</span>;</span><br><span class="line">            bubbleOrientation = <span class="built_in">UIImageOrientationUpMirrored</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            _contentInsets = RIGHT_CONTENT_I<span class="built_in">NSETS</span>;</span><br><span class="line">            bubbleOrientation = <span class="built_in">UIImageOrientationUp</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">UIImage</span> *coloredImage =[[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"ImageBubbleMask~iphone"</span>] maskWitColor:[<span class="built_in">UIColor</span> colorWithRed:<span class="number">0.439216</span> green:<span class="number">0.854902</span> blue:<span class="number">0.223529</span> alpha:<span class="number">1</span>]];</span><br><span class="line">        </span><br><span class="line">        _backgroundImageNormal = [[<span class="built_in">UIImage</span> imageWith<span class="built_in">CGImage</span>:coloredImage<span class="variable">.CGImage</span> scale:<span class="number">1.0</span> orientation:bubbleOrientation] resizableImageWithCapInsets:imageInsets resizingMode:<span class="built_in">UIImageResizingModeStretch</span>];</span><br><span class="line">        </span><br><span class="line">        _backgroundImageView = [[<span class="built_in">UIImageView</span> alloc] initWithImage:_backgroundImageNormal];</span><br><span class="line">        _backgroundImageView<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;</span><br><span class="line">        _backgroundImageView<span class="variable">.autoresizingMask</span> = <span class="built_in">UIViewAutoresizingFlexibleHeight</span> | <span class="built_in">UIViewAutoresizingFlexibleWidth</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">const</span> <span class="built_in">UIImage</span> *maskImageDrawnToSize = [_backgroundImageNormal renderAtSize:<span class="built_in">CGSizeMake</span>(<span class="number">90</span>, <span class="number">90</span>)];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//两个图片合并</span></span><br><span class="line">        <span class="built_in">UIImageView</span> *maskedImageView = [[<span class="built_in">UIImageView</span> alloc] initWithImage:[image maskWithImage:maskImageDrawnToSize]];</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        [<span class="keyword">self</span> addSubview:maskedImageView];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="其它知识点">其它知识点</h1><h2 id="@class">@class</h2><p>告诉编译器代码所依赖的文件的位置，但是使用 @class 时，你并不能调用 @class 中的实例方法，因为它的元数据没有提供给编译器。</p>
+<p>例如，你有两个类：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">A</span>:<span class="title">NSObject</span></span></span><br><span class="line">- (B*)calculateMyBNess;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">B</span>:<span class="title">NSObject</span></span></span><br><span class="line">- (A*)calculateMyANess;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>这时编译是失败的，因为它们互相依赖，这时加上 @class 就能正常编译。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@class</span> <span class="title">B</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">A</span>:<span class="title">NSObject</span></span></span><br><span class="line">- (B*)calculateMyBNess;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">B</span>:<span class="title">NSObject</span></span></span><br><span class="line">- (A*)calculateMyANess;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>来源：<a href="http://stackoverflow.com/questions/10019961/objective-c-class-directive-before-interface" target="_blank" rel="external">http://stackoverflow.com</a></p>
+<h2 id="category">category</h2><p>A category allows you to add methods to an existing class—even to one for which you do not have the source.</p>
+<p>Categories are a powerful feature that allows you to extend the functionality of existing classes without subclassing.</p>
+<p>该源代码使用 category 拓展了 UIImage。文件名称为 UIImage+Utils。所以可以在 CCBImageBubbleView.m 中 UIImage 的实例调用自定义的方法：</p>
+<p><code>const UIImage *maskImageDrawnToSize = [_backgroundImageNormal renderAtSize:CGSizeMake(90, 90)];</code></p>
+<h2 id="extension_(-m_文件中的_@interface_{}_)">extension (.m 文件中的 @interface {} )</h2><p>可以在 extension 中重新定义 .h 文件中声明的属性或方法，达成私有属性或私有函数的目的。extension 必须定义在与它相关联的 .m 文件中</p>
+<p>例如，属性在 .h 文件中定义是只读的，但在 .m 文件中用上了 extension，更改它的属性为可读写，那么 .m 中就可以调用 setObject。但是使用这个类的用户因为没有引用 .m 文件，所以属性仍然是只读的。</p>
+<p>所有在 extension 声明的 property 或者 methods 必须出现在类的 main implementaion block 中。</p>
+<p>例子：</p>
+<p><a href="http://code.tutsplus.com/tutorials/objective-c-succinctly-categories-and-extensions--mobile-22016" target="_blank" rel="external">资料来源：</a></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// Ship.h</span></span><br><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"Person.h"</span></span></span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Ship</span> : <span class="title">NSObject</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">readonly</span>) Person *captain;</span><br><span class="line"> </span><br><span class="line">- (<span class="keyword">id</span>)initWithCaptain:(Person *)captain;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// Ship.m</span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"Ship.h"</span></span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">// The class extension.</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Ship</span>()</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">readwrite</span>) Person *captain;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">// The standard implementation.</span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Ship</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">@synthesize</span> captain = _captain;</span><br><span class="line"> </span><br><span class="line">- (<span class="keyword">id</span>)initWithCaptain:(Person *)captain &#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="comment">// This WILL work because of the extension.</span></span><br><span class="line">        [<span class="keyword">self</span> setCaptain:captain];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>其它人的解释：</p>
+<blockquote>
+<p>实现一个不可变(immutable)的数据结构通常有一个好处是外部代码不能用setter修改对象的状态。然而,可能又希望它在内部又是一个可写的属性。Class extensions可以做到这一点:在公共接口(类的声明中)中,开发者可以声明一个属性是只读的,随后在类扩展中声明为可写。这样，对外部代码而言,该属性将是只读的,而内部代码却可以使用它setter方法。</p>
+</blockquote>
+<h2 id="dispatch_async">dispatch_async</h2><p><a href="http://jeffreysambells.com/2013/03/01/asynchronous-operations-in-ios-with-grand-central-dispatch" target="_blank" rel="external">资料地址</a></p>
+<p>是 C 语言的 API，GCD。</p>
+<p>异步执行一些耗时的方法，避免用户界面被锁定。<br>这些代码会分配到其它线程中执行，让你的 UI 主线程继续执行任务。<br>GCD 队列可以并发执行或者排队执行(当它们是一个队列，并且一个执行完成之后后面的接着执行)</p>
+<h2 id="UICollectionViewLayout">UICollectionViewLayout</h2><p>挺大的内容，<a href="https://developer.apple.com/library/prerelease/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/CreatingCustomLayouts/CreatingCustomLayouts.html" target="_blank" rel="external">文档地址</a>。</p>
+<h2 id="options:@{}">options:@{}</h2><p>问题来源：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">CGRect</span> textRect=[calculationView<span class="variable">.text</span> </span><br><span class="line">boundingRectWithSize:<span class="built_in">CGSizeMake</span>(<span class="keyword">self</span><span class="variable">.maxWidth</span>-<span class="keyword">self</span><span class="variable">.contentInsets</span><span class="variable">.left</span>-<span class="keyword">self</span><span class="variable">.contentInsets</span><span class="variable">.right</span>, <span class="number">10000000</span>)</span><br><span class="line">options:<span class="built_in">NSStringDrawingUsesLineFragmentOrigin</span> </span><br><span class="line">attributes:@&#123;<span class="built_in">NSFontAttributeName</span>:calculationView<span class="variable">.font</span>&#125; <span class="comment">//这里</span></span><br><span class="line">context:ctx];</span><br></pre></td></tr></table></figure>
+<p>查看文档后，<code>boundingRectWithSize:options:attributes:context:</code> 中 <code>attributes:</code> 所需要的类型是 <code>NSDictionary</code>，所以 <code>@{}</code> 是生成一个字典。</p>
+<p><code>calculationView.font</code> ：This property applies to the entire text string. The default font is a 17-point Helvetica plain font.</p>
+<p><code>NSFontAttributeName</code>，是通过封装的 <code>NSString</code>：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIKIT_EXTERN</span> <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">NSFontAttributeName</span> <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">6</span>_0);<span class="comment">// UIFont, default Helvetica(Neue) 12</span></span><br></pre></td></tr></table></figure></p>
+<p><code>NSFontAttributeName:calculationView.font</code> 会返回一系列字符串，然后通过 @{} 生成字典，传入 attributes。</p>
+<h2 id="UIEdgeInsetsMake">UIEdgeInsetsMake</h2><p>Creates an edge inset for a button or view.</p>
+<p>上面的图 1-4 说明了什么事 edge inset。</p>
+<p>在生成图片时作为参数传递进去：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#define IMAGE_INSETS UIEdgeInsetsMake(13,13,13,21)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">UIEdgeInsets</span> imageInsets = IMAGE_I<span class="built_in">NSETS</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">UIImage</span> *backgroundImageNormal = </span><br><span class="line">	[</span><br><span class="line">	[<span class="built_in">UIImage</span>  imageWith<span class="built_in">CGImage</span>:coloredImage<span class="variable">.CGImage</span> </span><br><span class="line">				scale:<span class="number">1.0</span> </span><br><span class="line">				orientation:bubbleOrientation] </span><br><span class="line">	resizableImageWithCapInsets:imageInsets <span class="comment">//作为参数传递</span></span><br><span class="line">	resizingMode:<span class="built_in">UIImageResizingModeStretch</span>];</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/iOS-DataProcess/">iOS 数据操作</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/VCP10/">iOS 翻译 《View Controller Programming Guide for iOS：Presenting View Controllers from Other View Controllers》</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/iOS-DEMO-SPH/"
+               data-title="iOS DEMO 项目：SPHChatCollectionView 分析" data-url="http://yoursite.com/2015/iOS-DEMO-SPH/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
   
-<script>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源码逻辑分析"><span class="nav-number">1.</span> <span class="nav-text">源码逻辑分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AppDelegate"><span class="nav-number">2.</span> <span class="nav-text">AppDelegate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#application:didFinishLaunchingWithOptions:"><span class="nav-number">2.1.</span> <span class="nav-text">application:didFinishLaunchingWithOptions:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CCBCollectionViewCell"><span class="nav-number">3.</span> <span class="nav-text">CCBCollectionViewCell</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CCBTextBubbleView"><span class="nav-number">3.1.</span> <span class="nav-text">CCBTextBubbleView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sizeToFit"><span class="nav-number">3.1.1.</span> <span class="nav-text">sizeToFit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#initWithText:withColor:withHighlightColor:withTailDirection:maxWidth:"><span class="nav-number">3.1.2.</span> <span class="nav-text">initWithText:withColor:withHighlightColor:withTailDirection:maxWidth:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CCBImageBubbleView"><span class="nav-number">3.2.</span> <span class="nav-text">CCBImageBubbleView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#initWithImage:withTailDirection:atSize:"><span class="nav-number">3.2.1.</span> <span class="nav-text">initWithImage:withTailDirection:atSize:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其它知识点"><span class="nav-number">4.</span> <span class="nav-text">其它知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#@class"><span class="nav-number">4.1.</span> <span class="nav-text">@class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#category"><span class="nav-number">4.2.</span> <span class="nav-text">category</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extension_(-m_文件中的_@interface_{}_)"><span class="nav-number">4.3.</span> <span class="nav-text">extension (.m 文件中的 @interface {} )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dispatch_async"><span class="nav-number">4.4.</span> <span class="nav-text">dispatch_async</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UICollectionViewLayout"><span class="nav-number">4.5.</span> <span class="nav-text">UICollectionViewLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#options:@{}"><span class="nav-number">4.6.</span> <span class="nav-text">options:@{}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIEdgeInsetsMake"><span class="nav-number">4.7.</span> <span class="nav-text">UIEdgeInsetsMake</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-62263979-1', 'auto');
   ga('send', 'pageview');
-</script>
+  </script>
 
-</head>
-<body>
-  <div id="container">
-    <header id="header" class="wrapper">
-  <div id="header-inner" class="inner">
-    <h1 id="logo-wrap">
-      <a href="" id="logo">Hexo</a>
-    </h1>
-    <nav id="main-nav">
-      <ul>
-        
-        <li class="main-nav-item">
-          <a href="https://github.com/" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
-        </li>
-      </ul>
-    </nav>
-    <div id="lang-select-wrap">
-      <label id="lang-select-label"><i class="fa fa-globe"></i><span></span></label>
-      <select id="lang-select" data-canonical="">
-        
-      </select>
-    </div>
-    <div id="search-btn-wrap" class="main-nav-item">
-      <a id="search-btn" class="main-nav-link st-search-show-outputs"><i class="fa fa-search"></i></a>
-    </div>
-    <a id="mobile-nav-toggle">
-      <span class="mobile-nav-toggle-bar"></span>
-      <span class="mobile-nav-toggle-bar"></span>
-      <span class="mobile-nav-toggle-bar"></span>
-    </a>
-    <a id="mobile-search-btn" class="st-search-launcher"></a>
-  </div>
-</header>
-    <div id="content-wrap">
-  <div class="wrapper">
-    <div class="inner">
-      <article class="article post" itemscope itemtype="http://schema.org/Article">
-  <header class="article-header">
-    
-      <h1 class="article-title" itemprop="name" data-swiftype-name="title" data-swiftype-type="string">iOS DEMO 项目：SPHChatCollectionView 分析</h1>
-    
-    <a href="/2015/iOS-DEMO-SPH/" class="article-date"><time datetime="2015-07-08T15:14:11.000Z">2015-07-08</time></a>
-  </header>
-  <div class="article-content" itemprop="articleBody" data-swiftype-name="body" data-swiftype-type="text">
-    
-  </div>
-  
-</article>
-    </div>
-  </div>
-</div>
-    <footer id="footer" class="wrapper">
-  <div class="inner">
-    <div id="footer-copyright">
-      &copy; 2015 <a href="https://zespia.tw/" target="_blank">Humyang</a><br>
-      Documentation licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
-    </div>
-    <div id="footer-links">
-      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
-      <a href="https://github.com/" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
-    </div>
-  </div>
-</footer>
-  </div>
-  <div id="mobile-nav-dimmer"></div>
-  <nav id="mobile-nav">
-  <div id="mobile-nav-inner">
-    <ul id="mobile-nav-list">
-      
-      <li class="mobile-nav-item">
-        <a href="https://github.com/" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
-      </li>
-    </ul>
-    
-  </div>
-  <div id="mobile-lang-select-wrap">
-    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span></span></span>
-    <select id="mobile-lang-select" data-canonical="">
-      
-    </select>
-  </div>
-</nav>
-  <!-- Scripts -->
-<!-- build:js build/js/main.js -->
-<script src="/js/lang_select.js" type="text/javascript"></script>
-<script src="/js/toc.js" type="text/javascript"></script>
-<script src="/js/mobile_nav.js" type="text/javascript"></script>
-<!-- endbuild -->
-<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
-
-<!-- Swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','https://s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
 </body>
 </html>
