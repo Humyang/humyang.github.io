@@ -1,1 +1,932 @@
- Humyang 
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> 常用代码片段备忘 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              常用代码片段备忘
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-08-03
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/备忘/">备忘</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/iosCodeCheat/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/iosCodeCheat/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>记录一些实用的代码片段</p>
+<a id="more"></a>
+<p>[toc]</p>
+<hr>
+<h1 id="常用代码片段备忘">常用代码片段备忘</h1><h2 id="Xcode">Xcode</h2><p>读取资源文件</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (<span class="built_in">NSString</span> *)sampleMarkdown</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSString</span> *samplePath = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"sample"</span> ofType:<span class="string">@"markdown"</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSError</span> *error = <span class="literal">nil</span>;</span><br><span class="line">    <span class="built_in">NSString</span> *sample = [<span class="built_in">NSString</span> stringWithContentsOfFile:samplePath encoding:<span class="built_in">NSUTF8StringEncoding</span> error:&amp;error];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (error != <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Error: %@"</span>, error);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> sample;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数学运算">数学运算</h2><h3 id="随机数">随机数</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arc4random() % <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+<h2 id="设计模式">设计模式</h2><h3 id="协议">协议</h3><h4 id="检测协议的实现者是否实现遵循了某个协议方法">检测协议的实现者是否实现遵循了某个协议方法</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//        如果设置了 init View，则将 init View 设置到中间</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">self</span>.delegate?.respondsToSelector(<span class="string">"initialViewIndexForHorizontalScroller"</span>) != <span class="literal">false</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//println(self.delegate?.respondsToSelector("initialViewIndexForHorizontalScroller"))</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">var</span> initialView:<span class="type">CGFloat</span> = <span class="type">CGFloat</span>(<span class="keyword">self</span>.delegate.initialViewIndexForHorizontalScroller!(<span class="keyword">self</span>))</span><br><span class="line">            </span><br><span class="line">            scroller.setContentOffset(<span class="type">CGPointMake</span>(initialView * (<span class="type">VIEW_DIMENSIONS</span> + (<span class="number">2</span> * <span class="type">VIEW_PADDING</span>)), <span class="number">0</span>), animated: <span class="literal">true</span>)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="swift_中定义协议">swift 中定义协议</h4><p>如果协议继承自 Objective-C 的类，那么协议前面需要加上 @objc。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">@objc</span> <span class="class"><span class="keyword">protocol</span> <span class="title">HorizontalScrollerDelegate</span>:<span class="title">NSObjectProtocol</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//ask the delegate how many view he wants present inside the horizontal scroller</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">numberOfViewsForHorizontalScroller</span><span class="params">(scroller:HorizontalScroller)</span></span>-&gt;<span class="type">NSInteger</span></span><br><span class="line">    <span class="comment">//ask the delegate to reuturn the view that should appear at &lt;index&gt;</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">horizontalScroller</span><span class="params">(scroller:HorizontalScroller,viewAtIndex:Int)</span></span>-&gt;<span class="type">UIView</span></span><br><span class="line">    <span class="comment">//inform the delegate what the view at &lt;index&gt; has been clicked</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">horizontalScroller</span><span class="params">(scroller:HorizontalScroller,clickedViewIndex:Int)</span></span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment">//    ask the delegate for the index of the inital view to display.this method is optional</span></span><br><span class="line"><span class="comment">//    and default to 0 if it's not implemented by the delegate</span></span><br><span class="line">    optional <span class="func"><span class="keyword">func</span> <span class="title">initialViewIndexForHorizontalScroller</span><span class="params">(scroller:HorizontalScroller)</span></span>-&gt;<span class="type">NSInteger</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="界面">界面</h2><h3 id="圆形图片和气泡对话框">圆形图片和气泡对话框</h3><h4 id="圆形图片">圆形图片</h4><p>使用 <code>setCornerRadius</code> 设置图片的边角弧度，如果想让图片周围显示一个圆圈线条，可以在图片上面添加一个透明背景的圆圈图片<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="keyword">self</span><span class="variable">.cover</span> layer] setMasksToBounds:<span class="literal">YES</span>];</span><br><span class="line">[[<span class="keyword">self</span><span class="variable">.cover</span> layer] setCornerRadius:[<span class="keyword">self</span><span class="variable">.cover</span> cw_width]/<span class="number">2</span>];</span><br></pre></td></tr></table></figure></p>
+<h3 id="界面跳转">界面跳转</h3><p>If you’re in a Navigation Controller:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ViewController *viewController = [[ViewController alloc] init];</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.navigationController</span> pushViewController:viewController animated:<span class="literal">YES</span>];</span><br></pre></td></tr></table></figure>
+<p>or if you just want to present a new view:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ViewController *viewController = [[ViewController alloc] init];    </span><br><span class="line">[<span class="keyword">self</span> presentViewController:viewController animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="动画效果">动画效果</h3><p>内容来自<a href="http://www.jikexueyuan.com/course/171.html" target="_blank" rel="external">极客学院</a>视频</p>
+<h4 id="进度条效果">进度条效果</h4><p>PrgresssView.swift：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PrgresssView</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// private var progress:UIView!</span></span><br><span class="line">    private <span class="keyword">var</span> progressLayer:<span class="type">CALayer</span>!</span><br><span class="line">    private <span class="keyword">var</span> progressPersent:<span class="type">CGFloat</span> = <span class="number">0</span></span><br><span class="line">    private <span class="keyword">var</span> progerssWidth:<span class="type">CGFloat</span> = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">init</span>(frame: <span class="type">CGRect</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(frame: frame)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        progressLayer = <span class="type">CALayer</span>()</span><br><span class="line">        progressLayer.frame = <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, frame.size.height)</span><br><span class="line">        </span><br><span class="line">        progressLayer.backgroundColor = <span class="type">UIColor</span>(red: <span class="number">1.0</span>, green: <span class="number">0.8288</span>, blue: <span class="number">0.0</span>, alpha: <span class="number">1.0</span>).<span class="type">CGColor</span></span><br><span class="line">        <span class="comment">//self.layer.backgroundColor = UIColor(red: 0.4812, green: 0.0477, blue: 0.0, alpha: 1.0).CGColor</span></span><br><span class="line">        <span class="keyword">self</span>.layer.addSublayer(progressLayer)</span><br><span class="line">        </span><br><span class="line">        progerssWidth = frame.size.width</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">setProgressPersent</span><span class="params">(progress:CGFloat)</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        progressPersent = progress</span><br><span class="line">        <span class="keyword">if</span>(progressPersent &lt;= <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">self</span>.progressLayer.frame = <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">self</span>.frame.size.height)</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (progressPersent &lt;= <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">self</span>.progressLayer.frame = <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, progressPersent*<span class="keyword">self</span>.progerssWidth, <span class="keyword">self</span>.frame.size.height)</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">self</span>.progressLayer.frame = <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="keyword">self</span>.progerssWidth, <span class="keyword">self</span>.frame.size.height)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">getProgressPersent</span><span class="params">()</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    required <span class="keyword">init</span>(coder aDecoder: <span class="type">NSCoder</span>) &#123;</span><br><span class="line">        fatalError(<span class="string">"init(coder:) has not been implemented"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Only override drawRect: if you perform custom drawing.</span></span><br><span class="line">    <span class="comment">// An empty implementation adversely affects performance during animation.</span></span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">drawRect</span><span class="params">(rect: CGRect)</span></span> &#123;</span><br><span class="line">        <span class="comment">// Drawing code</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ViewController.swift:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    private <span class="keyword">var</span> layer:<span class="type">CALayer</span>!</span><br><span class="line">    </span><br><span class="line">    private <span class="keyword">var</span> _processView:<span class="type">PrgresssView</span> = <span class="type">PrgresssView</span>(frame: <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>, <span class="number">10</span>))</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></span><br><span class="line">        <span class="keyword">var</span> timer = <span class="type">NSTimer</span>.scheduledTimerWithTimeInterval(<span class="number">1</span>, target: <span class="keyword">self</span>, selector: <span class="string">"layerAnimation"</span>, userInfo: <span class="literal">nil</span>, repeats: <span class="literal">true</span>)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        _processView.backgroundColor = <span class="type">UIColor</span> ( red: <span class="number">0.5723</span>, green: <span class="number">0.5723</span>, blue: <span class="number">0.5723</span>, alpha: <span class="number">0.0</span> )</span><br><span class="line">        _processView.layer.borderWidth = <span class="number">1</span></span><br><span class="line">        <span class="keyword">self</span>.view.addSubview(_processView)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">layerAnimation</span><span class="params">()</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        _processView.setProgressPersent(<span class="type">CGFloat</span>(arc4random_uniform(<span class="number">100</span>))/<span class="number">100</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="图片过渡效果和组合动画">图片过渡效果和组合动画</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    private <span class="keyword">var</span> imageLayer:<span class="type">CALayer</span>!</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> image1:<span class="type">UIImage</span> = <span class="type">UIImage</span>(named: <span class="string">"1.jpeg"</span>)!</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span>.imageLayer = <span class="type">CALayer</span>()</span><br><span class="line">        <span class="keyword">self</span>.imageLayer.frame = <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">510</span>, <span class="number">771</span>)</span><br><span class="line">        <span class="keyword">self</span>.view.layer.addSublayer(<span class="keyword">self</span>.imageLayer)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span>.imageLayer.contents = image1.<span class="type">CGImage</span></span><br><span class="line">        <span class="keyword">var</span> timer = <span class="type">NSTimer</span>.scheduledTimerWithTimeInterval(<span class="number">3</span>, target: <span class="keyword">self</span>, selector: <span class="string">"layerAnimation"</span>, userInfo: <span class="literal">nil</span>, repeats: <span class="literal">false</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">layerAnimation</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">var</span> image2:<span class="type">UIImage</span> = <span class="type">UIImage</span>(named: <span class="string">"2.jpeg"</span>)!</span><br><span class="line">        <span class="comment">//self.imageLayer.contents = image2.CGImage</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">/* 2015-08-03 20:57:53</span><br><span class="line">        </span><br><span class="line">        这段动画只是提交了上去，并没有修改 CALayer 的内容。</span><br><span class="line">        提交完成后会立刻恢复动画之前的状态，所有需要动画完成后手动修改CALayer 值</span><br><span class="line">        */</span></span><br><span class="line">        <span class="comment">//图片动画</span></span><br><span class="line">        <span class="keyword">var</span> contentsAnimation:<span class="type">CABasicAnimation</span> = <span class="type">CABasicAnimation</span>(keyPath: <span class="string">"contents"</span>)</span><br><span class="line">        contentsAnimation.fromValue = <span class="keyword">self</span>.imageLayer.contents</span><br><span class="line">        contentsAnimation.toValue = image2.<span class="type">CGImage</span></span><br><span class="line">        contentsAnimation.duration = <span class="number">3</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//bounds 动画</span></span><br><span class="line">        <span class="keyword">var</span> boundsAnimation:<span class="type">CABasicAnimation</span> = <span class="type">CABasicAnimation</span>(keyPath: <span class="string">"bounds"</span>)</span><br><span class="line">        boundsAnimation.fromValue = <span class="type">NSValue</span>(<span class="type">CGRect</span>: <span class="keyword">self</span>.imageLayer.bounds)</span><br><span class="line">        boundsAnimation.toValue = <span class="type">NSValue</span>(<span class="type">CGRect</span>: <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">510</span>/<span class="number">2</span>, <span class="number">771</span>/<span class="number">2</span>))</span><br><span class="line">        boundsAnimation.duration = <span class="number">3</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//组合动画</span></span><br><span class="line">        <span class="keyword">var</span> groupAnimation:<span class="type">CAAnimationGroup</span> = <span class="type">CAAnimationGroup</span>()</span><br><span class="line">        groupAnimation.animations = [contentsAnimation,boundsAnimation]</span><br><span class="line">        groupAnimation.duration = <span class="number">3</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span>.imageLayer.bounds = <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">510</span>/<span class="number">2</span>, <span class="number">771</span>/<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">self</span>.imageLayer.contents = image2.<span class="type">CGImage</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//单个动画</span></span><br><span class="line">        <span class="comment">//self.imageLayer.addAnimation(contentsAnimation, forKey: nil)</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//组合动画</span></span><br><span class="line">        <span class="keyword">self</span>.imageLayer.addAnimation(groupAnimation, forKey: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="CALayer_遮罩效果">CALayer 遮罩效果</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> imageLayer:<span class="type">CALayer</span>!</span><br><span class="line">    <span class="keyword">var</span> maskLayer:<span class="type">CALayer</span>!</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> imageContent:<span class="type">UIImage</span>!</span><br><span class="line">    <span class="keyword">var</span> maskContents:<span class="type">UIImage</span>!</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span>.imageContent=<span class="type">UIImage</span>(named: <span class="string">"1.jpeg"</span>)</span><br><span class="line">        <span class="keyword">self</span>.maskContents = <span class="type">UIImage</span>(named: <span class="string">"3.png"</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span>.imageLayer = <span class="type">CALayer</span>()</span><br><span class="line">        <span class="keyword">self</span>.imageLayer.frame = <span class="type">CGRectMake</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">200</span>, <span class="number">200</span>)</span><br><span class="line">        <span class="keyword">self</span>.imageLayer.contents = imageContent.<span class="type">CGImage</span></span><br><span class="line">        <span class="keyword">self</span>.view.layer.addSublayer(imageLayer)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">self</span>.maskLayer = <span class="type">CALayer</span>()</span><br><span class="line">        <span class="keyword">self</span>.maskLayer.frame = <span class="keyword">self</span>.imageLayer.bounds</span><br><span class="line">        <span class="keyword">self</span>.maskLayer.contents = <span class="keyword">self</span>.maskContents.<span class="type">CGImage</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//给图片提供遮罩的 layer</span></span><br><span class="line">        <span class="keyword">self</span>.imageLayer.mask = <span class="keyword">self</span>.maskLayer</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> timer = <span class="type">NSTimer</span>.scheduledTimerWithTimeInterval(<span class="number">3</span>, target: <span class="keyword">self</span>, selector: <span class="string">"maskLayerAnimation"</span>, userInfo: <span class="literal">nil</span>, repeats: <span class="literal">false</span>)</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">maskLayerAnimation</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">self</span>.maskLayer.frame = <span class="type">CGRectMake</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">200</span>, <span class="number">200</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Core_Graphic_绘图">Core Graphic 绘图</h3><p>内容来自<a href="http://www.jikexueyuan.com/course/159.html" target="_blank" rel="external">极客学院</a>视频</p>
+<h4 id="画线">画线</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">drawRect</span><span class="params">(rect: CGRect)</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> context = <span class="type">UIGraphicsGetCurrentContext</span>()</span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextMoveToPoint</span>(context,<span class="number">100</span>, <span class="number">100</span>)</span><br><span class="line">        <span class="type">CGContextAddLineToPoint</span>(context,<span class="number">100</span>, <span class="number">200</span>)</span><br><span class="line">        <span class="type">CGContextAddLineToPoint</span>(context, <span class="number">200</span>, <span class="number">200</span>)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextMoveToPoint</span>(context, <span class="number">100</span>, <span class="number">300</span>)</span><br><span class="line">        <span class="type">CGContextAddLineToPoint</span>(context, <span class="number">100</span>, <span class="number">400</span>)</span><br><span class="line">        <span class="type">CGContextAddLineToPoint</span>(context, <span class="number">200</span>, <span class="number">500</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextSetRGBStrokeColor</span>(context, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="type">CGContextSetLineWidth</span>(context, <span class="number">5</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextStrokePath</span>(context)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="画矩形">画矩形</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">drawRect</span><span class="params">(rect: CGRect)</span></span> &#123;</span><br><span class="line">       <span class="comment">// Drawing code</span></span><br><span class="line">       <span class="keyword">var</span> context = <span class="type">UIGraphicsGetCurrentContext</span>()</span><br><span class="line">       <span class="type">CGContextAddRect</span>(context, <span class="type">CGRect</span>(x: <span class="number">100</span>, y: <span class="number">100</span>, width: <span class="number">100</span>, height: <span class="number">100</span>))</span><br><span class="line">       <span class="type">CGContextSetRGBFillColor</span>(context, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">       <span class="type">CGContextFillPath</span>(context)</span><br><span class="line">       <span class="type">CGContextSetLineWidth</span>(context, <span class="number">5</span>)</span><br><span class="line">       <span class="type">CGContextSetRGBStrokeColor</span>(context, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">       <span class="type">CGContextStrokeRect</span>(context, <span class="type">CGRect</span>(x: <span class="number">100</span>, y: <span class="number">100</span>, width: <span class="number">100</span>, height: <span class="number">100</span>))</span><br><span class="line">       </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="画圆形">画圆形</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">drawRect</span><span class="params">(rect: CGRect)</span></span> &#123;</span><br><span class="line">        <span class="comment">// Drawing code</span></span><br><span class="line">        <span class="keyword">var</span> context = <span class="type">UIGraphicsGetCurrentContext</span>()</span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextAddArc</span>(context, <span class="number">150</span>, <span class="number">200</span>, <span class="number">100</span>,<span class="number">0</span> , <span class="number">3.141592653</span>*<span class="number">2</span>,<span class="number">0</span>)</span><br><span class="line">        <span class="type">CGContextSetRGBStrokeColor</span>(context, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="type">CGContextFillPath</span>(context)</span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextAddArc</span>(context,<span class="number">150</span>,<span class="number">200</span>,<span class="number">100</span>,<span class="number">0</span>,<span class="number">3.141592653</span>*<span class="number">2</span>,<span class="number">0</span>)</span><br><span class="line">        <span class="type">CGContextSetLineWidth</span>(context, <span class="number">10</span>)</span><br><span class="line">        <span class="type">CGContextStrokePath</span>(context)</span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextAddEllipseInRect</span>(context, <span class="type">CGRect</span>(x: <span class="number">50</span>, y: <span class="number">400</span>, width: <span class="number">200</span>, height: <span class="number">100</span>))</span><br><span class="line">        <span class="type">CGContextStrokePath</span>(context)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="画图片">画图片</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DrawImage</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> uiImage:<span class="type">CGImageRef</span>!</span><br><span class="line">    </span><br><span class="line">    required <span class="keyword">init</span>(coder aDecoder: <span class="type">NSCoder</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(coder: aDecoder)</span><br><span class="line">        </span><br><span class="line">        uiImage = <span class="type">UIImage</span>(named: <span class="string">"walle.jpg"</span>)?.<span class="type">CGImage</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Only override drawRect: if you perform custom drawing.</span></span><br><span class="line">    <span class="comment">// An empty implementation adversely affects performance during animation.</span></span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">drawRect</span><span class="params">(rect: CGRect)</span></span> &#123;</span><br><span class="line">        <span class="comment">// Drawing code</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> context = <span class="type">UIGraphicsGetCurrentContext</span>()</span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextSaveGState</span>(context)</span><br><span class="line">        </span><br><span class="line">        <span class="type">CGContextTranslateCTM</span>(context, <span class="number">10</span>, <span class="number">400</span>)</span><br><span class="line">        <span class="type">CGContextScaleCTM</span>(context, <span class="number">1</span>, -<span class="number">1</span>)</span><br><span class="line">        <span class="type">CGContextDrawImage</span>(context, <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">200</span>, height: <span class="number">200</span>), uiImage)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//恢复之前的 context，避免处理单个图片时影响到整个 context 的状态。</span></span><br><span class="line">        <span class="type">CGContextRestoreGState</span>(context)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//如果没有恢复之前的context，会影响到后续的执行。</span></span><br><span class="line">        <span class="type">CGContextStrokeRect</span>(context, <span class="type">CGRect</span>(x: <span class="number">50</span>, y: <span class="number">100</span>, width: <span class="number">100</span>, height: <span class="number">100</span>))</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="绘画板">绘画板</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Only override drawRect: if you perform custom drawing.</span></span><br><span class="line"><span class="comment">// An empty implementation adversely affects performance during animation.</span></span><br><span class="line"><span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">drawRect</span><span class="params">(rect: CGRect)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> context = <span class="type">UIGraphicsGetCurrentContext</span>()</span><br><span class="line">    <span class="type">CGContextAddPath</span>(context, path)</span><br><span class="line">    <span class="type">CGContextStrokePath</span>(context)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> path = <span class="type">CGPathCreateMutable</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">touchesBegan</span><span class="params">(touches: Set&lt;NSObject&gt;, withEvent event: UIEvent)</span></span> &#123;</span><br><span class="line">   <span class="keyword">var</span> p =  (touches.first <span class="keyword">as</span>! <span class="type">UITouch</span>).locationInView(<span class="keyword">self</span>)</span><br><span class="line">    <span class="type">CGPathMoveToPoint</span>(path, <span class="literal">nil</span>, p.x, p.y)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">touchesMoved</span><span class="params">(touches: Set&lt;NSObject&gt;, withEvent event: UIEvent)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> p =  (touches.first <span class="keyword">as</span>! <span class="type">UITouch</span>).locationInView(<span class="keyword">self</span>)</span><br><span class="line">    <span class="type">CGPathAddLineToPoint</span>(path, <span class="literal">nil</span>, p.x, p.y)</span><br><span class="line">    setNeedsDisplay()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="注册手势点击事件和检测发生点击所对应的视图">注册手势点击事件和检测发生点击所对应的视图</h3><p>1.注册手势检测</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (id)initWithFrame:(<span class="type">CGRect</span>)frame</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        scroller = [[<span class="type">UIScrollView</span> alloc] initWithFrame:<span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, frame.size.width, frame.size.height)];</span><br><span class="line">        scroller.delegate = <span class="keyword">self</span>;</span><br><span class="line">        [<span class="keyword">self</span> addSubview:scroller];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//在这里注册</span></span><br><span class="line">        <span class="type">UITapGestureRecognizer</span> *tapRecognizer = [[<span class="type">UITapGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:@selector(scrollerTapped:)];</span><br><span class="line">        [scroller addGestureRecognizer:tapRecognizer];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在 scrollerTapped 检测哪个 UIView 被选中。<br>检测完成后设置选中的 UIView 居中，并发送 delegate 消息通知协议实现者哪个视图发生了点击。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (void)scrollerTapped:(<span class="type">UITapGestureRecognizer</span>*)gesture</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">CGPoint</span> location = [gesture locationInView:gesture.view];</span><br><span class="line">    <span class="comment">// we can't use an enumerator here, because we don't want to enumerate over ALL of the UIScrollView subviews.</span></span><br><span class="line">    <span class="comment">// we want to enumerate only the subviews that we added</span></span><br><span class="line">    <span class="keyword">for</span> (int index=<span class="number">0</span>; index&lt;[<span class="keyword">self</span>.delegate numberOfViewsForHorizontalScroller:<span class="keyword">self</span>]; index++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">UIView</span> *view = scroller.subviews[index];</span><br><span class="line">        <span class="keyword">if</span> (<span class="type">CGRectContainsPoint</span>(view.frame, location))</span><br><span class="line">        &#123;</span><br><span class="line">            [<span class="keyword">self</span>.delegate horizontalScroller:<span class="keyword">self</span> clickedViewAtIndex:index];</span><br><span class="line">            [scroller setContentOffset:<span class="type">CGPointMake</span>(view.frame.origin.x - <span class="keyword">self</span>.frame.size.width/<span class="number">2</span> + view.frame.size.width/<span class="number">2</span>, <span class="number">0</span>) animated:<span class="type">YES</span>];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="手撸界面">手撸界面</h3><h4 id="手撸_UITableView">手撸 UITableView</h4><p>ViewDidLoad：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">self</span>.view.backgroundColor = <span class="type">UIColor</span>(red: <span class="number">0.76</span>, green: <span class="number">0.81</span>, blue: <span class="number">0.87</span>, alpha: <span class="number">1</span>)</span><br><span class="line">        currentAlbumIndex = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        allAlbums = <span class="type">LibraryAPI</span>.sharedInstance.getAlbums()</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//呈现 album 数据</span></span><br><span class="line">        </span><br><span class="line">        dataTable = <span class="type">UITableView</span>(frame: <span class="type">CGRectMake</span>(<span class="number">0</span>, <span class="number">120</span>, <span class="keyword">self</span>.view.frame.size.width, <span class="keyword">self</span>.view.frame.size.height-<span class="number">120</span>), style:<span class="type">UITableViewStyle</span>.<span class="type">Grouped</span>)</span><br><span class="line">        dataTable.delegate=<span class="keyword">self</span></span><br><span class="line">        dataTable.dataSource=<span class="keyword">self</span></span><br><span class="line">        dataTable.backgroundView=<span class="literal">nil</span></span><br><span class="line">        <span class="keyword">self</span>.view.addSubview(dataTable)</span><br></pre></td></tr></table></figure>
+<p>cellForRowAtIndexPath：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">UITableViewCell</span></span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">var</span> cell = tableView.dequeueReusableCellWithIdentifier(<span class="string">"cell"</span>)  <span class="keyword">as</span>? <span class="type">UITableViewCell</span></span><br><span class="line">       </span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> cell == <span class="literal">nil</span> &#123;</span><br><span class="line">           cell = <span class="type">UITableViewCell</span>(style: <span class="type">UITableViewCellStyle</span>.<span class="type">Value1</span>, reuseIdentifier: <span class="string">"cell"</span>)</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">       cell?.textLabel!.text = currentAlbumData[<span class="string">"titles"</span>]!.objectAtIndex(indexPath.row) <span class="keyword">as</span>? <span class="type">String</span></span><br><span class="line">       cell?.detailTextLabel?.text = currentAlbumData[<span class="string">"values"</span>]!.objectAtIndex(indexPath.row) <span class="keyword">as</span>? <span class="type">String</span></span><br><span class="line">       </span><br><span class="line">       <span class="keyword">return</span> cell!</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Objective-C_混合_Swift">Objective-C 混合 Swift</h2><h3 id="Objective-C_调用_Swift">Objective-C 调用 Swift</h3><p>在需要调用 Swift 方法的 <code>.h</code>文件顶部添加 <code>#import 工程名称-Swift.h</code>，即可在 Objective-C 中使用 Swift 的类</p>
+<h3 id="Swift_调用_Objective-C">Swift 调用 Objective-C</h3><p>在桥接文件加入需要调用的 Objective-C 的 <code>.h</code> 文件即可</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#ifndef <span class="type">CycleMemory_CycleMemory_Bridging_Header_h</span></span><br><span class="line">#define <span class="type">CycleMemory_CycleMemory_Bridging_Header_h</span></span><br><span class="line"></span><br><span class="line">#include <span class="string">"CycleMemoryApi.h"</span></span><br><span class="line"></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<h2 id="枚举">枚举</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, AFNetworkReachabilityStatus) &#123;</span><br><span class="line">    AFNetworkReachabilityStatusUnknown          = -<span class="number">1</span>,</span><br><span class="line">    AFNetworkReachabilityStatusNotReachable     = <span class="number">0</span>,</span><br><span class="line">    AFNetworkReachabilityStatusReachableViaWWAN = <span class="number">1</span>,</span><br><span class="line">    AFNetworkReachabilityStatusReachableViaWiFi = <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/maskImage/">刮刮乐小程序</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/iOSDesignPatterns/">iOS 设计模式笔记</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/iosCodeCheat/"
+               data-title="常用代码片段备忘" data-url="http://yoursite.com/2015/iosCodeCheat/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用代码片段备忘"><span class="nav-number">1.</span> <span class="nav-text">常用代码片段备忘</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Xcode"><span class="nav-number">1.1.</span> <span class="nav-text">Xcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学运算"><span class="nav-number">1.2.</span> <span class="nav-text">数学运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#随机数"><span class="nav-number">1.2.1.</span> <span class="nav-text">随机数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式"><span class="nav-number">1.3.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#协议"><span class="nav-number">1.3.1.</span> <span class="nav-text">协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#检测协议的实现者是否实现遵循了某个协议方法"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">检测协议的实现者是否实现遵循了某个协议方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#swift_中定义协议"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">swift 中定义协议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#界面"><span class="nav-number">1.4.</span> <span class="nav-text">界面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#圆形图片和气泡对话框"><span class="nav-number">1.4.1.</span> <span class="nav-text">圆形图片和气泡对话框</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#圆形图片"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">圆形图片</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#界面跳转"><span class="nav-number">1.4.2.</span> <span class="nav-text">界面跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动画效果"><span class="nav-number">1.4.3.</span> <span class="nav-text">动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进度条效果"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">进度条效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片过渡效果和组合动画"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">图片过渡效果和组合动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CALayer_遮罩效果"><span class="nav-number">1.4.3.3.</span> <span class="nav-text">CALayer 遮罩效果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Core_Graphic_绘图"><span class="nav-number">1.4.4.</span> <span class="nav-text">Core Graphic 绘图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#画线"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">画线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#画矩形"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">画矩形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#画圆形"><span class="nav-number">1.4.4.3.</span> <span class="nav-text">画圆形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#画图片"><span class="nav-number">1.4.4.4.</span> <span class="nav-text">画图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#绘画板"><span class="nav-number">1.4.4.5.</span> <span class="nav-text">绘画板</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册手势点击事件和检测发生点击所对应的视图"><span class="nav-number">1.4.5.</span> <span class="nav-text">注册手势点击事件和检测发生点击所对应的视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手撸界面"><span class="nav-number">1.4.6.</span> <span class="nav-text">手撸界面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#手撸_UITableView"><span class="nav-number">1.4.6.1.</span> <span class="nav-text">手撸 UITableView</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Objective-C_混合_Swift"><span class="nav-number">1.5.</span> <span class="nav-text">Objective-C 混合 Swift</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Objective-C_调用_Swift"><span class="nav-number">1.5.1.</span> <span class="nav-text">Objective-C 调用 Swift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift_调用_Objective-C"><span class="nav-number">1.5.2.</span> <span class="nav-text">Swift 调用 Objective-C</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举"><span class="nav-number">1.6.</span> <span class="nav-text">枚举</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62263979-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>

@@ -1,1 +1,1018 @@
- Humyang 
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="iOS," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> iOS 翻译 《View Controller Programming Guide for iOS：Resource Management View Controller》 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              iOS 翻译 《View Controller Programming Guide for iOS：Resource Management View Controller》
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-06-06
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/iOS/">iOS</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/iOS/翻译/">翻译</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/VCP4/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/VCP4/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>iOS 视图控制器编程指南：视图控制器的资源管理</p>
+<a id="more"></a>
+<p><a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457-CH1-SW1" target="_blank" rel="external">原文地址</a></p>
+<p>记录关于学习过的 iOS 文档</p>
+<hr>
+<h1 id="视图控制器的资源管理">视图控制器的资源管理</h1><p>视图控制器是管理应用程序的资源的必要部分。视图控制器可以将你的应用程序划分为多个部分并只实例化需要的部分。不仅如此，视图控制器自己也管理着不同的资源并在不同时间实例化它们。例如，视图控制器的视图层次结构只有当视图被访问时才实例化；通常，这种情况只会发生在视图在屏幕上显示时。如果多个视图控制器同时被放入导航堆栈中，那么只有最上层的视图控制器内容会显示，这意味着只有它的视图被访问。同样，如果视图控制器不通过导航控制器呈现，那么它不需要实例化它的导航项。通过延迟大多数资源的分配直到它需要，视图控制器可以使用更少的资源。</p>
+<p>当应用程序运行时可用内存过低，系统会自动通知所有视图控制器。这个通知会使视图控制器清除缓存和其它对象然后它们可以在以后内存充足时轻松的重新创建。实际的行为会根据应用程序在不同 iOS 版本运行而有所不同，这也会影响你的视图控制器设计。</p>
+<p>细心的管理与视图控制器关联的资源是应用程序高效运行的关键。你应该也比较喜欢延迟分配；创建和维持对象是昂贵的，应该延迟分配它们并只在需要时才分配。因为这个原因，你的视图控制器应该分开在整个视图控制器声明周期都需要的对象和只在某些时候需要的对象。当你的视图控制器接收到底内存警告时，如果它不是显示在屏幕上的，应该准备缩减它的内存使用。</p>
+<h2 id="初始化视图控制器">初始化视图控制器</h2><p>当视图控制器首次实例化时，它会创建或加载它的生命周期中需要的对象。它不应该创建它的视图层次结构或与显示内容关联的对象。它应该关注数据对象和实现它的关键行为需要的对象。</p>
+<h3 id="初始化视图控制器从故事板加载">初始化视图控制器从故事板加载</h3><p>当你在故事板中创建视图控制器时，在界面构造器配置的属性会序列化到一个存档中。在视图控制器实例化后，这个存档会加载到内存中并进行处理。使对象属性的设置与界面构造器的属性设置相同。这个存档的加载是通过调用视图控制器的 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Protocols/NSCoding_Protocol/index.html#//apple_ref/occ/intfm/NSCoding/initWithCoder:" target="_blank" rel="external">initWithCoder:</a> 方法。然后，<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/NSObject_UIKitAdditions/index.html#//apple_ref/occ/instm/NSObject/awakeFromNib" target="_blank" rel="external">awakeFromNib</a> 方法会被实现了该方法的对象调用。你可以使用这个方法对已实例化的对象执行任何需要的配置步骤。</p>
+<p>关于更多 archiving 和 archiving，见 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Archiving/Archiving.html#//apple_ref/doc/uid/10000047i" target="_blank" rel="external">Archives and Serializations Programming Guide</a>。</p>
+<h3 id="初始化视图控制器以编程方式">初始化视图控制器以编程方式</h3><p>如果视图控制器以编程方式分配它的资源，需要为视图控制器指定创建自定义初始化方法。这个方法应该调用它的父类的 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/index.html#//apple_ref/occ/instm/NSObject/init" target="_blank" rel="external">init</a> 方法并执行类特定的初始化任务。</p>
+<p>通常情况下，不要写太复杂的初始化方法。而应该实现简单的初始化方法，然后为视图控制器使用者提供属性配置它的行为。</p>
+<h2 id="视图控制器实例化它的视图当视图被访问时">视图控制器实例化它的视图当视图被访问时</h2><p>每当应用程序的某部分访问视图控制器视图对象而该对象当前不再内存中时，视图控制器会加载视图层次结构到内存中并将它保存到 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/view" target="_blank" rel="external">view</a> 属性中备用。加载周期期间会产生以下步骤：</p>
+<p>1.视图控制器调用它的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/loadView" target="_blank" rel="external">loadView</a> 方法。<code>loadview</code> 方法的默认实现过程做以下两件事之一：</p>
+<ul>
+<li>如果视图控制器是与故事板关联，它会从故事板加载视图。</li>
+<li>如果视图控制器没有与故事板关联，一个空的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView" target="_blank" rel="external">UIView</a> 对象会被创建并分配到 <code>view</code> 属性。 </li>
+</ul>
+<p>2.视图控制器调用它的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/viewDidLoad" target="_blank" rel="external">viewDidLoad</a> 方法，它让你的子类在加载时间 (load-time) 执行额外的任务。</p>
+<p>图 4-1 展现可视化的加载周期，包含若干被调用的方法。你的应用程序可以根据需要重写 <code>loadView</code> 和 <code>viewDidLoad</code> 方法，轻松的让视图控制器按照你的想法执行。例如，如果你的应用程序没有使用故事板但你想额外的视图能被添加到视图层次结构中，你可以通过重写 <code>loadView</code> 方法以编程方式初始化这些视图。</p>
+<p><strong>图 4-1</strong> 加载视图到内存中<br><img src="./loading_a_view_into_memory_2x.png" alt=""></p>
+<h3 id="从故事板加载视图控制器的视图">从故事板加载视图控制器的视图</h3><p>大多视图控制器从相关联的故事板中加载它们的视图。使用故事板的优点是它们可以让你以图形化界面布局和配置视图，可以轻松和快速的调整布局。你可以快速迭代不同的版本，细致的打磨应用程序界面。</p>
+<h4 id="在界面构造器创建视图">在界面构造器创建视图</h4><p>界面构造器是 Xcode 的一部分，提供了直观的方式为视图控制器创建和配置视图。使用界面构造器时，可以使用 inspector 窗口直接操作它们组合视图和控件，拖动它们进入工作空间，定位，调整尺寸，并修改它们的属性。结果会保存到故事板文件中，它保存着你组合的对象集合与你所做的所有自定义相关的信息。</p>
+<h5 id="在界面构造器配置视图的显示属性">在界面构造器配置视图的显示属性</h5><p>为了帮助正确布局视图的内容，界面构造器提供了让你指定视图是否拥有导航栏，工具栏或其它可以影响自定义内容位置的对象的控件。如果控制器在故事板中连接到容器控制器，它可以从容器推断这些设置，可以轻松准确的见到它在运行时如何显示。</p>
+<h5 id="为你的视图控制器配置_Action_和_Outlets">为你的视图控制器配置 Action 和 Outlets</h5><p>使用界面构造器时，可以创建界面中的视图和视图控制器之间的连接。</p>
+<p>清单 4-1 展示的自定义类 <code>MyViewController</code> 声明的两个自定义 outlets (通过关键字 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKitConstantsReference/index.html#//apple_ref/c/macro/IBOutlet" target="_blank" rel="external">IBOutlet</a> 定义) 和单个 action 方法 (定义为 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKitConstantsReference/index.html#//apple_ref/c/macro/IBAction" target="_blank" rel="external">IBAction</a> 返回类型)。它们在实现文件的 category 内声明。outlets 保存着在故事板中的按钮和文本字段的引用，action 方法响应按钮的 taps 事件。</p>
+<p><strong>清单 4-1</strong> 自定义视图控制器的类声明</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">MyViewController</span>()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="keyword">id</span> myButton;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="keyword">id</span> myTextField;</span><br><span class="line"> </span><br><span class="line">- (<span class="keyword">IBAction</span>)myAction:(<span class="keyword">id</span>)sender;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>图 4-2 展示你将在 <code>MyViewController</code> 类中创建的对象的连接。</p>
+<p><strong>图 4-2</strong> 故事板中的连接</p>
+<p><img src="./storyboard_art_2x.png" alt=""></p>
+<p>当上面配置的 <code>MyViewController</code> 类创建和呈现后，视图控制器的基础架构自动从故事板加载视图并重新配置所有 outlets 或 actions。因此，当视图被呈现给用户时，你的视图控制器的 outlets 和 actions 已经被设置并可以使用。这个能力在运行代码和设计时的资源文件之间的搭建桥梁，这是使故事板如此强大的原因之一。</p>
+<h3 id="以编程方式创建视图">以编程方式创建视图</h3><p>如果你准备以编程方式创建视图，替代故事板，你可以通过重写视图控制器的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/loadView" target="_blank" rel="external">loadView</a> 方法达成目的。这个方法的实现过程应该做以下的事情：</p>
+<p>1.创建根视图对象。</p>
+<p>根视图包含所有与视图控制器关联的其它视图，通常为这个视图定义 frame 适应应用程序窗口的尺寸，它应该填充整个屏幕。不过，frame 基于视图控制器如何显示而调整。见 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/AdoptingaFull-ScreenLayout/AdoptingaFull-ScreenLayout.html#//apple_ref/doc/uid/TP40007457-CH13-SW2" target="_blank" rel="external">Resizing the View Controller‘s Views</a>。</p>
+<p>你可以使用通用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView" target="_blank" rel="external">UIView</a> 对象自定义视图，或其它可以伸展填充满屏幕的视图。</p>
+<p>2.创建额外的子视图并把它们添加到根视图。</p>
+<p>对每个视图，你应该：</p>
+<p>a.创建和初始化视图。<br>b.使用 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/addSubview:" target="_blank" rel="external">addSubview:</a> 方法添加视图到父视图。</p>
+<p>3.如果你使用自动布局，请为你创建的每个视图分配足够的约束控制视图的位置和尺寸。否则，可以实现 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/viewWillLayoutSubviews" target="_blank" rel="external">viewWiiLayoutSubviews</a> 和 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/viewDidLayoutSubviews" target="_blank" rel="external">viewDidLayoutSubviews</a> 方法调整视图层次结构中子视图的 frame。见 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/AdoptingaFull-ScreenLayout/AdoptingaFull-ScreenLayout.html#//apple_ref/doc/uid/TP40007457-CH13-SW2" target="_blank" rel="external">Resizing the View Controller‘s Views</a>。</p>
+<p>4.把根视图分配到视图控制器的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instp/UIViewController/view" target="_blank" rel="external">view</a> 属性。</p>
+<p>清单 4-2 展示一个 <code>loadView</code> 方法实现的例子。这个方法创建了一对视图层次结构中的自定义视图并把它们分配到视图控制器。</p>
+<p><strong>清单 4-2</strong> 以编程方式创建视图</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)loadView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">CGRect</span> applicationFrame = [[<span class="built_in">UIScreen</span> mainScreen] applicationFrame];</span><br><span class="line">    <span class="built_in">UIView</span> *contentView = [[<span class="built_in">UIView</span> alloc] initWithFrame:applicationFrame];</span><br><span class="line">    contentView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.view</span> = contentView;</span><br><span class="line"> </span><br><span class="line">    levelView = [[LevelView alloc] initWithFrame:applicationFrame viewController:<span class="keyword">self</span>];</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:levelView];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当重写 <code>loadView</code> 方法以编程方式创建你的视图控制器时，你不应该调用 <code>super</code>。因为这样会启动默认视图加载行为通常只会浪费 CPU 周期。你的 <code>loadView</code> 实现过程应该只做为视图控制器创建根视图和子视图需要的工作。更多视图加载处理的信息，见 <a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/ViewLoadingandUnloading/ViewLoadingandUnloading.html#//apple_ref/doc/uid/TP40007457-CH10-SW2" target="_blank" rel="external">A View Controller Instantiates Its View Hierarchy When Its View is Accessed</a>。</p>
+</blockquote>
+<h2 id="高效管理内存">高效管理内存</h2><p>当涉及视图控制器和内存管理时，这里有两个问题需要考虑：</p>
+<ul>
+<li>如何高效分配内存</li>
+<li>何时与如何释放内存</li>
+</ul>
+<p>内存分配的一些方面严格由你决定，<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/cl/UIViewController" target="_blank" rel="external">UIViewControllers</a> 类提供了一些通常与内存管理任务有联系的方法。表格 4-1 列出在你的视图控制器对象中可能分配或释放内存的位置，和每个位置你应该怎么做的信息。</p>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>方法</th>
+<th>讨论 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分配视图控制器需要的关键数据结构</td>
+<td>初始化方法</td>
+<td>自定义初始化方法(名字是 <code>init</code> 或其它) 总是负责把你的视图控制器对象放入一个已知的良好状态。包含分配任何所需的数据对象确保正确运行。</td>
+</tr>
+<tr>
+<td>创建视图对象</td>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/loadView" target="_blank" rel="external">loadView</a></td>
+<td>只有如果你打算以编程方式创建视图时才需要重写 <code>loadView</code> 方法，如果你使用故事板，视图自动从故事板文件加载。</td>
+</tr>
+<tr>
+<td>创建自定义对象</td>
+<td>自定义属性和方法</td>
+<td>尽管你可以自由使用其它设计，请考虑使用与 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/loadView" target="_blank" rel="external">loadView</a> 方法类似的模式。创建保存对象的属性和匹配的方法对它初始化。当属性被读取并且它的值是 nil 时，调用关联的加载方法。</td>
+</tr>
+<tr>
+<td>分配或加载数据显示在视图中</td>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/viewDidLoad" target="_blank" rel="external">viewDidLoad</a></td>
+<td>数据对象通常通过配置视图控制器的属性提供。所有视图控制器想创建额外的对象都应该通过重写 <code>viewDidLoad</code> 方法完成。当这个方法被调用之后，视图对象会确保存在并且是一个已知的良好状态。</td>
+</tr>
+<tr>
+<td>响应低内存通知</td>
+<td><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/didReceiveMemoryWarning" target="_blank" rel="external">didReceiveMemoryWarning</a></td>
+<td>使用这个方法释放所有与视图控制器关联的非关键对象。在 iOS 6，你也可以使用这个方法释放对视图对象的引用。</td>
+</tr>
+<tr>
+<td>释放视图控制器需要的关键数据结构</td>
+<td><a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/index.html#//apple_ref/occ/instm/NSObject/dealloc" target="_blank" rel="external">dealloc</a></td>
+<td>重写这个方法是执行视图控制器类清理的最后一步。保存在实例变量和属性中的对象会自动释放，你不需要明确的释放它们。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="iOS_6_和之后的版本，视图控制器在需要时卸载它的视图">iOS 6 和之后的版本，视图控制器在需要时卸载它的视图</h3><p>视图控制器的默认行为是 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instp/UIViewController/view" target="_blank" rel="external">view</a> 属性第一次访问时加载它的视图层次结构并一直保持在内存中直到视图控制器处置它们。视图绘制它自己到屏幕上使用的内存可能相当的大，因此，当视图不与窗口关联时系统会自动释放这些昂贵的资源。大部分视图使用的残留内存足够的小，不值得系统自动清除和重新创建视图层次结构。</p>
+<p>如果你的应用程序必须用到额外的内存，你可以明确的释放视图层次结构。清单 4-3 重写 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/didReceiveMemoryWarning" target="_blank" rel="external">didReceiveMemoryWarning</a> 方法完成目的。首先，它调用父类的实现执行需要的默认行为。然后，它清除视图控制器的资源。最后，它测试视图控制器的视图没显示在屏幕上。如果视图与窗口关联，那么它清除所有视图控制器对它的视图和子视图的强引用。如果视图保存着需要被重新创建的数据，那么这个方法的实现过程应该在释放这些视图的引用之前保存数据。</p>
+<p><strong>清单 4-3</strong> 释放视图控制器的视图不在屏幕上显示</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</span><br><span class="line">    <span class="comment">// Add code to clean up any of your own resources that are no longer necessary.</span></span><br><span class="line">    <span class="keyword">if</span> ([<span class="keyword">self</span><span class="variable">.view</span> window] == <span class="literal">nil</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Add code to preserve data stored in the views that might be</span></span><br><span class="line">        <span class="comment">// needed later.</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Add code to clean up other strong references to the view in</span></span><br><span class="line">        <span class="comment">// the view hierarchy.</span></span><br><span class="line">        <span class="keyword">self</span><span class="variable">.view</span> = <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instp/UIViewController/view" target="_blank" rel="external">View</a> 属性下次被访问时，视图会如同第一次被访问一样重新加载。</p>
+<h3 id="iOS_5_和之前的版本，当内存过低时系统可能会卸载视图">iOS 5 和之前的版本，当内存过低时系统可能会卸载视图</h3><p>在早期版本的 iOS，当内存过低时系统自动尝试卸载视图控制器的视图。下面的步骤发生在卸载周期期间：</p>
+<p>1.应用程序从系统接收到低内存警告。</p>
+<p>2.每个视图控制器都调用它的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/didReceiveMemoryWarning" target="_blank" rel="external">didReceiveMemoryWarning</a> 方法。如果你重写这个方法，你应该使用它释放你的视图控制器对象不长期需要的内存或对象。你必须在实现过程的某个位置调用 <code>super</code> 确保默认的实现过程运行。在 iOS 5 和之前，默认实现过程会尝试释放视图，在 iOS 6 和之后，默认实现过程会退出 (无用)。</p>
+<p>3.如果视图不能安全的释放 (例如，它在屏幕上显示)，默认实现过程会退出。</p>
+<p>4.视图控制器调用它的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/viewWillUnload" target="_blank" rel="external">viewWillUnload</a> 方法。它的子类通常会重写这个方法如果它需要在视图销毁之前保存视图的属性。</p>
+<p>5.设置它的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/view" target="_blank" rel="external">view</a> 属性为 <code>nil</code>。</p>
+<p>6.视图控制器调用它的 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/viewDidUnload" target="_blank" rel="external">viewDidUnload</a> 方法。它的子类通常会重写这个方法释放对它拥有的视图的强引用。</p>
+<p>图 4-3 可视化的呈现视图控制器的卸载周期。</p>
+<p><strong>图 4-3</strong> 从内存中卸载视图</p>
+<p><img src="./unloading_a_view_controllers_view_2x.png" alt=""></p>
+<hr>
+<p><a href="../VCP0"><em>iOS 翻译 《View Controller Programming Guide for iOS：Introduction》</em></a> </p>
+<p><a href="../VCP1"><em>iOS 翻译 《View Controller Programming Guide for iOS：View Controller Basics》</em></a> </p>
+<p><a href="../VCP2"><em>iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in Your App》</em></a> </p>
+<p><a href="../VCP3"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》</em></a></p>
+<p><a href="../VCP4"><em>iOS 翻译 《View Controller Programming Guide for iOS：Resource Management in View Controllers》</em></a> </p>
+<p><a href="../VCP5"><em>iOS 翻译 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》</em></a> </p>
+<p><a href="../VCP6"><em>iOS 翻译 《View Controller Programming Guide for iOS：Resizing the View Controller’s Views》</em></a> </p>
+<p><a href="../VCP7"><em>iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》</em></a> </p>
+<p><a href="../VCP8"><em>iOS 翻译 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》</em></a> </p>
+<p><a href="../VCP9"><em>iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controllers’s Perspective》</em></a> </p>
+<p><a href="../VCP10"><em>iOS 翻译 《View Controller Programming Guide for iOS：Presenting View Controllers from Other View Controllers》</em></a> </p>
+<p><a href="../VCP11"><em>iOS 翻译 《View Controller Programming Guide for iOS：Coordinating Efforts Between View Controllers》</em></a> </p>
+<p><a href="../VCP12"><em>iOS 翻译 《View Controller Programming Guide for iOS：Enabling Edit Mode in a View Controller》</em></a> </p>
+<p><a href="../VCP13"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Segues》</em></a> </p>
+<p><a href="../VCP14"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Container View Controllers》</em></a></p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/"> #iOS </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/VCP5/">iOS 翻译 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/VCP3/">iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2015/VCP4/"
+               data-title="iOS 翻译 《View Controller Programming Guide for iOS：Resource Management View Controller》" data-url="http://yoursite.com/2015/VCP4/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#视图控制器的资源管理"><span class="nav-number">1.</span> <span class="nav-text">视图控制器的资源管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化视图控制器"><span class="nav-number">1.1.</span> <span class="nav-text">初始化视图控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化视图控制器从故事板加载"><span class="nav-number">1.1.1.</span> <span class="nav-text">初始化视图控制器从故事板加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化视图控制器以编程方式"><span class="nav-number">1.1.2.</span> <span class="nav-text">初始化视图控制器以编程方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图控制器实例化它的视图当视图被访问时"><span class="nav-number">1.2.</span> <span class="nav-text">视图控制器实例化它的视图当视图被访问时</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从故事板加载视图控制器的视图"><span class="nav-number">1.2.1.</span> <span class="nav-text">从故事板加载视图控制器的视图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在界面构造器创建视图"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">在界面构造器创建视图</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在界面构造器配置视图的显示属性"><span class="nav-number">1.2.1.1.1.</span> <span class="nav-text">在界面构造器配置视图的显示属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为你的视图控制器配置_Action_和_Outlets"><span class="nav-number">1.2.1.1.2.</span> <span class="nav-text">为你的视图控制器配置 Action 和 Outlets</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以编程方式创建视图"><span class="nav-number">1.2.2.</span> <span class="nav-text">以编程方式创建视图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高效管理内存"><span class="nav-number">1.3.</span> <span class="nav-text">高效管理内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS_6_和之后的版本，视图控制器在需要时卸载它的视图"><span class="nav-number">1.3.1.</span> <span class="nav-text">iOS 6 和之后的版本，视图控制器在需要时卸载它的视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS_5_和之前的版本，当内存过低时系统可能会卸载视图"><span class="nav-number">1.3.2.</span> <span class="nav-text">iOS 5 和之前的版本，当内存过低时系统可能会卸载视图</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62263979-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>
