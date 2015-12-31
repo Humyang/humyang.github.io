@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="前端,翻译," />
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-  <title> iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》 // Humyang </title>
+  <title> React 的 context 和 childContext // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》
+              React 的 context 和 childContext
             
           
         </h1>
@@ -119,14 +119,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-06-10
+          发表于 2015-12-31
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/iOS/">iOS</a>
+              <a href="/categories/前端/">前端</a>
 
               
               
@@ -134,7 +134,7 @@
               
 
             
-              <a href="/categories/iOS/翻译/">翻译</a>
+              <a href="/categories/前端/React/">React</a>
 
               
               
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/VCP7/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/VCP7/"></span>
+            <a href="/2015/ciiu1upgn0000onsj8o09pkf4/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciiu1upgn0000onsj8o09pkf4/"></span>
             </a>
           </span>
           
@@ -162,34 +162,31 @@
       
 
       
-        <p>iOS 视图控制器编程指南：在响应链中使用视图控制器</p>
+        <p>介绍如何使用 React 的 context </p>
 <a id="more"></a>
-<p><a href="https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457-CH1-SW1" target="_blank" rel="external">原文地址</a></p>
-<p>记录关于学习过的 iOS 文档</p>
 <hr>
-<h1 id="在响应链中使用视图控制器">在响应链中使用视图控制器</h1><p>视图控制器是 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIResponder_Class/index.html#//apple_ref/occ/cl/UIResponder" target="_blank" rel="external">UIResponder</a> 类的后代因此它有处理各种事件的能力。当视图不处理给定的事件时，它会传递事件给它的父视图，逐渐往视图层次结构的上方传递一直到根视图。不过，如果队列中的视图由视图控制器管理，它会把事件传递给它的父视图之前传递给视图控制器对象。因此，视图控制器可以响应它的不由它的视图处理的事件。如果视图控制器也不处理该事件，通常该事件会移动到视图的父视图。</p>
-<h2 id="响应链定义事件如何被传播到应用程序">响应链定义事件如何被传播到应用程序</h2><p>图 7-1 演示视图层次结构内的事件流程。假设你有一个嵌入到屏幕尺寸大小的通用视图对象中的自定义视图，而它们又是被视图控制器管理。到达自定义视图 frame 的事件会交由视图处理。如果你的视图不处理这个事件，它会继续传递到父视图。<strong>因为通用视图对象不处理事件</strong>，它会首先传递这些事件到它的视图控制器。如果视图控制器不处理事件，事件会继续传递到通用视图对象 <code>UIView</code> 的父视图，在这个例子中它是 window 对象。</p>
-<p><strong>图 7-1</strong> 响应链中的视图控制器<br><img src="./event_passing_2x.png" alt=""></p>
+<p><a href="http://javascript.tutorialhorizon.com/2015/06/06/using-context-and-childcontext-in-react/" target="_blank" rel="external">原文地址</a></p>
+<h1 id="Using_context_and_childContext_in_React">Using context and childContext in React</h1><p>在 React 使用 context 和 childContext</p>
 <blockquote>
-<p><strong>注意：</strong>视图控制器和它的视图之间的消息传递关系被视图控制器私有管理并且不能通过应用程序以编程方式更改。</p>
+<p>When work­ing with React in a deeply nested hier­ar­chy, often times you will find your­self in a sit­u­a­tion where you need to pass down props from the par­ent as is to the chil­dren and the grand­chil­dren. Although pass­ing down prop­er­ties is great, but writ­ing code in such a man­ner encour­ages rely­ing on mem­ory to pass down the nec­es­sary props, and that’s not really a good use of your brain.Fortunately, React pro­vides a way to make this task easier.</p>
 </blockquote>
-<p>虽然你可能不想在视图控制器中处理特殊的触摸事件，你可以用它处理基于运动的事件。你也可以使用它协调第一个响应者的设置和更改。更多关于事件如何在 iOS 应用程序中分布和处理，见 <a href="https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541" target="_blank" rel="external">Event Handling Guide for iOS</a>。</p>
-<hr>
-<p><a href="../VCP0"><em>iOS 翻译 《View Controller Programming Guide for iOS：Introduction》</em></a> </p>
-<p><a href="../VCP1"><em>iOS 翻译 《View Controller Programming Guide for iOS：View Controller Basics》</em></a> </p>
-<p><a href="../VCP2"><em>iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in Your App》</em></a> </p>
-<p><a href="../VCP3"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》</em></a></p>
-<p><a href="../VCP4"><em>iOS 翻译 《View Controller Programming Guide for iOS：Resource Management in View Controllers》</em></a> </p>
-<p><a href="../VCP5"><em>iOS 翻译 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》</em></a> </p>
-<p><a href="../VCP6"><em>iOS 翻译 《View Controller Programming Guide for iOS：Resizing the View Controller’s Views》</em></a> </p>
-<p>[<em>iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》</em></p>
-<p><a href="../VCP8"><em>iOS 翻译 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》</em></a> </p>
-<p><a href="../VCP9"><em>iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controllers’s Perspective》</em></a> </p>
-<p><a href="../VCP10"><em>iOS 翻译 《View Controller Programming Guide for iOS：Presenting View Controllers from Other View Controllers》</em></a> </p>
-<p><a href="../VCP11"><em>iOS 翻译 《View Controller Programming Guide for iOS：Coordinating Efforts Between View Controllers》</em></a> </p>
-<p><a href="../VCP12"><em>iOS 翻译 《View Controller Programming Guide for iOS：Enabling Edit Mode in a View Controller》</em></a> </p>
-<p><a href="../VCP13"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Segues》</em></a> </p>
-<p><a href="../VCP14"><em>iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Container View Controllers》</em></a></p>
+<p>在操作 React 中深层嵌套的层次结构时，当你需要从父组件获取 props 传递到子组件时，通常你需要找到自己所在的位置。尽管传递 properties 是好的做法，但在写代码时却要依靠记忆传递所需要的 props，这对大脑来说不怎么友好。幸运的是，React 提供了一种方式使得这些工作简单完成。</p>
+<blockquote>
+<p>React has some­thing called as Child contexts that allows a par­ent ele­ment to spec­ify a con­text — aka a set of prop­er­ties — which can be accessed from all of its chil­dren and grand­chil­dren via the this.context object.</p>
+</blockquote>
+<p>React 有一些叫做 Child context 的东西，允许父元素指定一个 context - 等于设置一个属性 － 它可以通过 <code>this.context</code> 对象访问它所有的 children 和 grandchildren。</p>
+<blockquote>
+<p>There are 2 aspects to how you would go about imple­ment­ing this in your code.</p>
+</blockquote>
+<p>在代码实现需要处理两方面。</p>
+<blockquote>
+<p>1.In the par­ent, the getChild­Con­text method is used to return an object that is passed own as the child con­text. The prop types of all the keys in this object must also be defined in the childContextTypes prop­erty of the parent.<br>2.Any child that needs to con­sume the prop­er­ties passed down from its par­ents must whitelist the prop­er­ties it wants to access via the ‘con­text­Types’ property.<br>Here’s an exam­ple of how this works</p>
+</blockquote>
+<p>1.在父组件，getChildContext 方法返回一个对象，这个对象把自己传给 child context。这个对象中所有的 key 的 prop types 也必须在父组件的 childContextType 属性中定义。<br>2.任何 child 想访问从 parent 传递过来的 properties，都需要通过将 properties 添加到 contextTypes 属性进行访问。</p>
+<p>这里是一段它们如何工作的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> Grandparent = React.createClass(&#123;</span><br><span class="line"></span><br><span class="line">    childContextTypes: &#123;</span><br><span class="line">         foo: React.PropTypes.string.isRequired</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    getChildContext: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> &#123; foo: <span class="string">"I m the grandparent"</span> &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="title">Parent</span> /&gt;</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Parent = React.createClass(&#123;</span><br><span class="line"></span><br><span class="line">    childContextTypes: &#123;</span><br><span class="line">         bar: React.PropTypes.string.isRequired</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    getChildContext: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> &#123; bar: <span class="string">"I am the parent"</span> &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="title">Child</span> /&gt;</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Child = React.createClass(&#123;</span><br><span class="line"></span><br><span class="line">    contextTypes: &#123;</span><br><span class="line">        foo: React.PropTypes.string.isRequired,</span><br><span class="line">        bar: React.PropTypes.string.isRequired</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          <span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">div</span>&gt;</span>My name is: &#123;this.context.foo&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">div</span>&gt;</span>My name is: &#123;this.context.bar&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">        )</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Finally you render the grandparent</span></span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="title">Grandparent</span> /&gt;</span>, document.body);</span></span><br></pre></td></tr></table></figure>
+<p>One may argue that this makes the code a bit more ver­bose, because now you end up cre­at­ing an addi­tional key contextTypes on every child com­po­nent. How­ever, the real­ity is that you can spec­ify the ‘con­text­Types’ prop­erty on a mixin. That way you can avoid rewrit­ing the whitelist­ing boil­er­plate code by sim­ply using the mixin on all the child com­po­nents that need to access those prop­er­ties from its context.</p>
+<p>有人可能会说这使得代码更复杂，因为现在要在每个子组件额外的添加 <code>contextTypes</code> 属性。但是，其实你可以把 contextTypes 属性的代码放到 mixin。通过简单的在所有子组件使用 mixin 可以避免重写白名单的代码，这样所有子组件都可以通过 context 访问父组件的属性了。</p>
 
       
     </div>
@@ -198,7 +195,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/"> #iOS </a>
+            <a href="/tags/前端/"> #前端 </a>
+          
+            <a href="/tags/翻译/"> #翻译 </a>
           
         </div>
       
@@ -207,13 +206,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/VCP8/">iOS 翻译 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/VCP6/">iOS 翻译 《View Controller Programming Guide for iOS：Resizing the View Controler's Views》</a>
+              <a href="/2015/sdasd/">前端记录</a>
             
           </div>
         </div>
@@ -229,8 +226,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2015/VCP7/"
-               data-title="iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》" data-url="http://yoursite.com/2015/VCP7/">
+          <div class="ds-thread" data-thread-key="2015/ciiu1upgn0000onsj8o09pkf4/"
+               data-title="React 的 context 和 childContext" data-url="http://yoursite.com/2015/ciiu1upgn0000onsj8o09pkf4/">
           </div>
         
       </div>
@@ -321,7 +318,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在响应链中使用视图控制器"><span class="nav-number">1.</span> <span class="nav-text">在响应链中使用视图控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#响应链定义事件如何被传播到应用程序"><span class="nav-number">1.1.</span> <span class="nav-text">响应链定义事件如何被传播到应用程序</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Using_context_and_childContext_in_React"><span class="nav-number">1.</span> <span class="nav-text">Using context and childContext in React</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
