@@ -1,0 +1,1011 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> Grunt 项目脚手架 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              Grunt 项目脚手架
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2016-01-03
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/工具/">工具</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/ciiyo4cua0000jhmpkw0e3563/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/ciiyo4cua0000jhmpkw0e3563/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>介绍如何使用 Grunt 创建 template，可以快速构建一个新项目。</p>
+<a id="more"></a>
+<hr>
+<p>Grunt-项目脚手架</p>
+<h1 id="grunt-init">grunt-init</h1><p>Grunt-init 是一个脚手架工具用作自动化创建项目。它将根据当前环境设置和你对一些问题的答案构建整个目录结构。</p>
+<p>通过模版创建的精确的文件和内容是根据你的回答来进行选择。</p>
+<h1 id="安装">安装</h1><p>为了使用 <code>grunt-init</code>,你需要以全局模式安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">npm install -g grunt-init</span><br></pre></td></tr></table></figure>
+<p>这个命令把 <code>grunt-init</code> 命令安装在你的系统路径，允许它在任意位置运行。</p>
+<blockquote>
+<p><strong>注意：</strong>你可能需要以 sudo 或以管理员运行该命令。</p>
+</blockquote>
+<h1 id="使用方式">使用方式</h1><ul>
+<li>获取帮助和可用的模版列表 <code>grunt-init --help</code></li>
+<li>基于可用的模版创建项目 <code>grunt-init [TEMPLATE NAME]</code></li>
+<li>基于任意位置的模版创建项目 <code>grunt-init /path/to/TEMPLATE</code></li>
+</ul>
+<p>注意大部分模版会在当前目录生成文件，如果你不想覆盖当前目录的文件请确认已更改到新目录。</p>
+<h1 id="添加模版">添加模版</h1><p>把模版放到 <code>~/.grunt-init/</code> 目录 (在 Windows 的目录为 <code>%USERPROFILE%\.grunt-init\</code>)。<br>然后就可以通过 <code>grunt-init</code> 使用模版。推荐使用 <code>git clone</code> 添加模版到目录，例如可以这样安装 <code>grunt-init-jquery</code> 模版:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git clone https:<span class="comment">//github.com/gruntjs/grunt-init-jquery.git ~/.grunt-init/jquery</span></span><br></pre></td></tr></table></figure>
+<p>注意：如果你想使模版的可用路径改为 “foobarbaz”，你可以在 cloning 时指定 <code>~/.grunt-init/foobarbaz</code>。Grunt-init 将会使用实际的目录替代 <code>~/.grunt-init/</code>。</p>
+<p>这里官方提供了一些正式的模版：</p>
+<ul>
+<li><a href="https://github.com/gruntjs/grunt-init-commonjs" target="_blank" rel="external">grunt-init-commonjs</a> - Create a commonjs module, including Nodeunit unit tests. (sample “generated” repo | creation transcript)</li>
+<li><a href="https://github.com/gruntjs/grunt-init-gruntfile" target="_blank" rel="external">grunt-init-gruntfile</a> - Create a basic Gruntfile. (sample “generated” repo | creation transcript)</li>
+<li><a href="https://github.com/gruntjs/grunt-init-gruntplugin" target="_blank" rel="external">grunt-init-gruntplugin</a> - Create a Grunt plugin, including Nodeunit unit tests. (sample “generated” repo | creation transcript)</li>
+<li><a href="https://github.com/gruntjs/grunt-init-jquery" target="_blank" rel="external">grunt-init-jquery</a> - Create a jQuery plugin, including QUnit unit tests. (sample “generated” repo | creation transcript)</li>
+<li><a href="https://github.com/gruntjs/grunt-init-node" target="_blank" rel="external">grunt-init-node</a> - Create a Node.js module, including Nodeunit unit tests. (sample “generated” repo | creation transcript)</li>
+</ul>
+<h1 id="自定义模版">自定义模版</h1><p>你可以创建和使用自定义模版。你的模版必须跟随上面模版的结构。</p>
+<p>一个名为 <code>my-template</code> 的模版,将会生成这些文件结构：</p>
+<ul>
+<li><code>my-template/template.js</code> - 主要的模版文件</li>
+<li><code>my-template/rename.json</code> - 指定重命名规则，处理为模版.</li>
+<li><code>my-template/root/</code> - 复制到目标路径的文件.</li>
+</ul>
+<p>假设这些文件在 <code>/path/to/my-template</code>，命令 <code>grunt-init /path/to/my-template</code> 将会处理成模版。多个唯一命名的模版可以位于同一目录下。</p>
+<p>此外，如果你将自定义模版放置在 <code>~/.grunt-init/</code> 目录它自动成为模版，可以通过 <code>grunt-init my-template</code> 使用。</p>
+<h2 id="复制文件">复制文件</h2><p>在 <code>template.js</code> 文件主要用到 <code>init-filesToCopy</code> 和 <code>init.copyAndProcess</code> 方法，在运行 <code>grunt-init template</code> 时 <code>root/</code> 子目录的所在文件都会复制到当前目录，。</p>
+<p>注意所有被复制的文件都会根据 <code>props</code> 数据对象处理文件内设置的 <code>{ %  % }</code>，除非设置了 <code>noProcess</code> 选项。见 <a href="https://github.com/gruntjs/grunt-init-jquery" target="_blank" rel="external">jquery template</a> 的做法。</p>
+<p>例如文件顶部的版权声明：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * &#123; %= name % &#125; </span><br><span class="line"> * &#123; %= homepage % &#125;</span><br><span class="line"> *</span><br><span class="line"> * Copyright (c) &#123; %= grunt.template.today('yyyy') % &#125; &#123; %= author_name % &#125;</span><br><span class="line"> * Licensed under the &#123; %= licenses.join(', ') % &#125; license&#123; %= licenses.length === 1 ? '' : 's' %&#125; .</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure>
+<h2 id="重命名或排除模版文件">重命名或排除模版文件</h2><p>在 <code>rename.json</code> 描述了文件从 <code>sourcepath</code> 复制到 <code>destpath</code> 的重命名规则。<code>sourcepath</code> 必须是相对于 <code>root/</code> 文件夹的路径，但 <code>destpath</code> 值可以包含 <code>{ % % }</code> 描述目标路径。</p>
+<p>如果对 <code>destpath</code> 指定为 <code>false</code> 文件将不会被复制。同时，<code>srcpath</code> 支持通配符表达式。</p>
+<h1 id="指定默认提示回答">指定默认提示回答</h1><p>初始提示可以是硬编码字符或由当前环境决定的默认值。如果你想覆盖特定的默认值，OS X 中你可以修改 <code>~/.grunt-init/defaults.json</code> 文件，Windows 中修改 <code>% USERPROFILE %\.grunt-init\defaults.json</code> 文件。</p>
+<p>例如，我的 <code>default.json</code> 文件是这样的，因为我想使用与默认名称稍微不同的名称，并且想排除 Email 地址，和自动指定作者 url：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"author_name"</span>: <span class="string">"\"Cowboy\" Ben Alman"</span>,</span><br><span class="line">  <span class="string">"author_email"</span>: <span class="string">"none"</span>,</span><br><span class="line">  <span class="string">"author_url"</span>: <span class="string">"http://benalman.com/"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明：在文档中有所有的内置提示，都可以在 <a href="https://github.com/gruntjs/grunt-init/blob/master/tasks/init.js" target="_blank" rel="external">source code</a> 中找到它们的名称和默认值。</p>
+<h1 id="定义一个初始模版">定义一个初始模版</h1><h2 id="exports-description">exports.description</h2><p>当用户运行 grunt init 或 grunt-init 后在模版列表旁显示的简要描述。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">exports.description = descriptionString;</span><br></pre></td></tr></table></figure>
+<h2 id="exports-notes">exports.notes</h2><p>如果指定了，在显示模版选项提示之前会显示对模版的拓展描述。在这里可以给用户一些命名上约定的帮助，对于提示来说是可选的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">exports.notes = notesString;</span><br></pre></td></tr></table></figure>
+<h2 id="exports-warnOn">exports.warnOn</h2><p>这是可选的选项 (推荐使用)，传入通配符模式或通配符数组进行匹配文件，如果匹配成功 Grunt 将中断操作并产生一个警告，用户可以通过 <code>--force</code> 强制执行。可以使用这个功能防止用户误操作覆盖原有文件。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">exports.warnOn = wildcardPattern;</span><br></pre></td></tr></table></figure>
+<p>最常用的值是 <code>*</code>，适配任意文件和目录，<a href="https://github.com/isaacs/minimatch" target="_blank" rel="external">minimatch</a> 通配符模式语法使用非常灵活，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">exports.warnOn = <span class="string">'Gruntfile.js'</span>;    <span class="comment">// Warn on a Gruntfile.js file.</span></span><br><span class="line">exports.warnOn = <span class="string">'*.js'</span>;            <span class="comment">// Warn on any .js file.</span></span><br><span class="line">exports.warnOn = <span class="string">'*'</span>;               <span class="comment">// Warn on any non-dotfile or non-dotdir.</span></span><br><span class="line">exports.warnOn = <span class="string">'.*'</span>;              <span class="comment">// Warn on any dotfile or dotdir.</span></span><br><span class="line">exports.warnOn = <span class="string">'&#123;.*,*&#125;'</span>;          <span class="comment">// Warn on any file or dir (dot or non-dot).</span></span><br><span class="line">exports.warnOn = <span class="string">'!*/**'</span>;           <span class="comment">// Warn on any file (ignoring dirs).</span></span><br><span class="line">exports.warnOn = <span class="string">'*.&#123;png,gif,jpg&#125;'</span>; <span class="comment">// Warn on any image file.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// This is another way of writing the last example.</span></span><br><span class="line">exports.warnOn = [<span class="string">'*.png'</span>, <span class="string">'*.gif'</span>, <span class="string">'*.jpg'</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="exports-template">exports.template</h2><p><code>exports</code> 所有的属性都定义在该函数之外，实际的初始化代码是指定在该函数内。</p>
+<p>有三个参数传递到该函数，<code>grunt</code> 参数是对 grunt 的引用，包含所有 <a href="http://gruntjs.com/api/grunt" target="_blank" rel="external">grunt methods and libs</a>。<code>init</code> argument 是一个对象包含指定给该模版的方法和属性。<code>done</code> 参数是一个函数，当模版初始化完成后执行，也可以用来中断初始化，例如传入了敏感的项目名称如 “jQuery” 等。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">exports.template = <span class="function"><span class="keyword">function</span>(<span class="params">grunt, init, done</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// See the "Inside an init template" section.</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="template_方法的内部">template 方法的内部</h1><h2 id="init-addLicenseFiles">init.addLicenseFiles</h2><p>添加 license 文件的属性名到 files object。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> files = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> licenses = [<span class="string">'MIT'</span>];</span><br><span class="line">init.addLicenseFiles(files, licenses);</span><br><span class="line"><span class="comment">// files === &#123;'LICENSE-MIT': 'licenses/LICENSE-MIT'&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="init-availableLicenses">init.availableLicenses</h2><p>获取可用的 licenses 数组：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> licenses = init.availableLicenses();</span><br><span class="line"><span class="comment">// licenses === [ 'Apache-2.0', 'GPL-2.0', 'MIT', 'MPL-2.0' ]</span></span><br></pre></td></tr></table></figure>
+<h2 id="init-copy">init.copy</h2><p>传入一个绝对或相对 source path，和一个可选的相对 destination path，通过可选的回调方法处理复制文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.copy(srcpath[, destpath], options)</span><br></pre></td></tr></table></figure>
+<h2 id="init-copyAndProcess">init.copyAndProcess</h2><p>遍历传入对象中所有文件，复制源文件内容到目标，并处理这些文件内容。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.copyAndProcess(files, props[, options])</span><br></pre></td></tr></table></figure>
+<h2 id="init-defaults">init.defaults</h2><p>从 defaults.json 指定的用户默认值初始值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.defaults</span><br></pre></td></tr></table></figure>
+<h2 id="init-destpath">init.destpath</h2><p>获取目标文件的相对路径。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.destpath()</span><br></pre></td></tr></table></figure>
+<h2 id="init-expand">init.expand</h2><p>与 <a href="https://github.com/gruntjs/grunt/wiki/grunt.file#wiki-grunt-file-expand" target="_blank" rel="external">grunt.file.expand</a> 相同。</p>
+<p>返回匹配通配符表达式的<strong>文件数组</strong>或<strong>目录路径</strong>。这个方法接受 <code>,</code> 分隔的通配符表达式或通配符表达时的数组。适配路径的表达式如果以 <code>!</code> 开头将会被排除出数组。表达式按顺序处理，因此包含和排斥的顺序非常重要。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.expand([options, ] patterns)</span><br></pre></td></tr></table></figure>
+<h2 id="init-filesToCopy">init.filesToCopy</h2><p>返回一个对象，该对象包含复制文件的来源路径和相对目标路径，根据 rename.json (如果有) 的规则重命名 (或省略)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> files = init.filesToCopy(props);</span><br><span class="line"><span class="comment">/* files === &#123; '.gitignore': 'template/root/.gitignore',</span><br><span class="line">  '.jshintrc': 'template/root/.jshintrc',</span><br><span class="line">  'Gruntfile.js': 'template/root/Gruntfile.js',</span><br><span class="line">  'README.md': 'template/root/README.md',</span><br><span class="line">  'test/test_test.js': 'template/root/test/name_test.js' &#125; */</span></span><br></pre></td></tr></table></figure>
+<h2 id="init-getFile">init.getFile</h2><p>获取单个任务文件路径</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.getFile(filepath[, ...])</span><br></pre></td></tr></table></figure>
+<h2 id="init-getTemplates">init.getTemplates</h2><p>返回一个包含所有可用 templates 的对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.getTemplates()</span><br></pre></td></tr></table></figure>
+<h2 id="init-initSearchDirs">init.initSearchDirs</h2><p>为了搜索初始模版而初始化目录。<code>template</code> 是模版的位置。还包括 <code>~/.grunt-init/</code> 和核心初始任务在 <code>grunt-init</code> 内。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.initSearchDirs([filename])</span><br></pre></td></tr></table></figure>
+<h2 id="init-process">init.process</h2><p>开启处理并提示用户输入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.process(options, prompts, done)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.process(&#123;&#125;, [</span><br><span class="line">  <span class="comment">// Prompt for these values</span></span><br><span class="line">  init.prompt(<span class="string">'name'</span>),</span><br><span class="line">  init.prompt(<span class="string">'description'</span>),</span><br><span class="line">  init.prompt(<span class="string">'version'</span>)</span><br><span class="line">], <span class="function"><span class="keyword">function</span>(<span class="params">err, props</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// All finished, do something with the properties</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="init-prompt">init.prompt</h2><p>提示用户需要输入的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.prompt(name[, <span class="keyword">default</span>])</span><br></pre></td></tr></table></figure>
+<h2 id="init-prompts">init.prompts</h2><p>获取一个包含所有 prompt 的对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> prompts = init.prompts;</span><br></pre></td></tr></table></figure>
+<h2 id="init-readDefaults">init.readDefaults</h2><p>从默认任务文件 (如果有) 读取 JSON，合并它们到一个数据对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.readDefaults(filepath[, ...])</span><br></pre></td></tr></table></figure>
+<h2 id="init-renames">init.renames</h2><p>模版的重命名规则</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> renames = init.renames;</span><br><span class="line"><span class="comment">// renames === &#123; 'test/name_test.js': 'test/&#123;%= name %&#125;_test.js' &#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="init-searchDirs">init.searchDirs</h2><p>搜索模版内的目录结果的数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> dirs = init.searchDirs;</span><br><span class="line"><span class="comment">/* dirs === [ '/Users/shama/.grunt-init',</span><br><span class="line">  '/usr/local/lib/node_modules/grunt-init/templates' ] */</span></span><br></pre></td></tr></table></figure>
+<h2 id="init-srcpath">init.srcpath</h2><p>在初始模版目录搜索文件名并返回绝对路径。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.srcpath(filepath[, ...])</span><br></pre></td></tr></table></figure>
+<h2 id="init-userDir">init.userDir</h2><p>返回用户的模版目录的绝对路径。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> dir = init.userDir();</span><br><span class="line"><span class="comment">// dir === '/Users/shama/.grunt-init'</span></span><br></pre></td></tr></table></figure>
+<h2 id="init-writePackageJSON">init.writePackageJSON</h2><p>写入 package.json 文件到目标目录。回调方法可以用作后期 add/remove 一些属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">init.writePackageJSON(filename, props[, callback])</span><br></pre></td></tr></table></figure>
+<h1 id="Built-in_prompts">Built-in prompts</h1><h2 id="author_email">author_email</h2><p>Author’s email address to use in the package.json. Will attempt to find a default value from the user’s git config.</p>
+<h2 id="author_name">author_name</h2><p>Author’s full name to use in the package.json and copyright notices. Will attempt to find a default value from the user’s git config.</p>
+<h2 id="author_url">author_url</h2><p>A public URL to the author’s website to use in the package.json.</p>
+<h2 id="bin">bin</h2><p>A relative path from the project root for a cli script.</p>
+<h2 id="bugs">bugs</h2><p>A public URL to the project’s issues tracker. Will default to the github issue tracker if the project has a github repository.</p>
+<h2 id="description">description</h2><p>A description of the project. Used in the package.json and README files.</p>
+<h2 id="grunt_version">grunt_version</h2><p>A valid semantic version range descriptor of Grunt the project requires.</p>
+<h2 id="homepage">homepage</h2><p>A public URL to the project’s home page. Will default to the github url if a github repository.</p>
+<h2 id="jquery_version">jquery_version</h2><p>If a jQuery project, the version of jQuery the project requires. Must be a valid semantic version range descriptor.</p>
+<h2 id="licenses">licenses</h2><p>The license(s) for the project. Multiple licenses are separated by spaces. The licenses built-in are: MIT, MPL-2.0, GPL-2.0, and Apache-2.0. Defaults to MIT. Add custom licenses with init.addLicenseFiles.</p>
+<h2 id="main">main</h2><p>The primary entry point of the project. Defaults to the project name within the lib folder.</p>
+<h2 id="name">name</h2><p>The name of the project. Will be used heavily throughout the project template. Defaults to the current working directory.</p>
+<h2 id="node_version">node_version</h2><p>The version of Node.js the project requires. Must be a valid semantic version range descriptor.</p>
+<h2 id="npm_test">npm_test</h2><p>The command to run tests on your project. Defaults to grunt.</p>
+<h2 id="repository">repository</h2><p>Project’s git repository. Defaults to a guess of a github url.</p>
+<h2 id="title">title</h2><p>A human readable project name. Defaults to the actual project name altered to be more human readable.</p>
+<h2 id="version">version</h2><p>The version of the project. Defaults to the first valid semantic version, 0.1.0.</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/ciiyo0ftl0009iqmp0nsp69vz/">关于 Babel 6 你需要知道的 6 件事情</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/ciiyooeaz0000l9mppozsm8bq/">React 的 context 和 childContext</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2016/ciiyo4cua0000jhmpkw0e3563/"
+               data-title="Grunt 项目脚手架" data-url="http://yoursite.com/2016/ciiyo4cua0000jhmpkw0e3563/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#grunt-init"><span class="nav-number">1.</span> <span class="nav-text">grunt-init</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用方式"><span class="nav-number">3.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加模版"><span class="nav-number">4.</span> <span class="nav-text">添加模版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义模版"><span class="nav-number">5.</span> <span class="nav-text">自定义模版</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复制文件"><span class="nav-number">5.1.</span> <span class="nav-text">复制文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重命名或排除模版文件"><span class="nav-number">5.2.</span> <span class="nav-text">重命名或排除模版文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指定默认提示回答"><span class="nav-number">6.</span> <span class="nav-text">指定默认提示回答</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义一个初始模版"><span class="nav-number">7.</span> <span class="nav-text">定义一个初始模版</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#exports-description"><span class="nav-number">7.1.</span> <span class="nav-text">exports.description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exports-notes"><span class="nav-number">7.2.</span> <span class="nav-text">exports.notes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exports-warnOn"><span class="nav-number">7.3.</span> <span class="nav-text">exports.warnOn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exports-template"><span class="nav-number">7.4.</span> <span class="nav-text">exports.template</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#template_方法的内部"><span class="nav-number">8.</span> <span class="nav-text">template 方法的内部</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#init-addLicenseFiles"><span class="nav-number">8.1.</span> <span class="nav-text">init.addLicenseFiles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-availableLicenses"><span class="nav-number">8.2.</span> <span class="nav-text">init.availableLicenses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-copy"><span class="nav-number">8.3.</span> <span class="nav-text">init.copy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-copyAndProcess"><span class="nav-number">8.4.</span> <span class="nav-text">init.copyAndProcess</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-defaults"><span class="nav-number">8.5.</span> <span class="nav-text">init.defaults</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-destpath"><span class="nav-number">8.6.</span> <span class="nav-text">init.destpath</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-expand"><span class="nav-number">8.7.</span> <span class="nav-text">init.expand</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-filesToCopy"><span class="nav-number">8.8.</span> <span class="nav-text">init.filesToCopy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-getFile"><span class="nav-number">8.9.</span> <span class="nav-text">init.getFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-getTemplates"><span class="nav-number">8.10.</span> <span class="nav-text">init.getTemplates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-initSearchDirs"><span class="nav-number">8.11.</span> <span class="nav-text">init.initSearchDirs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-process"><span class="nav-number">8.12.</span> <span class="nav-text">init.process</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-prompt"><span class="nav-number">8.13.</span> <span class="nav-text">init.prompt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-prompts"><span class="nav-number">8.14.</span> <span class="nav-text">init.prompts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-readDefaults"><span class="nav-number">8.15.</span> <span class="nav-text">init.readDefaults</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-renames"><span class="nav-number">8.16.</span> <span class="nav-text">init.renames</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-searchDirs"><span class="nav-number">8.17.</span> <span class="nav-text">init.searchDirs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-srcpath"><span class="nav-number">8.18.</span> <span class="nav-text">init.srcpath</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-userDir"><span class="nav-number">8.19.</span> <span class="nav-text">init.userDir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-writePackageJSON"><span class="nav-number">8.20.</span> <span class="nav-text">init.writePackageJSON</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Built-in_prompts"><span class="nav-number">9.</span> <span class="nav-text">Built-in prompts</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#author_email"><span class="nav-number">9.1.</span> <span class="nav-text">author_email</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#author_name"><span class="nav-number">9.2.</span> <span class="nav-text">author_name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#author_url"><span class="nav-number">9.3.</span> <span class="nav-text">author_url</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bin"><span class="nav-number">9.4.</span> <span class="nav-text">bin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bugs"><span class="nav-number">9.5.</span> <span class="nav-text">bugs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#description"><span class="nav-number">9.6.</span> <span class="nav-text">description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grunt_version"><span class="nav-number">9.7.</span> <span class="nav-text">grunt_version</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#homepage"><span class="nav-number">9.8.</span> <span class="nav-text">homepage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery_version"><span class="nav-number">9.9.</span> <span class="nav-text">jquery_version</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#licenses"><span class="nav-number">9.10.</span> <span class="nav-text">licenses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main"><span class="nav-number">9.11.</span> <span class="nav-text">main</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#name"><span class="nav-number">9.12.</span> <span class="nav-text">name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node_version"><span class="nav-number">9.13.</span> <span class="nav-text">node_version</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm_test"><span class="nav-number">9.14.</span> <span class="nav-text">npm_test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#repository"><span class="nav-number">9.15.</span> <span class="nav-text">repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#title"><span class="nav-number">9.16.</span> <span class="nav-text">title</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#version"><span class="nav-number">9.17.</span> <span class="nav-text">version</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62263979-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>
