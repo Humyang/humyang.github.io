@@ -208,92 +208,7 @@
           
           
             
-              <a class="post-title-link" href="/2016/cijk2iz8r00031zjd829p67w5/">
-                未命名
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2016-01-18
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/cijk2iz8r00031zjd829p67w5/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijk2iz8r00031zjd829p67w5/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>CSS Margin (二) Margin 与 block，inline 元素</p>
-<h1 id="Margin">Margin</h1><h2 id="HTML_元素类型">HTML 元素类型</h2><p>HTML 有两种基本元素，即 block 和 inline。</p>
-<p>block 元素占据一行，inline 元素与其它 inline 元素占据统同一行。</p>
-<h3 id="Replaced_element">Replaced element</h3><p>除了上面两种基本类型外，Replaced element 也是常用的元素类型。</p>
-<p>在 MDN 是这样介绍 Replace element 的：</p>
-<blockquote>
-<p>In CSS, a replaced element is an element whose representation is outside the scope of CSS. These are kind of external objects whose representation is independent of the CSS.</p>
-<p>在 CSS 中，replaced element 拥有 CSS 范围之外的属性 (例如 <code>img</code> 的 width 和 height 属性)，这是一种独立于 CSS 的拓展对象。</p>
-</blockquote>
-<p>另外，使用 CSS 的 <code>content</code> 属性插入的元素也是一个匿名的 Replaced element (anonymous replaced elements)。</p>
-<p>Replaced element 与 inline element 对应 (即 inline element 是 non-replaced element)，它与 inline element  的区别是：这些元素拥有内在尺寸(intrinsic dimensions),他们可以设置 width/height 属性。他们的性质同设置了 <code>display:inline-block</code> 的元素一致。</p>
-<h2 id="Margin_与_HTML_元素类型">Margin 与 HTML 元素类型</h2><h3 id="Margin_与_Block_element">Margin 与 Block element</h3><p>margin 在块级元素下，他的性能可以完全体现，上下左右任你设定。且记住块级元素的 margin 的参照基准是前一个元素即相对于自身之前的元素有 margin 距离。如果元素是第一个元素，则就是相对于父元素的 margin 距离（但第一个元素相对于父元素 margin-top 而父元素又没有设定 padding-top/border-top 的话要需要印证上垂直外边距合并的知识)。</p>
-<h3 id="Margin_与_Inline_element">Margin 与 Inline element</h3><p>margin 也能用于内联元素，这是规范所允许的，但是 margin-top 和 margin-bottom 对内联元素（对行）的高度没有影响，并且由于边界效果(margin 效果)是透明的，他也没有任何的视觉影响。</p>
-<p>这时因为边界应用于内联元素时<strong>不改变元素的行高度</strong>，如果你要改变内联元素的行高即类似文本的行间距，那么你只能使用这三个属性：<code>line-height</code>，<code>fong-size</code>，<code>vertical-align</code>。请记住，这个影响内联元素高度的是line-height而不是height，因为内联元素是一行行的，定一个height的话，那这到底是整段inline元素的高呢？还是inline元素一行的高呢？这都说不准，所以统一都给每行定一个高，只能是line-height了。</p>
-<h3 id="Margin_与_Replace_element">Margin 与 Replace element</h3><p>因为 replace element 相当于 inline-block，所以 Margin 的上下左右都有效果。</p>
-<h2 id="HTML_元素类型参考">HTML 元素类型参考</h2><p><a href="https://developer.mozilla.org/en/docs/Web/HTML/Block-level_elements" target="_blank" rel="external">block 元素:</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">address</span>&gt;</span></span><br><span class="line">Contact information.</span><br><span class="line"><span class="tag">&lt;<span class="title">article</span>&gt;</span> HTML5</span><br><span class="line">Article content.</span><br><span class="line"><span class="tag">&lt;<span class="title">aside</span>&gt;</span> HTML5</span><br><span class="line">Aside content.</span><br><span class="line"><span class="tag">&lt;<span class="title">blockquote</span>&gt;</span></span><br><span class="line">Long ("block") quotation.</span><br><span class="line"><span class="tag">&lt;<span class="title">canvas</span>&gt;</span> HTML5</span><br><span class="line">Drawing canvas.</span><br><span class="line"><span class="tag">&lt;<span class="title">dd</span>&gt;</span></span><br><span class="line">Definition description.</span><br><span class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line">Document division.</span><br><span class="line"><span class="tag">&lt;<span class="title">dl</span>&gt;</span></span><br><span class="line">Definition list.</span><br><span class="line"><span class="tag">&lt;<span class="title">fieldset</span>&gt;</span></span><br><span class="line">Field set label.</span><br><span class="line"><span class="tag">&lt;<span class="title">figcaption</span>&gt;</span> HTML5</span><br><span class="line">Figure caption.</span><br><span class="line"><span class="tag">&lt;<span class="title">figure</span>&gt;</span> HTML5</span><br><span class="line">Groups media content with a caption (see <span class="tag">&lt;<span class="title">figcaption</span>&gt;</span>).</span><br><span class="line"><span class="tag">&lt;<span class="title">footer</span>&gt;</span> HTML5</span><br><span class="line">Section or page footer.</span><br><span class="line"><span class="tag">&lt;<span class="title">form</span>&gt;</span></span><br><span class="line">Input form.</span><br><span class="line"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>, <span class="tag">&lt;<span class="title">h2</span>&gt;</span>, <span class="tag">&lt;<span class="title">h3</span>&gt;</span>, <span class="tag">&lt;<span class="title">h4</span>&gt;</span>, <span class="tag">&lt;<span class="title">h5</span>&gt;</span>, <span class="tag">&lt;<span class="title">h6</span>&gt;</span></span><br><span class="line">Heading levels 1-6.</span><br><span class="line"><span class="tag">&lt;<span class="title">header</span>&gt;</span> HTML5</span><br><span class="line">Section or page header.</span><br><span class="line"><span class="tag">&lt;<span class="title">hgroup</span>&gt;</span> HTML5</span><br><span class="line">Groups header information.</span><br><span class="line"><span class="tag">&lt;<span class="title">hr</span>&gt;</span></span><br><span class="line">Horizontal rule (dividing line).</span><br><span class="line"><span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">List item.</span><br><span class="line"><span class="tag">&lt;<span class="title">main</span>&gt;</span></span><br><span class="line">Contains the central content unique to this document.</span><br><span class="line"><span class="tag">&lt;<span class="title">nav</span>&gt;</span></span><br><span class="line">Contains navigation links.</span><br><span class="line"><span class="tag">&lt;<span class="title">noscript</span>&gt;</span></span><br><span class="line">Content to use if scripting is not supported or turned off.</span><br><span class="line"><span class="tag">&lt;<span class="title">ol</span>&gt;</span></span><br><span class="line">Ordered list.</span><br><span class="line"><span class="tag">&lt;<span class="title">output</span>&gt;</span> HTML5</span><br><span class="line">Form output.</span><br><span class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span></span><br><span class="line">Paragraph.</span><br><span class="line"><span class="tag">&lt;<span class="title">pre</span>&gt;</span></span><br><span class="line">Preformatted text.</span><br><span class="line"><span class="tag">&lt;<span class="title">section</span>&gt;</span> HTML5</span><br><span class="line">Section of a web page.</span><br><span class="line"><span class="tag">&lt;<span class="title">table</span>&gt;</span></span><br><span class="line">Table.</span><br><span class="line"><span class="tag">&lt;<span class="title">tfoot</span>&gt;</span></span><br><span class="line">Table footer.</span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">Unordered list.</span><br><span class="line"><span class="tag">&lt;<span class="title">video</span>&gt;</span> HTML5</span><br><span class="line">Video player.</span><br></pre></td></tr></table></figure>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements" target="_blank" rel="external">inline 元素:</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b, big, i, small, tt</span><br><span class="line">abbr, acronym, cite, code, dfn, em, kbd, strong, samp, time, var</span><br><span class="line">a, bdo, br, img, map, object, q, script, span, sub, sup</span><br><span class="line">button, input, label, select, textarea</span><br></pre></td></tr></table></figure>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element" target="_blank" rel="external">Replaced element:</a></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Typical replaced elements are <span class="tag">&lt;<span class="title">img</span>&gt;</span>, <span class="tag">&lt;<span class="title">object</span>&gt;</span>, <span class="tag">&lt;<span class="title">video</span>&gt;</span></span><br><span class="line">form elements like <span class="tag">&lt;<span class="title">textarea</span>&gt;</span> and <span class="tag">&lt;<span class="title">input</span>&gt;</span></span><br><span class="line">Some elements, like <span class="tag">&lt;<span class="title">audio</span>&gt;</span> or <span class="tag">&lt;<span class="title">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/ciiyo0fq30000iqmpkt31dpll/">
+              <a class="post-title-link" href="/2016/cijk396mo005oa8jdbz32ioli/">
                 Grunt 介绍
               </a>
             
@@ -331,8 +246,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/ciiyo0fq30000iqmpkt31dpll/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/ciiyo0fq30000iqmpkt31dpll/"></span>
+            <a href="/2016/cijk396mo005oa8jdbz32ioli/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijk396mo005oa8jdbz32ioli/"></span>
             </a>
           </span>
           
@@ -349,7 +264,7 @@
         
           <p>介绍如何使用 Grunt。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/ciiyo0fq30000iqmpkt31dpll/#more">
+            <a class="btn" href="/2016/cijk396mo005oa8jdbz32ioli/#more">
               阅读全文 &raquo;
             </a>
           </div>
@@ -388,7 +303,7 @@
           
           
             
-              <a class="post-title-link" href="/2016/ciiyo0ftc0005iqmpijpp4l5l/">
+              <a class="post-title-link" href="/2016/cijk396b8000va8jd0k410vci/">
                 Webpack 入门
               </a>
             
@@ -426,8 +341,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/ciiyo0ftc0005iqmpijpp4l5l/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/ciiyo0ftc0005iqmpijpp4l5l/"></span>
+            <a href="/2016/cijk396b8000va8jd0k410vci/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijk396b8000va8jd0k410vci/"></span>
             </a>
           </span>
           
@@ -444,7 +359,7 @@
         
           <p>跟着官网入门文章过了一遍。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/ciiyo0ftc0005iqmpijpp4l5l/#more">
+            <a class="btn" href="/2016/cijk396b8000va8jd0k410vci/#more">
               阅读全文 &raquo;
             </a>
           </div>
@@ -483,7 +398,7 @@
           
           
             
-              <a class="post-title-link" href="/2016/ciiyo0ftl0009iqmp0nsp69vz/">
+              <a class="post-title-link" href="/2016/cijk396mj005ca8jdzrvp6qni/">
                 关于 Babel 6 你需要知道的 6 件事情
               </a>
             
@@ -521,8 +436,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/ciiyo0ftl0009iqmp0nsp69vz/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/ciiyo0ftl0009iqmp0nsp69vz/"></span>
+            <a href="/2016/cijk396mj005ca8jdzrvp6qni/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijk396mj005ca8jdzrvp6qni/"></span>
             </a>
           </span>
           
@@ -539,7 +454,7 @@
         
           <p>快速了解 Babel 6 和 Babel 5 之间的区别。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/ciiyo0ftl0009iqmp0nsp69vz/#more">
+            <a class="btn" href="/2016/cijk396mj005ca8jdzrvp6qni/#more">
               阅读全文 &raquo;
             </a>
           </div>
@@ -578,7 +493,7 @@
           
           
             
-              <a class="post-title-link" href="/2016/ciiyo4cua0000jhmpkw0e3563/">
+              <a class="post-title-link" href="/2016/cijk396mm005ka8jdl5xyygzx/">
                 Grunt 项目脚手架
               </a>
             
@@ -616,8 +531,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/ciiyo4cua0000jhmpkw0e3563/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/ciiyo4cua0000jhmpkw0e3563/"></span>
+            <a href="/2016/cijk396mm005ka8jdl5xyygzx/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijk396mm005ka8jdl5xyygzx/"></span>
             </a>
           </span>
           
@@ -634,7 +549,7 @@
         
           <p>介绍如何使用 Grunt 创建 template，可以快速构建一个新项目。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/ciiyo4cua0000jhmpkw0e3563/#more">
+            <a class="btn" href="/2016/cijk396mm005ka8jdl5xyygzx/#more">
               阅读全文 &raquo;
             </a>
           </div>
@@ -673,7 +588,7 @@
           
           
             
-              <a class="post-title-link" href="/2015/ciiyooeaz0000l9mppozsm8bq/">
+              <a class="post-title-link" href="/2015/cijk396l7004ea8jdjuehmwew/">
                 React 的 context 和 childContext
               </a>
             
@@ -711,8 +626,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/ciiyooeaz0000l9mppozsm8bq/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciiyooeaz0000l9mppozsm8bq/"></span>
+            <a href="/2015/cijk396l7004ea8jdjuehmwew/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/cijk396l7004ea8jdjuehmwew/"></span>
             </a>
           </span>
           
@@ -729,7 +644,7 @@
         
           <p>介绍如何使用 React 的 context </p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/ciiyooeaz0000l9mppozsm8bq/#more">
+            <a class="btn" href="/2015/cijk396l7004ea8jdjuehmwew/#more">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1042,11 +957,106 @@
 
 
     
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015/fontCSS/">
+                CSS
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-11-14
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/CSS/">CSS</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/fontCSS/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/fontCSS/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>W3SCHOOL 的基础 CSS 教程。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/fontCSS/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
   </div>
 
   
   <div class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
   </div>
 
 
@@ -1080,21 +1090,21 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">50</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
