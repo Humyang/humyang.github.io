@@ -208,185 +208,6 @@
           
           
             
-              <a class="post-title-link" href="/2016/cijk2iz8y00061zjdklsn1lhg/">
-                未命名
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2016-01-18
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/cijk2iz8y00061zjdklsn1lhg/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijk2iz8y00061zjdklsn1lhg/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>来自 CSS The Definitive Guide Eric A Meyer。</p>
-<h1 id="Base_Visual_Formatting">Base Visual Formatting</h1><blockquote>
-<p>In the previous chapters, we covered a great deal of practical information on how CSS handles text and fonts in a document. In this chapter, we’ll look at the theoretical side of visual rendering, answering many of the questions we skipped earlier in the interest of addressing how CSS is implemented.</p>
-</blockquote>
-<p>在之前的章节，我们进行了大量的实践用 CSS 处理文字和文档的字体。在这章中，我们会学习外观呈现的理论，回答许多之前跳过的许多 CSS 如何实现的问题。</p>
-<blockquote>
-<p>Why is it necessary to spend an entire chapter on the theoretical underpinnings of visual rendering in CSS? The answer is that with a model as open and powerful as that contained within CSS, no book could hope to cover every possible way of combining properties and effects. You will obviously go on to discover new ways of using CSS for your own document effects.</p>
-</blockquote>
-<p>为什么需要花费一整章在 CSS 视觉呈现的理论基础？因为它是开发的模式和强大的 CSS 容器，没有任何一本书可以覆盖所有属性组合的效果。明显你需要探索新的方式使用 CSS，实现你想要的效果。</p>
-<blockquote>
-<p>In the course of exploring CSS, you may encounter seemingly strange behaviors in user agents. With a thorough grasp of how the visual rendering model works in CSS, you’ll be able to determine whether a behavior is a correct (though unexpected) consequence of the rendering engine CSS defines, or whether you’ve stumbled across a bug that needs to be reported.</p>
-</blockquote>
-<p>在探索 CSS 的过程中，你可能在 user agents 遇到看似奇怪的行为。深入的理解和掌握 CSS 中工作的视觉呈现模型，你就可以判断在哪些行为可以在 CSS 渲染引擎获取正确结果 (尽管看起来奇怪)，或者你偶然遇到一个需要提交的 bug。</p>
-<h2 id="Basic_Boxes">Basic Boxes</h2><blockquote>
-<p>CSS assumes that every element generates one or more rectangular boxes, called element boxes. (Future versions of the specification may allow for nonrectangular boxes, but for now everything is rectangular.) Each element box has a content area at its core. The content area is surrounded by optional amounts of padding, borders, and margins. These items are considered optional because they could all be set to a width of zero, effectively removing them from the element box. An example content area is shown in Figure 7-1, along with the surrounding regions of padding, border, and margins.</p>
-</blockquote>
-<p>CSS 假设所有元素都会生成一个或多个矩形盒子，称为元素盒子 (未来的版本可能允许不规则形状的盒子，但现在所有都是矩形)。每一个元素盒子在它的核心都有一个内容区域。这个内容区域被可选的 padding，border，和 margin 包围。这些选项是可选的因为它们的宽度全都可以被设置为 0，有效的将它们从元素盒子移除。一个元素的内容区域如图 7-1 所示，围绕它的是 padding,border,和 margins 的区域。</p>
-<p>图 7-1<br><img src="./7-1.png" alt=""></p>
-<blockquote>
-<p>Each of the margins, borders, and padding can be set using various properties, such as margin-left or border-bottom. The content’s background a color or tiled image, for example is also applied to the padding. The margins are always transparent, revealing the background of any parent elements. Padding cannot be a negative value, but margins can. We’ll explore the effects of negative margins later in this chapter.</p>
-</blockquote>
-<p>每个 margin，border，和 padding 可以使用单独的属性设置，例如 margin-left 或 border-bottom。内容的背景颜色或背景图像，也会应用到 padding。而 margin 总是透明的，露出父元素的背景颜色。Padding 不能是负值，但 margin 可以。我们会在后面的章节探索负 margin 的效果。</p>
-<blockquote>
-<p>Borders are generated using defined styles, such as solid or inset, and their colors are set using the border-color property. If no color is set, then the border takes on the foreground color of the element’s content. For example, if the text of a paragraph is white, then any borders around that paragraph will be white unless the author explicitly declares a different border color. If a border style has gaps of some type, then the element’s background is visible through those gaps. In other words, the border has the same background as the content and padding. Finally, the width of a border can never be negative.</p>
-</blockquote>
-<p>border 使用自定义的样式生成，例如 solid 或 inset，它们的颜色使用 border-color 属性设置。如果没设置颜色，border 会使用元素内容的前景色。例如段落的文字是白色，那么 border 也会是白色除非作者明确指定了不同的 border 颜色。如果 border 的样式会出现一些缺口，那么元素背景会在通过这些缺口可见。换句话说，border 有一部分背景是内容和 padding。最后，border 的宽度永远不能是负数。</p>
-<blockquote>
-<p>The various components of an element box can be affected by a number of properties, such as width or border-right. Many of these properties will be used in this chapter, even though we haven’t discussed them yet. The actual property definitions are given in Chapter 8, which builds on the concepts set forth in this chapter.</p>
-</blockquote>
-<p>元素盒子的各个部分可以被几个属性影响，例如 width 或 border-right。在这章我们会用到许多这些属性，尽管我们没有讨论过它们。实际上第 8 章才会探索它们，我们先在这一章了解它的概念。</p>
-<blockquote>
-<p>You will, however, find differences in how various types of elements are formatted. Block-level elements are treated differently than inline-level elements, while floated and positioned elements have their own ways of behaving.</p>
-</blockquote>
-<p>最后你会发现几个不同类型元素的格式的不同。Block 级别元素与 inline-level 元素的区别，浮动元素 (float) 和定位元素 (positioned) 它们自己的行为。</p>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/cijk2iz8u00041zjdndqk309h/">
-                未命名
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2016-01-18
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/cijk2iz8u00041zjdndqk309h/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijk2iz8u00041zjdndqk309h/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h1 id="CSS_Margin_(一)_负_Margin">CSS Margin (一) 负 Margin</h1><p>在一次开发时想使用 Marin 合并但不记得具体细节，就 Google 了一下资料，发现了这两篇详细介绍 Marin 的文章。</p>
-<p><a href="http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/" target="_blank" rel="external">http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/</a></p>
-<p><a href="http://www.hicss.net/do-not-tell-me-you-understand-margin/" target="_blank" rel="external">http://www.hicss.net/do-not-tell-me-you-understand-margin/</a></p>
-<p>因为 Margin 用得挺多了，所以基础的不记录了，只做一下以前不知道的知识的笔记。</p>
-<h2 id="总结">总结</h2><p>Margin 主要影响到元素与周边元素的关系，不管传入正数负数，所以一定程度上可以替代 relative 和 absolute。</p>
-<p>这里对几种情况进行测试一下。</p>
-<h3 id="父子元素的关系">父子元素的关系</h3><p>首先测试父子关系的 div 元素。有三个 div，其中一个为父 div，两个子 div，它们 的 display 都是 block。</p>
-<p>下面第一个子 div 称为<strong>老大</strong>，第二个子 div 称为<strong>老二</strong>，主要修改老大的 margin，老二主要作为参照物。</p>
-<h4 id="测试_1">测试 1</h4><p>修改老大的 <code>margin: -10px 0 0 0;</code>，效果: 整体元素往上偏移。同理如果为正数则往下偏移。</p>
-<p>加上老大的 <code>margin-top</code> 为 10px,如果设置父 div 的 <code>margin-top</code> 大于 10 px，则按照父 div 的数值移动。这现象被称为<code>垂直外边距合并</code>。</p>
-<p>如果老大和父 div 的正负数相反，则会进行相加，例如老大 <code>margin: -10px 0 0 0;</code>，父 <code>margin: 10px 0 0 0;</code>，那么元素 margin 被抵消，位置保持不变。</p>
-<blockquote>
-<p>设置老大的 display 为 <strong>inline</strong>,这时老大的 margin-top 和 margin－bottom 都不起作用了。同时设置老二的 display 为 inline，老大的 margin-top 和 margin－bottom 也是没作用。<br>但是 margin-left 和 margin-right 还是有作用的。</p>
-<p>设置老大的 display 为 <strong>inline-block</strong> 时，不会影响父 div 的位置，但还是会影响同级元素的位置。</p>
-</blockquote>
-<h3 id="用途">用途</h3><h4 id="负_margin_替代_relative/absolute">负 margin 替代 relative/absolute</h4><h4 id="Tab_选项卡">Tab 选项卡</h4><h4 id="鳞片式导航">鳞片式导航</h4>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
               <a class="post-title-link" href="/2016/cijk2iz8r00031zjd829p67w5/">
                 未命名
               </a>
@@ -443,230 +264,6 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b, big, i, small, tt</span><br><span class="line">abbr, acronym, cite, code, dfn, em, kbd, strong, samp, time, var</span><br><span class="line">a, bdo, br, img, map, object, q, script, span, sub, sup</span><br><span class="line">button, input, label, select, textarea</span><br></pre></td></tr></table></figure>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element" target="_blank" rel="external">Replaced element:</a></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Typical replaced elements are <span class="tag">&lt;<span class="title">img</span>&gt;</span>, <span class="tag">&lt;<span class="title">object</span>&gt;</span>, <span class="tag">&lt;<span class="title">video</span>&gt;</span></span><br><span class="line">form elements like <span class="tag">&lt;<span class="title">textarea</span>&gt;</span> and <span class="tag">&lt;<span class="title">input</span>&gt;</span></span><br><span class="line">Some elements, like <span class="tag">&lt;<span class="title">audio</span>&gt;</span> or <span class="tag">&lt;<span class="title">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/cijk2iz8w00051zjd5vvsm5mt/">
-                未命名
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2016-01-18
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/cijk2iz8w00051zjd5vvsm5mt/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijk2iz8w00051zjd5vvsm5mt/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h1 id="Basic_Visual_Formatting">Basic Visual Formatting</h1><h2 id="The_Containing_Block">The Containing Block</h2><blockquote>
-<p>Every element is laid out with respect to its containing block; in a very real way, the containing block is the “layout context” for an element. CSS2.1 defines a series of rules for determining an element’s containing block. I’ll cover only those rules that pertain to the concepts covered in this chapter and leave the rest for future chapters.</p>
-</blockquote>
-<p>每个元素的布局规则都遵循所包含它的容器块；容器块是元素的布局上下文。CSS 2.1 为元素的容器块定义了几种规则。这个章节我会介绍覆盖这些规则的概念，其余的留给以后的章节。</p>
-<blockquote>
-<p>For an element in the normal, Western-style flow of text, the containing block is formed by the content edge of the nearest block-level, table cell, or inline-block ancestor box. Consider the following markup:</p>
-</blockquote>
-<p>正常情况下的元素，西式的文本，容器块从最近的 block-level，table cell，或 inline-block 祖先 box 的内容的边缘形成，参考下面的标记：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span> <span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="title">p</span>&gt;</span>This is a paragraph.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>In this very simple example, the containing block for the p element is the div element, as that is the closest ancestor element that is block-level, a table cell, or inline-block (in this case, it’s a block box). Similarly, the div’s containing block is the body. Thus, the layout of the p is dependent on the layout of the div, which is in turn dependent on the layout of the body.</p>
-</blockquote>
-<p>在这个非常简单的例子中，p 元素的容器块是 div 元素，因为它最近的祖先元素是 block-level.table cell，或 inline-block (在这个例子中，它是块级盒子)。同理，div 元素的容器块是 body，因此，p 元素的布局是依赖 div 元素，div 元素又反过来以来 body 元素。</p>
-<blockquote>
-<p>You don’t need to worry about inline elements since the way they are laid out doesn’t depend directly on containing blocks. We’ll talk about them later in the chapter.</p>
-</blockquote>
-<p>你不需要担心 inline 元素的布局方式是否直接以来容器块。我会在之后的章节谈论它们。</p>
-<h2 id="A_Quick_Refresher">A Quick Refresher</h2><blockquote>
-<p>Let’s quickly review the kinds of elements we’ll be discussing, as well as some important terms that are needed to follow the explanations in this chapter:</p>
-</blockquote>
-<p>让我们快速预览我们将会谈论到的元素的种类，以及一些重要的术语，可以在这个章节查询。</p>
-<h3 id="Normal_flow">Normal flow</h3><p>正常流</p>
-<blockquote>
-<p>The left-to-right, top-to-bottom rendering of text in Western languages and the familiar text layout of traditional HTML documents. Note that the flow direction may be changed in non-Western languages. Most elements are in the normal flow, and the only way for an element to leave it is to be floated or positioned (covered in Chapter 10). Remember, the discussions in this chapter cover only elements in the normal flow.</p>
-</blockquote>
-<p>从左到右，顶部到底部渲染西方语言文字和传统 HTML 文档的文字布局。注意流的方向可以通过更改以非西方语言的方式渲染。大部分元素都是正常流，只有设置元素为浮动或 position 才能脱离 (在第 10 章讨论)。</p>
-<h3 id="Nonreplaced_element">Nonreplaced element</h3><p>非替代元素</p>
-<blockquote>
-<p>An element whose content is contained within the document. For example, a paragraph is a nonreplaced element because its textual content is found within the element itself.</p>
-</blockquote>
-<p>元素的内容包含在文档内。例如段落 (<code>&lt;p&gt;</code>) 是非替代元素因为它的文本内容在元素自身内。</p>
-<h3 id="Replaced_element">Replaced element</h3><p>替代元素</p>
-<blockquote>
-<p>An element that serves as a placeholder for something else. The classic example of a replaced element is the img element, which simply points to an image file that is then inserted into the document’s flow at the point where the img element itself is found. Most form elements are also replaced (e.g., <input type="radio">).</p>
-</blockquote>
-<p>元素起类似占位符作用的。典型的替代元素是 img 元素，它简单的指向一个图像文件然后插入到文档流中 img 元素所在的位置。大部分 form 元素也是替代元素。</p>
-<h3 id="Block-level_element">Block-level element</h3><p>块级元素</p>
-<blockquote>
-<p>An element such as a paragraph, heading, or a div. These elements generate “new lines” both before and after their boxes when in the normal flow, so that block-level elements in the normal flow stack vertically. An element can be made to generate a block-level box by declaring display: block.</p>
-</blockquote>
-<p>如段落，标题，或 div 元素。当这些元素处于正常流时会在它们的前后盒子之间生成 “新行”，因此块级元素在正常流中垂直的堆放。元素可以通过 display:block 让自己生成块级盒子。</p>
-<h3 id="Inline_element">Inline element</h3><p>内联元素</p>
-<blockquote>
-<p>An element such as strong or span. These elements do not generate “line breaks” before or after themselves, and they are descendants of a block-level element. You can cause an element to generate an inline-level box by declaring display: inline.</p>
-</blockquote>
-<p>如 strong 或 span 元素。这些元素不会在它们之前或之后生成 “换行符”，并且它们是块级元素的后代。你可以使用 display:inline 为元素生成内联级盒子。</p>
-<h3 id="Root_element">Root element</h3><p>根元素</p>
-<blockquote>
-<p>The element at the top of the document tree. In HTML documents, this is the element html. In XML documents, it can be whatever the language permits.</p>
-</blockquote>
-<p>在文档树顶端的元素。在 HTML 文档中，它是 <code>&lt;html&gt;</code> 元素。在 XML 文档，它可以是语言许可。</p>
-
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/cijk2iz8200021zjd78cd2ozv/">
-                未命名
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于 2016-01-18
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2016/cijk2iz8200021zjd78cd2ozv/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijk2iz8200021zjd78cd2ozv/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h1 id="CSS_布局之_Formatting_Context_(一)_Block_Formatting_Context">CSS 布局之 Formatting Context (一) Block Formatting Context</h1><p>首先来了解什么是 Formatting Context。</p>
-<p>Formatting Context 是页面中的一块渲染区域，在这个区域内拥有它自己的渲染规则，决定了子元素如何定位，及元素之间如何相互作用。</p>
-<p>不同的 Formatting Context 有不同的渲染规则，常见的有 <code>BFC</code> (Block Formatting Contextext)，<code>IFC</code> (Inline Formatting Context)，和 CSS 3 新增加的 <code>GFC</code> (Grid Formatting Context)，<code>FFC</code> (Flex Formatting Context)。 </p>
-<p>与 Formatting Context 息息相关的是 Box，每个 HTML 元素作为 Box 通过 CSS 渲染，不同的类型的 Box 有不同的行为，CSS 中有两种 Box：Block 和 Inline，<a href="">这里有介绍</a>。</p>
-<h2 id="BFC">BFC</h2><p>BFC 就是只有 Block-level Box 参与的 Formatting Context。它是一个独立的渲染区域，它规定了内部的 Block-level Box 如何布局，并且与这个区域外部毫不相干。</p>
-<h3 id="哪些元素会生成_BFC">哪些元素会生成 BFC</h3><p>以前我一直不知道有 Formatting Context 这个概念，以为 Box 负责了 Formatting Context 的职责，但这也说明了 Formatting Context 不用手动创建也会出现，那么它出现的规则是什么呢，或者说哪些元素会生成 BFC？</p>
-<p>这些元素会生成 BFC：</p>
-<blockquote>
-<ul>
-<li>the root element or something that contains it</li>
-<li>floats (elements where float is not none)</li>
-<li>absolutely positioned elements (elements where position is absolute or fixed)</li>
-<li>inline-blocks (elements with display: inline-block)</li>
-<li>table cells (elements with display: table-cell, which is the default for HTML table cells)</li>
-<li>table captions (elements with display: table-caption, which is the default for HTML table captions)</li>
-<li>elements where overflow has a value other than visible</li>
-<li>flex boxes (elements with display: flex or inline-flex)</li>
-</ul>
-</blockquote>
-<ul>
-<li>root 元素或一些包含它的元素。</li>
-<li>floats 元素 (元素的 float 值不为 none)</li>
-<li>absolutely 定位的元素 (元素的 position 值是 absolute 或 fixed)</li>
-<li>inline-block 元素 (元素的 display 为 inline-block)</li>
-<li>table cell 元素 (元素的 display 为 table-cell, 它是HTML 的 table cell 的默认值)</li>
-<li>table captions (元素的 display 值为 table-caption,它是 HTML table captions 的默认值)</li>
-<li>元素的 overflow 有非 visible 的值</li>
-<li>flex boxes (元素的 display 为 flex 或 inline-flex)</li>
-</ul>
-<p>Block Formatting Context 包含创建它的元素的所有内部元素，但不包含会创建新的 Block Formatting Context 的后裔元素。</p>
-<h3 id="BFC_的规则">BFC 的规则</h3><p>Block Formatting Context 对于 positioning (见 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float" target="_blank" rel="external">float</a>) 和 clear (见 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clear" target="_blank" rel="external">clear</a>) 非常重要，这些规则只会在同一个 Block Formatting 中应用。</p>
-<p>Floats 不会影响其它 block formatting context 的布局，clear 也只会清除同一个 block formatting context 的 float。</p>
-<p>这里是其它博客看到的一个总结：</p>
-<ul>
-<li>内部的Box会在垂直方向，一个接一个地放置。</li>
-<li>Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠</li>
-<li>每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。</li>
-<li>BFC的区域不会与float box重叠。</li>
-<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
-<li>计算BFC的高度时，浮动元素也参与计算</li>
-</ul>
-<h2 id="参考资料">参考资料</h2><p><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Visual_formatting_model#Block-level_elements_and_block_boxes" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Visual_formatting_model#Block-level_elements_and_block_boxes</a></p>
-<p><a href="http://www.cnblogs.com/liugblog/p/4982684.html" target="_blank" rel="external">http://www.cnblogs.com/liugblog/p/4982684.html</a></p>
-
         
       
     </div>
@@ -1065,6 +662,386 @@
 
 
     
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015/ciiyooeaz0000l9mppozsm8bq/">
+                React 的 context 和 childContext
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-12-31
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/React/">React</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/ciiyooeaz0000l9mppozsm8bq/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/ciiyooeaz0000l9mppozsm8bq/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>介绍如何使用 React 的 context </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/ciiyooeaz0000l9mppozsm8bq/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015/sdasd/">
+                前端记录
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-12-31
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/查询/">查询</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/sdasd/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/sdasd/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>记录遇到的一些问题和解决方法，和一些技巧。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/sdasd/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015/reusable-components/">
+                React 重用组件
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-11-29
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/React/">React</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/reusable-components/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/reusable-components/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>Prop Validation，Default Prop Values，Transferring Props: A Shortcut，Single Child，Mixins，ES6 Classes，Stateless Functions。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/reusable-components/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              <a class="post-title-link" href="/2015/Reacttutorial/">
+                React 指南
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-11-29
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/React/">React</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/Reacttutorial/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/Reacttutorial/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>一遍翻译一遍学的 React 官方指南。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/Reacttutorial/#more">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/"> #React </a>
+          
+        </div>
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
   </div>
 
   
@@ -1103,21 +1080,21 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
