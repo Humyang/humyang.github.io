@@ -31,7 +31,7 @@
 
 
 
-  <title> Basic Visual Formatting (三) // Humyang </title>
+  <title> Base Visual Formatting  (二)  Containing Block and Quick Refresher // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              Basic Visual Formatting (三)
+              Base Visual Formatting  (二)  Containing Block and Quick Refresher
             
           
         </h1>
@@ -119,7 +119,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-01-22
+          发表于 2016-01-16
         </span>
 
         
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/cijsepirb007a96jdo6lwxs3a/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijsepirb007a96jdo6lwxs3a/"></span>
+            <a href="/2016/cijsmyfyc007akzjduw6cmfrb/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijsmyfyc007akzjduw6cmfrb/"></span>
             </a>
           </span>
           
@@ -162,109 +162,60 @@
       
 
       
-        <p>介绍盒模型的块级元素和 margin，width 使用 auto 的效果。</p>
+        <p>介绍 CSS 布局的基础概念：Containing Block，和一些专业术语的解释。</p>
 <a id="more"></a>
 <hr>
-<p>Basic Visual Formatting (三)</p>
-<h1 id="Block-Level_Elements">Block-Level Elements</h1><p>块级元素</p>
+<h1 id="Basic_Visual_Formatting">Basic Visual Formatting</h1><h2 id="The_Containing_Block">The Containing Block</h2><blockquote>
+<p>Every element is laid out with respect to its containing block; in a very real way, the containing block is the “layout context” for an element. CSS2.1 defines a series of rules for determining an element’s containing block. I’ll cover only those rules that pertain to the concepts covered in this chapter and leave the rest for future chapters.</p>
+</blockquote>
+<p>每个元素的布局规则都遵循所包含它的容器块；容器块是元素的布局上下文。CSS 2.1 为元素的容器块定义了几种规则。这个章节我会介绍覆盖这些规则的概念，其余的留给以后的章节。</p>
 <blockquote>
-<p>Block-level elements can behave in both predictable and surprising ways. The handling of element placement along the horizontal and vertical axes can differ, for example. To fully understand how block-level elements are handled, you must clearly understand a number of boundaries and areas. They are shown in detail in Figure 7-2.</p>
+<p>For an element in the normal, Western-style flow of text, the containing block is formed by the content edge of the nearest block-level, table cell, or inline-block ancestor box. Consider the following markup:</p>
 </blockquote>
-<p>块级元素的行为即可预测且令人诧异的，元素布局在水平和垂直轴线有不同处理方式。例如，要完全明白块级元素是如何处理的，你必须清晰了解几处边界和区域。他们在图 7-2 列出。</p>
-<p><img src="/images/2016/01/7-2.png" alt=""><br><small>图 7-2. 完整的盒模型</small></p>
+<p>正常情况下的元素，西式的文本，容器块从最近的 block-level，table cell，或 inline-block 祖先 box 的内容的边缘形成，参考下面的标记：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span> <span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="title">p</span>&gt;</span>This is a paragraph.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>In general, the width of an element is defined as the distance from the left inner edge to the right inner edge, and the height is the distance from the inner top to the inner bottom. Both of these properties can be applied to an element.</p>
+<p>In this very simple example, the containing block for the p element is the div element, as that is the closest ancestor element that is block-level, a table cell, or inline-block (in this case, it’s a block box). Similarly, the div’s containing block is the body. Thus, the layout of the p is dependent on the layout of the div, which is in turn dependent on the layout of the body.</p>
 </blockquote>
-<p>通常，元素的宽度被定义为从左内边缘到右内边缘的距离，高度是从顶部内边缘到底部内边缘的距离。这些属性都可以被应用到元素。</p>
+<p>在这个非常简单的例子中，p 元素的容器块是 div 元素，因为它最近的祖先元素是 block-level.table cell，或 inline-block (在这个例子中，它是块级盒子)。同理，div 元素的容器块是 body，因此，p 元素的布局是依赖 div 元素，div 元素又反过来以来 body 元素。</p>
 <blockquote>
-<p>The various widths, heights, padding, and margins combine to determine how a document is laid out. In most cases, the height and width of the document are automatically determined by the browser and are based on the available display region and other factors. Under CSS, of course, you can assert more direct control over the way elements are sized and displayed. You can select different effects for horizontal and vertical layouts, so we’ll tackle them separately.</p>
+<p>You don’t need to worry about inline elements since the way they are laid out doesn’t depend directly on containing blocks. We’ll talk about them later in the chapter.</p>
 </blockquote>
-<p>这几个宽度，高度，内边距和外边距的组合决定了文档如何布局。大部分情况，文档的高度和宽度是由浏览器和基于可见显示区域和其它因素自动决定。在 CSS 中，当然，你可以直接的控制元素的尺寸和显示方式。你可以为水平和垂直布局选择不同效果，因此我们将这些分开单独来讲。</p>
-<h2 id="Horizontal_Formatting">Horizontal Formatting</h2><p>水平格式化</p>
+<p>你不需要担心 inline 元素的布局方式是否直接以来容器块。我会在之后的章节谈论它们。</p>
+<h2 id="A_Quick_Refresher">A Quick Refresher</h2><blockquote>
+<p>Let’s quickly review the kinds of elements we’ll be discussing, as well as some important terms that are needed to follow the explanations in this chapter:</p>
+</blockquote>
+<p>让我们快速预览我们将会谈论到的元素的种类，以及一些重要的术语，可以在这个章节查询。</p>
+<h3 id="Normal_flow">Normal flow</h3><p>正常流</p>
 <blockquote>
-<p>Horizontal formatting is often more complex than you’d think. Part of the complexity has to do with how width affects the width of the content area, not the entire visible element box. Consider the following example:</p>
+<p>The left-to-right, top-to-bottom rendering of text in Western languages and the familiar text layout of traditional HTML documents. Note that the flow direction may be changed in non-Western languages. Most elements are in the normal flow, and the only way for an element to leave it is to be floated or positioned (covered in Chapter 10). Remember, the discussions in this chapter cover only elements in the normal flow.</p>
 </blockquote>
-<p>水平格式化比你认为的还要复杂。复杂的部分有处理元素的宽度如何影响内容区域宽度，而非是整个可见元素盒子，例如下面的例子：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">style</span>=<span class="value">"width: 200px;"</span>&gt;</span>wideness?<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>从左到右，顶部到底部渲染西方语言文字和传统 HTML 文档的文字布局。注意流的方向可以通过更改以非西方语言的方式渲染。大部分元素都是正常流，只有设置元素为浮动或 position 才能脱离 (在第 10 章讨论)。</p>
+<h3 id="Nonreplaced_element">Nonreplaced element</h3><p>非替代元素</p>
 <blockquote>
-<p>This line of code will make the paragraph’s content 200 pixels wide. If you gave the element a background, this would be quite obvious. However, any padding, bor- ders, or margins you specify are added to the width value. Suppose you do this:</p>
+<p>An element whose content is contained within the document. For example, a paragraph is a nonreplaced element because its textual content is found within the element itself.</p>
 </blockquote>
-<p>这一行代码设置段落宽度为 200px 宽，如果你设置了元素的背景颜色，那么效果是很明显的。接着，你添加内边距，外边距，边框增大段落的宽度值，如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">style</span>=<span class="value">"width: 200px; padding: 10px; margin: 20px;"</span>&gt;</span>wideness?<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>元素的内容包含在文档内。例如段落 (<code>&lt;p&gt;</code>) 是非替代元素因为它的文本内容在元素自身内。</p>
+<h3 id="Replaced_element">Replaced element</h3><p>替代元素</p>
 <blockquote>
-<p>The visible element box is now 220 pixels wide since you’ve added 10 pixels of padding to the right and left of the content. The margins will now extend another 20 pixels to both sides for an overall element box width of 260 pixels.</p>
+<p>An element that serves as a placeholder for something else. The classic example of a replaced element is the img element, which simply points to an image file that is then inserted into the document’s flow at the point where the img element itself is found. Most form elements are also replaced (e.g., <input type="radio">).</p>
 </blockquote>
-<p>元素盒子现在的可以看见的宽度是 220 px，因为分别添加了 10 px 内边距到内容的左边和右边。而外边距拓展了元素盒子 20px 的整体宽度，现在整个元素盒子的宽度是 260px。</p>
+<p>元素起类似占位符作用的。典型的替代元素是 img 元素，它简单的指向一个图像文件然后插入到文档流中 img 元素所在的位置。大部分 form 元素也是替代元素。</p>
+<h3 id="Block-level_element">Block-level element</h3><p>块级元素</p>
 <blockquote>
-<p>Understanding the hidden additions to width is critical. Most users think that width refers to the width of the visible element box, and that if they declare an element to have padding, borders, and a width, the value they supply for the width will be the distance from the outer left border edge to the outer right border edge. This is not the case in CSS. Keep this fact firmly in mind to avoid confusion later.</p>
+<p>An element such as a paragraph, heading, or a div. These elements generate “new lines” both before and after their boxes when in the normal flow, so that block-level elements in the normal flow stack vertically. An element can be made to generate a block-level box by declaring display: block.</p>
 </blockquote>
-<p>最重要的是弄清楚隐藏的宽度。大部分使用者认为元素的宽度只是指元素盒子的可见宽度，如果他们声明了一个拥有内边距，边框，和宽度的元素盒子，他们提供的值只是从外左边缘到外右边缘的距离。在 CSS 中不仅如此。请牢记这一点避免在后面的章节产生困惑。</p>
+<p>如段落，标题，或 div 元素。当这些元素处于正常流时会在它们的前后盒子之间生成 “新行”，因此块级元素在正常流中垂直的堆放。元素可以通过 display:block 让自己生成块级盒子。</p>
+<h3 id="Inline_element">Inline element</h3><p>内联元素</p>
 <blockquote>
-<p><small>As of this writing, the Box Model module of CSS includes proposals for ways to let authors choose whether width refers to the content width or the visible box width.</small></p>
+<p>An element such as strong or span. These elements do not generate “line breaks” before or after themselves, and they are descendants of a block-level element. You can cause an element to generate an inline-level box by declaring display: inline.</p>
 </blockquote>
-<p><small>在撰写此书时，CSS 的盒模型模块包含一个提议：能让使用者把宽度指定为内容宽度或盒子可见宽度。</small></p>
+<p>如 strong 或 span 元素。这些元素不会在它们之前或之后生成 “换行符”，并且它们是块级元素的后代。你可以使用 display:inline 为元素生成内联级盒子。</p>
+<h3 id="Root_element">Root element</h3><p>根元素</p>
 <blockquote>
-<p>Almost as simple is the rule that says that the sum of the horizontal components of a block-level element box in the normal flow always equals the width of the parent. Take two paragraphs within a div whose margins have been set to 1em. The content width (the value of width) of the paragraph, plus its left and right padding, borders, and margins, always add up to the width of the div’s content area.</p>
+<p>The element at the top of the document tree. In HTML documents, this is the element html. In XML documents, it can be whatever the language permits.</p>
 </blockquote>
-<p>解释块级元素盒子的规则最简单的描述是：在正常流中他的水平部分的宽度总和总是与父元素的宽度相同。把两个段落放到已经设置了外边距为 1em 的 div 中。段落的内容宽度  (宽度的值) ，加上他的左右内边距，边框，和外边距，加起来总是等于 div 的内容区域的宽度。</p>
-<blockquote>
-<p>Let’s say the width of the div is 30em, making the sum total of the content width, padding, borders, and margins of each paragraph 30em. In Figure 7-3, the “blank” space around the paragraphs is actually their margins. If the div had any padding, there would be even more blank space, but that isn’t the case here. I’ll discuss padding soon.</p>
-</blockquote>
-<p>如果 div 的宽度是 30em，使每个有 30em 宽的段落的内容宽度，内边距，外边距，边框相加。如图 7-3 中，围绕着段落的 “空白” 空间实际上是他们的外边距。如果 div 有内边距，这里将会有更多空白空间，先不在这里介绍，我会在后面讨论内边距时说明。</p>
-<p><img src="/images/2016/01/7-3.png" alt=""><br>图 7-3. 元素盒子的宽度与他们的父元素一样宽。</p>
-<h3 id="Horizontal_properties">Horizontal properties</h3><p>水平属性</p>
-<blockquote>
-<p>The “seven properties” of horizontal formatting are: margin-left, border-left, padding-left, width, padding-right, border-right, and margin-right. These properties, which are diagrammed in Figure 7-4, relate to the horizontal layout of block-level boxes.</p>
-</blockquote>
-<p>水平格式化的 “七个属性”：左外边距，左边框，左内边距，宽度，右内边距，右边框，右外边距。这些属性，在图 7-4，他们是关于块级盒子水平布局的。</p>
-<p><img src="/images/2016/01/7-4.png" alt=""><br>图 7-4. 水平格式化的 “七个属性”</p>
-<blockquote>
-<p>The values of these seven properties must add up to the width of the element’s containing block, which is usually the value of width for a block element’s parent (since block-level elements nearly always have block-level elements for parents).</p>
-</blockquote>
-<p>这七个属性的值一定会添加到元素的容器块的宽度，他通常是块元素的父元素的宽度  (块级元素的上级元素几乎总是块级元素)。</p>
-<blockquote>
-<p>Of these seven properties, only three may be set to auto: the width of the element’s content and the left and right margins. The remaining properties must be set either to specific values or default to a width of zero. Figure 7-5 shows which parts of the box can take a value of auto and which cannot.</p>
-</blockquote>
-<p>这七个属性，只有三个能设为 auto：元素的内容的宽度和左右外边距。剩余的属性必须设置为指定值或默认的宽度 0。图 7-5 显示演示盒子的部分哪些可以设置为 auto 哪些不能。</p>
-<p><img src="/images/2016/01/7-5.png" alt=""><br>图 7-5. 可以设置为 auto 的水平属性</p>
-<blockquote>
-<p>width must either be set to auto or a nonnegative value of some type. When you do use auto in horizontal formatting, different effects can result.</p>
-</blockquote>
-<p>宽度必须设置为 auto 或某类非负数的值 (marin 可以是负数)。当你在水平格式化使用 auto，会产生不同的效果。</p>
-<blockquote>
-<p><small>CSS allows browsers to set a minimum value for width; this is the value below which a block-level element’s width cannot drop. The value of this minimum can vary between browsers, as it is not defined in the specification.</small></p>
-</blockquote>
-<p>CSS 允许浏览器设置宽度的最小值；这个值能使块级元素的宽度无法抛弃。这个最小值在不同浏览器之间会有变化，因为他不是规范中定义的。</p>
-<h3 id="Using_auto">Using auto</h3><blockquote>
-<p>If you set width, margin-left, or margin-right to a value of auto, and give the remaining two properties specific values, then the property that is set to auto determines the length required to make the element box’s width equal to the parent element’s width. In other words, let’s say the sum of the seven properties must equal 400 pixels, no padding or borders are set, the right margin and width are set to 100px, and the left margin is set to auto. The left margin will be 200 pixels wide:</p>
-</blockquote>
-<p>如果你设置内容宽度了，左外边距或右外边距的值为 auto，并指定剩余的两个属性为指定值，然后设置为 auto 的属性会自动判断使元素盒子的宽度等于父元素的宽度所需要的长度。换句话说，假设这七个属性的总和为 400 px，不设置内边距或边框，右外边距和宽度设置为 100px,左外边距设置为 auto。那么左外边距的宽度将会是 200px：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: auto; margin-right: 100px;</span><br><span class="line">     width: 100px;&#125;   /* 'auto' left margin evaluates to 200px */</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>In a sense, auto can be used to make up the difference between everything else and the required total. However, what if all three of these properties are set to 100px and none of them are set to auto?</p>
-</blockquote>
-<p>在某种意义上，auto 可以被用作填充一切不同的东西之间需要的总和。不过，如果这三个属性都设置为 100px 而不是设置为 auto 呢？</p>
-<blockquote>
-<p>In the case where all three properties are set to something other than auto—or, in CSS terminology, when these formatting properties have been overconstrained— then margin-right is always forced to be auto. This means that if both margins and the width are set to 100px, then the user agent will reset the right margin to auto. The right margin’s width will then be set according to the rule that one auto value “fills in” the distance needed to make the element’s overall width equal that of its containing block. Figure 7-6 shows the result of the following markup:</p>
-</blockquote>
-<p>这种三个属性除了设置为 auto 之外的情况－或在 CSS 技术中，如果这个格式化属性已经超过约束条件－那么右外边距总是强制被设置为 auto。这意味着如果外边距和宽度都设置为 100px，那么用户代理会强制设置右外边距为 auto。右外边距的宽度将依照 “填充” 的规则自动设置一个距离值，使元素的总宽等于包含他的容器块的宽度。图 7-6 显示下面的 html 标记的结果：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: 100px; margin-right: 100px;</span><br><span class="line">     width: 100px;&#125;   /* right margin forced to be 200px */</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2016/01/7-6.png" alt=""><br>图 7-6. 覆盖右外边距的设置</p>
-<blockquote>
-<p><small>margin-right is forced to be auto only for left-to-right languages such as English. In right-to-left languages, everything is reversed, so margin-left is forced to be auto, not margin-right.</small></p>
-</blockquote>
-<p>强制设置右外边距为 auto 只发生在从左到右的语言例如英语。在右到左的语言，所有都是相反，例如强制左外边距为 auto，而不是右外边距。</p>
-<blockquote>
-<p>If both margins are set explicitly, and width is set to auto, then the value of width will be set to whatever value is needed to reach the required total (which is the content width of the parent element). The results of the following markup are shown in Figure 7-7:</p>
-</blockquote>
-<p>如果所有外边距都设置了明确值，而宽度设置为 auto，那么宽度的值会被设置为达到总宽所需要的大小  (父元素的内容宽度)。下面的标记的结果在图 7-7 ：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: 100px; margin-right: 100px; width: auto;&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2016/01/7-7.png" alt=""><br>图 7-7. 自动宽度</p>
-<blockquote>
-<p>The case shown in Figure 7-7 is the most common since it is equivalent to setting the margins and not declaring anything for the width. The result of the following markup is exactly the same as that shown in Figure 7-7:</p>
-</blockquote>
-<p>图 7-7 的例子是最常用的方式他相当于设置了外边距并没声明任何宽度。下面的标记的结果也会产生图 7-7 的效果。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: 100px; margin-right: 100px;&#125; /* same as before */</span><br></pre></td></tr></table></figure>
+<p>在文档树顶端的元素。在 HTML 文档中，它是 <code>&lt;html&gt;</code> 元素。在 XML 文档，它可以是语言许可。</p>
 
       
     </div>
@@ -284,13 +235,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/3015/FrontEndNavigation/">前端 EXAMPLE 导航</a>
+              <a href="/2016/cijsmyfyp007kkzjdkznhkom3/">Base Visual Formatting  (一)  Basic Boxes</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/cijsepiot006696jdyty91j12/">Flexbox 布局  (一) Container</a>
+              <a href="/2016/cijsmyfy3006xkzjdkr0ws2tu/">CSS 布局之 Formatting Context (一) Block Formatting Context</a>
             
           </div>
         </div>
@@ -306,8 +257,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/cijsepirb007a96jdo6lwxs3a/"
-               data-title="Basic Visual Formatting (三)" data-url="http://yoursite.com/2016/cijsepirb007a96jdo6lwxs3a/">
+          <div class="ds-thread" data-thread-key="2016/cijsmyfyc007akzjduw6cmfrb/"
+               data-title="Base Visual Formatting  (二)  Containing Block and Quick Refresher" data-url="http://yoursite.com/2016/cijsmyfyc007akzjduw6cmfrb/">
           </div>
         
       </div>
@@ -354,7 +305,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -398,7 +349,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Block-Level_Elements"><span class="nav-number">1.</span> <span class="nav-text">Block-Level Elements</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Horizontal_Formatting"><span class="nav-number">1.1.</span> <span class="nav-text">Horizontal Formatting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Horizontal_properties"><span class="nav-number">1.1.1.</span> <span class="nav-text">Horizontal properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using_auto"><span class="nav-number">1.1.2.</span> <span class="nav-text">Using auto</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic_Visual_Formatting"><span class="nav-number">1.</span> <span class="nav-text">Basic Visual Formatting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The_Containing_Block"><span class="nav-number">1.1.</span> <span class="nav-text">The Containing Block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A_Quick_Refresher"><span class="nav-number">1.2.</span> <span class="nav-text">A Quick Refresher</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal_flow"><span class="nav-number">1.2.1.</span> <span class="nav-text">Normal flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nonreplaced_element"><span class="nav-number">1.2.2.</span> <span class="nav-text">Nonreplaced element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replaced_element"><span class="nav-number">1.2.3.</span> <span class="nav-text">Replaced element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Block-level_element"><span class="nav-number">1.2.4.</span> <span class="nav-text">Block-level element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inline_element"><span class="nav-number">1.2.5.</span> <span class="nav-text">Inline element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Root_element"><span class="nav-number">1.2.6.</span> <span class="nav-text">Root element</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

@@ -31,7 +31,7 @@
 
 
 
-  <title> 关于 Babel 6 你需要知道的 6 件事情 // Humyang </title>
+  <title> CSS Margin (一) 负 Margin // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              关于 Babel 6 你需要知道的 6 件事情
+              CSS Margin (一) 负 Margin
             
           
         </h1>
@@ -119,7 +119,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-01-03
+          发表于 2016-01-13
         </span>
 
         
@@ -134,7 +134,7 @@
               
 
             
-              <a href="/categories/前端/工具/">工具</a>
+              <a href="/categories/前端/CSS/">CSS</a>
 
               
               
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/cijsepinz005c96jdurhgc7uy/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijsepinz005c96jdurhgc7uy/"></span>
+            <a href="/2016/cijsmyfy80076kzjd8lz6dhfi/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijsmyfy80076kzjd8lz6dhfi/"></span>
             </a>
           </span>
           
@@ -162,71 +162,29 @@
       
 
       
-        <p>快速了解 Babel 6 和 Babel 5 之间的区别。</p>
+        <p>简单总结了对负 margin 的理解，和一些用途。</p>
 <a id="more"></a>
 <hr>
-<p><a href="http://jamesknelson.com/the-six-things-you-need-to-know-about-babel-6/" target="_blank" rel="external">原文地址</a></p>
-<h1 id="关于_Babel_6_你需要知道的_6_件事情">关于 Babel 6 你需要知道的 6 件事情</h1><blockquote>
-<p>Over the last year, Babel has become the go-to tool for transforming ES2015 and JSX into boring old JavaScript. But seemingly overnight, Babel 6 changed everything. The babel package was deprecated, running babel doesn’t actually transform ES2015 to ES5, and the old docs have basically disappeared.</p>
-</blockquote>
-<p>在过去的一年，Babel 变成了最流行的将 ES2015 和 JSX 转换成旧 JavaScript 的工具。但似乎一夜之间，Babel 6 更改了一切。<code>babel</code> 包已经被移除，运行 babel 不会将 ES2015 转换成 ES5，并且旧的文档基本已经消失了。</p>
+<h1 id="CSS_Margin_(一)_负_Margin">CSS Margin (一) 负 Margin</h1><p>偶然发现了两篇详细介绍 Marin 的文章：</p>
+<p><a href="http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/" target="_blank" rel="external">http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/</a></p>
+<p><a href="http://www.hicss.net/do-not-tell-me-you-understand-margin/" target="_blank" rel="external">http://www.hicss.net/do-not-tell-me-you-understand-margin/</a></p>
+<p>因为学到了熟悉的内容但陌生的知识，所以做一下总结。</p>
+<h2 id="总结">总结</h2><p>Margin 主要影响到元素与周边元素的关系，不管传入正数负数，所以一定程度上可以替代 relative 和 absolute。</p>
+<p>这里对几种情况进行测试一下。</p>
+<h3 id="父子元素的关系">父子元素的关系</h3><p>首先测试父子关系的 div 元素。有三个 div，其中一个为父 div，两个子 div，它们 的 display 都是 block。</p>
+<p>下面第一个子 div 称为 A，第二个子 div 称为 B，主要修改 A 的 margin， B 主要作为参照物。</p>
+<h4 id="测试，_修改_A_的_margin：">测试， 修改 A 的 margin：</h4><p>此时三个 div 的 display 都是 block。</p>
+<p>修改 A 的 <code>margin: -10px 0 0 0;</code>，效果: 整体元素往上偏移。同理如果为正数则往下偏移。</p>
+<p>若 A 的 <code>margin-top</code> 为 10px,如果父 div 的 <code>margin-top</code> 大于 10 px，则按照父 div 的数值移动。这现象被称为<code>垂直外边距合并</code>。</p>
+<p>如果 A 和父 div 的正负数相反，则会进行相加，例如 A  <code>margin: -10px 0 0 0;</code>，父 <code>margin: 10px 0 0 0;</code>，那么元素 margin 被抵消，位置保持不变。</p>
 <blockquote>
-<p>But Don’t Panic! To get you up to speed, I’ve put together a brief list of the six most important changes. And if you need a little more help, my Complete Guide to ES6 with Babel 6 will walk you through the practical details; including the CLI, Webpack, Mocha and Gulp.</p>
+<p>设置 A 的 display 为 <strong>inline</strong>,这时 A 的 margin-top 和 margin－bottom 都不起作用了。同时设置 B 的 display 为 inline， A 的 margin-top 和 margin－bottom 也是没作用。<br>但是 margin-left 和 margin-right 还是有作用的。 margin-right 正负值不会改变 A 的位置，但如果正数过大会影响 B 的位置。<br>margin-left 正负数都可以影响 A 的位置。</p>
+<p>设置 A 的 display 为 <strong>inline-block</strong> 时， 修改 A 的 margin 不会影响父 div 的位置，但会影响同级元素的位置。</p>
 </blockquote>
-<p>但是不要惊慌，为了让你加快速度，我挑出了 6 个最重要的更改进行简要说明，如果你需要更多帮助，我的 <a href="http://jamesknelson.com/the-complete-guide-to-es6-with-babel-6/" target="_blank" rel="external">Complete Guide to ES6 with Babel 6</a> 会讲解实用的详细细节；包含 CLI，Webpack，Mocha 和 Gulp。</p>
-<blockquote>
-<p>1.The <code>babel</code> npm package no longer exists. Instead, Babel has been split into multiple packages:</p>
-<ul>
-<li>babel-cli, which contains the babel command line interface</li>
-<li>babel-core, which contains the Node API and require hook</li>
-<li>babel-polyfill, which when required, sets you up with a full ES2015-ish environment</li>
-</ul>
-<p>To avoid accidental conflicts, make sure to remove any previous Babel packages like babel, babel-core, etc. from your package.json, and then npm uninstall them.</p>
-</blockquote>
-<p>1.<strong><code>babel</code> npm 包已经不存在</strong>。作为替代，Babel 已经分割成多个包：</p>
-<p><a href="">babel-cli</a>,包含 babel 命令行接口。<br><a href="">babel-core</a>，包含 Node API 和 <code>require</code> hook<br><a href="">babel-polyfill</a>,当 <code>require</code> d (漏了内容？)，为你设置 ES2015 需要的完整环境。</p>
-<p>为了避免冲突，请你在 <code>package.json</code> 移除之前的 babel 包例如 babel,babel-core 等。然后运行 <code>npm uninstall</code> 卸载它们。</p>
-<blockquote>
-<p>2.Every single transform is now a plugin, including ES2015 and JSX. And as a result, nothing happens by default – so you’ll need to install the correct plugins. Actually, ES2015 consists of about 20 plugins. You don’t want to install each of these manually, which is why Babel has added presets.</p>
-</blockquote>
-<p>2.<strong>每个单独的转换现在都以 plugin 形式出现，包括 ES2015 和 JSX</strong>。因此，默认的 bable 什么都不发生 － 因此你需要正确的安装 plguin。但实际上，ES2015 包含了大约 20 个plugin。你不会想手动安装它们的，因此 Babel 添加了 presets 的概念。</p>
-<blockquote>
-<p>3.Babel 6 adds presets, or collections of plugins. And it provides two presets for the functionality provided by default in Babel 5:</p>
-<p>  <code>npm install babel-preset-es2015 babel-preset-react --save-dev</code></p>
-<p>But even after installing a preset, you need to tell Babel to use it.</p>
-</blockquote>
-<p>3.<strong>Babel 6 增加了 preset，或 plugin 集合</strong>。它提供了两个 Babel 5 默认提供的功能：</p>
-<p><code>npm install babel-preset-es2015 babel-preset-react --save-dev</code></p>
-<p>但即使安装了 preset 之后，你仍需要告诉 Babel 使用它。</p>
-<blockquote>
-<p>4.<code>.babelrc</code> is kinda a necessity now. Since Babel no longer uses ES2015 and React transforms by default, the require hook used by gulpfile.babel.js and mocha will not actually do anything. Fix this by creating a .babelrc in your project directory:</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [<span class="string">"es2015"</span>, <span class="string">"react"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>.babelrc</code> 现在是<strong>有点必要性</strong>，自从 Babel 默认不具备 ES2015 和 React 转换，<code>gulpfile.babel.js</code> 和 <a href="">mocha</a> 中通过 <code>require</code> hook 使用 Babel，不会进行任何操作。要修复这个问题请在你的项目目录创建一个 <code>.babelrc</code> 文件，包含这些内容：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [<span class="string">"es2015"</span>, <span class="string">"react"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>5.Stage 0 is now a separate preset, not an option. Previously, you enabled ES7 features like decorators and async/await by passing —stage 0 to babel. Now, you install and load the babel-preset-stage-0 package.</p>
-</blockquote>
-<p><strong>Stage 0 现在是单独的 preset，不再是一个选项</strong>。以前，通过传递 —stage 0 给 babel 启用 ES7 的功能例如修饰符和 <code>async</code>/<code>await</code>。现在你需要安装和加载 <code>babel-preset-stage-0</code> 包。</p>
-<blockquote>
-<p>6.The —external-helpers option is now a plugin. To avoid repeated inclusion of Babel’s helper functions, you’ll now need to install and apply the babel-plugin-transform-runtime package, and then require the babel-runtime package within your code (yes, even if you’re using the polyfill).</p>
-</blockquote>
-<p><code>-external-helpers</code> 选项现在是 plugin。为了避免反复包含 Babel 的 helper function，你现在需要安装和应用 <code>babel-plugin-transform-runtime</code> 包，然后 require <code>babel-runtion</code> 包到你的代码中 (是的，即使你在使用 polyfill)。</p>
-<blockquote>
-<p>And there you have it, you’re now up to speed on Babel 6’s packages, plugins, presets and options! But what about Webpack? What about passing presets via the CLI? I’ve tried to keep this list as succinct as possible, and to do so I’ve kept my Complete Guide to ES6 with Babel 6 as a separate series — covering the CLI, Webpack, Gulp and Mocha.</p>
-</blockquote>
-<p>现在已经快速了解了 Babel 6 的包，plugin，preset 和 option！但关于 Webpack 呢？如何通过 CLI 传递 preset？为了保持文章的简洁风格，我把这些内容写在了 <a href="http://jamesknelson.com/the-complete-guide-to-es6-with-babel-6/" target="_blank" rel="external">Complete Guide to ES6 with Babel6</a> 作为独立的系列 - 包含 CLI，Webpack，Gulp 和 Mocha。</p>
-<h2 id="But_everything_moves_so_fast-_How_will_I_keep_up_to_date?">But everything moves so fast. How will I keep up to date?</h2><p>但一切进展都那么快，我该如何才能跟上脚步呢？</p>
-<blockquote>
-<p>With ES2015 already standardised, there is no argument that Babel is a necessary tool for most JavaScript developers. But does the thought of integrating an entire platform for transforming JavaScript into every new project worry you a little bit? The speed at which the JavaScript ecosystem is growing can feel demoralising. But luckily, it doesn’t have to be that way!</p>
-</blockquote>
-<p>ES2015 已经实现标准化，没有参数的 Babel 对大部分开发者来说是必要的工具。但整合整个平台把 JavaScript 转换到新的项目你是否会有一点担心？JavaScript 生态系统的快速增长会然人感觉到有些泄气。但很幸运，不用这样做。</p>
-<blockquote>
-<p>The thing is that for most projects, scaling is a problem you’d like to have. And until you’re at that point, you’ll be more productive by focusing on a few important tools than trying to grasp everything.</p>
-</blockquote>
-<p>对于大部分项目都会遇到的伸缩问题，在你遇到这个问题时你会明白，通过关注一个最小最重要的工具你将更有效率，而不是试图抓住一切。</p>
-<p>One way to keep focussed on the tools which count is to join my Newsletter. You’ll receive one e-mail every couple weeks with information tailored to small apps using React. And in return for your e-mail, you’ll immediately receive three bonus print-optimised PDF cheatsheets – on React (see preview), ES6 and JavaScript promises. All for free!</p>
-<p>One more thing – I love hearing your questions, offers and opinions. If you have something to say, leave a comment or send me an e-mail at james@jamesknelson.com. I’m looking forward to hearing from you!</p>
+<p>继续测试时才发现元素组合太多了，根本测试不完，理解原理才最关键，在后面的文章中学习。</p>
+<h3 id="负_margin_用途">负 margin 用途</h3><h4 id="负_margin_替代_relative/absolute">负 margin 替代 relative/absolute</h4><p>例如在 img 元素上显示另一个元素的内容，以前是用 relative 或 absolute 调整坐标的方式，现在也可以用负 margin 替代了。</p>
+<h4 id="Tab_选项卡">Tab 选项卡</h4><p>让元素上移一个像素点，使选项卡的下边界消失</p>
+<h4 id="鳞片式导航">鳞片式导航</h4><p>就是多个选项卡重叠在一起。</p>
 
       
     </div>
@@ -244,13 +202,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/cijsepiee000v96jdod302i9i/">Webpack 入门</a>
+              <a href="/2016/cijsmyfy50071kzjd1spqczuk/">CSS Margin (二) Margin 与 block，inline 元素</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/cijsepio4005k96jd8kxcu2r2/">Grunt 项目脚手架</a>
+              <a href="/2016/cijsmyfu6005okzjdtyrz3ml2/">Grunt 介绍</a>
             
           </div>
         </div>
@@ -266,8 +224,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/cijsepinz005c96jdurhgc7uy/"
-               data-title="关于 Babel 6 你需要知道的 6 件事情" data-url="http://yoursite.com/2016/cijsepinz005c96jdurhgc7uy/">
+          <div class="ds-thread" data-thread-key="2016/cijsmyfy80076kzjd8lz6dhfi/"
+               data-title="CSS Margin (一) 负 Margin" data-url="http://yoursite.com/2016/cijsmyfy80076kzjd8lz6dhfi/">
           </div>
         
       </div>
@@ -314,7 +272,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -358,7 +316,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于_Babel_6_你需要知道的_6_件事情"><span class="nav-number">1.</span> <span class="nav-text">关于 Babel 6 你需要知道的 6 件事情</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#But_everything_moves_so_fast-_How_will_I_keep_up_to_date?"><span class="nav-number">1.1.</span> <span class="nav-text">But everything moves so fast. How will I keep up to date?</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS_Margin_(一)_负_Margin"><span class="nav-number">1.</span> <span class="nav-text">CSS Margin (一) 负 Margin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#父子元素的关系"><span class="nav-number">1.1.1.</span> <span class="nav-text">父子元素的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试，_修改_A_的_margin："><span class="nav-number">1.1.1.1.</span> <span class="nav-text">测试， 修改 A 的 margin：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负_margin_用途"><span class="nav-number">1.1.2.</span> <span class="nav-text">负 margin 用途</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#负_margin_替代_relative/absolute"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">负 margin 替代 relative/absolute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tab_选项卡"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Tab 选项卡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#鳞片式导航"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">鳞片式导航</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

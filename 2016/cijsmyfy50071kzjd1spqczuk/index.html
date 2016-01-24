@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="前端,翻译," />
+  <meta name="keywords" content="前端," />
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-  <title> Base Visual Formatting  (一)  Basic Boxes // Humyang </title>
+  <title> CSS Margin (二) Margin 与 block，inline 元素 // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              Base Visual Formatting  (一)  Basic Boxes
+              CSS Margin (二) Margin 与 block，inline 元素
             
           
         </h1>
@@ -119,7 +119,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-01-16
+          发表于 2016-01-13
         </span>
 
         
@@ -134,7 +134,7 @@
               
 
             
-              <a href="/categories/CSS/布局/">布局</a>
+              <a href="/categories/CSS/Margin/">Margin</a>
 
               
               
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/cijsepire007f96jdyjqhvjkx/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijsepire007f96jdyjqhvjkx/"></span>
+            <a href="/2016/cijsmyfy50071kzjd1spqczuk/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijsmyfy50071kzjd1spqczuk/"></span>
             </a>
           </span>
           
@@ -162,43 +162,36 @@
       
 
       
-        <p>介绍 CSS 布局的基础概念：Basic Boxes。</p>
+        <p>元素的 Margin 与 Block，Inline 元素的关系和如何相互影响。</p>
 <a id="more"></a>
 <hr>
-<p>来自 CSS The Definitive Guide Eric A Meyer。</p>
-<h1 id="Base_Visual_Formatting">Base Visual Formatting</h1><blockquote>
-<p>In the previous chapters, we covered a great deal of practical information on how CSS handles text and fonts in a document. In this chapter, we’ll look at the theoretical side of visual rendering, answering many of the questions we skipped earlier in the interest of addressing how CSS is implemented.</p>
-</blockquote>
-<p>在之前的章节，我们进行了大量的实践用 CSS 处理文字和文档的字体。在这章中，我们会学习外观呈现的理论，回答许多之前跳过的许多 CSS 如何实现的问题。</p>
+<p>CSS Margin (二) Margin 与 block，inline 元素</p>
+<h1 id="Margin">Margin</h1><h2 id="HTML_元素类型">HTML 元素类型</h2><p>HTML 有两种基本元素，即 block 和 inline。</p>
+<p>block 元素占据一行，inline 元素与其它 inline 元素占据同一行。</p>
+<h3 id="Replaced_element">Replaced element</h3><p>除了上面两种基本类型外，Replaced element 也是常用的元素类型。</p>
+<p>在 MDN 是这样介绍 Replace element 的：</p>
 <blockquote>
-<p>Why is it necessary to spend an entire chapter on the theoretical underpinnings of visual rendering in CSS? The answer is that with a model as open and powerful as that contained within CSS, no book could hope to cover every possible way of combining properties and effects. You will obviously go on to discover new ways of using CSS for your own document effects.</p>
+<p>In CSS, a replaced element is an element whose representation is outside the scope of CSS. These are kind of external objects whose representation is independent of the CSS.</p>
+<p>在 CSS 中，replaced element 拥有 CSS 范围之外的属性 (例如 <code>img</code> 的 width 和 height 属性)，这是一种独立于 CSS 的拓展对象。</p>
 </blockquote>
-<p>为什么需要花费一整章在 CSS 视觉呈现的理论基础？因为它是开发的模式和强大的 CSS 容器，没有任何一本书可以覆盖所有属性组合的效果。明显你需要探索新的方式使用 CSS，实现你想要的效果。</p>
+<p>还是 CSS 权威指南介绍得易懂一些，后面也是重点学习权威指南内的资料。</p>
 <blockquote>
-<p>In the course of exploring CSS, you may encounter seemingly strange behaviors in user agents. With a thorough grasp of how the visual rendering model works in CSS, you’ll be able to determine whether a behavior is a correct (though unexpected) consequence of the rendering engine CSS defines, or whether you’ve stumbled across a bug that needs to be reported.</p>
+<p>An element that serves as a placeholder for something else. The classic example of a replaced element is the img element, which simply points to an image file that is then inserted into the document’s flow at the point where the img element itself is found. Most form elements are also replaced (e.g., <input type="radio">).<br>元素起类似占位符作用的。典型的替代元素是 img 元素，它简单的指向一个图像文件然后插入到文档流中 img 元素所在的位置。大部分 form 元素也是替代元素。</p>
 </blockquote>
-<p>在探索 CSS 的过程中，你可能在 user agents 遇到看似奇怪的行为。深入的理解和掌握 CSS 中工作的视觉呈现模型，你就可以判断在哪些行为可以在 CSS 渲染引擎获取正确结果 (尽管看起来奇怪)，或者你偶然遇到一个需要提交的 bug。</p>
-<h2 id="Basic_Boxes">Basic Boxes</h2><blockquote>
-<p>CSS assumes that every element generates one or more rectangular boxes, called element boxes. (Future versions of the specification may allow for nonrectangular boxes, but for now everything is rectangular.) Each element box has a content area at its core. The content area is surrounded by optional amounts of padding, borders, and margins. These items are considered optional because they could all be set to a width of zero, effectively removing them from the element box. An example content area is shown in Figure 7-1, along with the surrounding regions of padding, border, and margins.</p>
-</blockquote>
-<p>CSS 假设所有元素都会生成一个或多个矩形盒子，称为元素盒子 (未来的版本可能允许不规则形状的盒子，但现在所有都是矩形)。每一个元素盒子在它的核心都有一个内容区域。这个内容区域被可选的 padding，border，和 margin 包围。这些选项是可选的因为它们的宽度全都可以被设置为 0，有效的将它们从元素盒子移除。一个元素的内容区域如图 7-1 所示，围绕它的是 padding,border,和 margins 的区域。</p>
-<p>图 7-1<br><img src="./7-1.png" alt=""></p>
-<blockquote>
-<p>Each of the margins, borders, and padding can be set using various properties, such as margin-left or border-bottom. The content’s background a color or tiled image, for example is also applied to the padding. The margins are always transparent, revealing the background of any parent elements. Padding cannot be a negative value, but margins can. We’ll explore the effects of negative margins later in this chapter.</p>
-</blockquote>
-<p>每个 margin，border，和 padding 可以使用单独的属性设置，例如 margin-left 或 border-bottom。内容的背景颜色或背景图像，也会应用到 padding。而 margin 总是透明的，露出父元素的背景颜色。Padding 不能是负值，但 margin 可以。我们会在后面的章节探索负 margin 的效果。</p>
-<blockquote>
-<p>Borders are generated using defined styles, such as solid or inset, and their colors are set using the border-color property. If no color is set, then the border takes on the foreground color of the element’s content. For example, if the text of a paragraph is white, then any borders around that paragraph will be white unless the author explicitly declares a different border color. If a border style has gaps of some type, then the element’s background is visible through those gaps. In other words, the border has the same background as the content and padding. Finally, the width of a border can never be negative.</p>
-</blockquote>
-<p>border 使用自定义的样式生成，例如 solid 或 inset，它们的颜色使用 border-color 属性设置。如果没设置颜色，border 会使用元素内容的前景色。例如段落的文字是白色，那么 border 也会是白色除非作者明确指定了不同的 border 颜色。如果 border 的样式会出现一些缺口，那么元素背景会在通过这些缺口可见。换句话说，border 有一部分背景是内容和 padding。最后，border 的宽度永远不能是负数。</p>
-<blockquote>
-<p>The various components of an element box can be affected by a number of properties, such as width or border-right. Many of these properties will be used in this chapter, even though we haven’t discussed them yet. The actual property definitions are given in Chapter 8, which builds on the concepts set forth in this chapter.</p>
-</blockquote>
-<p>元素盒子的各个部分可以被几个属性影响，例如 width 或 border-right。在这章我们会用到许多这些属性，尽管我们没有讨论过它们。实际上第 8 章才会探索它们，我们先在这一章了解它的概念。</p>
-<blockquote>
-<p>You will, however, find differences in how various types of elements are formatted. Block-level elements are treated differently than inline-level elements, while floated and positioned elements have their own ways of behaving.</p>
-</blockquote>
-<p>最后你会发现几个不同类型元素的格式的不同。Block 级别元素与 inline-level 元素的区别，浮动元素 (float) 和定位元素 (positioned) 它们自己的行为。</p>
+<p>另外，使用 CSS 的 <code>content</code> 属性插入的元素也是一个匿名的 Replaced element (anonymous replaced elements)。</p>
+<p>Replaced element 与 inline element 对应 (即 inline element 是 non-replaced element)，它与 inline element  的区别是：这些元素拥有内在尺寸(intrinsic dimensions),他们可以设置 width/height 属性。他们的性质同设置了 <code>display:inline-block</code> 的元素一致。</p>
+<h2 id="Margin_与_HTML_元素类型">Margin 与 HTML 元素类型</h2><h3 id="Margin_与_Block_element">Margin 与 Block element</h3><p>margin 在块级元素下，他的性能可以完全体现，上下左右任你设定。且记住块级元素的 margin 的参照是基于<strong>前一个元素</strong>即相对于自身之前的元素的距离。如果元素是第一个元素，则就是相对于<strong>父元素</strong>的 margin 距离（如果第一个元素设置了 margin-top ，而父元素又没有设定 padding-top/border-top， 则需要印证<strong>垂直外边距合并</strong>的知识)。</p>
+<p>重点在第一个元素：如果第一个元素的父元素<strong>也是</strong>第一个元素，则会逐级往上遍历，或者可以给父元素设置一个 border 或 padding 即可阻止这个行为。</p>
+<h3 id="Margin_与_Inline_element">Margin 与 Inline element</h3><p>margin 也能用于内联元素，这是规范所允许的，但是 margin-top 和 margin-bottom 对内联元素（对行）的高度没有影响，并且由于边界效果 (margin ) 是透明的，因此他也没有任何的视觉影响。</p>
+<p>这是因为 margin 应用于内联元素时<strong>不改变元素的行高度</strong>，如果你要改变内联元素的行高即类似文本的行间距，那么你只能使用这三个属性：<code>line-height</code>，<code>fong-size</code>，<code>vertical-align</code>。请记住，影响内联元素高度的是 line-height 而不是 height，因为内联元素是一行行的，定一个 height 的话，那这到底是整段 inline 元素的高呢？还是 inline 元素一行的高呢？这都说不准，所以统一都给每行定一个高，只能是line-height了。</p>
+<h3 id="Margin_与_Replace_element">Margin 与 Replace element</h3><p>因为 replace element 相当于 inline-block，所以 Margin 的上下左右都有效果。</p>
+<h2 id="HTML_元素类型参考">HTML 元素类型参考</h2><p><a href="https://developer.mozilla.org/en/docs/Web/HTML/Block-level_elements" target="_blank" rel="external">block 元素:</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">address</span>&gt;</span></span><br><span class="line">Contact information.</span><br><span class="line"><span class="tag">&lt;<span class="title">article</span>&gt;</span> HTML5</span><br><span class="line">Article content.</span><br><span class="line"><span class="tag">&lt;<span class="title">aside</span>&gt;</span> HTML5</span><br><span class="line">Aside content.</span><br><span class="line"><span class="tag">&lt;<span class="title">blockquote</span>&gt;</span></span><br><span class="line">Long ("block") quotation.</span><br><span class="line"><span class="tag">&lt;<span class="title">canvas</span>&gt;</span> HTML5</span><br><span class="line">Drawing canvas.</span><br><span class="line"><span class="tag">&lt;<span class="title">dd</span>&gt;</span></span><br><span class="line">Definition description.</span><br><span class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line">Document division.</span><br><span class="line"><span class="tag">&lt;<span class="title">dl</span>&gt;</span></span><br><span class="line">Definition list.</span><br><span class="line"><span class="tag">&lt;<span class="title">fieldset</span>&gt;</span></span><br><span class="line">Field set label.</span><br><span class="line"><span class="tag">&lt;<span class="title">figcaption</span>&gt;</span> HTML5</span><br><span class="line">Figure caption.</span><br><span class="line"><span class="tag">&lt;<span class="title">figure</span>&gt;</span> HTML5</span><br><span class="line">Groups media content with a caption (see <span class="tag">&lt;<span class="title">figcaption</span>&gt;</span>).</span><br><span class="line"><span class="tag">&lt;<span class="title">footer</span>&gt;</span> HTML5</span><br><span class="line">Section or page footer.</span><br><span class="line"><span class="tag">&lt;<span class="title">form</span>&gt;</span></span><br><span class="line">Input form.</span><br><span class="line"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>, <span class="tag">&lt;<span class="title">h2</span>&gt;</span>, <span class="tag">&lt;<span class="title">h3</span>&gt;</span>, <span class="tag">&lt;<span class="title">h4</span>&gt;</span>, <span class="tag">&lt;<span class="title">h5</span>&gt;</span>, <span class="tag">&lt;<span class="title">h6</span>&gt;</span></span><br><span class="line">Heading levels 1-6.</span><br><span class="line"><span class="tag">&lt;<span class="title">header</span>&gt;</span> HTML5</span><br><span class="line">Section or page header.</span><br><span class="line"><span class="tag">&lt;<span class="title">hgroup</span>&gt;</span> HTML5</span><br><span class="line">Groups header information.</span><br><span class="line"><span class="tag">&lt;<span class="title">hr</span>&gt;</span></span><br><span class="line">Horizontal rule (dividing line).</span><br><span class="line"><span class="tag">&lt;<span class="title">li</span>&gt;</span></span><br><span class="line">List item.</span><br><span class="line"><span class="tag">&lt;<span class="title">main</span>&gt;</span></span><br><span class="line">Contains the central content unique to this document.</span><br><span class="line"><span class="tag">&lt;<span class="title">nav</span>&gt;</span></span><br><span class="line">Contains navigation links.</span><br><span class="line"><span class="tag">&lt;<span class="title">noscript</span>&gt;</span></span><br><span class="line">Content to use if scripting is not supported or turned off.</span><br><span class="line"><span class="tag">&lt;<span class="title">ol</span>&gt;</span></span><br><span class="line">Ordered list.</span><br><span class="line"><span class="tag">&lt;<span class="title">output</span>&gt;</span> HTML5</span><br><span class="line">Form output.</span><br><span class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span></span><br><span class="line">Paragraph.</span><br><span class="line"><span class="tag">&lt;<span class="title">pre</span>&gt;</span></span><br><span class="line">Preformatted text.</span><br><span class="line"><span class="tag">&lt;<span class="title">section</span>&gt;</span> HTML5</span><br><span class="line">Section of a web page.</span><br><span class="line"><span class="tag">&lt;<span class="title">table</span>&gt;</span></span><br><span class="line">Table.</span><br><span class="line"><span class="tag">&lt;<span class="title">tfoot</span>&gt;</span></span><br><span class="line">Table footer.</span><br><span class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></span><br><span class="line">Unordered list.</span><br><span class="line"><span class="tag">&lt;<span class="title">video</span>&gt;</span> HTML5</span><br><span class="line">Video player.</span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements" target="_blank" rel="external">inline 元素:</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b, big, i, small, tt</span><br><span class="line">abbr, acronym, cite, code, dfn, em, kbd, strong, samp, time, var</span><br><span class="line">a, bdo, br, img, map, object, q, script, span, sub, sup</span><br><span class="line">button, input, label, select, textarea</span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element" target="_blank" rel="external">Replaced element:</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Typical replaced elements are <span class="tag">&lt;<span class="title">img</span>&gt;</span>, <span class="tag">&lt;<span class="title">object</span>&gt;</span>, <span class="tag">&lt;<span class="title">video</span>&gt;</span></span><br><span class="line">form elements like <span class="tag">&lt;<span class="title">textarea</span>&gt;</span> and <span class="tag">&lt;<span class="title">input</span>&gt;</span></span><br><span class="line">Some elements, like <span class="tag">&lt;<span class="title">audio</span>&gt;</span> or <span class="tag">&lt;<span class="title">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>参考资料：<br><a href="https://developer.mozilla.org/en/docs/Web/CSS/margin" target="_blank" rel="external">https://developer.mozilla.org/en/docs/Web/CSS/margin</a><br><a href="http://www.hicss.net/do-not-tell-me-you-understand-margin/" target="_blank" rel="external">http://www.hicss.net/do-not-tell-me-you-understand-margin/</a><br>CSS.The.Definitive.Guide.Eric.A.Meyer</p>
 
       
     </div>
@@ -209,8 +202,6 @@
           
             <a href="/tags/前端/"> #前端 </a>
           
-            <a href="/tags/翻译/"> #翻译 </a>
-          
         </div>
       
 
@@ -218,13 +209,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/cijsepir9007596jdal9xc91o/">Base Visual Formatting  (二)  Containing Block and Quick Refresher</a>
+              <a href="/2016/cijsmyfy3006xkzjdkr0ws2tu/">CSS 布局之 Formatting Context (一) Block Formatting Context</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/cijsepir1006s96jd8ero2stn/">CSS 布局之 Formatting Context (一) Block Formatting Context</a>
+              <a href="/2016/cijsmyfy80076kzjd8lz6dhfi/">CSS Margin (一) 负 Margin</a>
             
           </div>
         </div>
@@ -240,8 +231,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/cijsepire007f96jdyjqhvjkx/"
-               data-title="Base Visual Formatting  (一)  Basic Boxes" data-url="http://yoursite.com/2016/cijsepire007f96jdyjqhvjkx/">
+          <div class="ds-thread" data-thread-key="2016/cijsmyfy50071kzjd1spqczuk/"
+               data-title="CSS Margin (二) Margin 与 block，inline 元素" data-url="http://yoursite.com/2016/cijsmyfy50071kzjd1spqczuk/">
           </div>
         
       </div>
@@ -288,7 +279,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -332,7 +323,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Base_Visual_Formatting"><span class="nav-number">1.</span> <span class="nav-text">Base Visual Formatting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic_Boxes"><span class="nav-number">1.1.</span> <span class="nav-text">Basic Boxes</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Margin"><span class="nav-number">1.</span> <span class="nav-text">Margin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML_元素类型"><span class="nav-number">1.1.</span> <span class="nav-text">HTML 元素类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Replaced_element"><span class="nav-number">1.1.1.</span> <span class="nav-text">Replaced element</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Margin_与_HTML_元素类型"><span class="nav-number">1.2.</span> <span class="nav-text">Margin 与 HTML 元素类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Margin_与_Block_element"><span class="nav-number">1.2.1.</span> <span class="nav-text">Margin 与 Block element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Margin_与_Inline_element"><span class="nav-number">1.2.2.</span> <span class="nav-text">Margin 与 Inline element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Margin_与_Replace_element"><span class="nav-number">1.2.3.</span> <span class="nav-text">Margin 与 Replace element</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML_元素类型参考"><span class="nav-number">1.3.</span> <span class="nav-text">HTML 元素类型参考</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
