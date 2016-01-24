@@ -31,7 +31,7 @@
 
 
 
-  <title> CSS 布局之 Formatting Context (一) Block Formatting Context // Humyang </title>
+  <title> CSS Margin (一) 负 Margin // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              CSS 布局之 Formatting Context (一) Block Formatting Context
+              CSS Margin (一) 负 Margin
             
           
         </h1>
@@ -119,14 +119,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-01-15
+          发表于 2016-01-13
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/CSS/">CSS</a>
+              <a href="/categories/前端/">前端</a>
 
               
               
@@ -134,7 +134,7 @@
               
 
             
-              <a href="/categories/CSS/布局/">布局</a>
+              <a href="/categories/前端/CSS/">CSS</a>
 
               
               
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/cijkv8tpj000871f7yjuneo7u/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijkv8tpj000871f7yjuneo7u/"></span>
+            <a href="/2016/cijsejj6g00744ujdzaucwg14/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijsejj6g00744ujdzaucwg14/"></span>
             </a>
           </span>
           
@@ -162,53 +162,29 @@
       
 
       
-        <p>介绍 CSS 布局的一个重要概念，Formatting Context，它是布局的基础。</p>
+        <p>简单总结了对负 margin 的理解，和一些用途。</p>
 <a id="more"></a>
 <hr>
-<h1 id="CSS_布局之_Formatting_Context_(一)_Block_Formatting_Context">CSS 布局之 Formatting Context (一) Block Formatting Context</h1><p>首先来了解什么是 Formatting Context。</p>
-<p>Formatting Context 是页面中的一块渲染区域，在这个区域内拥有它自己的渲染规则，决定了子元素如何定位，及元素之间如何相互作用。</p>
-<p>不同的 Formatting Context 有不同的渲染规则，常见的有 <code>BFC</code> (Block Formatting Contextext)，<code>IFC</code> (Inline Formatting Context)，和 CSS 3 新增加的 <code>GFC</code> (Grid Formatting Context)，<code>FFC</code> (Flex Formatting Context)。</p>
-<p>与 Formatting Context 息息相关的是 Box，每个 HTML 元素作为 Box 被 CSS 渲染。不同的类型的 Box 有不同的行为，CSS 中有两种 Box：Block 和 Inline。</p>
-<h2 id="BFC">BFC</h2><p>BFC 就是只有 Block-level Box 参与的 Formatting Context。它是一个独立的渲染区域，它规定了内部的 Block-level Box 如何布局，并且与这个区域外部毫不相干。</p>
-<h3 id="哪些元素会生成_BFC">哪些元素会生成 BFC</h3><p>以前我一直不知道有 Formatting Context 这个概念，以为 Box 负责了 Formatting Context 的职责，但这也说明了 Formatting Context 不用手动创建也会出现，那么它出现的规则是什么呢，或者说哪些元素会生成 BFC？</p>
-<p>这些元素会生成 BFC：</p>
+<h1 id="CSS_Margin_(一)_负_Margin">CSS Margin (一) 负 Margin</h1><p>偶然发现了两篇详细介绍 Marin 的文章：</p>
+<p><a href="http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/" target="_blank" rel="external">http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/</a></p>
+<p><a href="http://www.hicss.net/do-not-tell-me-you-understand-margin/" target="_blank" rel="external">http://www.hicss.net/do-not-tell-me-you-understand-margin/</a></p>
+<p>因为学到了熟悉的内容但陌生的知识，所以做一下总结。</p>
+<h2 id="总结">总结</h2><p>Margin 主要影响到元素与周边元素的关系，不管传入正数负数，所以一定程度上可以替代 relative 和 absolute。</p>
+<p>这里对几种情况进行测试一下。</p>
+<h3 id="父子元素的关系">父子元素的关系</h3><p>首先测试父子关系的 div 元素。有三个 div，其中一个为父 div，两个子 div，它们 的 display 都是 block。</p>
+<p>下面第一个子 div 称为 A，第二个子 div 称为 B，主要修改 A 的 margin， B 主要作为参照物。</p>
+<h4 id="测试，_修改_A_的_margin：">测试， 修改 A 的 margin：</h4><p>此时三个 div 的 display 都是 block。</p>
+<p>修改 A 的 <code>margin: -10px 0 0 0;</code>，效果: 整体元素往上偏移。同理如果为正数则往下偏移。</p>
+<p>若 A 的 <code>margin-top</code> 为 10px,如果父 div 的 <code>margin-top</code> 大于 10 px，则按照父 div 的数值移动。这现象被称为<code>垂直外边距合并</code>。</p>
+<p>如果 A 和父 div 的正负数相反，则会进行相加，例如 A  <code>margin: -10px 0 0 0;</code>，父 <code>margin: 10px 0 0 0;</code>，那么元素 margin 被抵消，位置保持不变。</p>
 <blockquote>
-<ul>
-<li>the root element or something that contains it</li>
-<li>floats (elements where float is not none)</li>
-<li>absolutely positioned elements (elements where position is absolute or fixed)</li>
-<li>inline-blocks (elements with display: inline-block)</li>
-<li>table cells (elements with display: table-cell, which is the default for HTML table cells)</li>
-<li>table captions (elements with display: table-caption, which is the default for HTML table captions)</li>
-<li>elements where overflow has a value other than visible</li>
-<li>flex boxes (elements with display: flex or inline-flex)</li>
-</ul>
+<p>设置 A 的 display 为 <strong>inline</strong>,这时 A 的 margin-top 和 margin－bottom 都不起作用了。同时设置 B 的 display 为 inline， A 的 margin-top 和 margin－bottom 也是没作用。<br>但是 margin-left 和 margin-right 还是有作用的。 margin-right 正负值不会改变 A 的位置，但如果正数过大会影响 B 的位置。<br>margin-left 正负数都可以影响 A 的位置。</p>
+<p>设置 A 的 display 为 <strong>inline-block</strong> 时， 修改 A 的 margin 不会影响父 div 的位置，但会影响同级元素的位置。</p>
 </blockquote>
-<ul>
-<li>root 元素或一些包含它的元素。</li>
-<li>floats 元素 (元素的 float 值不为 none)</li>
-<li>absolutely 定位的元素 (元素的 position 值是 absolute 或 fixed)</li>
-<li>inline-block 元素 (元素的 display 为 inline-block)</li>
-<li>table cell 元素 (元素的 display 为 table-cell, 它是HTML 的 table cell 的默认值)</li>
-<li>table captions (元素的 display 值为 table-caption,它是 HTML table captions 的默认值)</li>
-<li>元素的 overflow 有非 visible 的值</li>
-<li>flex boxes (元素的 display 为 flex 或 inline-flex)</li>
-</ul>
-<p>Block Formatting Context 包含创建它的元素的所有内部元素，但不包含会创建新的 Block Formatting Context 的后裔元素。</p>
-<h3 id="BFC_的规则">BFC 的规则</h3><p>Block Formatting Context 对于如何定位 (见 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float" target="_blank" rel="external">float</a>) 和 clear (见 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clear" target="_blank" rel="external">clear</a>) 非常重要，这些规则只会在同一个 Block Formatting 中应用。</p>
-<p>Floats 不会影响其它 block formatting context 的布局，clear 也只会清除同一个 block formatting context 的 float。</p>
-<p>这里是其它博客看到的一个总结：</p>
-<ul>
-<li>内部的 Box 以垂直方向，一个接一个地放置。</li>
-<li>Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠。</li>
-<li>每个元素的 margin box 的左边， 与容器块的 border box 的左边相接触(对于从左往右的文字格式  (西方语言)  ，否则相反)。即使存在浮动也是如此。</li>
-<li>BFC的区域不会与 float box 重叠。</li>
-<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
-<li>计算BFC的高度时，浮动元素也参与计算</li>
-</ul>
-<h3 id="其它_FC">其它 FC</h3><p>参考在后面的 CSS 权威指南翻译文章。</p>
-<h2 id="参考资料">参考资料</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Visual_formatting_model" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Visual_formatting_model</a></p>
-<p><a href="http://www.cnblogs.com/liugblog/p/4982684.html" target="_blank" rel="external">http://www.cnblogs.com/liugblog/p/4982684.html</a></p>
+<p>继续测试时才发现元素组合太多了，根本测试不完，理解原理才最关键，在后面的文章中学习。</p>
+<h3 id="负_margin_用途">负 margin 用途</h3><h4 id="负_margin_替代_relative/absolute">负 margin 替代 relative/absolute</h4><p>例如在 img 元素上显示另一个元素的内容，以前是用 relative 或 absolute 调整坐标的方式，现在也可以用负 margin 替代了。</p>
+<h4 id="Tab_选项卡">Tab 选项卡</h4><p>让元素上移一个像素点，使选项卡的下边界消失</p>
+<h4 id="鳞片式导航">鳞片式导航</h4><p>就是多个选项卡重叠在一起。</p>
 
       
     </div>
@@ -226,13 +202,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/cijkv8tqk000l71f7bg5kyga9/">Base Visual Formatting  (二)  Containing Block and Quick Refresher</a>
+              <a href="/2016/cijsejj6e006z4ujd6hlox2wa/">CSS Margin (二) Margin 与 block，inline 元素</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/cijkv8tpp000c71f7ibetsb38/">CSS Margin (二) Margin 与 block，inline 元素</a>
+              <a href="/2016/cijsejj3l005q4ujdsbsl7rl7/">Grunt 介绍</a>
             
           </div>
         </div>
@@ -248,8 +224,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/cijkv8tpj000871f7yjuneo7u/"
-               data-title="CSS 布局之 Formatting Context (一) Block Formatting Context" data-url="http://yoursite.com/2016/cijkv8tpj000871f7yjuneo7u/">
+          <div class="ds-thread" data-thread-key="2016/cijsejj6g00744ujdzaucwg14/"
+               data-title="CSS Margin (一) 负 Margin" data-url="http://yoursite.com/2016/cijsejj6g00744ujdzaucwg14/">
           </div>
         
       </div>
@@ -340,7 +316,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS_布局之_Formatting_Context_(一)_Block_Formatting_Context"><span class="nav-number">1.</span> <span class="nav-text">CSS 布局之 Formatting Context (一) Block Formatting Context</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC"><span class="nav-number">1.1.</span> <span class="nav-text">BFC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#哪些元素会生成_BFC"><span class="nav-number">1.1.1.</span> <span class="nav-text">哪些元素会生成 BFC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFC_的规则"><span class="nav-number">1.1.2.</span> <span class="nav-text">BFC 的规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它_FC"><span class="nav-number">1.1.3.</span> <span class="nav-text">其它 FC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS_Margin_(一)_负_Margin"><span class="nav-number">1.</span> <span class="nav-text">CSS Margin (一) 负 Margin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#父子元素的关系"><span class="nav-number">1.1.1.</span> <span class="nav-text">父子元素的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试，_修改_A_的_margin："><span class="nav-number">1.1.1.1.</span> <span class="nav-text">测试， 修改 A 的 margin：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负_margin_用途"><span class="nav-number">1.1.2.</span> <span class="nav-text">负 margin 用途</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#负_margin_替代_relative/absolute"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">负 margin 替代 relative/absolute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tab_选项卡"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Tab 选项卡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#鳞片式导航"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">鳞片式导航</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
