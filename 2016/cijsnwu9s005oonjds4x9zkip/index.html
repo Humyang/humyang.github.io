@@ -1,0 +1,1020 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> Grunt 介绍 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              Grunt 介绍
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2016-01-03
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/工具/">工具</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/cijsnwu9s005oonjds4x9zkip/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijsnwu9s005oonjds4x9zkip/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>介绍如何使用 Grunt。</p>
+<a id="more"></a>
+<hr>
+<h1 id="Grunt_介绍">Grunt 介绍</h1><p><a href="https://github.com/gruntjs/grunt" target="_blank" rel="external">Grunt</a> 是基于 Node.js 的自动化工具。可以帮助你完成项目模版创建，压缩代码，生成测试代码等繁杂的工作。</p>
+<p>想象一下，如果经常需要创建一些前端项目，有的是微信页面，有的是 Web App 项目，有的是商城项目。不同的项目的模版文件都不同，通过配置 Grunt 后，只需要一条命令就可以快速搭建好项目环境，直接进行开发。</p>
+<p>当项目完成后，需要对 CSS，JavaScript 代码压缩，或者改动代码后的重新压缩，Grunt 同样可以帮助你完成这些工作。</p>
+<p>Grunt 还提供了大量开发者贡献的插件，你所需要的任务大部分都可以在这里找到。</p>
+<h2 id="使用心得">使用心得</h2><p>暂时用到的 Grunt 插件有 <code>grunt-contrib-clean</code>，用于清除文件夹内容， <code>grunt-contrib-concat</code> 用于合并文件内容，<code>grunt-contrib-jshint</code> 用于检测 JavaScript 错误。</p>
+<p>这些插件都有明确的功能，在 Gruntfile 配置好每个插件需要的参数，并使用 <code>grunt.loadNpmTasks</code> 加载插件功能，即可在项目更目录执行 Grunt 或 Grunt Task，使插件执行各自的任务。</p>
+<p>有的插件需要指定文件来源 (src)，输出目标是可选的(dest)，如 clean 和 jshint。<br>有的则需要两者都明确指定，如 concat。</p>
+<h1 id="使用_Grunt">使用 Grunt</h1><p>首先需要在项目目录添加 <code>package.json</code> 和 <code>Gruntfile.js</code>。</p>
+<p><code>package.json</code> 用于存储项目相关的数据和依赖。例如项目名称，版本号等。因为需要将项目放置在 Git 的仓库中，需要将 Grunt 的依赖要保存到该文件中，如 Grunt，Grunt 中的插件等，以便将来直接 <code>npm install</code> 使用。</p>
+<p><code>Gruntfile.js</code> 是用来保存项目对 Grunt 的配置。配置该文件后，在命令行进入项目目录执行 <code>grunt</code> 命令即可自动执行 <code>Gruntfile.js</code> 分配的任务。</p>
+<h2 id="package-json">package.json</h2><p>下面有几种创建 <code>package.json</code> 文件的方式：</p>
+<ul>
+<li>使用 <code>grunt-init</code>，会自动在项目目录创建 <code>package.json</code> 文件。</li>
+<li>使用 <code>npm init</code> 命令，创建一个基本的 <code>package.json</code> 文件。</li>
+<li>复制下面的文本，根据需要进行补充。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"my-project-name"</span>,</span><br><span class="line">  <span class="string">"version"</span>: <span class="string">"0.1.0"</span>,</span><br><span class="line">  <span class="string">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="string">"grunt"</span>: <span class="string">"~0.4.5"</span>,</span><br><span class="line">    <span class="string">"grunt-contrib-jshint"</span>: <span class="string">"~0.10.0"</span>,</span><br><span class="line">    <span class="string">"grunt-contrib-nodeunit"</span>: <span class="string">"~0.4.1"</span>,</span><br><span class="line">    <span class="string">"grunt-contrib-uglify"</span>: <span class="string">"~0.5.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 <code>npm install &lt;module&gt; --save-dev</code> 安装 Grunt 和 Grunt 插件是最好的方式，它不仅会在项目目录安装模块，并且会将依赖信息写入到 <code>package.json</code> 的 <code>devDependencies</code> 字段中。 </p>
+<p>例如下面的命令安装 Grunt 的最新版本到项目目录中，并将信息添加到 <code>devDependencies</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install grunt --save-dev</span><br></pre></td></tr></table></figure>
+<p>同样，安装 Grunt 插件也是这种形式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install grunt-contrib-jshint --save-dev</span><br></pre></td></tr></table></figure>
+<p><a href="http://www.gruntjs.net/plugins" target="_blank" rel="external">Grunt 插件</a> 提供了大量 Grunt 插件，都可以直接安装使用。</p>
+<p>安装插件之后，请务必确保将更新之后的 <code>package.json</code> 文件提交到项目仓库中。</p>
+<h2 id="Gruntfile">Gruntfile</h2><p><code>Gruntfile.js</code> 或 <code>Gruntfile.coffee</code> 文件都是有效的，应当放置在项目根目录，与 <code>package.json</code> 同级，并且添加到源码管理器中。</p>
+<p>下面是一个 Gruntfile 例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Project configuration.</span></span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line">    pkg: grunt.file.readJSON(<span class="string">'package.json'</span>),</span><br><span class="line">    uglify: &#123;</span><br><span class="line">      options: &#123;</span><br><span class="line">        banner: <span class="string">'/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */\n'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      build: &#123;</span><br><span class="line">        src: <span class="string">'src/&lt;%= pkg.name %&gt;.js'</span>,</span><br><span class="line">        dest: <span class="string">'build/&lt;%= pkg.name %&gt;.min.js'</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 加载包含 "uglify" 任务的插件。</span></span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-contrib-uglify'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 默认被执行的任务列表。</span></span><br><span class="line">  grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>]);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Gruntfile 由以下几部分构成：</p>
+<ul>
+<li>“wrapper” 函数</li>
+<li>项目与任务配置</li>
+<li>加载grunt插件和任务</li>
+<li>自定义任务</li>
+</ul>
+<h3 id="“wrapper”_函数">“wrapper” 函数</h3><p><code>Gruntfile</code> 和 Grunt 插件都遵循同样的格式，你的 Grunt 代码必须放在此函数内：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Do grunt-related things in here</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="项目配置和任务配置">项目配置和任务配置</h3><p>大部分 Grunt 都需要进行一些配置，配置信息定义在一个 Object 内，传递给 <code>grunt.initConfig</code> 方法。</p>
+<p>下面的案例中，<code>grunt.file.readJSON(&#39;package.json&#39;)</code> 将 package.json 文件的配置信息读取到 Grunt ，保存在 pkg 变量中。通过使用 <code>&lt;% %&gt;</code> 模版字符串可以引用 Grunt 中任意的配置属性。例如 <code>pkg.name</code>,<code>grunt.template</code>。通过这种方式可以方便的使用配置数据，减少重复的工作。</p>
+<p>你可以在这个配置对象中 (传递给 initConfig 的 Object) 存储任意的数据，只要它不与你任务配置所需的属性冲突。</p>
+<p>与大多数任务一样，<code>grunt-contrib-uglify</code> 插件中的 <code>uglify</code> 任务配置指定在一个同名属性中。在这个例子中，我们使用了一个可选选项 <code>banner</code>，用于在文件顶部生成一个注释。接着是一个名为 <code>build</code> 的目标，用于配置要压缩的 js 文件和输出文件。</p>
+<h3 id="加载_Grunt_插件和任务">加载 Grunt 插件和任务</h3><p>通过 <code>npm install grunt-contrib-jshint --save-dev</code> 安装插件或者直接执行 <code>npm install</code> 安装 <code>package.json</code> 的依赖文件后，需要在 Gruntfile 中加在这些插件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载能够提供"uglify"任务的插件。</span></span><br><span class="line">grunt.loadNpmTasks(<span class="string">'grunt-contrib-uglify'</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：<code>grunt --help</code> 命令将列出所有可用的任务。</p>
+</blockquote>
+<h3 id="自定义任务">自定义任务</h3><p>通过定义 <code>default</code> 任务，可以让 Grunt 默认执行一个或多个任务。在下面的例子中，在命令行执行 grunt 如果不指定任务，则会执行 <code>uglify</code> 任务。这和执行 <code>grunt uglify</code> 或 <code>grunt default</code> 的效果是一样的。</p>
+<p>default 任务列表数组中可以指定任意数量的任务 (可以带参数)。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Default task(s).</span><br><span class="line">grunt.registerTask('default', ['uglify']);</span><br></pre></td></tr></table></figure>
+<p>如果 Grunt 提供的插件无法满足你的需求，你还可以在 <code>Gruntfile</code> 中自定义任务。</p>
+<p>例如，下面的 <code>Gruntfile</code> 自定义了一个 default 任务，它甚至不依赖任务配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// A very basic default task.</span></span><br><span class="line">  grunt.registerTask(<span class="string">'default'</span>, <span class="string">'Log some stuff.'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    grunt.log.write(<span class="string">'Logging some stuff...'</span>).ok();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>针对特定项目的任务不必在 <code>Gruntfile</code> 中定义。它们可以定义在外部 <code>.js</code> 文件中，通过 <code>grunt.loadTasks</code> 方法加载。</p>
+<h1 id="配置任务">配置任务</h1><p>这章说明如何使用 Gruntfile 为你的项目配置任务。在  <a href="http://gruntjs.com/sample-gruntfile/" target="_blank" rel="external">Sample Gruntfile</a> 可以了解什么是 <code>Gruntfile</code>。</p>
+<p>任务配置是通过 <code>grunt.initConfig</code> 方法指定给 <code>Gruntfile</code>。大部分配置都在任务名属性下，但也可以包含任意的其它数据。只要属性名不与你的任务需要的属性名冲突，否则将会被忽略。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  concat: &#123;</span><br><span class="line">    <span class="comment">// concat task configuration goes here.</span></span><br><span class="line">  &#125;,</span><br><span class="line">  uglify: &#123;</span><br><span class="line">    <span class="comment">// uglify task configuration goes here.</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// Arbitrary non-task-specific properties.</span></span><br><span class="line">  my_property: <span class="string">'whatever'</span>,</span><br><span class="line">  my_src_files: [<span class="string">'foo/*.js'</span>, <span class="string">'bar/*.js'</span>],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="任务配置和_Target">任务配置和 Target</h2><p>当运行任务时，Grunt 会寻找同名的属性下的配置。多个任务可以有多个配置，使用 Target 定义这些配置。在下面的例子，<code>concat</code> 任务有 <code>foo</code> 和 <code>bar</code> 两个 target，在 <code>uglify</code> 任务只有 <code>bar</code> 一个 target。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  concat: &#123;</span><br><span class="line">    foo: &#123;</span><br><span class="line">      <span class="comment">// concat task "foo" target options and files go here.</span></span><br><span class="line">    &#125;,</span><br><span class="line">    bar: &#123;</span><br><span class="line">      <span class="comment">// concat task "bar" target options and files go here.</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  uglify: &#123;</span><br><span class="line">    bar: &#123;</span><br><span class="line">      <span class="comment">// uglify task "bar" target options and files go here.</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在命令行中使用任务和 target，如 <code>grunt concat:foo</code> or <code>grunt concat:bar</code> 将会处理指定的 target 的配置。但运行 <code>grunt concat</code> 将会处理所有 target，一次处理。注意如果任务已经通过 <code>grunt.task.renameTask</code> 重命名，Grunt 将会在配置 Object 的属性中寻找新的任务名。</p>
+<h2 id="Option">Option</h2><p>在任务的配置内，<code>option</code> 属性可以指定覆盖任务默认的配置。此外，每个 target 也有一个 <code>option</code> 属性真对 traget 的配置。Target 级别的 <code>option</code> 将会覆盖任务级别的 option。</p>
+<p>options 对象是可选的，如果不需要可以省略。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  concat: &#123;</span><br><span class="line">    options: &#123;</span><br><span class="line">      <span class="comment">// Task-level options may go here, overriding task defaults.</span></span><br><span class="line">    &#125;,</span><br><span class="line">    foo: &#123;</span><br><span class="line">      options: &#123;</span><br><span class="line">        <span class="comment">// "foo" target options may go here, overriding task-level options.</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    bar: &#123;</span><br><span class="line">      <span class="comment">// No options specified; this target will use task-level options.</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="Files">Files</h2><p>因为大部分任务都需要执行文件操作，Grunt 定义了强大的抽象处理使任务选择需要操作的文件。这里有几种方式定义 <code>src-dest</code> (source-destination) 文件映射，提供了不同的详细程度和控制程度。任何多任务都明白下面的格式，因此选择你最需要的。</p>
+<p>所有文件格式都支持 <code>src</code> 和 <code>desc</code> ，但 “Compact” 和 “Files Array” 格式支持少量额外的属性：</p>
+<ul>
+<li><code>filter</code> 传入 <a href="">fs.Stats method name </a> 或 function 适配 <code>src</code> 的文件路径并返回 <code>true</code> 或 <code>false</code>。</li>
+<li><code>nonull</code> 如果设置成 <code>true</code> 那么该操作将包含非匹配模式。结合 Grunt 的 <code>--verbose</code> 标记，这个选项可以帮助调试文件路径问题。</li>
+<li><code>dot</code> 允许表达式适配文件名开始的部分，即使表达式没有明确的指定 <code>.</code> 的范围。</li>
+<li><code>matchBase</code> 如果设置，那么路径的 basename 包含斜杠的部分不会被匹配，只会匹配不包含斜杠的部分。例如，a?b 将会适配路径 <code>/xyz/123/acb</code>，但不适配 <code>/xyz/acb/123</code>。</li>
+<li><code>expand</code> 处理动态的 src-dest 文件映射，见 <a href="http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically" target="_blank" rel="external">“Building the files object dynamically”</a> 获取更多信息。</li>
+</ul>
+<h3 id="Compact_Format">Compact Format</h3><p>这个 format 允许在每个 target 中添加单个 <strong>src-dest</strong> 文件映射。在只读任务中它是最通用的，例如 <a href="https://github.com/gruntjs/grunt-contrib-jshint" target="_blank" rel="external">grunt-contrib-jshint</a>，只需要单个 <code>src</code>，不需要相应的 <code>dest</code>。这个格式也支持给每一个 <code>src-dest</code> 文件映射添加额外的属性 (filter,nonull 等)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  jshint: &#123;</span><br><span class="line">    foo: &#123;</span><br><span class="line">      src: [<span class="string">'src/aa.js'</span>, <span class="string">'src/aaa.js'</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  concat: &#123;</span><br><span class="line">    bar: &#123;</span><br><span class="line">      src: [<span class="string">'src/bb.js'</span>, <span class="string">'src/bbb.js'</span>],</span><br><span class="line">      dest: <span class="string">'dest/b.js'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Files_Object_Format">Files Object Format</h3><p>这种格式对每个 target 支持多个 src-dest 映射，每个属性名对应目标文件，值是源文件 (多个)。任意数量的 src-dest 文件映射可以指定为这种方式，但每一个映射不能指定额外的属性 (filter,nonull 等)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  concat: &#123;</span><br><span class="line">    foo: &#123;</span><br><span class="line">      files: &#123;</span><br><span class="line">        <span class="string">'dest/a.js'</span>: [<span class="string">'src/aa.js'</span>, <span class="string">'src/aaa.js'</span>],</span><br><span class="line">        <span class="string">'dest/a1.js'</span>: [<span class="string">'src/aa1.js'</span>, <span class="string">'src/aaa1.js'</span>],</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    bar: &#123;</span><br><span class="line">      files: &#123;</span><br><span class="line">        <span class="string">'dest/b.js'</span>: [<span class="string">'src/bb.js'</span>, <span class="string">'src/bbb.js'</span>],</span><br><span class="line">        <span class="string">'dest/b1.js'</span>: [<span class="string">'src/bb1.js'</span>, <span class="string">'src/bbb1.js'</span>],</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Files_Array_Format">Files Array Format</h3><p>这种格式支持每个 target 多个 src-dest 文件映射，也允许对每个映射添加额外的属性 (filter,nonull 等)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  concat: &#123;</span><br><span class="line">    foo: &#123;</span><br><span class="line">      files: [</span><br><span class="line">        &#123;src: [<span class="string">'src/aa.js'</span>, <span class="string">'src/aaa.js'</span>], dest: <span class="string">'dest/a.js'</span>&#125;,</span><br><span class="line">        &#123;src: [<span class="string">'src/aa1.js'</span>, <span class="string">'src/aaa1.js'</span>], dest: <span class="string">'dest/a1.js'</span>&#125;,</span><br><span class="line">      ],</span><br><span class="line">    &#125;,</span><br><span class="line">    bar: &#123;</span><br><span class="line">      files: [</span><br><span class="line">        &#123;src: [<span class="string">'src/bb.js'</span>, <span class="string">'src/bbb.js'</span>], dest: <span class="string">'dest/b/'</span>, nonull: <span class="literal">true</span>&#125;,</span><br><span class="line">        &#123;src: [<span class="string">'src/bb1.js'</span>, <span class="string">'src/bbb1.js'</span>], dest: <span class="string">'dest/b1/'</span>, filter: <span class="string">'isFile'</span>&#125;,</span><br><span class="line">      ],</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Older_Formats">Older Formats</h3><p><strong>dest-as-target</strong> 文件格式是遗留的多任务 targets 格式，它把目标目标文件路径作为 target 名。不幸的是，因为 target 名是文件路径，运行 <code>grunt task:target</code> 时显得非常笨拙。同时，你不能指定 target 级别的选项或者给每个 src-dest 文件映射添加额外的属性。</p>
+<p>因为这种格式已经移除，应当避免下面的方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  concat: &#123;</span><br><span class="line">    <span class="string">'dest/a.js'</span>: [<span class="string">'src/aa.js'</span>, <span class="string">'src/aaa.js'</span>],</span><br><span class="line">    <span class="string">'dest/b.js'</span>: [<span class="string">'src/bb.js'</span>, <span class="string">'src/bbb.js'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Custom_Filter_Function">Custom Filter Function</h3><p><code>filter</code> 属性让你精确控制你需要的内容。简单的使用有效的 <a href="http://javascript.org/docs/latest/api/fs.html#fs_class_fs_stats" target="_blank" rel="external">fs.Stats method name</a>。下面将适配内容指定为文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  clean: &#123;</span><br><span class="line">    foo: &#123;</span><br><span class="line">      src: [<span class="string">'tmp/**/*'</span>],</span><br><span class="line">      filter: <span class="string">'isFile'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>或者你可以创建属于你的 <code>filter</code> 函数，根据文件是否匹配返回 true 或 false 。下面演示选取空文件夹的操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  clean: &#123;</span><br><span class="line">    foo: &#123;</span><br><span class="line">      src: [<span class="string">'tmp/**/*'</span>],</span><br><span class="line">      filter: <span class="function"><span class="keyword">function</span>(<span class="params">filepath</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (grunt.file.isDir(filepath) &amp;&amp; <span class="built_in">require</span>(<span class="string">'fs'</span>).readdirSync(filepath).length === <span class="number">0</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这样将获取了 tmp 所有子目录及子目录的子目录的空文件夹。</p>
+<h3 id="Globbing_patterns">Globbing patterns</h3><p>使用单个表达式指定所有源文件的路径是不实用的，因此 Grunt 通过内置的 <a href="https://github.com/isaacs/node-glob" target="_blank" rel="external">node-glob</a> 和 <a href="https://github.com/isaacs/minimatch" target="_blank" rel="external">minimatch</a> 库提供了文件名expansion (也称为通配符)。</p>
+<p>下面是不全面的通配符模式指南，用来匹配文件路径：</p>
+<ul>
+<li><code>*</code> 适配任意数量的字符，不包含 <code>／</code></li>
+<li><code>?</code> 匹配单个字符串，不包含 <code>/</code></li>
+<li><code>**</code> 匹配任意数量的字符串，包含 <code>/</code>，只要它是唯一的路径</li>
+<li><code>{}</code> 允许使用 <code>or</code> 表达式队列，在 <code>{}</code> 内部使用 <code>,</code> 分隔。</li>
+<li><code>!</code> 出现在表达式开头会适配与该表达时不匹配的内容</li>
+</ul>
+<p>大部分人需要知道 <code>foo/*.js</code> 将会适配所有以 <code>.js</code> 结尾的位于 <code>foo/</code> 子目录的所有文件。但 <code>foo/**/*.js</code> 将会适配所有 <code>.js</code> 结尾的文件位于 <code>foo/</code> 子目录和它的所有子目录的文件。</p>
+<p>同时，为了简化复杂的通配符表达时，Grunt 允许文件路径或通配符表达式指定为数组。表达式会按顺序处理，前缀是 <code>!</code> 的表达式会从结果集排除适配结果。结果集是独特的。</p>
+<p>例如下面：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// You can specify single files:</span></span><br><span class="line">&#123;src: <span class="string">'foo/this.js'</span>, dest: ...&#125;</span><br><span class="line"><span class="comment">// Or arrays of files:</span></span><br><span class="line">&#123;src: [<span class="string">'foo/this.js'</span>, <span class="string">'foo/that.js'</span>, <span class="string">'foo/the-other.js'</span>], dest: ...&#125;</span><br><span class="line"><span class="comment">// Or you can generalize with a glob pattern:</span></span><br><span class="line">&#123;src: <span class="string">'foo/th*.js'</span>, dest: ...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// This single node-glob pattern:</span></span><br><span class="line">&#123;src: <span class="string">'foo/&#123;a,b&#125;*.js'</span>, dest: ...&#125;</span><br><span class="line"><span class="comment">// Could also be written like this:</span></span><br><span class="line">&#123;src: [<span class="string">'foo/a*.js'</span>, <span class="string">'foo/b*.js'</span>], dest: ...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// All .js files, in foo/, in alpha order:</span></span><br><span class="line">&#123;src: [<span class="string">'foo/*.js'</span>], dest: ...&#125;</span><br><span class="line"><span class="comment">// Here, bar.js is first, followed by the remaining files, in alpha order:</span></span><br><span class="line">&#123;src: [<span class="string">'foo/bar.js'</span>, <span class="string">'foo/*.js'</span>], dest: ...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// All files except for bar.js, in alpha order:</span></span><br><span class="line">&#123;src: [<span class="string">'foo/*.js'</span>, <span class="string">'!foo/bar.js'</span>], dest: ...&#125;</span><br><span class="line"><span class="comment">// All files in alpha order, but with bar.js at the end.</span></span><br><span class="line">&#123;src: [<span class="string">'foo/*.js'</span>, <span class="string">'!foo/bar.js'</span>, <span class="string">'foo/bar.js'</span>], dest: ...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Templates may be used in filepaths or glob patterns:</span></span><br><span class="line">&#123;src: [<span class="string">'src/&lt;%= basename %&gt;.js'</span>], dest: <span class="string">'build/&lt;%= basename %&gt;.min.js'</span>&#125;</span><br><span class="line"><span class="comment">// But they may also reference file lists defined elsewhere in the config:</span></span><br><span class="line">&#123;src: [<span class="string">'foo/*.js'</span>, <span class="string">'&lt;%= jshint.all.src %&gt;'</span>], dest: ...</span><br></pre></td></tr></table></figure>
+<p>更多通配符表达时语法，见 <a href="https://github.com/isaacs/node-glob" target="_blank" rel="external">node-glob</a> 和 <a href="https://github.com/isaacs/minimatch" target="_blank" rel="external">minimatch</a> 文档。</p>
+<h3 id="Building_the_files_object_dynamically">Building the files object dynamically</h3><p>当你想处理许多单个文件时，一些属性可以帮助你构建动态的文件列表。这些属性可以指定到 “Compact” 和 “Files Array” 映射格式。</p>
+<p><code>expand</code> 设置为 true 启用下面的选项：</p>
+<ul>
+<li><code>cwd</code> 传入一个路径，指定 <code>src</code> 的适配相对于 (但不包含) 此路径。</li>
+<li><code>src</code> 适配表达式内容，相对于 <code>cwd</code> 路径。</li>
+<li><code>dest</code> 目标路径前缀 (<code>lib/a.js</code> 则 /lib/ 是路径前缀)。</li>
+<li><code>ext</code> 传入一个拓展名，将所有生成在 <code>dest</code> 路径的文件的拓展名替换为它。</li>
+<li><code>extDot</code> 指定拓展名的位置。可以是 <code>first</code> (扩展名位于文件名称的第一个 <code>.</code> 之后) 或者 <code>last</code> (扩展名位于文件名称最后一个 <code>.</code> 之后)，默认值是 <code>first</code>。[在 0.43 版本添加] </li>
+<li><code>flatten</code> 从已生成的 <code>dest</code> 路径移除所有路径部分。</li>
+<li><code>rename</code> 这个函数调用每一个适配的 <code>src</code> 文件，(拓展名重命名与合并之后)。<code>dest</code> 和适配的 <code>src</code> 路径会被传递进去，这个函数必须返回新的 <code>dest</code> 值。如果同样的 <code>dest</code> 返回了多次，每一个 <code>src</code> 都会使用它并为它添加到来源数组。 </li>
+</ul>
+<p>下面的例子，<code>uglify</code> 任务将会在 <code>static_mappings</code> target 和 <code>dynamic_mappings</code> target 看到同样的 src-dest 文件映射，因为 Grunt 会将 <code>dynamic_mappings</code> 文件对象自动解释为四个单独的静态 <code>src-dest</code> 文件映射 - 假设在任务运行时找到了这四个文件。</p>
+<p>可以指定任意的 静态 <code>src-dest</code> 和动态的 <code>src-dest</code> 文件映射。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  uglify: &#123;</span><br><span class="line">    static_mappings: &#123;</span><br><span class="line">      <span class="comment">// Because these src-dest file mappings are manually specified, every</span></span><br><span class="line">      <span class="comment">// time a new file is added or removed, the Gruntfile has to be updated.</span></span><br><span class="line">      files: [</span><br><span class="line">        &#123;src: <span class="string">'lib/a.js'</span>, dest: <span class="string">'build/a.min.js'</span>&#125;,</span><br><span class="line">        &#123;src: <span class="string">'lib/b.js'</span>, dest: <span class="string">'build/b.min.js'</span>&#125;,</span><br><span class="line">        &#123;src: <span class="string">'lib/subdir/c.js'</span>, dest: <span class="string">'build/subdir/c.min.js'</span>&#125;,</span><br><span class="line">        &#123;src: <span class="string">'lib/subdir/d.js'</span>, dest: <span class="string">'build/subdir/d.min.js'</span>&#125;,</span><br><span class="line">      ],</span><br><span class="line">    &#125;,</span><br><span class="line">    dynamic_mappings: &#123;</span><br><span class="line">      <span class="comment">// Grunt will search for "**/*.js" under "lib/" when the "uglify" task</span></span><br><span class="line">      <span class="comment">// runs and build the appropriate src-dest file mappings then, so you</span></span><br><span class="line">      <span class="comment">// don't need to update the Gruntfile when files are added or removed.</span></span><br><span class="line">      files: [</span><br><span class="line">        &#123;</span><br><span class="line">          expand: <span class="literal">true</span>,     <span class="comment">// Enable dynamic expansion.</span></span><br><span class="line">          cwd: <span class="string">'lib/'</span>,      <span class="comment">// Src matches are relative to this path.</span></span><br><span class="line">          src: [<span class="string">'**/*.js'</span>], <span class="comment">// Actual pattern(s) to match.</span></span><br><span class="line">          dest: <span class="string">'build/'</span>,   <span class="comment">// Destination path prefix.</span></span><br><span class="line">          ext: <span class="string">'.min.js'</span>,   <span class="comment">// Dest filepaths will have this extension.</span></span><br><span class="line">          extDot: <span class="string">'first'</span>   <span class="comment">// Extensions in filenames begin after the first dot</span></span><br><span class="line">        &#125;,</span><br><span class="line">      ],</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="Templates">Templates</h2><p>Templates 指定使用 <code>&lt;% %&gt;</code> 分隔符，当从配置中读取任务时将会自动解析这些内容。Templates 会递归解析，直到没有 <code>&lt;% %&gt;</code> 为止。</p>
+<p>完整的配置对象是这些属性解析完成后的上下文。此外，<code>grunt</code> 和它的方法可以在 templates 中使用，如 <code>&lt;%= grunt.template.today(&#39;yyyy-mm-dd&#39;) %&gt;</code>。</p>
+<ul>
+<li><code>&lt;%= prop.subprop %&gt;</code> 解析为配置中的 <code>prop.subprop</code> 的值，不论类型。Templates 不仅可以用来引用字符串类型，也可以是数组或 Object。</li>
+<li><code>&lt;% %&gt;</code> 可以执行任意行的 JavaScript 代码。可以用来执行控制流或循环。</li>
+</ul>
+<p>下面给出一个 <code>concat</code> 任务的例子，运行 <code>concat:sample</code> 将会串联所有匹配 <code>foo/*.js</code>，<code>bar/*.js</code>，<code>baz/*.js</code> 的文件，生成名为 <code>build/abcde.js</code> 的文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  concat: &#123;</span><br><span class="line">    sample: &#123;</span><br><span class="line">      options: &#123;</span><br><span class="line">        banner: <span class="string">'/* &lt;%= baz %&gt; */\n'</span>,   <span class="comment">// '/* abcde */\n'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      src: [<span class="string">'&lt;%= qux %&gt;'</span>, <span class="string">'baz/*.js'</span>],  <span class="comment">// [['foo/*.js', 'bar/*.js'], 'baz/*.js']</span></span><br><span class="line">      dest: <span class="string">'build/&lt;%= baz %&gt;.js'</span>,      <span class="comment">// 'build/abcde.js'</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// Arbitrary properties used in task configuration templates.</span></span><br><span class="line">  foo: <span class="string">'c'</span>,</span><br><span class="line">  bar: <span class="string">'b&lt;%= foo %&gt;d'</span>, <span class="comment">// 'bcd'</span></span><br><span class="line">  baz: <span class="string">'a&lt;%= bar %&gt;e'</span>, <span class="comment">// 'abcde'</span></span><br><span class="line">  qux: [<span class="string">'foo/*.js'</span>, <span class="string">'bar/*.js'</span>],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="Importing_External_Data">Importing External Data</h2><p>在下面的 Grunfile，Grunt 配置从 <code>package.json</code> 文件导入项目的元数据，<code>grunt-contrib-uglify plugin</code> 插件的 uglify 任务被配置为缩小源文件的尺寸并动态使用元数据生成注释 banner。</p>
+<p>Grunt 有 <code>grunt.file.readJSON</code> 和 <code>grunt.file.readYAML</code> 方法分别读取 JSON 和 YAML 数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">grunt.initConfig(&#123;</span><br><span class="line">  pkg: grunt.file.readJSON(<span class="string">'package.json'</span>),</span><br><span class="line">  uglify: &#123;</span><br><span class="line">    options: &#123;</span><br><span class="line">      banner: <span class="string">'/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("yyyy-mm-dd") %&gt; */\n'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    dist: &#123;</span><br><span class="line">      src: <span class="string">'src/&lt;%= pkg.name %&gt;.js'</span>,</span><br><span class="line">      dest: <span class="string">'dist/&lt;%= pkg.name %&gt;.min.js'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="Gruntfile_样本分析">Gruntfile 样本分析</h1><p>下面我们仔细过一遍 <code>Gruntfile</code>，这里有一个小例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">grunt</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  grunt.initConfig(&#123;</span><br><span class="line">    jshint: &#123;</span><br><span class="line">      files: [<span class="string">'Gruntfile.js'</span>, <span class="string">'src/**/*.js'</span>, <span class="string">'test/**/*.js'</span>],</span><br><span class="line">      options: &#123;</span><br><span class="line">        globals: &#123;</span><br><span class="line">          jQuery: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">      files: [<span class="string">'&lt;%= jshint.files %&gt;'</span>],</span><br><span class="line">      tasks: [<span class="string">'jshint'</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-contrib-jshint'</span>);</span><br><span class="line">  grunt.loadNpmTasks(<span class="string">'grunt-contrib-watch'</span>);</span><br><span class="line"></span><br><span class="line">  grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'jshint'</span>]);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/cijsnwuc90076onjdqbd3wnjq/">CSS Margin (一) 负 Margin</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/cijsnwtxw000vonjdo1hzvk3z/">Webpack 入门</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2016/cijsnwu9s005oonjds4x9zkip/"
+               data-title="Grunt 介绍" data-url="http://yoursite.com/2016/cijsnwu9s005oonjds4x9zkip/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Grunt_介绍"><span class="nav-number">1.</span> <span class="nav-text">Grunt 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用心得"><span class="nav-number">1.1.</span> <span class="nav-text">使用心得</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用_Grunt"><span class="nav-number">2.</span> <span class="nav-text">使用 Grunt</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#package-json"><span class="nav-number">2.1.</span> <span class="nav-text">package.json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gruntfile"><span class="nav-number">2.2.</span> <span class="nav-text">Gruntfile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#“wrapper”_函数"><span class="nav-number">2.2.1.</span> <span class="nav-text">“wrapper” 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目配置和任务配置"><span class="nav-number">2.2.2.</span> <span class="nav-text">项目配置和任务配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载_Grunt_插件和任务"><span class="nav-number">2.2.3.</span> <span class="nav-text">加载 Grunt 插件和任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义任务"><span class="nav-number">2.2.4.</span> <span class="nav-text">自定义任务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置任务"><span class="nav-number">3.</span> <span class="nav-text">配置任务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#任务配置和_Target"><span class="nav-number">3.1.</span> <span class="nav-text">任务配置和 Target</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Option"><span class="nav-number">3.2.</span> <span class="nav-text">Option</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Files"><span class="nav-number">3.3.</span> <span class="nav-text">Files</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compact_Format"><span class="nav-number">3.3.1.</span> <span class="nav-text">Compact Format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Files_Object_Format"><span class="nav-number">3.3.2.</span> <span class="nav-text">Files Object Format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Files_Array_Format"><span class="nav-number">3.3.3.</span> <span class="nav-text">Files Array Format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Older_Formats"><span class="nav-number">3.3.4.</span> <span class="nav-text">Older Formats</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Custom_Filter_Function"><span class="nav-number">3.3.5.</span> <span class="nav-text">Custom Filter Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Globbing_patterns"><span class="nav-number">3.3.6.</span> <span class="nav-text">Globbing patterns</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Building_the_files_object_dynamically"><span class="nav-number">3.3.7.</span> <span class="nav-text">Building the files object dynamically</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Templates"><span class="nav-number">3.4.</span> <span class="nav-text">Templates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Importing_External_Data"><span class="nav-number">3.5.</span> <span class="nav-text">Importing External Data</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gruntfile_样本分析"><span class="nav-number">4.</span> <span class="nav-text">Gruntfile 样本分析</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62263979-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>
