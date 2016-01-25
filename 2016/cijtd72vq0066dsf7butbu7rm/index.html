@@ -31,7 +31,7 @@
 
 
 
-  <title> Basic Visual Formatting (三) // Humyang </title>
+  <title> Flexbox 布局  (二) Container // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              Basic Visual Formatting (三)
+              Flexbox 布局  (二) Container
             
           
         </h1>
@@ -119,7 +119,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-01-22
+          发表于 2016-01-24
         </span>
 
         
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/cijtcrjwy007fcff7xd7a5zkx/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijtcrjwy007fcff7xd7a5zkx/"></span>
+            <a href="/2016/cijtd72vq0066dsf7butbu7rm/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijtd72vq0066dsf7butbu7rm/"></span>
             </a>
           </span>
           
@@ -162,109 +162,70 @@
       
 
       
-        <p>介绍盒模型的块级元素和 margin，width 使用 auto 的效果。</p>
+        <p>介绍 Flexbox 的概念，和 Child 能应用哪些属性。</p>
 <a id="more"></a>
 <hr>
-<p>Basic Visual Formatting (三)</p>
-<h1 id="Block-Level_Elements">Block-Level Elements</h1><p>块级元素</p>
+<h1 id="Properties_for_the_Children_(flex_items)">Properties for the Children (flex items)</h1><p><img src="./flex-items.svg" alt=""></p>
+<h2 id="order">order</h2><p><img src="./order-2.svg" alt=""></p>
 <blockquote>
-<p>Block-level elements can behave in both predictable and surprising ways. The handling of element placement along the horizontal and vertical axes can differ, for example. To fully understand how block-level elements are handled, you must clearly understand a number of boundaries and areas. They are shown in detail in Figure 7-2.</p>
+<p>By default, flex items are laid out in the source <code>order</code>. However, the order property controls the order in which they appear in the flex container.</p>
 </blockquote>
-<p>块级元素的行为即可预测且令人诧异的，元素布局在水平和垂直轴线有不同处理方式。例如，要完全明白块级元素是如何处理的，你必须清晰了解几处边界和区域。他们在图 7-2 列出。</p>
-<p><img src="/images/2016/01/7-2.png" alt=""><br><small>图 7-2. 完整的盒模型</small></p>
+<p>flex Item 顺序默认按照源顺序排序。而 <code>order</code> 属性可以控制他们的排列顺序。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">order</span>:<span class="value"> integer</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="flex-grow">flex-grow</h2><p><img src="./flex-grow.svg" alt=""></p>
 <blockquote>
-<p>In general, the width of an element is defined as the distance from the left inner edge to the right inner edge, and the height is the distance from the inner top to the inner bottom. Both of these properties can be applied to an element.</p>
+<p>This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
 </blockquote>
-<p>通常，元素的宽度被定义为从左内边缘到右内边缘的距离，高度是从顶部内边缘到底部内边缘的距离。这些属性都可以被应用到元素。</p>
+<p>可以使用这个属性根据需要增大 flex Item 。他接受无单位的值作为比例。他根据比例将 flex  Container 可用的空间分配给 flex Item 。</p>
 <blockquote>
-<p>The various widths, heights, padding, and margins combine to determine how a document is laid out. In most cases, the height and width of the document are automatically determined by the browser and are based on the available display region and other factors. Under CSS, of course, you can assert more direct control over the way elements are sized and displayed. You can select different effects for horizontal and vertical layouts, so we’ll tackle them separately.</p>
+<p>If all items have flex-grow set to 1, the remaining space in the container will be distributed equally to all children. If one of the children a value of 2, the remaining space would take up twice as much space as the others (or it will try to, at least).</p>
 </blockquote>
-<p>这几个宽度，高度，内边距和外边距的组合决定了文档如何布局。大部分情况，文档的高度和宽度是由浏览器和基于可见显示区域和其它因素自动决定。在 CSS 中，当然，你可以直接的控制元素的尺寸和显示方式。你可以为水平和垂直布局选择不同效果，因此我们将这些分开单独来讲。</p>
-<h2 id="Horizontal_Formatting">Horizontal Formatting</h2><p>水平格式化</p>
+<p>如果所有的 Item 的 flex-grow 属性设置为 1， Container 剩余的空间将会平均分配给 flex Item 。如果一个值是 2，剩余的空间将会为此 Item 分配比其他 Item 一倍的空间  (会尝试)。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex-grow</span>:<span class="value"> &lt;number&gt;</span></span>; <span class="comment">/* default 0 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>Horizontal formatting is often more complex than you’d think. Part of the complexity has to do with how width affects the width of the content area, not the entire visible element box. Consider the following example:</p>
+<p>Negative numbers are invalid.</p>
 </blockquote>
-<p>水平格式化比你认为的还要复杂。复杂的部分有处理元素的宽度如何影响内容区域宽度，而非是整个可见元素盒子，例如下面的例子：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">style</span>=<span class="value">"width: 200px;"</span>&gt;</span>wideness?<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>负数是无效的。</p>
+<h2 id="flex-shrink">flex-shrink</h2><blockquote>
+<p>This defines the ability for a flex item to shrink if necessary.</p>
+</blockquote>
+<p>如果需要可以缩小 flex Item 。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex-shrink</span>:<span class="value"> &lt;number&gt;</span></span>; <span class="comment">/* default 1 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>This line of code will make the paragraph’s content 200 pixels wide. If you gave the element a background, this would be quite obvious. However, any padding, bor- ders, or margins you specify are added to the width value. Suppose you do this:</p>
+<p>Negative numbers are invalid.</p>
 </blockquote>
-<p>这一行代码设置段落宽度为 200px 宽，如果你设置了元素的背景颜色，那么效果是很明显的。接着，你添加内边距，外边距，边框增大段落的宽度值，如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">style</span>=<span class="value">"width: 200px; padding: 10px; margin: 20px;"</span>&gt;</span>wideness?<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>负数是无效的。</p>
+<h2 id="flex-basis">flex-basis</h2><blockquote>
+<p>This defines the default size of an element before the remaining space is distributed. It can be a length (e.g. 20%, 5rem, etc.) or a keyword. The <code>auto</code> keyword means “look at my width or height property” (which was temporarily done by the <code>main-size</code> keyword until deprecated). The <code>content</code> keyword means “size it based on the item’s content” - this keyword isn’t well supported yet, so it’s hard to test and harder to know what it’s brethren <code>max-content</code>, <code>min-content</code>, and <code>fit-content</code> do.</p>
+</blockquote>
+<p>分配空间前指定元素的默认尺寸。他可以是一个长度  (如 20%，5rem 等) 或关键字。关键字 <code>auto</code> 意味着 “根据我的 width 或 height 属性”  (曾经临时使用关键字 <code>main-size</code>，现已弃用)。 关键字 <code>content</code> 意味着 “尺寸是基于 Item 的内容” - 这个关键字不是很好的被支持，因此他很难测试并且更难知道他的哪些兄弟有效果：<code>max-content</code>,<code>min-content</code> 和 <code>fit-content</code>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex-basis</span>:<span class="value"> [length] | auto</span></span>; <span class="comment">/* default auto */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>The visible element box is now 220 pixels wide since you’ve added 10 pixels of padding to the right and left of the content. The margins will now extend another 20 pixels to both sides for an overall element box width of 260 pixels.</p>
+<p>If set to <code>0</code>, the extra space around content isn’t factored in. If set to <code>auto</code>, the extra space is distributed based on its <code>flex-grow</code> value. See this graphic.</p>
 </blockquote>
-<p>元素盒子现在的可以看见的宽度是 220 px，因为分别添加了 10 px 内边距到内容的左边和右边。而外边距拓展了元素盒子 20px 的整体宽度，现在整个元素盒子的宽度是 260px。</p>
+<p>如果设置为 <code>0</code>，环绕内容的额外空间则不会算上。如果设置为 <code>auto</code>，额外空间的分配基于他的 <code>flex-grow</code> 值。见此图：</p>
+<p><img src="./rel-vs-abs-flex.svg" alt=""></p>
+<h2 id="flex">flex</h2><blockquote>
+<p>This is the shorthand for <code>flex-grow</code>, <code>flex-shrink</code> and <code>flex-basis</code> combined. The second and third parameters (<code>flex-shrink</code> and <code>flex-basis</code>) are optional. Default is <code>0 1 auto</code>.</p>
+</blockquote>
+<p>这是 <code>flex-grow</code>,<code>flex-shrink</code> 和 <code>flex-basis</code> 组合的缩写。第二和第三个参数是可写的。默认是 <code>0 1 auto</code>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex</span>:<span class="value"> none | [ &lt;<span class="string">'flex-grow'</span>&gt; &lt;<span class="string">'flex-shrink'</span>&gt;? || &lt;<span class="string">'flex-basis'</span>&gt; ]</span><br><span class="line">&#125;</span></span></span></span><br></pre></td></tr></table></figure>
+<p><strong>It is recommended that you use this shorthand property</strong> rather than set the individual properties. The short hand sets the other values intelligently.</p>
+<p><strong>推荐使用这个缩写属性</strong> 而不要使用单个属性。这个缩写更加智能的设置其他值。</p>
+<h2 id="align-self">align-self</h2><p><img src="./align-self.svg" alt=""></p>
 <blockquote>
-<p>Understanding the hidden additions to width is critical. Most users think that width refers to the width of the visible element box, and that if they declare an element to have padding, borders, and a width, the value they supply for the width will be the distance from the outer left border edge to the outer right border edge. This is not the case in CSS. Keep this fact firmly in mind to avoid confusion later.</p>
+<p>This allows the default alignment (or the one specified by <code>align-items</code>) to be overridden for individual flex items.</p>
 </blockquote>
-<p>最重要的是弄清楚隐藏的宽度。大部分使用者认为元素的宽度只是指元素盒子的可见宽度，如果他们声明了一个拥有内边距，边框，和宽度的元素盒子，他们提供的值只是从外左边缘到外右边缘的距离。在 CSS 中不仅如此。请牢记这一点避免在后面的章节产生困惑。</p>
+<p>使单个 flex Item 可以覆盖默认的对齐方式  (或通过 <code>align-items</code> 指定一个)。</p>
 <blockquote>
-<p><small>As of this writing, the Box Model module of CSS includes proposals for ways to let authors choose whether width refers to the content width or the visible box width.</small></p>
+<p>Please see the <code>align-items</code> explanation to understand the available values.</p>
 </blockquote>
-<p><small>在撰写此书时，CSS 的盒模型模块包含一个提议：能让使用者把宽度指定为内容宽度或盒子可见宽度。</small></p>
+<p>请参照 <code>align-items</code> 了解可用值。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">align-self</span>:<span class="value"> auto | flex-start | flex-end | center | baseline | stretch</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>Almost as simple is the rule that says that the sum of the horizontal components of a block-level element box in the normal flow always equals the width of the parent. Take two paragraphs within a div whose margins have been set to 1em. The content width (the value of width) of the paragraph, plus its left and right padding, borders, and margins, always add up to the width of the div’s content area.</p>
+<p>Note that <code>float</code>, <code>clear</code> and <code>vertical-align</code> have no effect on a flex item.</p>
 </blockquote>
-<p>解释块级元素盒子的规则最简单的描述是：在正常流中他的水平部分的宽度总和总是与父元素的宽度相同。把两个段落放到已经设置了外边距为 1em 的 div 中。段落的内容宽度  (宽度的值) ，加上他的左右内边距，边框，和外边距，加起来总是等于 div 的内容区域的宽度。</p>
-<blockquote>
-<p>Let’s say the width of the div is 30em, making the sum total of the content width, padding, borders, and margins of each paragraph 30em. In Figure 7-3, the “blank” space around the paragraphs is actually their margins. If the div had any padding, there would be even more blank space, but that isn’t the case here. I’ll discuss padding soon.</p>
-</blockquote>
-<p>如果 div 的宽度是 30em，使每个有 30em 宽的段落的内容宽度，内边距，外边距，边框相加。如图 7-3 中，围绕着段落的 “空白” 空间实际上是他们的外边距。如果 div 有内边距，这里将会有更多空白空间，先不在这里介绍，我会在后面讨论内边距时说明。</p>
-<p><img src="/images/2016/01/7-3.png" alt=""><br>图 7-3. 元素盒子的宽度与他们的父元素一样宽。</p>
-<h3 id="Horizontal_properties">Horizontal properties</h3><p>水平属性</p>
-<blockquote>
-<p>The “seven properties” of horizontal formatting are: margin-left, border-left, padding-left, width, padding-right, border-right, and margin-right. These properties, which are diagrammed in Figure 7-4, relate to the horizontal layout of block-level boxes.</p>
-</blockquote>
-<p>水平格式化的 “七个属性”：左外边距，左边框，左内边距，宽度，右内边距，右边框，右外边距。这些属性，在图 7-4，他们是关于块级盒子水平布局的。</p>
-<p><img src="/images/2016/01/7-4.png" alt=""><br>图 7-4. 水平格式化的 “七个属性”</p>
-<blockquote>
-<p>The values of these seven properties must add up to the width of the element’s containing block, which is usually the value of width for a block element’s parent (since block-level elements nearly always have block-level elements for parents).</p>
-</blockquote>
-<p>这七个属性的值一定会添加到元素的容器块的宽度，他通常是块元素的父元素的宽度  (块级元素的上级元素几乎总是块级元素)。</p>
-<blockquote>
-<p>Of these seven properties, only three may be set to auto: the width of the element’s content and the left and right margins. The remaining properties must be set either to specific values or default to a width of zero. Figure 7-5 shows which parts of the box can take a value of auto and which cannot.</p>
-</blockquote>
-<p>这七个属性，只有三个能设为 auto：元素的内容的宽度和左右外边距。剩余的属性必须设置为指定值或默认的宽度 0。图 7-5 显示演示盒子的部分哪些可以设置为 auto 哪些不能。</p>
-<p><img src="/images/2016/01/7-5.png" alt=""><br>图 7-5. 可以设置为 auto 的水平属性</p>
-<blockquote>
-<p>width must either be set to auto or a nonnegative value of some type. When you do use auto in horizontal formatting, different effects can result.</p>
-</blockquote>
-<p>宽度必须设置为 auto 或某类非负数的值 (marin 可以是负数)。当你在水平格式化使用 auto，会产生不同的效果。</p>
-<blockquote>
-<p><small>CSS allows browsers to set a minimum value for width; this is the value below which a block-level element’s width cannot drop. The value of this minimum can vary between browsers, as it is not defined in the specification.</small></p>
-</blockquote>
-<p>CSS 允许浏览器设置宽度的最小值；这个值能使块级元素的宽度无法抛弃。这个最小值在不同浏览器之间会有变化，因为他不是规范中定义的。</p>
-<h3 id="Using_auto">Using auto</h3><blockquote>
-<p>If you set width, margin-left, or margin-right to a value of auto, and give the remaining two properties specific values, then the property that is set to auto determines the length required to make the element box’s width equal to the parent element’s width. In other words, let’s say the sum of the seven properties must equal 400 pixels, no padding or borders are set, the right margin and width are set to 100px, and the left margin is set to auto. The left margin will be 200 pixels wide:</p>
-</blockquote>
-<p>如果你设置内容宽度了，左外边距或右外边距的值为 auto，并指定剩余的两个属性为指定值，然后设置为 auto 的属性会自动判断使元素盒子的宽度等于父元素的宽度所需要的长度。换句话说，假设这七个属性的总和为 400 px，不设置内边距或边框，右外边距和宽度设置为 100px,左外边距设置为 auto。那么左外边距的宽度将会是 200px：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: auto; margin-right: 100px;</span><br><span class="line">     width: 100px;&#125;   /* 'auto' left margin evaluates to 200px */</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>In a sense, auto can be used to make up the difference between everything else and the required total. However, what if all three of these properties are set to 100px and none of them are set to auto?</p>
-</blockquote>
-<p>在某种意义上，auto 可以被用作填充一切不同的东西之间需要的总和。不过，如果这三个属性都设置为 100px 而不是设置为 auto 呢？</p>
-<blockquote>
-<p>In the case where all three properties are set to something other than auto—or, in CSS terminology, when these formatting properties have been overconstrained— then margin-right is always forced to be auto. This means that if both margins and the width are set to 100px, then the user agent will reset the right margin to auto. The right margin’s width will then be set according to the rule that one auto value “fills in” the distance needed to make the element’s overall width equal that of its containing block. Figure 7-6 shows the result of the following markup:</p>
-</blockquote>
-<p>这种三个属性除了设置为 auto 之外的情况－或在 CSS 技术中，如果这个格式化属性已经超过约束条件－那么右外边距总是强制被设置为 auto。这意味着如果外边距和宽度都设置为 100px，那么用户代理会强制设置右外边距为 auto。右外边距的宽度将依照 “填充” 的规则自动设置一个距离值，使元素的总宽等于包含他的容器块的宽度。图 7-6 显示下面的 html 标记的结果：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: 100px; margin-right: 100px;</span><br><span class="line">     width: 100px;&#125;   /* right margin forced to be 200px */</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2016/01/7-6.png" alt=""><br>图 7-6. 覆盖右外边距的设置</p>
-<blockquote>
-<p><small>margin-right is forced to be auto only for left-to-right languages such as English. In right-to-left languages, everything is reversed, so margin-left is forced to be auto, not margin-right.</small></p>
-</blockquote>
-<p>强制设置右外边距为 auto 只发生在从左到右的语言例如英语。在右到左的语言，所有都是相反，例如强制左外边距为 auto，而不是右外边距。</p>
-<blockquote>
-<p>If both margins are set explicitly, and width is set to auto, then the value of width will be set to whatever value is needed to reach the required total (which is the content width of the parent element). The results of the following markup are shown in Figure 7-7:</p>
-</blockquote>
-<p>如果所有外边距都设置了明确值，而宽度设置为 auto，那么宽度的值会被设置为达到总宽所需要的大小  (父元素的内容宽度)。下面的标记的结果在图 7-7 ：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: 100px; margin-right: 100px; width: auto;&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2016/01/7-7.png" alt=""><br>图 7-7. 自动宽度</p>
-<blockquote>
-<p>The case shown in Figure 7-7 is the most common since it is equivalent to setting the margins and not declaring anything for the width. The result of the following markup is exactly the same as that shown in Figure 7-7:</p>
-</blockquote>
-<p>图 7-7 的例子是最常用的方式他相当于设置了外边距并没声明任何宽度。下面的标记的结果也会产生图 7-7 的效果。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: 100px; margin-right: 100px;&#125; /* same as before */</span><br></pre></td></tr></table></figure>
+<p>注意 <code>float</code>，<code>clear</code>，和 <code>vertical-align</code> 在 flex Item  没有效果。</p>
 
       
     </div>
@@ -284,13 +245,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/cijtcrjuu0066cff7hv74cfen/">Flexbox 布局  (二) Container</a>
+              <a href="/3015/FrontEndNavigation/">前端 EXAMPLE 导航</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/cijtcrjvh006ecff72zbx562x/">Flexbox 布局  (一) Container</a>
+              <a href="/2016/cijtd72yo007fdsf71qcwn9t5/">Basic Visual Formatting (三)</a>
             
           </div>
         </div>
@@ -306,8 +267,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/cijtcrjwy007fcff7xd7a5zkx/"
-               data-title="Basic Visual Formatting (三)" data-url="http://yoursite.com/2016/cijtcrjwy007fcff7xd7a5zkx/">
+          <div class="ds-thread" data-thread-key="2016/cijtd72vq0066dsf7butbu7rm/"
+               data-title="Flexbox 布局  (二) Container" data-url="http://yoursite.com/2016/cijtd72vq0066dsf7butbu7rm/">
           </div>
         
       </div>
@@ -398,7 +359,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Block-Level_Elements"><span class="nav-number">1.</span> <span class="nav-text">Block-Level Elements</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Horizontal_Formatting"><span class="nav-number">1.1.</span> <span class="nav-text">Horizontal Formatting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Horizontal_properties"><span class="nav-number">1.1.1.</span> <span class="nav-text">Horizontal properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using_auto"><span class="nav-number">1.1.2.</span> <span class="nav-text">Using auto</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Properties_for_the_Children_(flex_items)"><span class="nav-number">1.</span> <span class="nav-text">Properties for the Children (flex items)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#order"><span class="nav-number">1.1.</span> <span class="nav-text">order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-grow"><span class="nav-number">1.2.</span> <span class="nav-text">flex-grow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-shrink"><span class="nav-number">1.3.</span> <span class="nav-text">flex-shrink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-basis"><span class="nav-number">1.4.</span> <span class="nav-text">flex-basis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex"><span class="nav-number">1.5.</span> <span class="nav-text">flex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#align-self"><span class="nav-number">1.6.</span> <span class="nav-text">align-self</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
