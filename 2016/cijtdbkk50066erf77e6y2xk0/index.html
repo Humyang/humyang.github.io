@@ -31,7 +31,7 @@
 
 
 
-  <title> Base Visual Formatting  (一)  Basic Boxes // Humyang </title>
+  <title> Flexbox 布局  (二) Container // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              Base Visual Formatting  (一)  Basic Boxes
+              Flexbox 布局  (二) Container
             
           
         </h1>
@@ -119,7 +119,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-01-16
+          发表于 2016-01-24
         </span>
 
         
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/cijtd72z2007kdsf7kjsoz4u6/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijtd72z2007kdsf7kjsoz4u6/"></span>
+            <a href="/2016/cijtdbkk50066erf77e6y2xk0/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijtdbkk50066erf77e6y2xk0/"></span>
             </a>
           </span>
           
@@ -162,43 +162,70 @@
       
 
       
-        <p>介绍 CSS 布局的基础概念：Basic Boxes。</p>
+        <p>介绍 Flexbox 的概念，和 Child 能应用哪些属性。</p>
 <a id="more"></a>
 <hr>
-<p>来自 CSS The Definitive Guide Eric A Meyer。</p>
-<h1 id="Base_Visual_Formatting">Base Visual Formatting</h1><blockquote>
-<p>In the previous chapters, we covered a great deal of practical information on how CSS handles text and fonts in a document. In this chapter, we’ll look at the theoretical side of visual rendering, answering many of the questions we skipped earlier in the interest of addressing how CSS is implemented.</p>
-</blockquote>
-<p>在之前的章节，我们进行了大量的实践用 CSS 处理文字和文档的字体。在这章中，我们会学习外观呈现的理论，回答许多之前跳过的许多 CSS 如何实现的问题。</p>
+<h1 id="Properties_for_the_Children_(flex_items)">Properties for the Children (flex items)</h1><p><img src="./flex-items.svg" alt=""></p>
+<h2 id="order">order</h2><p><img src="./order-2.svg" alt=""></p>
 <blockquote>
-<p>Why is it necessary to spend an entire chapter on the theoretical underpinnings of visual rendering in CSS? The answer is that with a model as open and powerful as that contained within CSS, no book could hope to cover every possible way of combining properties and effects. You will obviously go on to discover new ways of using CSS for your own document effects.</p>
+<p>By default, flex items are laid out in the source <code>order</code>. However, the order property controls the order in which they appear in the flex container.</p>
 </blockquote>
-<p>为什么需要花费一整章在 CSS 视觉呈现的理论基础？因为它是开发的模式和强大的 CSS 容器，没有任何一本书可以覆盖所有属性组合的效果。明显你需要探索新的方式使用 CSS，实现你想要的效果。</p>
+<p>flex Item 顺序默认按照源顺序排序。而 <code>order</code> 属性可以控制他们的排列顺序。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">order</span>:<span class="value"> integer</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="flex-grow">flex-grow</h2><p><img src="./flex-grow.svg" alt=""></p>
 <blockquote>
-<p>In the course of exploring CSS, you may encounter seemingly strange behaviors in user agents. With a thorough grasp of how the visual rendering model works in CSS, you’ll be able to determine whether a behavior is a correct (though unexpected) consequence of the rendering engine CSS defines, or whether you’ve stumbled across a bug that needs to be reported.</p>
+<p>This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
 </blockquote>
-<p>在探索 CSS 的过程中，你可能在 user agents 遇到看似奇怪的行为。深入的理解和掌握 CSS 中工作的视觉呈现模型，你就可以判断在哪些行为可以在 CSS 渲染引擎获取正确结果 (尽管看起来奇怪)，或者你偶然遇到一个需要提交的 bug。</p>
-<h2 id="Basic_Boxes">Basic Boxes</h2><blockquote>
-<p>CSS assumes that every element generates one or more rectangular boxes, called element boxes. (Future versions of the specification may allow for nonrectangular boxes, but for now everything is rectangular.) Each element box has a content area at its core. The content area is surrounded by optional amounts of padding, borders, and margins. These items are considered optional because they could all be set to a width of zero, effectively removing them from the element box. An example content area is shown in Figure 7-1, along with the surrounding regions of padding, border, and margins.</p>
-</blockquote>
-<p>CSS 假设所有元素都会生成一个或多个矩形盒子，称为元素盒子 (未来的版本可能允许不规则形状的盒子，但现在所有都是矩形)。每一个元素盒子在它的核心都有一个内容区域。这个内容区域被可选的 padding，border，和 margin 包围。这些选项是可选的因为它们的宽度全都可以被设置为 0，有效的将它们从元素盒子移除。一个元素的内容区域如图 7-1 所示，围绕它的是 padding,border,和 margins 的区域。</p>
-<p>图 7-1<br><img src="./7-1.png" alt=""></p>
+<p>可以使用这个属性根据需要增大 flex Item 。他接受无单位的值作为比例。他根据比例将 flex  Container 可用的空间分配给 flex Item 。</p>
 <blockquote>
-<p>Each of the margins, borders, and padding can be set using various properties, such as margin-left or border-bottom. The content’s background a color or tiled image, for example is also applied to the padding. The margins are always transparent, revealing the background of any parent elements. Padding cannot be a negative value, but margins can. We’ll explore the effects of negative margins later in this chapter.</p>
+<p>If all items have flex-grow set to 1, the remaining space in the container will be distributed equally to all children. If one of the children a value of 2, the remaining space would take up twice as much space as the others (or it will try to, at least).</p>
 </blockquote>
-<p>每个 margin，border，和 padding 可以使用单独的属性设置，例如 margin-left 或 border-bottom。内容的背景颜色或背景图像，也会应用到 padding。而 margin 总是透明的，露出父元素的背景颜色。Padding 不能是负值，但 margin 可以。我们会在后面的章节探索负 margin 的效果。</p>
+<p>如果所有的 Item 的 flex-grow 属性设置为 1， Container 剩余的空间将会平均分配给 flex Item 。如果一个值是 2，剩余的空间将会为此 Item 分配比其他 Item 一倍的空间  (会尝试)。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex-grow</span>:<span class="value"> &lt;number&gt;</span></span>; <span class="comment">/* default 0 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>Borders are generated using defined styles, such as solid or inset, and their colors are set using the border-color property. If no color is set, then the border takes on the foreground color of the element’s content. For example, if the text of a paragraph is white, then any borders around that paragraph will be white unless the author explicitly declares a different border color. If a border style has gaps of some type, then the element’s background is visible through those gaps. In other words, the border has the same background as the content and padding. Finally, the width of a border can never be negative.</p>
+<p>Negative numbers are invalid.</p>
 </blockquote>
-<p>border 使用自定义的样式生成，例如 solid 或 inset，它们的颜色使用 border-color 属性设置。如果没设置颜色，border 会使用元素内容的前景色。例如段落的文字是白色，那么 border 也会是白色除非作者明确指定了不同的 border 颜色。如果 border 的样式会出现一些缺口，那么元素背景会在通过这些缺口可见。换句话说，border 有一部分背景是内容和 padding。最后，border 的宽度永远不能是负数。</p>
+<p>负数是无效的。</p>
+<h2 id="flex-shrink">flex-shrink</h2><blockquote>
+<p>This defines the ability for a flex item to shrink if necessary.</p>
+</blockquote>
+<p>如果需要可以缩小 flex Item 。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex-shrink</span>:<span class="value"> &lt;number&gt;</span></span>; <span class="comment">/* default 1 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>The various components of an element box can be affected by a number of properties, such as width or border-right. Many of these properties will be used in this chapter, even though we haven’t discussed them yet. The actual property definitions are given in Chapter 8, which builds on the concepts set forth in this chapter.</p>
+<p>Negative numbers are invalid.</p>
 </blockquote>
-<p>元素盒子的各个部分可以被几个属性影响，例如 width 或 border-right。在这章我们会用到许多这些属性，尽管我们没有讨论过它们。实际上第 8 章才会探索它们，我们先在这一章了解它的概念。</p>
+<p>负数是无效的。</p>
+<h2 id="flex-basis">flex-basis</h2><blockquote>
+<p>This defines the default size of an element before the remaining space is distributed. It can be a length (e.g. 20%, 5rem, etc.) or a keyword. The <code>auto</code> keyword means “look at my width or height property” (which was temporarily done by the <code>main-size</code> keyword until deprecated). The <code>content</code> keyword means “size it based on the item’s content” - this keyword isn’t well supported yet, so it’s hard to test and harder to know what it’s brethren <code>max-content</code>, <code>min-content</code>, and <code>fit-content</code> do.</p>
+</blockquote>
+<p>分配空间前指定元素的默认尺寸。他可以是一个长度  (如 20%，5rem 等) 或关键字。关键字 <code>auto</code> 意味着 “根据我的 width 或 height 属性”  (曾经临时使用关键字 <code>main-size</code>，现已弃用)。 关键字 <code>content</code> 意味着 “尺寸是基于 Item 的内容” - 这个关键字不是很好的被支持，因此他很难测试并且更难知道他的哪些兄弟有效果：<code>max-content</code>,<code>min-content</code> 和 <code>fit-content</code>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex-basis</span>:<span class="value"> [length] | auto</span></span>; <span class="comment">/* default auto */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>You will, however, find differences in how various types of elements are formatted. Block-level elements are treated differently than inline-level elements, while floated and positioned elements have their own ways of behaving.</p>
+<p>If set to <code>0</code>, the extra space around content isn’t factored in. If set to <code>auto</code>, the extra space is distributed based on its <code>flex-grow</code> value. See this graphic.</p>
 </blockquote>
-<p>最后你会发现几个不同类型元素的格式的不同。Block 级别元素与 inline-level 元素的区别，浮动元素 (float) 和定位元素 (positioned) 它们自己的行为。</p>
+<p>如果设置为 <code>0</code>，环绕内容的额外空间则不会算上。如果设置为 <code>auto</code>，额外空间的分配基于他的 <code>flex-grow</code> 值。见此图：</p>
+<p><img src="./rel-vs-abs-flex.svg" alt=""></p>
+<h2 id="flex">flex</h2><blockquote>
+<p>This is the shorthand for <code>flex-grow</code>, <code>flex-shrink</code> and <code>flex-basis</code> combined. The second and third parameters (<code>flex-shrink</code> and <code>flex-basis</code>) are optional. Default is <code>0 1 auto</code>.</p>
+</blockquote>
+<p>这是 <code>flex-grow</code>,<code>flex-shrink</code> 和 <code>flex-basis</code> 组合的缩写。第二和第三个参数是可写的。默认是 <code>0 1 auto</code>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex</span>:<span class="value"> none | [ &lt;<span class="string">'flex-grow'</span>&gt; &lt;<span class="string">'flex-shrink'</span>&gt;? || &lt;<span class="string">'flex-basis'</span>&gt; ]</span><br><span class="line">&#125;</span></span></span></span><br></pre></td></tr></table></figure>
+<p><strong>It is recommended that you use this shorthand property</strong> rather than set the individual properties. The short hand sets the other values intelligently.</p>
+<p><strong>推荐使用这个缩写属性</strong> 而不要使用单个属性。这个缩写更加智能的设置其他值。</p>
+<h2 id="align-self">align-self</h2><p><img src="./align-self.svg" alt=""></p>
+<blockquote>
+<p>This allows the default alignment (or the one specified by <code>align-items</code>) to be overridden for individual flex items.</p>
+</blockquote>
+<p>使单个 flex Item 可以覆盖默认的对齐方式  (或通过 <code>align-items</code> 指定一个)。</p>
+<blockquote>
+<p>Please see the <code>align-items</code> explanation to understand the available values.</p>
+</blockquote>
+<p>请参照 <code>align-items</code> 了解可用值。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">align-self</span>:<span class="value"> auto | flex-start | flex-end | center | baseline | stretch</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note that <code>float</code>, <code>clear</code> and <code>vertical-align</code> have no effect on a flex item.</p>
+</blockquote>
+<p>注意 <code>float</code>，<code>clear</code>，和 <code>vertical-align</code> 在 flex Item  没有效果。</p>
 
       
     </div>
@@ -218,13 +245,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/cijtd72wv006edsf779o4j82t/">Flexbox 布局  (一) Container</a>
+              <a href="/3015/FrontEndNavigation/">前端 EXAMPLE 导航</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/cijtd72yl007adsf7u7mn4u6l/">Base Visual Formatting  (二)  Containing Block and Quick Refresher</a>
+              <a href="/2016/cijtdbkmx007ferf71ekb9zxe/">Basic Visual Formatting (三)</a>
             
           </div>
         </div>
@@ -240,8 +267,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/cijtd72z2007kdsf7kjsoz4u6/"
-               data-title="Base Visual Formatting  (一)  Basic Boxes" data-url="http://yoursite.com/2016/cijtd72z2007kdsf7kjsoz4u6/">
+          <div class="ds-thread" data-thread-key="2016/cijtdbkk50066erf77e6y2xk0/"
+               data-title="Flexbox 布局  (二) Container" data-url="http://yoursite.com/2016/cijtdbkk50066erf77e6y2xk0/">
           </div>
         
       </div>
@@ -332,7 +359,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Base_Visual_Formatting"><span class="nav-number">1.</span> <span class="nav-text">Base Visual Formatting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic_Boxes"><span class="nav-number">1.1.</span> <span class="nav-text">Basic Boxes</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Properties_for_the_Children_(flex_items)"><span class="nav-number">1.</span> <span class="nav-text">Properties for the Children (flex items)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#order"><span class="nav-number">1.1.</span> <span class="nav-text">order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-grow"><span class="nav-number">1.2.</span> <span class="nav-text">flex-grow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-shrink"><span class="nav-number">1.3.</span> <span class="nav-text">flex-shrink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-basis"><span class="nav-number">1.4.</span> <span class="nav-text">flex-basis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex"><span class="nav-number">1.5.</span> <span class="nav-text">flex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#align-self"><span class="nav-number">1.6.</span> <span class="nav-text">align-self</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

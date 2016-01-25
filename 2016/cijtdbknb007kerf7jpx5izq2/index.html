@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="前端," />
+  <meta name="keywords" content="前端,翻译," />
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-  <title> React 的 context 和 childContext // Humyang </title>
+  <title> Base Visual Formatting  (一)  Basic Boxes // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              React 的 context 和 childContext
+              Base Visual Formatting  (一)  Basic Boxes
             
           
         </h1>
@@ -119,14 +119,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-12-31
+          发表于 2016-01-16
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/前端/">前端</a>
+              <a href="/categories/CSS/">CSS</a>
 
               
               
@@ -134,7 +134,7 @@
               
 
             
-              <a href="/categories/前端/React/">React</a>
+              <a href="/categories/CSS/布局/">布局</a>
 
               
               
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/cijtd72uf004edsf77jywn03n/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/cijtd72uf004edsf77jywn03n/"></span>
+            <a href="/2016/cijtdbknb007kerf7jpx5izq2/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijtdbknb007kerf7jpx5izq2/"></span>
             </a>
           </span>
           
@@ -162,31 +162,43 @@
       
 
       
-        <p>介绍如何使用 React 的 context</p>
+        <p>介绍 CSS 布局的基础概念：Basic Boxes。</p>
 <a id="more"></a>
 <hr>
-<p><a href="http://javascript.tutorialhorizon.com/2015/06/06/using-context-and-childcontext-in-react/" target="_blank" rel="external">原文地址</a></p>
-<h1 id="Using_context_and_childContext_in_React">Using context and childContext in React</h1><p>在 React 使用 context 和 childContext</p>
-<blockquote>
-<p>When work­ing with React in a deeply nested hier­ar­chy, often times you will find your­self in a sit­u­a­tion where you need to pass down props from the par­ent as is to the chil­dren and the grand­chil­dren. Although pass­ing down prop­er­ties is great, but writ­ing code in such a man­ner encour­ages rely­ing on mem­ory to pass down the nec­es­sary props, and that’s not really a good use of your brain.Fortunately, React pro­vides a way to make this task easier.</p>
+<p>来自 CSS The Definitive Guide Eric A Meyer。</p>
+<h1 id="Base_Visual_Formatting">Base Visual Formatting</h1><blockquote>
+<p>In the previous chapters, we covered a great deal of practical information on how CSS handles text and fonts in a document. In this chapter, we’ll look at the theoretical side of visual rendering, answering many of the questions we skipped earlier in the interest of addressing how CSS is implemented.</p>
 </blockquote>
-<p>在操作 React 中深层嵌套的层次结构时，当你需要从父组件获取 props 传递到子组件时，通常你需要找到自己所在的位置。尽管传递 properties 是好的做法，但在写代码时却要依靠记忆传递所需要的 props，这对大脑来说不怎么友好。幸运的是，React 提供了一种方式使得这些工作简单完成。</p>
+<p>在之前的章节，我们进行了大量的实践用 CSS 处理文字和文档的字体。在这章中，我们会学习外观呈现的理论，回答许多之前跳过的许多 CSS 如何实现的问题。</p>
 <blockquote>
-<p>React has some­thing called as Child contexts that allows a par­ent ele­ment to spec­ify a con­text — aka a set of prop­er­ties — which can be accessed from all of its chil­dren and grand­chil­dren via the this.context object.</p>
+<p>Why is it necessary to spend an entire chapter on the theoretical underpinnings of visual rendering in CSS? The answer is that with a model as open and powerful as that contained within CSS, no book could hope to cover every possible way of combining properties and effects. You will obviously go on to discover new ways of using CSS for your own document effects.</p>
 </blockquote>
-<p>React 有一些叫做 Child context 的东西，允许父元素指定一个 context - 等于设置一个属性 － 它的所有 children 和 grandchildren 都可以通过 <code>this.context</code> 对象访问它的属性。</p>
+<p>为什么需要花费一整章在 CSS 视觉呈现的理论基础？因为它是开发的模式和强大的 CSS 容器，没有任何一本书可以覆盖所有属性组合的效果。明显你需要探索新的方式使用 CSS，实现你想要的效果。</p>
 <blockquote>
-<p>There are 2 aspects to how you would go about imple­ment­ing this in your code.</p>
+<p>In the course of exploring CSS, you may encounter seemingly strange behaviors in user agents. With a thorough grasp of how the visual rendering model works in CSS, you’ll be able to determine whether a behavior is a correct (though unexpected) consequence of the rendering engine CSS defines, or whether you’ve stumbled across a bug that needs to be reported.</p>
 </blockquote>
-<p>在代码实现需要处理两方面。</p>
+<p>在探索 CSS 的过程中，你可能在 user agents 遇到看似奇怪的行为。深入的理解和掌握 CSS 中工作的视觉呈现模型，你就可以判断在哪些行为可以在 CSS 渲染引擎获取正确结果 (尽管看起来奇怪)，或者你偶然遇到一个需要提交的 bug。</p>
+<h2 id="Basic_Boxes">Basic Boxes</h2><blockquote>
+<p>CSS assumes that every element generates one or more rectangular boxes, called element boxes. (Future versions of the specification may allow for nonrectangular boxes, but for now everything is rectangular.) Each element box has a content area at its core. The content area is surrounded by optional amounts of padding, borders, and margins. These items are considered optional because they could all be set to a width of zero, effectively removing them from the element box. An example content area is shown in Figure 7-1, along with the surrounding regions of padding, border, and margins.</p>
+</blockquote>
+<p>CSS 假设所有元素都会生成一个或多个矩形盒子，称为元素盒子 (未来的版本可能允许不规则形状的盒子，但现在所有都是矩形)。每一个元素盒子在它的核心都有一个内容区域。这个内容区域被可选的 padding，border，和 margin 包围。这些选项是可选的因为它们的宽度全都可以被设置为 0，有效的将它们从元素盒子移除。一个元素的内容区域如图 7-1 所示，围绕它的是 padding,border,和 margins 的区域。</p>
+<p>图 7-1<br><img src="./7-1.png" alt=""></p>
 <blockquote>
-<p>1.In the par­ent, the getChild­Con­text method is used to return an object that is passed own as the child con­text. The prop types of all the keys in this object must also be defined in the childContextTypes prop­erty of the parent.<br>2.Any child that needs to con­sume the prop­er­ties passed down from its par­ents must whitelist the prop­er­ties it wants to access via the ‘con­text­Types’ property.<br>Here’s an exam­ple of how this works</p>
+<p>Each of the margins, borders, and padding can be set using various properties, such as margin-left or border-bottom. The content’s background a color or tiled image, for example is also applied to the padding. The margins are always transparent, revealing the background of any parent elements. Padding cannot be a negative value, but margins can. We’ll explore the effects of negative margins later in this chapter.</p>
 </blockquote>
-<p>1.在父组件，getChildContext 方法返回一个对象，这个对象把自己传给 child context。这个对象中所有的 key 的 prop types 也必须在父组件的 childContextType 属性中定义。<br>2.任何 child 想访问从 parent 传递过来的 properties，都需要通过将 properties 添加到 contextTypes 属性进行访问。</p>
-<p>这里是一段它们如何工作的代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> Grandparent = React.createClass(&#123;</span><br><span class="line"></span><br><span class="line">    childContextTypes: &#123;</span><br><span class="line">         foo: React.PropTypes.string.isRequired</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    getChildContext: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> &#123; foo: <span class="string">"I m the grandparent"</span> &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="title">Parent</span> /&gt;</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Parent = React.createClass(&#123;</span><br><span class="line"></span><br><span class="line">    childContextTypes: &#123;</span><br><span class="line">         bar: React.PropTypes.string.isRequired</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    getChildContext: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> &#123; bar: <span class="string">"I am the parent"</span> &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="title">Child</span> /&gt;</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Child = React.createClass(&#123;</span><br><span class="line"></span><br><span class="line">    contextTypes: &#123;</span><br><span class="line">        foo: React.PropTypes.string.isRequired,</span><br><span class="line">        bar: React.PropTypes.string.isRequired</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          <span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">div</span>&gt;</span>My name is: &#123;this.context.foo&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="title">div</span>&gt;</span>My name is: &#123;this.context.bar&#125;<span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">        )</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Finally you render the grandparent</span></span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="title">Grandparent</span> /&gt;</span>, document.body);</span></span><br></pre></td></tr></table></figure>
-<p>One may argue that this makes the code a bit more ver­bose, because now you end up cre­at­ing an addi­tional key contextTypes on every child com­po­nent. How­ever, the real­ity is that you can spec­ify the ‘con­text­Types’ prop­erty on a mixin. That way you can avoid rewrit­ing the whitelist­ing boil­er­plate code by sim­ply using the mixin on all the child com­po­nents that need to access those prop­er­ties from its context.</p>
-<p>有人可能会说这使得代码更复杂，因为现在要在每个子组件额外的添加 <code>contextTypes</code> 属性。但是，其实你可以把 contextTypes 属性的代码放到 mixin。通过简单的在所有子组件使用 mixin 可以避免重写白名单的代码，这样所有子组件都可以通过 context 访问父组件的属性了。</p>
+<p>每个 margin，border，和 padding 可以使用单独的属性设置，例如 margin-left 或 border-bottom。内容的背景颜色或背景图像，也会应用到 padding。而 margin 总是透明的，露出父元素的背景颜色。Padding 不能是负值，但 margin 可以。我们会在后面的章节探索负 margin 的效果。</p>
+<blockquote>
+<p>Borders are generated using defined styles, such as solid or inset, and their colors are set using the border-color property. If no color is set, then the border takes on the foreground color of the element’s content. For example, if the text of a paragraph is white, then any borders around that paragraph will be white unless the author explicitly declares a different border color. If a border style has gaps of some type, then the element’s background is visible through those gaps. In other words, the border has the same background as the content and padding. Finally, the width of a border can never be negative.</p>
+</blockquote>
+<p>border 使用自定义的样式生成，例如 solid 或 inset，它们的颜色使用 border-color 属性设置。如果没设置颜色，border 会使用元素内容的前景色。例如段落的文字是白色，那么 border 也会是白色除非作者明确指定了不同的 border 颜色。如果 border 的样式会出现一些缺口，那么元素背景会在通过这些缺口可见。换句话说，border 有一部分背景是内容和 padding。最后，border 的宽度永远不能是负数。</p>
+<blockquote>
+<p>The various components of an element box can be affected by a number of properties, such as width or border-right. Many of these properties will be used in this chapter, even though we haven’t discussed them yet. The actual property definitions are given in Chapter 8, which builds on the concepts set forth in this chapter.</p>
+</blockquote>
+<p>元素盒子的各个部分可以被几个属性影响，例如 width 或 border-right。在这章我们会用到许多这些属性，尽管我们没有讨论过它们。实际上第 8 章才会探索它们，我们先在这一章了解它的概念。</p>
+<blockquote>
+<p>You will, however, find differences in how various types of elements are formatted. Block-level elements are treated differently than inline-level elements, while floated and positioned elements have their own ways of behaving.</p>
+</blockquote>
+<p>最后你会发现几个不同类型元素的格式的不同。Block 级别元素与 inline-level 元素的区别，浮动元素 (float) 和定位元素 (positioned) 它们自己的行为。</p>
 
       
     </div>
@@ -197,6 +209,8 @@
           
             <a href="/tags/前端/"> #前端 </a>
           
+            <a href="/tags/翻译/"> #翻译 </a>
+          
         </div>
       
 
@@ -204,13 +218,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/cijtd72ve005kdsf715wx0ryv/">Grunt 项目脚手架</a>
+              <a href="/2016/cijtdbkkz006eerf7agd1qyfd/">Flexbox 布局  (一) Container</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/sdasd/">前端记录</a>
+              <a href="/2016/cijtdbkmn007aerf7hy60kp6z/">Base Visual Formatting  (二)  Containing Block and Quick Refresher</a>
             
           </div>
         </div>
@@ -226,8 +240,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2015/cijtd72uf004edsf77jywn03n/"
-               data-title="React 的 context 和 childContext" data-url="http://yoursite.com/2015/cijtd72uf004edsf77jywn03n/">
+          <div class="ds-thread" data-thread-key="2016/cijtdbknb007kerf7jpx5izq2/"
+               data-title="Base Visual Formatting  (一)  Basic Boxes" data-url="http://yoursite.com/2016/cijtdbknb007kerf7jpx5izq2/">
           </div>
         
       </div>
@@ -318,7 +332,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Using_context_and_childContext_in_React"><span class="nav-number">1.</span> <span class="nav-text">Using context and childContext in React</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Base_Visual_Formatting"><span class="nav-number">1.</span> <span class="nav-text">Base Visual Formatting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic_Boxes"><span class="nav-number">1.1.</span> <span class="nav-text">Basic Boxes</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

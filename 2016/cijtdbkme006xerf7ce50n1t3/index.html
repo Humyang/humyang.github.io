@@ -31,7 +31,7 @@
 
 
 
-  <title> 关于 Babel 6 你需要知道的 6 件事情 // Humyang </title>
+  <title> CSS 布局之 Formatting Context (一) Block Formatting Context // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              关于 Babel 6 你需要知道的 6 件事情
+              CSS 布局之 Formatting Context (一) Block Formatting Context
             
           
         </h1>
@@ -119,14 +119,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-01-03
+          发表于 2016-01-15
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/前端/">前端</a>
+              <a href="/categories/CSS/">CSS</a>
 
               
               
@@ -134,7 +134,7 @@
               
 
             
-              <a href="/categories/前端/工具/">工具</a>
+              <a href="/categories/CSS/布局/">布局</a>
 
               
               
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/cijtd72va005cdsf7jeys3w4h/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijtd72va005cdsf7jeys3w4h/"></span>
+            <a href="/2016/cijtdbkme006xerf7ce50n1t3/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijtdbkme006xerf7ce50n1t3/"></span>
             </a>
           </span>
           
@@ -162,71 +162,53 @@
       
 
       
-        <p>快速了解 Babel 6 和 Babel 5 之间的区别。</p>
+        <p>介绍 CSS 布局的一个重要概念，Formatting Context，它是布局的基础。</p>
 <a id="more"></a>
 <hr>
-<p><a href="http://jamesknelson.com/the-six-things-you-need-to-know-about-babel-6/" target="_blank" rel="external">原文地址</a></p>
-<h1 id="关于_Babel_6_你需要知道的_6_件事情">关于 Babel 6 你需要知道的 6 件事情</h1><blockquote>
-<p>Over the last year, Babel has become the go-to tool for transforming ES2015 and JSX into boring old JavaScript. But seemingly overnight, Babel 6 changed everything. The babel package was deprecated, running babel doesn’t actually transform ES2015 to ES5, and the old docs have basically disappeared.</p>
-</blockquote>
-<p>在过去的一年，Babel 变成了最流行的将 ES2015 和 JSX 转换成旧 JavaScript 的工具。但似乎一夜之间，Babel 6 更改了一切。<code>babel</code> 包已经被移除，运行 babel 不会将 ES2015 转换成 ES5，并且旧的文档基本已经消失了。</p>
+<h1 id="CSS_布局之_Formatting_Context_(一)_Block_Formatting_Context">CSS 布局之 Formatting Context (一) Block Formatting Context</h1><p>首先来了解什么是 Formatting Context。</p>
+<p>Formatting Context 是页面中的一块渲染区域，在这个区域内拥有它自己的渲染规则，决定了子元素如何定位，及元素之间如何相互作用。</p>
+<p>不同的 Formatting Context 有不同的渲染规则，常见的有 <code>BFC</code> (Block Formatting Contextext)，<code>IFC</code> (Inline Formatting Context)，和 CSS 3 新增加的 <code>GFC</code> (Grid Formatting Context)，<code>FFC</code> (Flex Formatting Context)。</p>
+<p>与 Formatting Context 息息相关的是 Box，每个 HTML 元素作为 Box 被 CSS 渲染。不同的类型的 Box 有不同的行为，CSS 中有两种 Box：Block 和 Inline。</p>
+<h2 id="BFC">BFC</h2><p>BFC 就是只有 Block-level Box 参与的 Formatting Context。它是一个独立的渲染区域，它规定了内部的 Block-level Box 如何布局，并且与这个区域外部毫不相干。</p>
+<h3 id="哪些元素会生成_BFC">哪些元素会生成 BFC</h3><p>以前我一直不知道有 Formatting Context 这个概念，以为 Box 负责了 Formatting Context 的职责，但这也说明了 Formatting Context 不用手动创建也会出现，那么它出现的规则是什么呢，或者说哪些元素会生成 BFC？</p>
+<p>这些元素会生成 BFC：</p>
 <blockquote>
-<p>But Don’t Panic! To get you up to speed, I’ve put together a brief list of the six most important changes. And if you need a little more help, my Complete Guide to ES6 with Babel 6 will walk you through the practical details; including the CLI, Webpack, Mocha and Gulp.</p>
-</blockquote>
-<p>但是不要惊慌，为了让你加快速度，我挑出了 6 个最重要的更改进行简要说明，如果你需要更多帮助，我的 <a href="http://jamesknelson.com/the-complete-guide-to-es6-with-babel-6/" target="_blank" rel="external">Complete Guide to ES6 with Babel 6</a> 会讲解实用的详细细节；包含 CLI，Webpack，Mocha 和 Gulp。</p>
-<blockquote>
-<p>1.The <code>babel</code> npm package no longer exists. Instead, Babel has been split into multiple packages:</p>
 <ul>
-<li>babel-cli, which contains the babel command line interface</li>
-<li>babel-core, which contains the Node API and require hook</li>
-<li>babel-polyfill, which when required, sets you up with a full ES2015-ish environment</li>
+<li>the root element or something that contains it</li>
+<li>floats (elements where float is not none)</li>
+<li>absolutely positioned elements (elements where position is absolute or fixed)</li>
+<li>inline-blocks (elements with display: inline-block)</li>
+<li>table cells (elements with display: table-cell, which is the default for HTML table cells)</li>
+<li>table captions (elements with display: table-caption, which is the default for HTML table captions)</li>
+<li>elements where overflow has a value other than visible</li>
+<li>flex boxes (elements with display: flex or inline-flex)</li>
 </ul>
-<p>To avoid accidental conflicts, make sure to remove any previous Babel packages like babel, babel-core, etc. from your package.json, and then npm uninstall them.</p>
 </blockquote>
-<p>1.<strong><code>babel</code> npm 包已经不存在</strong>。作为替代，Babel 已经分割成多个包：</p>
-<p><a href="">babel-cli</a>,包含 babel 命令行接口。<br><a href="">babel-core</a>，包含 Node API 和 <code>require</code> hook<br><a href="">babel-polyfill</a>,当 <code>require</code> d (漏了内容？)，为你设置 ES2015 需要的完整环境。</p>
-<p>为了避免冲突，请你在 <code>package.json</code> 移除之前的 babel 包例如 babel,babel-core 等。然后运行 <code>npm uninstall</code> 卸载它们。</p>
-<blockquote>
-<p>2.Every single transform is now a plugin, including ES2015 and JSX. And as a result, nothing happens by default – so you’ll need to install the correct plugins. Actually, ES2015 consists of about 20 plugins. You don’t want to install each of these manually, which is why Babel has added presets.</p>
-</blockquote>
-<p>2.<strong>每个单独的转换现在都以 plugin 形式出现，包括 ES2015 和 JSX</strong>。因此，默认的 bable 什么都不发生 － 因此你需要正确的安装 plguin。但实际上，ES2015 包含了大约 20 个plugin。你不会想手动安装它们的，因此 Babel 添加了 presets 的概念。</p>
-<blockquote>
-<p>3.Babel 6 adds presets, or collections of plugins. And it provides two presets for the functionality provided by default in Babel 5:</p>
-<p>  <code>npm install babel-preset-es2015 babel-preset-react --save-dev</code></p>
-<p>But even after installing a preset, you need to tell Babel to use it.</p>
-</blockquote>
-<p>3.<strong>Babel 6 增加了 preset，或 plugin 集合</strong>。它提供了两个 Babel 5 默认提供的功能：</p>
-<p><code>npm install babel-preset-es2015 babel-preset-react --save-dev</code></p>
-<p>但即使安装了 preset 之后，你仍需要告诉 Babel 使用它。</p>
-<blockquote>
-<p>4.<code>.babelrc</code> is kinda a necessity now. Since Babel no longer uses ES2015 and React transforms by default, the require hook used by gulpfile.babel.js and mocha will not actually do anything. Fix this by creating a .babelrc in your project directory:</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [<span class="string">"es2015"</span>, <span class="string">"react"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>.babelrc</code> 现在是<strong>有点必要性</strong>，自从 Babel 默认不具备 ES2015 和 React 转换，<code>gulpfile.babel.js</code> 和 <a href="">mocha</a> 中通过 <code>require</code> hook 使用 Babel，不会进行任何操作。要修复这个问题请在你的项目目录创建一个 <code>.babelrc</code> 文件，包含这些内容：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [<span class="string">"es2015"</span>, <span class="string">"react"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>5.Stage 0 is now a separate preset, not an option. Previously, you enabled ES7 features like decorators and async/await by passing —stage 0 to babel. Now, you install and load the babel-preset-stage-0 package.</p>
-</blockquote>
-<p><strong>Stage 0 现在是单独的 preset，不再是一个选项</strong>。以前，通过传递 —stage 0 给 babel 启用 ES7 的功能例如修饰符和 <code>async</code>/<code>await</code>。现在你需要安装和加载 <code>babel-preset-stage-0</code> 包。</p>
-<blockquote>
-<p>6.The —external-helpers option is now a plugin. To avoid repeated inclusion of Babel’s helper functions, you’ll now need to install and apply the babel-plugin-transform-runtime package, and then require the babel-runtime package within your code (yes, even if you’re using the polyfill).</p>
-</blockquote>
-<p><code>-external-helpers</code> 选项现在是 plugin。为了避免反复包含 Babel 的 helper function，你现在需要安装和应用 <code>babel-plugin-transform-runtime</code> 包，然后 require <code>babel-runtion</code> 包到你的代码中 (是的，即使你在使用 polyfill)。</p>
-<blockquote>
-<p>And there you have it, you’re now up to speed on Babel 6’s packages, plugins, presets and options! But what about Webpack? What about passing presets via the CLI? I’ve tried to keep this list as succinct as possible, and to do so I’ve kept my Complete Guide to ES6 with Babel 6 as a separate series — covering the CLI, Webpack, Gulp and Mocha.</p>
-</blockquote>
-<p>现在已经快速了解了 Babel 6 的包，plugin，preset 和 option！但关于 Webpack 呢？如何通过 CLI 传递 preset？为了保持文章的简洁风格，我把这些内容写在了 <a href="http://jamesknelson.com/the-complete-guide-to-es6-with-babel-6/" target="_blank" rel="external">Complete Guide to ES6 with Babel6</a> 作为独立的系列 - 包含 CLI，Webpack，Gulp 和 Mocha。</p>
-<h2 id="But_everything_moves_so_fast-_How_will_I_keep_up_to_date?">But everything moves so fast. How will I keep up to date?</h2><p>但一切进展都那么快，我该如何才能跟上脚步呢？</p>
-<blockquote>
-<p>With ES2015 already standardised, there is no argument that Babel is a necessary tool for most JavaScript developers. But does the thought of integrating an entire platform for transforming JavaScript into every new project worry you a little bit? The speed at which the JavaScript ecosystem is growing can feel demoralising. But luckily, it doesn’t have to be that way!</p>
-</blockquote>
-<p>ES2015 已经实现标准化，没有参数的 Babel 对大部分开发者来说是必要的工具。但整合整个平台把 JavaScript 转换到新的项目你是否会有一点担心？JavaScript 生态系统的快速增长会然人感觉到有些泄气。但很幸运，不用这样做。</p>
-<blockquote>
-<p>The thing is that for most projects, scaling is a problem you’d like to have. And until you’re at that point, you’ll be more productive by focusing on a few important tools than trying to grasp everything.</p>
-</blockquote>
-<p>对于大部分项目都会遇到的伸缩问题，在你遇到这个问题时你会明白，通过关注一个最小最重要的工具你将更有效率，而不是试图抓住一切。</p>
-<p>One way to keep focussed on the tools which count is to join my Newsletter. You’ll receive one e-mail every couple weeks with information tailored to small apps using React. And in return for your e-mail, you’ll immediately receive three bonus print-optimised PDF cheatsheets – on React (see preview), ES6 and JavaScript promises. All for free!</p>
-<p>One more thing – I love hearing your questions, offers and opinions. If you have something to say, leave a comment or send me an e-mail at james@jamesknelson.com. I’m looking forward to hearing from you!</p>
+<ul>
+<li>root 元素或一些包含它的元素。</li>
+<li>floats 元素 (元素的 float 值不为 none)</li>
+<li>absolutely 定位的元素 (元素的 position 值是 absolute 或 fixed)</li>
+<li>inline-block 元素 (元素的 display 为 inline-block)</li>
+<li>table cell 元素 (元素的 display 为 table-cell, 它是HTML 的 table cell 的默认值)</li>
+<li>table captions (元素的 display 值为 table-caption,它是 HTML table captions 的默认值)</li>
+<li>元素的 overflow 有非 visible 的值</li>
+<li>flex boxes (元素的 display 为 flex 或 inline-flex)</li>
+</ul>
+<p>Block Formatting Context 包含创建它的元素的所有内部元素，但不包含会创建新的 Block Formatting Context 的后裔元素。</p>
+<h3 id="BFC_的规则">BFC 的规则</h3><p>Block Formatting Context 对于如何定位 (见 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float" target="_blank" rel="external">float</a>) 和 clear (见 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clear" target="_blank" rel="external">clear</a>) 非常重要，这些规则只会在同一个 Block Formatting 中应用。</p>
+<p>Floats 不会影响其它 block formatting context 的布局，clear 也只会清除同一个 block formatting context 的 float。</p>
+<p>这里是其它博客看到的一个总结：</p>
+<ul>
+<li>内部的 Box 以垂直方向，一个接一个地放置。</li>
+<li>Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠。</li>
+<li>每个元素的 margin box 的左边， 与容器块的 border box 的左边相接触(对于从左往右的文字格式  (西方语言)  ，否则相反)。即使存在浮动也是如此。</li>
+<li>BFC的区域不会与 float box 重叠。</li>
+<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
+<li>计算BFC的高度时，浮动元素也参与计算</li>
+</ul>
+<h3 id="其它_FC">其它 FC</h3><p>参考在后面的 CSS 权威指南翻译文章。</p>
+<h2 id="参考资料">参考资料</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Visual_formatting_model" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Visual_formatting_model</a></p>
+<p><a href="http://www.cnblogs.com/liugblog/p/4982684.html" target="_blank" rel="external">http://www.cnblogs.com/liugblog/p/4982684.html</a></p>
 
       
     </div>
@@ -244,13 +226,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/cijtd72m0000vdsf7hdreqiyq/">Webpack 入门</a>
+              <a href="/2016/cijtdbkmn007aerf7hy60kp6z/">Base Visual Formatting  (二)  Containing Block and Quick Refresher</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/cijtd72ve005kdsf715wx0ryv/">Grunt 项目脚手架</a>
+              <a href="/2016/cijtdbkmh0071erf72ebeqecd/">CSS Margin (二) Margin 与 block，inline 元素</a>
             
           </div>
         </div>
@@ -266,8 +248,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/cijtd72va005cdsf7jeys3w4h/"
-               data-title="关于 Babel 6 你需要知道的 6 件事情" data-url="http://yoursite.com/2016/cijtd72va005cdsf7jeys3w4h/">
+          <div class="ds-thread" data-thread-key="2016/cijtdbkme006xerf7ce50n1t3/"
+               data-title="CSS 布局之 Formatting Context (一) Block Formatting Context" data-url="http://yoursite.com/2016/cijtdbkme006xerf7ce50n1t3/">
           </div>
         
       </div>
@@ -358,7 +340,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于_Babel_6_你需要知道的_6_件事情"><span class="nav-number">1.</span> <span class="nav-text">关于 Babel 6 你需要知道的 6 件事情</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#But_everything_moves_so_fast-_How_will_I_keep_up_to_date?"><span class="nav-number">1.1.</span> <span class="nav-text">But everything moves so fast. How will I keep up to date?</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS_布局之_Formatting_Context_(一)_Block_Formatting_Context"><span class="nav-number">1.</span> <span class="nav-text">CSS 布局之 Formatting Context (一) Block Formatting Context</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC"><span class="nav-number">1.1.</span> <span class="nav-text">BFC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#哪些元素会生成_BFC"><span class="nav-number">1.1.1.</span> <span class="nav-text">哪些元素会生成 BFC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFC_的规则"><span class="nav-number">1.1.2.</span> <span class="nav-text">BFC 的规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它_FC"><span class="nav-number">1.1.3.</span> <span class="nav-text">其它 FC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

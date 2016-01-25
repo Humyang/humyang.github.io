@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="前端,翻译," />
+  <meta name="keywords" content="前端," />
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-  <title> Flexbox 布局  (二) Container // Humyang </title>
+  <title> 关于 Babel 6 你需要知道的 6 件事情 // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              Flexbox 布局  (二) Container
+              关于 Babel 6 你需要知道的 6 件事情
             
           
         </h1>
@@ -119,14 +119,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-01-24
+          发表于 2016-01-03
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/CSS/">CSS</a>
+              <a href="/categories/前端/">前端</a>
 
               
               
@@ -134,7 +134,7 @@
               
 
             
-              <a href="/categories/CSS/布局/">布局</a>
+              <a href="/categories/前端/工具/">工具</a>
 
               
               
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/cijtd72vq0066dsf7butbu7rm/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijtd72vq0066dsf7butbu7rm/"></span>
+            <a href="/2016/cijtdbkjp005cerf7fb4gecot/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijtdbkjp005cerf7fb4gecot/"></span>
             </a>
           </span>
           
@@ -162,70 +162,71 @@
       
 
       
-        <p>介绍 Flexbox 的概念，和 Child 能应用哪些属性。</p>
+        <p>快速了解 Babel 6 和 Babel 5 之间的区别。</p>
 <a id="more"></a>
 <hr>
-<h1 id="Properties_for_the_Children_(flex_items)">Properties for the Children (flex items)</h1><p><img src="./flex-items.svg" alt=""></p>
-<h2 id="order">order</h2><p><img src="./order-2.svg" alt=""></p>
+<p><a href="http://jamesknelson.com/the-six-things-you-need-to-know-about-babel-6/" target="_blank" rel="external">原文地址</a></p>
+<h1 id="关于_Babel_6_你需要知道的_6_件事情">关于 Babel 6 你需要知道的 6 件事情</h1><blockquote>
+<p>Over the last year, Babel has become the go-to tool for transforming ES2015 and JSX into boring old JavaScript. But seemingly overnight, Babel 6 changed everything. The babel package was deprecated, running babel doesn’t actually transform ES2015 to ES5, and the old docs have basically disappeared.</p>
+</blockquote>
+<p>在过去的一年，Babel 变成了最流行的将 ES2015 和 JSX 转换成旧 JavaScript 的工具。但似乎一夜之间，Babel 6 更改了一切。<code>babel</code> 包已经被移除，运行 babel 不会将 ES2015 转换成 ES5，并且旧的文档基本已经消失了。</p>
 <blockquote>
-<p>By default, flex items are laid out in the source <code>order</code>. However, the order property controls the order in which they appear in the flex container.</p>
+<p>But Don’t Panic! To get you up to speed, I’ve put together a brief list of the six most important changes. And if you need a little more help, my Complete Guide to ES6 with Babel 6 will walk you through the practical details; including the CLI, Webpack, Mocha and Gulp.</p>
 </blockquote>
-<p>flex Item 顺序默认按照源顺序排序。而 <code>order</code> 属性可以控制他们的排列顺序。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">order</span>:<span class="value"> integer</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="flex-grow">flex-grow</h2><p><img src="./flex-grow.svg" alt=""></p>
+<p>但是不要惊慌，为了让你加快速度，我挑出了 6 个最重要的更改进行简要说明，如果你需要更多帮助，我的 <a href="http://jamesknelson.com/the-complete-guide-to-es6-with-babel-6/" target="_blank" rel="external">Complete Guide to ES6 with Babel 6</a> 会讲解实用的详细细节；包含 CLI，Webpack，Mocha 和 Gulp。</p>
 <blockquote>
-<p>This defines the ability for a flex item to grow if necessary. It accepts a unitless value that serves as a proportion. It dictates what amount of the available space inside the flex container the item should take up.</p>
+<p>1.The <code>babel</code> npm package no longer exists. Instead, Babel has been split into multiple packages:</p>
+<ul>
+<li>babel-cli, which contains the babel command line interface</li>
+<li>babel-core, which contains the Node API and require hook</li>
+<li>babel-polyfill, which when required, sets you up with a full ES2015-ish environment</li>
+</ul>
+<p>To avoid accidental conflicts, make sure to remove any previous Babel packages like babel, babel-core, etc. from your package.json, and then npm uninstall them.</p>
 </blockquote>
-<p>可以使用这个属性根据需要增大 flex Item 。他接受无单位的值作为比例。他根据比例将 flex  Container 可用的空间分配给 flex Item 。</p>
+<p>1.<strong><code>babel</code> npm 包已经不存在</strong>。作为替代，Babel 已经分割成多个包：</p>
+<p><a href="">babel-cli</a>,包含 babel 命令行接口。<br><a href="">babel-core</a>，包含 Node API 和 <code>require</code> hook<br><a href="">babel-polyfill</a>,当 <code>require</code> d (漏了内容？)，为你设置 ES2015 需要的完整环境。</p>
+<p>为了避免冲突，请你在 <code>package.json</code> 移除之前的 babel 包例如 babel,babel-core 等。然后运行 <code>npm uninstall</code> 卸载它们。</p>
 <blockquote>
-<p>If all items have flex-grow set to 1, the remaining space in the container will be distributed equally to all children. If one of the children a value of 2, the remaining space would take up twice as much space as the others (or it will try to, at least).</p>
+<p>2.Every single transform is now a plugin, including ES2015 and JSX. And as a result, nothing happens by default – so you’ll need to install the correct plugins. Actually, ES2015 consists of about 20 plugins. You don’t want to install each of these manually, which is why Babel has added presets.</p>
 </blockquote>
-<p>如果所有的 Item 的 flex-grow 属性设置为 1， Container 剩余的空间将会平均分配给 flex Item 。如果一个值是 2，剩余的空间将会为此 Item 分配比其他 Item 一倍的空间  (会尝试)。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex-grow</span>:<span class="value"> &lt;number&gt;</span></span>; <span class="comment">/* default 0 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>2.<strong>每个单独的转换现在都以 plugin 形式出现，包括 ES2015 和 JSX</strong>。因此，默认的 bable 什么都不发生 － 因此你需要正确的安装 plguin。但实际上，ES2015 包含了大约 20 个plugin。你不会想手动安装它们的，因此 Babel 添加了 presets 的概念。</p>
 <blockquote>
-<p>Negative numbers are invalid.</p>
+<p>3.Babel 6 adds presets, or collections of plugins. And it provides two presets for the functionality provided by default in Babel 5:</p>
+<p>  <code>npm install babel-preset-es2015 babel-preset-react --save-dev</code></p>
+<p>But even after installing a preset, you need to tell Babel to use it.</p>
 </blockquote>
-<p>负数是无效的。</p>
-<h2 id="flex-shrink">flex-shrink</h2><blockquote>
-<p>This defines the ability for a flex item to shrink if necessary.</p>
-</blockquote>
-<p>如果需要可以缩小 flex Item 。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex-shrink</span>:<span class="value"> &lt;number&gt;</span></span>; <span class="comment">/* default 1 */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>3.<strong>Babel 6 增加了 preset，或 plugin 集合</strong>。它提供了两个 Babel 5 默认提供的功能：</p>
+<p><code>npm install babel-preset-es2015 babel-preset-react --save-dev</code></p>
+<p>但即使安装了 preset 之后，你仍需要告诉 Babel 使用它。</p>
 <blockquote>
-<p>Negative numbers are invalid.</p>
+<p>4.<code>.babelrc</code> is kinda a necessity now. Since Babel no longer uses ES2015 and React transforms by default, the require hook used by gulpfile.babel.js and mocha will not actually do anything. Fix this by creating a .babelrc in your project directory:</p>
 </blockquote>
-<p>负数是无效的。</p>
-<h2 id="flex-basis">flex-basis</h2><blockquote>
-<p>This defines the default size of an element before the remaining space is distributed. It can be a length (e.g. 20%, 5rem, etc.) or a keyword. The <code>auto</code> keyword means “look at my width or height property” (which was temporarily done by the <code>main-size</code> keyword until deprecated). The <code>content</code> keyword means “size it based on the item’s content” - this keyword isn’t well supported yet, so it’s hard to test and harder to know what it’s brethren <code>max-content</code>, <code>min-content</code>, and <code>fit-content</code> do.</p>
-</blockquote>
-<p>分配空间前指定元素的默认尺寸。他可以是一个长度  (如 20%，5rem 等) 或关键字。关键字 <code>auto</code> 意味着 “根据我的 width 或 height 属性”  (曾经临时使用关键字 <code>main-size</code>，现已弃用)。 关键字 <code>content</code> 意味着 “尺寸是基于 Item 的内容” - 这个关键字不是很好的被支持，因此他很难测试并且更难知道他的哪些兄弟有效果：<code>max-content</code>,<code>min-content</code> 和 <code>fit-content</code>。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex-basis</span>:<span class="value"> [length] | auto</span></span>; <span class="comment">/* default auto */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [<span class="string">"es2015"</span>, <span class="string">"react"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>.babelrc</code> 现在是<strong>有点必要性</strong>，自从 Babel 默认不具备 ES2015 和 React 转换，<code>gulpfile.babel.js</code> 和 <a href="">mocha</a> 中通过 <code>require</code> hook 使用 Babel，不会进行任何操作。要修复这个问题请在你的项目目录创建一个 <code>.babelrc</code> 文件，包含这些内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [<span class="string">"es2015"</span>, <span class="string">"react"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>If set to <code>0</code>, the extra space around content isn’t factored in. If set to <code>auto</code>, the extra space is distributed based on its <code>flex-grow</code> value. See this graphic.</p>
+<p>5.Stage 0 is now a separate preset, not an option. Previously, you enabled ES7 features like decorators and async/await by passing —stage 0 to babel. Now, you install and load the babel-preset-stage-0 package.</p>
 </blockquote>
-<p>如果设置为 <code>0</code>，环绕内容的额外空间则不会算上。如果设置为 <code>auto</code>，额外空间的分配基于他的 <code>flex-grow</code> 值。见此图：</p>
-<p><img src="./rel-vs-abs-flex.svg" alt=""></p>
-<h2 id="flex">flex</h2><blockquote>
-<p>This is the shorthand for <code>flex-grow</code>, <code>flex-shrink</code> and <code>flex-basis</code> combined. The second and third parameters (<code>flex-shrink</code> and <code>flex-basis</code>) are optional. Default is <code>0 1 auto</code>.</p>
-</blockquote>
-<p>这是 <code>flex-grow</code>,<code>flex-shrink</code> 和 <code>flex-basis</code> 组合的缩写。第二和第三个参数是可写的。默认是 <code>0 1 auto</code>。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex</span>:<span class="value"> none | [ &lt;<span class="string">'flex-grow'</span>&gt; &lt;<span class="string">'flex-shrink'</span>&gt;? || &lt;<span class="string">'flex-basis'</span>&gt; ]</span><br><span class="line">&#125;</span></span></span></span><br></pre></td></tr></table></figure>
-<p><strong>It is recommended that you use this shorthand property</strong> rather than set the individual properties. The short hand sets the other values intelligently.</p>
-<p><strong>推荐使用这个缩写属性</strong> 而不要使用单个属性。这个缩写更加智能的设置其他值。</p>
-<h2 id="align-self">align-self</h2><p><img src="./align-self.svg" alt=""></p>
+<p><strong>Stage 0 现在是单独的 preset，不再是一个选项</strong>。以前，通过传递 —stage 0 给 babel 启用 ES7 的功能例如修饰符和 <code>async</code>/<code>await</code>。现在你需要安装和加载 <code>babel-preset-stage-0</code> 包。</p>
 <blockquote>
-<p>This allows the default alignment (or the one specified by <code>align-items</code>) to be overridden for individual flex items.</p>
+<p>6.The —external-helpers option is now a plugin. To avoid repeated inclusion of Babel’s helper functions, you’ll now need to install and apply the babel-plugin-transform-runtime package, and then require the babel-runtime package within your code (yes, even if you’re using the polyfill).</p>
 </blockquote>
-<p>使单个 flex Item 可以覆盖默认的对齐方式  (或通过 <code>align-items</code> 指定一个)。</p>
+<p><code>-external-helpers</code> 选项现在是 plugin。为了避免反复包含 Babel 的 helper function，你现在需要安装和应用 <code>babel-plugin-transform-runtime</code> 包，然后 require <code>babel-runtion</code> 包到你的代码中 (是的，即使你在使用 polyfill)。</p>
 <blockquote>
-<p>Please see the <code>align-items</code> explanation to understand the available values.</p>
+<p>And there you have it, you’re now up to speed on Babel 6’s packages, plugins, presets and options! But what about Webpack? What about passing presets via the CLI? I’ve tried to keep this list as succinct as possible, and to do so I’ve kept my Complete Guide to ES6 with Babel 6 as a separate series — covering the CLI, Webpack, Gulp and Mocha.</p>
 </blockquote>
-<p>请参照 <code>align-items</code> 了解可用值。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.item</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">align-self</span>:<span class="value"> auto | flex-start | flex-end | center | baseline | stretch</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>现在已经快速了解了 Babel 6 的包，plugin，preset 和 option！但关于 Webpack 呢？如何通过 CLI 传递 preset？为了保持文章的简洁风格，我把这些内容写在了 <a href="http://jamesknelson.com/the-complete-guide-to-es6-with-babel-6/" target="_blank" rel="external">Complete Guide to ES6 with Babel6</a> 作为独立的系列 - 包含 CLI，Webpack，Gulp 和 Mocha。</p>
+<h2 id="But_everything_moves_so_fast-_How_will_I_keep_up_to_date?">But everything moves so fast. How will I keep up to date?</h2><p>但一切进展都那么快，我该如何才能跟上脚步呢？</p>
 <blockquote>
-<p>Note that <code>float</code>, <code>clear</code> and <code>vertical-align</code> have no effect on a flex item.</p>
+<p>With ES2015 already standardised, there is no argument that Babel is a necessary tool for most JavaScript developers. But does the thought of integrating an entire platform for transforming JavaScript into every new project worry you a little bit? The speed at which the JavaScript ecosystem is growing can feel demoralising. But luckily, it doesn’t have to be that way!</p>
 </blockquote>
-<p>注意 <code>float</code>，<code>clear</code>，和 <code>vertical-align</code> 在 flex Item  没有效果。</p>
+<p>ES2015 已经实现标准化，没有参数的 Babel 对大部分开发者来说是必要的工具。但整合整个平台把 JavaScript 转换到新的项目你是否会有一点担心？JavaScript 生态系统的快速增长会然人感觉到有些泄气。但很幸运，不用这样做。</p>
+<blockquote>
+<p>The thing is that for most projects, scaling is a problem you’d like to have. And until you’re at that point, you’ll be more productive by focusing on a few important tools than trying to grasp everything.</p>
+</blockquote>
+<p>对于大部分项目都会遇到的伸缩问题，在你遇到这个问题时你会明白，通过关注一个最小最重要的工具你将更有效率，而不是试图抓住一切。</p>
+<p>One way to keep focussed on the tools which count is to join my Newsletter. You’ll receive one e-mail every couple weeks with information tailored to small apps using React. And in return for your e-mail, you’ll immediately receive three bonus print-optimised PDF cheatsheets – on React (see preview), ES6 and JavaScript promises. All for free!</p>
+<p>One more thing – I love hearing your questions, offers and opinions. If you have something to say, leave a comment or send me an e-mail at james@jamesknelson.com. I’m looking forward to hearing from you!</p>
 
       
     </div>
@@ -236,8 +237,6 @@
           
             <a href="/tags/前端/"> #前端 </a>
           
-            <a href="/tags/翻译/"> #翻译 </a>
-          
         </div>
       
 
@@ -245,13 +244,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/3015/FrontEndNavigation/">前端 EXAMPLE 导航</a>
+              <a href="/2016/cijtdbkam000verf7yrk6oeln/">Webpack 入门</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/cijtd72yo007fdsf71qcwn9t5/">Basic Visual Formatting (三)</a>
+              <a href="/2016/cijtdbkjt005kerf7sgmllyq9/">Grunt 项目脚手架</a>
             
           </div>
         </div>
@@ -267,8 +266,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/cijtd72vq0066dsf7butbu7rm/"
-               data-title="Flexbox 布局  (二) Container" data-url="http://yoursite.com/2016/cijtd72vq0066dsf7butbu7rm/">
+          <div class="ds-thread" data-thread-key="2016/cijtdbkjp005cerf7fb4gecot/"
+               data-title="关于 Babel 6 你需要知道的 6 件事情" data-url="http://yoursite.com/2016/cijtdbkjp005cerf7fb4gecot/">
           </div>
         
       </div>
@@ -359,7 +358,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Properties_for_the_Children_(flex_items)"><span class="nav-number">1.</span> <span class="nav-text">Properties for the Children (flex items)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#order"><span class="nav-number">1.1.</span> <span class="nav-text">order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-grow"><span class="nav-number">1.2.</span> <span class="nav-text">flex-grow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-shrink"><span class="nav-number">1.3.</span> <span class="nav-text">flex-shrink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-basis"><span class="nav-number">1.4.</span> <span class="nav-text">flex-basis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex"><span class="nav-number">1.5.</span> <span class="nav-text">flex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#align-self"><span class="nav-number">1.6.</span> <span class="nav-text">align-self</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于_Babel_6_你需要知道的_6_件事情"><span class="nav-number">1.</span> <span class="nav-text">关于 Babel 6 你需要知道的 6 件事情</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#But_everything_moves_so_fast-_How_will_I_keep_up_to_date?"><span class="nav-number">1.1.</span> <span class="nav-text">But everything moves so fast. How will I keep up to date?</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
