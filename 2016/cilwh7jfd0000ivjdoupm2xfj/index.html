@@ -236,9 +236,9 @@
 </ul>
 <p>记住，容器组件没有 DOM。他只需要提供组合不同 UI 所需要的边界。</p>
 <p>利用这个优势。</p>
-<h2 id="When_to_Introduce_Containers?">When to Introduce Containers?</h2><p>开始介绍容器组件？</p>
+<h2 id="When_to_Introduce_Containers?">When to Introduce Containers?</h2><p>何时使用容器？</p>
 <p>I suggest you to start building your app with just presentational components first. Eventually you’ll realize that you are passing too many props down the intermediate components. When you notice that some components don’t use the props they receive but merely forward them down and you have to rewire all those intermediate components any time the children need more data, it’s a good time to introduce some container components. This way you can get the data and the behavior props to the leaf components without burdening the unrelated components in the middle of the tree.</p>
-<p>我猜测你开始构建你的 app 时首先创建的是表现层组件。最后你会发现传递了太多 props 到中间组件。当你注意到一些组件不需要用到他们接收到的 props 但只是要转发他们下去并且你重写了所有这些中间组件他们的子组件需要的更多数据，那时介绍一些容器组件的好时间。通过这种方式你可以获取数据和行为 props 给叶组件而不需要麻烦树结构中间无关的组件。</p>
+<p>我猜测你开始构建你的 app 时首先创建的是表现层组件。最后你会发现传递了太多 props 到中间组件。当你注意到一些组件不需要用到他们接收到的 props 但只是要转发他们下去并且你重写了所有这些中间组件他们的子组件需要的更多数据，那是使用一些容器组件的好时间。通过这种方式你可以获取数据和行为 props 给叶组件而不需要麻烦树结构中间无关的组件。</p>
 <p>This is an ongoing process of refactoring so don’t try to get it right the first time. As you experiment with this pattern, you will develop an intuitive sense for when it’s time to extract some containers, just like you know when it’s time to extract a function. My free Redux Egghead series might help you with that too!</p>
 <p>这是一个持续重构的过程所以不用设法第一时间就得到完美答案。当你尝试这种模式时，你会有一种直观的感觉，在需要提取容器时，就像当你明白要如何提取函数时的感觉。我的 <a href="https://egghead.io/series/getting-started-with-redux" target="_blank" rel="external">free Redux Egghead series</a> 可能也可以帮助你。</p>
 <h2 id="Other_Dichotomies">Other Dichotomies</h2><p>其他区分方法</p>
