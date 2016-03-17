@@ -171,7 +171,7 @@
 <p>Block-level elements can behave in both predictable and surprising ways. The handling of element placement along the horizontal and vertical axes can differ, for example. To fully understand how block-level elements are handled, you must clearly understand a number of boundaries and areas. They are shown in detail in Figure 7-2.</p>
 </blockquote>
 <p>块级元素的行为即可预测且令人诧异的，元素布局在水平和垂直轴线有不同处理方式。例如，要完全明白块级元素是如何处理的，你必须清晰了解几处边界和区域。他们在图 7-2 列出。</p>
-<p><img src="./7-2.png" alt=""><br><small>图 7-2. 完整的盒模型</small></p>
+<p><img src="/images/2016/01/7-2.png" alt=""><br><small>图 7-2. 完整的盒模型</small></p>
 <blockquote>
 <p>In general, the width of an element is defined as the distance from the left inner edge to the right inner edge, and the height is the distance from the inner top to the inner bottom. Both of these properties can be applied to an element.</p>
 </blockquote>
@@ -211,13 +211,13 @@
 <p>Let’s say the width of the div is 30em, making the sum total of the content width, padding, borders, and margins of each paragraph 30em. In Figure 7-3, the “blank” space around the paragraphs is actually their margins. If the div had any padding, there would be even more blank space, but that isn’t the case here. I’ll discuss padding soon.</p>
 </blockquote>
 <p>如果 div 的宽度是 30em，使每个有 30em 宽的段落的内容宽度，内边距，外边距，边框相加。如图 7-3 中，围绕着段落的 “空白” 空间实际上是他们的外边距。如果 div 有内边距，这里将会有更多空白空间，先不在这里介绍，我会在后面讨论内边距时说明。</p>
-<p><img src="./7-3.png" alt=""><br>图 7-3. 元素盒子的宽度与他们的父元素一样宽。</p>
+<p><img src="/images/2016/01/7-3.png" alt=""><br>图 7-3. 元素盒子的宽度与他们的父元素一样宽。</p>
 <h3 id="Horizontal_properties">Horizontal properties</h3><p>水平属性</p>
 <blockquote>
 <p>The “seven properties” of horizontal formatting are: margin-left, border-left, padding-left, width, padding-right, border-right, and margin-right. These properties, which are diagrammed in Figure 7-4, relate to the horizontal layout of block-level boxes.</p>
 </blockquote>
 <p>水平格式化的 “七个属性”：左外边距，左边框，左内边距，宽度，右内边距，右边框，右外边距。这些属性，在图 7-4，他们是关于块级盒子水平布局的。</p>
-<p><img src="./7-4.png" alt=""><br>图 7-4. 水平格式化的 “七个属性”</p>
+<p><img src="/images/2016/01/7-4.png" alt=""><br>图 7-4. 水平格式化的 “七个属性”</p>
 <blockquote>
 <p>The values of these seven properties must add up to the width of the element’s containing block, which is usually the value of width for a block element’s parent (since block-level elements nearly always have block-level elements for parents).</p>
 </blockquote>
@@ -226,7 +226,7 @@
 <p>Of these seven properties, only three may be set to auto: the width of the element’s content and the left and right margins. The remaining properties must be set either to specific values or default to a width of zero. Figure 7-5 shows which parts of the box can take a value of auto and which cannot.</p>
 </blockquote>
 <p>这七个属性，只有三个能设为 auto：元素的内容的宽度和左右外边距。剩余的属性必须设置为指定值或默认的宽度 0。图 7-5 显示演示盒子的部分哪些可以设置为 auto 哪些不能。</p>
-<p><img src="./7-5.png" alt=""><br>图 7-5. 可以设置为 auto 的水平属性</p>
+<p><img src="/images/2016/01/7-5.png" alt=""><br>图 7-5. 可以设置为 auto 的水平属性</p>
 <blockquote>
 <p>width must either be set to auto or a nonnegative value of some type. When you do use auto in horizontal formatting, different effects can result.</p>
 </blockquote>
@@ -249,7 +249,7 @@
 </blockquote>
 <p>这种三个属性除了设置为 auto 之外的情况－或在 CSS 技术中，如果这个格式化属性已经超过约束条件－那么右外边距总是强制被设置为 auto。这意味着如果外边距和宽度都设置为 100px，那么用户代理会强制设置右外边距为 auto。右外边距的宽度将依照 “填充” 的规则自动设置一个距离值，使元素的总宽等于包含他的容器块的宽度。图 7-6 显示下面的 html 标记的结果：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: 100px; margin-right: 100px;</span><br><span class="line">     width: 100px;&#125;   /* right margin forced to be 200px */</span><br></pre></td></tr></table></figure>
-<p><img src="./7-6.png" alt=""><br>图 7-6. 覆盖右外边距的设置</p>
+<p><img src="/images/2016/01/7-6.png" alt=""><br>图 7-6. 覆盖右外边距的设置</p>
 <blockquote>
 <p><small>margin-right is forced to be auto only for left-to-right languages such as English. In right-to-left languages, everything is reversed, so margin-left is forced to be auto, not margin-right.</small></p>
 </blockquote>
@@ -259,7 +259,7 @@
 </blockquote>
 <p>如果所有外边距都设置了明确值，而宽度设置为 auto，那么宽度的值会被设置为达到总宽所需要的大小  (父元素的内容宽度)。下面的标记的结果在图 7-7 ：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: 100px; margin-right: 100px; width: auto;&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="./7-7.png" alt=""><br>图 7-7. 自动宽度</p>
+<p><img src="/images/2016/01/7-7.png" alt=""><br>图 7-7. 自动宽度</p>
 <blockquote>
 <p>The case shown in Figure 7-7 is the most common since it is equivalent to setting the margins and not declaring anything for the width. The result of the following markup is exactly the same as that shown in Figure 7-7:</p>
 </blockquote>
@@ -354,14 +354,14 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
