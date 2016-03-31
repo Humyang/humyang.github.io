@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="前端," />
+  <meta name="keywords" content="前端,翻译," />
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-  <title> 表现层组件和容器组件 // Humyang </title>
+  <title> Base Visual Formatting  (一)  Basic Boxes // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              表现层组件和容器组件
+              Base Visual Formatting  (一)  Basic Boxes
             
           
         </h1>
@@ -119,14 +119,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-03-17
+          发表于 2016-01-16
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/React/">React</a>
+              <a href="/categories/CSS/">CSS</a>
 
               
               
@@ -134,7 +134,7 @@
               
 
             
-              <a href="/categories/React/Redux/">Redux</a>
+              <a href="/categories/CSS/布局/">布局</a>
 
               
               
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/cilwh7jfd0000ivjdoupm2xfj/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cilwh7jfd0000ivjdoupm2xfj/"></span>
+            <a href="/2016/cimgh4xk4007qy9jdt7ujchcs/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cimgh4xk4007qy9jdt7ujchcs/"></span>
             </a>
           </span>
           
@@ -162,117 +162,43 @@
       
 
       
-        <p><a href="http://redux.js.org/docs/basics/UsageWithReact.html" target="_blank" rel="external">Redux 文档</a>内推荐阅读的前置知识。</p>
+        <p>介绍 CSS 布局的基础概念：Basic Boxes。</p>
 <a id="more"></a>
 <hr>
-<p><a href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0" target="_blank" rel="external">原文</a></p>
-<h1 id="Presentational_and_Container_Components">Presentational and Container Components</h1><p>表现层组件和容器组件</p>
-<p>There’s a simple pattern I find immensely useful when writing React applications. If you’ve been doing React for a while, you have probably already discovered it. This article explains it well, but I want to add a few more points.</p>
-<p>这是我在写 React 应用程序时找到的非常有用并简单的模式。<a href="http://facebook.github.io/react/blog/2015/03/19/building-the-facebook-news-feed-with-relay.html" target="_blank" rel="external">如果你已经使用过 React 一段时间</a>，你可能已经发现了。<a href="https://medium.com/@learnreact/container-components-c0e67432e005" target="_blank" rel="external">这篇文章解释得很好</a>，但我想添加一些东西。</p>
-<p>You’ll find your components much easier to reuse and reason about if you divide them into two categories. I call them Container and Presentational components* but I also heard Fat and Skinny, Smart and Dumb, Stateful and Pure, Screens and Components, etc. These all are not exactly the same, but the core idea is similar.</p>
-<p>如果将你的组件分成两大类会更易重用和合理。我把他们称为<code>容器组件</code>和<code>表现层组件</code>，我也听说了  Fat and Skinny, Smart and Dumb, Stateful and Pure, Screens and Components, 等。他们都不完全一样，但核心的理念是一样的。</p>
-<p>My <strong>presentational</strong> components:</p>
-<ul>
-<li>Are concerned with how things look.</li>
-<li>May contain both presentational and container components** inside, and usually have some DOM markup and styles of their own.</li>
-<li>Often allow containment via this.props.children.</li>
-<li>Have no dependencies on the rest of the app, such as Flux actions or stores.</li>
-<li>Don’t specify how the data is loaded or mutated.</li>
-<li>Receive data and callbacks exclusively via props.</li>
-<li>Rarely have their own state (when they do, it’s UI state rather than data).</li>
-<li>Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.</li>
-<li>Examples: Page, Sidebar, Story, UserInfo, List.</li>
-</ul>
-<p>我的表现层组件：</p>
-<ul>
-<li>是关心事物看起来如何的。</li>
-<li>内部可以包含表现层组件和容器组件，并通常有一些属于自己的 DOM 标记和样式。</li>
-<li>通常允许通过 this.props.children 实现容器化。</li>
-<li>不依赖 app 其余部分，例如 Flux action 或 stores。</li>
-<li>不用指定数据如何加载或修改。</li>
-<li>接收数据和回调方法只通过 <code>props</code>。</li>
-<li>很少有属于自己的 state (当有时，他们是 UI state 而不是数据)。</li>
-<li>是写成功能组件的，除非他们需要 state，挂钩生命周期，或执行优化。</li>
-<li>例如：页面，侧边栏，用户信息，列表。</li>
-</ul>
-<p>My <strong>container</strong> components:</p>
-<ul>
-<li>Are concerned with how things work.</li>
-<li>May contain both presentational and container components** inside but usually don’t have any DOM markup of their own except for some wrapping divs, and never have any styles.</li>
-<li>Provide the data and behavior to presentational or other container components.</li>
-<li>Call Flux actions and provide these as callbacks to dumb components.</li>
-<li>Are often stateful, as they tend to serve as data sources.</li>
-<li>Are usually generated using higher order components such as connect() from React Redux, createContainer() from Relay, or Container.create() from Flux Utils, rather than written by hand.</li>
-<li>Examples: UserPage, FollowersSidebar, StoryContainer, FollowedUserList.</li>
-</ul>
-<p>I put them in different folders to make this distinction clear.</p>
-<p>我的容器组件：</p>
-<ul>
-<li>是关心事物如何工作的。</li>
-<li>内部可以包含表现层组件和容器组件但通常没有任何他们自己的 DOM 标记除了一些作为包裹的 <code>div</code>，且永远没有任何样式。</li>
-<li>提供数据和行为给表现层或其它容器组件。</li>
-<li>调用 Flux action 和提供这些作为回调给哑组件。</li>
-<li>通常是有状态的，因为他们通常被作为数据源。</li>
-<li>通常使用<a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750" target="_blank" rel="external">高阶组件</a>生成例如 React redux 的 connect()，Relay 的 createContainer(),或 Flux Utils 的 ‘Container.create()’,而不是直接手写。</li>
-<li>例如：UserPage, FollowersSidebar, StoryContainer, FollowedUserList。</li>
-</ul>
-<p>我把他们放在不同的文件夹来进行区分清楚。</p>
-<h2 id="Benefits_of_This_Approach">Benefits of This Approach</h2><p>这种实现的优点</p>
-<ul>
-<li>Better separation of concerns. You understand your app and your UI better by writing components this way.</li>
-<li>Better reusability. You can use the same presentational component with completely different state sources, and turn those into separate container components that can be further reused.</li>
-<li>Presentational components are essentially your app’s “palette”. You can put them on a single page and let the designer tweak all their variations without touching the app’s logic. You can run screenshot regression tests on that page.</li>
-<li>This forces you to extract “layout components” such as Sidebar, Page, ContextMenu and use this.props.children instead of duplicating the same markup and layout in several container components.</li>
-</ul>
+<p>来自 CSS The Definitive Guide Eric A Meyer。</p>
+<h1 id="Base_Visual_Formatting">Base Visual Formatting</h1><blockquote>
+<p>In the previous chapters, we covered a great deal of practical information on how CSS handles text and fonts in a document. In this chapter, we’ll look at the theoretical side of visual rendering, answering many of the questions we skipped earlier in the interest of addressing how CSS is implemented.</p>
+</blockquote>
+<p>在之前的章节，我们进行了大量的实践用 CSS 处理文字和文档的字体。在这章中，我们会学习外观呈现的理论，回答许多之前跳过的许多 CSS 如何实现的问题。</p>
 <blockquote>
-<p>Remember, components don’t have to emit DOM. They only need to provide composition boundaries between UI concerns.</p>
+<p>Why is it necessary to spend an entire chapter on the theoretical underpinnings of visual rendering in CSS? The answer is that with a model as open and powerful as that contained within CSS, no book could hope to cover every possible way of combining properties and effects. You will obviously go on to discover new ways of using CSS for your own document effects.</p>
 </blockquote>
-<p>Take advantage of that.</p>
-<ul>
-<li>更好的分离关注点。这种方式写组件更能了解你的 app 和 UI。</li>
-<li>更好的复用。你可以使用相同的表现层组件在完全不同的 state 来源，并切把这些放到分离的容器组件使他们能在将来复用。</li>
-<li>表现层组件实质上是你的 app 的 “调色板”。你可以把他们放到单独的页面和让他们的设计者调整所有变化而无需接触 app 的逻辑。你可以在这个页面运行 screenshot regression tests 。</li>
-<li>强制你提取布局组件例如 Sidebar,Page,ContextMenu 和使用 this.props.children 替代几个组件重复相同的标记和布局。</li>
-</ul>
-<p>记住，容器组件没有 DOM。他只需要提供组合不同 UI 所需要的边界。</p>
-<p>利用这个优势。</p>
-<h2 id="When_to_Introduce_Containers?">When to Introduce Containers?</h2><p>何时使用容器？</p>
-<p>I suggest you to start building your app with just presentational components first. Eventually you’ll realize that you are passing too many props down the intermediate components. When you notice that some components don’t use the props they receive but merely forward them down and you have to rewire all those intermediate components any time the children need more data, it’s a good time to introduce some container components. This way you can get the data and the behavior props to the leaf components without burdening the unrelated components in the middle of the tree.</p>
-<p>我猜测你开始构建你的 app 时首先创建的是表现层组件。最后你会发现传递了太多 props 到中间组件。当你注意到一些组件不需要用到他们接收到的 props 但只是要转发他们下去并且你重写了所有这些中间组件他们的子组件需要的更多数据，那是使用一些容器组件的好时间。通过这种方式你可以获取数据和行为 props 给叶组件而不需要麻烦树结构中间无关的组件。</p>
-<p>This is an ongoing process of refactoring so don’t try to get it right the first time. As you experiment with this pattern, you will develop an intuitive sense for when it’s time to extract some containers, just like you know when it’s time to extract a function. My free Redux Egghead series might help you with that too!</p>
-<p>这是一个持续重构的过程所以不用设法第一时间就得到完美答案。当你尝试这种模式时，你会有一种直观的感觉，在需要提取容器时，就像当你明白要如何提取函数时的感觉。我的 <a href="https://egghead.io/series/getting-started-with-redux" target="_blank" rel="external">free Redux Egghead series</a> 可能也可以帮助你。</p>
-<h2 id="Other_Dichotomies">Other Dichotomies</h2><p>其他区分方法</p>
-<p>It’s important that you understand that the distinction between the presentational components and the containers is not a technical one. Rather, it is a distinction in their purpose.</p>
-<p>你要清楚表现层组件和容器组件这种区分方式不是唯一的技术。相反它是区分组件的目的。</p>
-<p>By contrast, here are a few related (but different!) technical distinctions:</p>
-<p>对比一下，这里是一些关联的 (但不一样的) 区分技术</p>
-<ul>
-<li><strong>Stateful and Stateless.</strong> Some components use React setState() method and some don’t. While container components tend to be stateful and presentational components tend to be stateless, this is not a hard rule. Presentational components can be stateful, and containers can be stateless too.</li>
-<li><strong>Classes and Functions.</strong> Since React 0.14, components can be declared both as classes and as functions. Functional components are simpler to define but they lack certain features currently available only to class components. Some of these restrictions may go away in the future but they exist today. Because functional components are easier to understand, I suggest you to use them unless you need state, lifecycle hooks, or performance optimizations, which are only available to the class components at this time.</li>
-<li><p><strong>Pure and Impure.</strong> People say that a component is pure if it is guaranteed to return the same result given the same props and state. Pure components can be defined both as classes and functions, and can be both stateful and stateless. Another important aspect of pure components is that they don’t rely on deep mutations in props or state, so their rendering performance can be optimized by a shallow comparison in their shouldComponentUpdate() hook. Currently only classes can define shouldComponentUpdate() but that may change in the future.</p>
-</li>
-<li><p><strong>状态和无状态。</strong> 一些组件使用了 React 的 setState() 方法而一些没使用。容器组件倾向于有状态而表现层组件倾向于无状态，但这不是固定的规则。表现层组件可以是有状态的，而容器也可以是无状态的。</p>
-</li>
-<li><strong>类和函数。</strong> 从 React 0.14 起，组件可以被声明为类和函数。函数组件定义较简单但他们缺乏某些当前只能在类使用的功能。这些限制可能在未来解决但现在还是存在的。因为函数组件更容易明白，我建议你使用他们除非你需要 state，挂钩生命周期，或性能优化，他们只能在类组件中使用。</li>
-<li><strong>纯与不纯。</strong> 人们称如果组件保证返回与传入相同的 props 和 state 那么他是纯的。纯组件可以被定义为类和函数，也可以是有状态和无状态的。纯组件另一重要的方面是他们不依靠 props 或 state 的深度改变，因此他们的渲染性能可以通过他们的 shouldComponentUpdate() hoot 浅层比较进行优化。当前只有类可以定义 shouldComponentUpdate() hook 但可能在未来发生变化。</li>
-</ul>
-<p>Both presentational components and containers can fall into either of those buckets. In my experience, presentational components tend to be stateless pure functions, and containers tend to be stateful pure classes. However this is not a rule but an observation, and I’ve seen the exact opposite cases that made sense in specific circumstances.</p>
-<p>表现层组件和容器组件都可以分为这些两种种类。以我的经验，表现层容器倾向于无状态纯函数，容器倾向于有状态纯类。但这不是规则但根据观察，且我已经发现在特定的情况下会出现完全相反的情况。</p>
-<p>Don’t take the presentational and container component separation as a dogma. Sometimes it doesn’t matter or it’s hard to draw the line. If you feel unsure about whether a specific component should be presentational or a container, it might be too early to decide. Don’t sweat it!</p>
-<p>不要把表现层组件和容器组件的分离作为教条。有时候他并不重要或者他很难绘制一条线条。如果你感到不确定特定的组件应是表现层组件或容器组件，那么不用太早决定。不用浪费太多汗水！</p>
-<h2 id="Example">Example</h2><p>This <a href="https://gist.github.com/chantastic/fc9e3853464dffdb1e3c" target="_blank" rel="external">gist </a>by <a href="https://twitter.com/chantastic" target="_blank" rel="external">Michael Chan</a> pretty much nails it.</p>
-<h2 id="Further_Reading">Further Reading</h2><ul>
-<li><a href="https://egghead.io/series/getting-started-with-redux" target="_blank" rel="external">Getting Started with Redux</a></li>
-<li><a href="https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750" target="_blank" rel="external">Mixins are Dead, Long Live Composition</a></li>
-<li><a href="https://medium.com/@learnreact/container-components-c0e67432e005" target="_blank" rel="external">Container Components</a></li>
-<li><a href="http://bradfrost.com/blog/post/atomic-web-design/" target="_blank" rel="external">Atomic Web Design</a></li>
-<li><a href="http://facebook.github.io/react/blog/2015/03/19/building-the-facebook-news-feed-with-relay.html" target="_blank" rel="external">Building the Facebook News Feed with Relay</a></li>
-</ul>
-<h2 id="Footnotes">Footnotes</h2><blockquote>
-<ul>
-<li>In an earlier version of this article I called them “smart” and “dumb” components but this was overly harsh to the presentational components and, most importantly, didn’t really explain the difference in their purpose. I enjoy the new terms much better, and I hope that you do too!<br>** In an earlier version of this article I claimed that presentational components should only contain other presentational components. I no longer think this is the case. Whether a component is a presentational component or a container is its implementation detail. You should be able to replace a presentational component with a container without modifying any of the call sites. Therefore, both presentational and container components can contain other presentational or container components just fine.</li>
-</ul>
+<p>为什么需要花费一整章在 CSS 视觉呈现的理论基础？因为它是开发的模式和强大的 CSS 容器，没有任何一本书可以覆盖所有属性组合的效果。明显你需要探索新的方式使用 CSS，实现你想要的效果。</p>
+<blockquote>
+<p>In the course of exploring CSS, you may encounter seemingly strange behaviors in user agents. With a thorough grasp of how the visual rendering model works in CSS, you’ll be able to determine whether a behavior is a correct (though unexpected) consequence of the rendering engine CSS defines, or whether you’ve stumbled across a bug that needs to be reported.</p>
 </blockquote>
+<p>在探索 CSS 的过程中，你可能在 user agents 遇到看似奇怪的行为。深入的理解和掌握 CSS 中工作的视觉呈现模型，你就可以判断在哪些行为可以在 CSS 渲染引擎获取正确结果 (尽管看起来奇怪)，或者你偶然遇到一个需要提交的 bug。</p>
+<h2 id="Basic_Boxes">Basic Boxes</h2><blockquote>
+<p>CSS assumes that every element generates one or more rectangular boxes, called element boxes. (Future versions of the specification may allow for nonrectangular boxes, but for now everything is rectangular.) Each element box has a content area at its core. The content area is surrounded by optional amounts of padding, borders, and margins. These items are considered optional because they could all be set to a width of zero, effectively removing them from the element box. An example content area is shown in Figure 7-1, along with the surrounding regions of padding, border, and margins.</p>
+</blockquote>
+<p>CSS 假设所有元素都会生成一个或多个矩形盒子，称为元素盒子 (未来的版本可能允许不规则形状的盒子，但现在所有都是矩形)。每一个元素盒子在它的核心都有一个内容区域。这个内容区域被可选的 padding，border，和 margin 包围。这些选项是可选的因为它们的宽度全都可以被设置为 0，有效的将它们从元素盒子移除。一个元素的内容区域如图 7-1 所示，围绕它的是 padding,border,和 margins 的区域。</p>
+<p>图 7-1<br><img src="./7-1.png" alt=""></p>
+<blockquote>
+<p>Each of the margins, borders, and padding can be set using various properties, such as margin-left or border-bottom. The content’s background a color or tiled image, for example is also applied to the padding. The margins are always transparent, revealing the background of any parent elements. Padding cannot be a negative value, but margins can. We’ll explore the effects of negative margins later in this chapter.</p>
+</blockquote>
+<p>每个 margin，border，和 padding 可以使用单独的属性设置，例如 margin-left 或 border-bottom。内容的背景颜色或背景图像，也会应用到 padding。而 margin 总是透明的，露出父元素的背景颜色。Padding 不能是负值，但 margin 可以。我们会在后面的章节探索负 margin 的效果。</p>
+<blockquote>
+<p>Borders are generated using defined styles, such as solid or inset, and their colors are set using the border-color property. If no color is set, then the border takes on the foreground color of the element’s content. For example, if the text of a paragraph is white, then any borders around that paragraph will be white unless the author explicitly declares a different border color. If a border style has gaps of some type, then the element’s background is visible through those gaps. In other words, the border has the same background as the content and padding. Finally, the width of a border can never be negative.</p>
+</blockquote>
+<p>border 使用自定义的样式生成，例如 solid 或 inset，它们的颜色使用 border-color 属性设置。如果没设置颜色，border 会使用元素内容的前景色。例如段落的文字是白色，那么 border 也会是白色除非作者明确指定了不同的 border 颜色。如果 border 的样式会出现一些缺口，那么元素背景会在通过这些缺口可见。换句话说，border 有一部分背景是内容和 padding。最后，border 的宽度永远不能是负数。</p>
+<blockquote>
+<p>The various components of an element box can be affected by a number of properties, such as width or border-right. Many of these properties will be used in this chapter, even though we haven’t discussed them yet. The actual property definitions are given in Chapter 8, which builds on the concepts set forth in this chapter.</p>
+</blockquote>
+<p>元素盒子的各个部分可以被几个属性影响，例如 width 或 border-right。在这章我们会用到许多这些属性，尽管我们没有讨论过它们。实际上第 8 章才会探索它们，我们先在这一章了解它的概念。</p>
+<blockquote>
+<p>You will, however, find differences in how various types of elements are formatted. Block-level elements are treated differently than inline-level elements, while floated and positioned elements have their own ways of behaving.</p>
+</blockquote>
+<p>最后你会发现几个不同类型元素的格式的不同。Block 级别元素与 inline-level 元素的区别，浮动元素 (float) 和定位元素 (positioned) 它们自己的行为。</p>
 
       
     </div>
@@ -283,6 +209,8 @@
           
             <a href="/tags/前端/"> #前端 </a>
           
+            <a href="/tags/翻译/"> #翻译 </a>
+          
         </div>
       
 
@@ -290,13 +218,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/3015/FrontEndNavigation/">前端 EXAMPLE 导航</a>
+              <a href="/2016/cimgh4xi5006ky9jduzk7r7bl/">Flexbox 布局  (一) Container</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/ciljljzzv0000rzjdnjml49bu/">Canvas API</a>
+              <a href="/2016/cimgh4xjq007gy9jdl4mgvc8t/">Base Visual Formatting  (二)  Containing Block and Quick Refresher</a>
             
           </div>
         </div>
@@ -312,8 +240,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/cilwh7jfd0000ivjdoupm2xfj/"
-               data-title="表现层组件和容器组件" data-url="http://yoursite.com/2016/cilwh7jfd0000ivjdoupm2xfj/">
+          <div class="ds-thread" data-thread-key="2016/cimgh4xk4007qy9jdt7ujchcs/"
+               data-title="Base Visual Formatting  (一)  Basic Boxes" data-url="http://yoursite.com/2016/cimgh4xk4007qy9jdt7ujchcs/">
           </div>
         
       </div>
@@ -367,14 +295,14 @@
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -404,7 +332,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Presentational_and_Container_Components"><span class="nav-number">1.</span> <span class="nav-text">Presentational and Container Components</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Benefits_of_This_Approach"><span class="nav-number">1.1.</span> <span class="nav-text">Benefits of This Approach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#When_to_Introduce_Containers?"><span class="nav-number">1.2.</span> <span class="nav-text">When to Introduce Containers?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other_Dichotomies"><span class="nav-number">1.3.</span> <span class="nav-text">Other Dichotomies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">1.4.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Further_Reading"><span class="nav-number">1.5.</span> <span class="nav-text">Further Reading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Footnotes"><span class="nav-number">1.6.</span> <span class="nav-text">Footnotes</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Base_Visual_Formatting"><span class="nav-number">1.</span> <span class="nav-text">Base Visual Formatting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic_Boxes"><span class="nav-number">1.1.</span> <span class="nav-text">Basic Boxes</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

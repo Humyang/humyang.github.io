@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="前端,翻译," />
+  <meta name="keywords" content="前端," />
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-  <title> Basic Visual Formatting (三) // Humyang </title>
+  <title> 关于 Babel 6 你需要知道的 6 件事情 // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              Basic Visual Formatting (三)
+              关于 Babel 6 你需要知道的 6 件事情
             
           
         </h1>
@@ -119,14 +119,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-01-22
+          发表于 2016-01-03
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/CSS/">CSS</a>
+              <a href="/categories/前端/">前端</a>
 
               
               
@@ -134,7 +134,7 @@
               
 
             
-              <a href="/categories/CSS/布局/">布局</a>
+              <a href="/categories/前端/工具/">工具</a>
 
               
               
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/cijtdbkmx007ferf71ekb9zxe/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijtdbkmx007ferf71ekb9zxe/"></span>
+            <a href="/2016/cimgh4xh2005iy9jdx1sflmrp/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cimgh4xh2005iy9jdx1sflmrp/"></span>
             </a>
           </span>
           
@@ -162,109 +162,71 @@
       
 
       
-        <p>介绍盒模型的块级元素和 margin，width 使用 auto 的效果。</p>
+        <p>快速了解 Babel 6 和 Babel 5 之间的区别。</p>
 <a id="more"></a>
 <hr>
-<p>Basic Visual Formatting (三)</p>
-<h1 id="Block-Level_Elements">Block-Level Elements</h1><p>块级元素</p>
+<p><a href="http://jamesknelson.com/the-six-things-you-need-to-know-about-babel-6/" target="_blank" rel="external">原文地址</a></p>
+<h1 id="关于_Babel_6_你需要知道的_6_件事情">关于 Babel 6 你需要知道的 6 件事情</h1><blockquote>
+<p>Over the last year, Babel has become the go-to tool for transforming ES2015 and JSX into boring old JavaScript. But seemingly overnight, Babel 6 changed everything. The babel package was deprecated, running babel doesn’t actually transform ES2015 to ES5, and the old docs have basically disappeared.</p>
+</blockquote>
+<p>在过去的一年，Babel 变成了最流行的将 ES2015 和 JSX 转换成旧 JavaScript 的工具。但似乎一夜之间，Babel 6 更改了一切。<code>babel</code> 包已经被移除，运行 babel 不会将 ES2015 转换成 ES5，并且旧的文档基本已经消失了。</p>
 <blockquote>
-<p>Block-level elements can behave in both predictable and surprising ways. The handling of element placement along the horizontal and vertical axes can differ, for example. To fully understand how block-level elements are handled, you must clearly understand a number of boundaries and areas. They are shown in detail in Figure 7-2.</p>
+<p>But Don’t Panic! To get you up to speed, I’ve put together a brief list of the six most important changes. And if you need a little more help, my Complete Guide to ES6 with Babel 6 will walk you through the practical details; including the CLI, Webpack, Mocha and Gulp.</p>
 </blockquote>
-<p>块级元素的行为即可预测且令人诧异的，元素布局在水平和垂直轴线有不同处理方式。例如，要完全明白块级元素是如何处理的，你必须清晰了解几处边界和区域。他们在图 7-2 列出。</p>
-<p><img src="./7-2.png" alt=""><br><small>图 7-2. 完整的盒模型</small></p>
+<p>但是不要惊慌，为了让你加快速度，我挑出了 6 个最重要的更改进行简要说明，如果你需要更多帮助，我的 <a href="http://jamesknelson.com/the-complete-guide-to-es6-with-babel-6/" target="_blank" rel="external">Complete Guide to ES6 with Babel 6</a> 会讲解实用的详细细节；包含 CLI，Webpack，Mocha 和 Gulp。</p>
 <blockquote>
-<p>In general, the width of an element is defined as the distance from the left inner edge to the right inner edge, and the height is the distance from the inner top to the inner bottom. Both of these properties can be applied to an element.</p>
+<p>1.The <code>babel</code> npm package no longer exists. Instead, Babel has been split into multiple packages:</p>
+<ul>
+<li>babel-cli, which contains the babel command line interface</li>
+<li>babel-core, which contains the Node API and require hook</li>
+<li>babel-polyfill, which when required, sets you up with a full ES2015-ish environment</li>
+</ul>
+<p>To avoid accidental conflicts, make sure to remove any previous Babel packages like babel, babel-core, etc. from your package.json, and then npm uninstall them.</p>
 </blockquote>
-<p>通常，元素的宽度被定义为从左内边缘到右内边缘的距离，高度是从顶部内边缘到底部内边缘的距离。这些属性都可以被应用到元素。</p>
+<p>1.<strong><code>babel</code> npm 包已经不存在</strong>。作为替代，Babel 已经分割成多个包：</p>
+<p><a href="">babel-cli</a>,包含 babel 命令行接口。<br><a href="">babel-core</a>，包含 Node API 和 <code>require</code> hook<br><a href="">babel-polyfill</a>,当 <code>require</code> d (漏了内容？)，为你设置 ES2015 需要的完整环境。</p>
+<p>为了避免冲突，请你在 <code>package.json</code> 移除之前的 babel 包例如 babel,babel-core 等。然后运行 <code>npm uninstall</code> 卸载它们。</p>
 <blockquote>
-<p>The various widths, heights, padding, and margins combine to determine how a document is laid out. In most cases, the height and width of the document are automatically determined by the browser and are based on the available display region and other factors. Under CSS, of course, you can assert more direct control over the way elements are sized and displayed. You can select different effects for horizontal and vertical layouts, so we’ll tackle them separately.</p>
+<p>2.Every single transform is now a plugin, including ES2015 and JSX. And as a result, nothing happens by default – so you’ll need to install the correct plugins. Actually, ES2015 consists of about 20 plugins. You don’t want to install each of these manually, which is why Babel has added presets.</p>
 </blockquote>
-<p>这几个宽度，高度，内边距和外边距的组合决定了文档如何布局。大部分情况，文档的高度和宽度是由浏览器和基于可见显示区域和其它因素自动决定。在 CSS 中，当然，你可以直接的控制元素的尺寸和显示方式。你可以为水平和垂直布局选择不同效果，因此我们将这些分开单独来讲。</p>
-<h2 id="Horizontal_Formatting">Horizontal Formatting</h2><p>水平格式化</p>
+<p>2.<strong>每个单独的转换现在都以 plugin 形式出现，包括 ES2015 和 JSX</strong>。因此，默认的 bable 什么都不发生 － 因此你需要正确的安装 plguin。但实际上，ES2015 包含了大约 20 个plugin。你不会想手动安装它们的，因此 Babel 添加了 presets 的概念。</p>
 <blockquote>
-<p>Horizontal formatting is often more complex than you’d think. Part of the complexity has to do with how width affects the width of the content area, not the entire visible element box. Consider the following example:</p>
+<p>3.Babel 6 adds presets, or collections of plugins. And it provides two presets for the functionality provided by default in Babel 5:</p>
+<p>  <code>npm install babel-preset-es2015 babel-preset-react --save-dev</code></p>
+<p>But even after installing a preset, you need to tell Babel to use it.</p>
 </blockquote>
-<p>水平格式化比你认为的还要复杂。复杂的部分有处理元素的宽度如何影响内容区域宽度，而非是整个可见元素盒子，例如下面的例子：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">style</span>=<span class="value">"width: 200px;"</span>&gt;</span>wideness?<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>3.<strong>Babel 6 增加了 preset，或 plugin 集合</strong>。它提供了两个 Babel 5 默认提供的功能：</p>
+<p><code>npm install babel-preset-es2015 babel-preset-react --save-dev</code></p>
+<p>但即使安装了 preset 之后，你仍需要告诉 Babel 使用它。</p>
 <blockquote>
-<p>This line of code will make the paragraph’s content 200 pixels wide. If you gave the element a background, this would be quite obvious. However, any padding, bor- ders, or margins you specify are added to the width value. Suppose you do this:</p>
+<p>4.<code>.babelrc</code> is kinda a necessity now. Since Babel no longer uses ES2015 and React transforms by default, the require hook used by gulpfile.babel.js and mocha will not actually do anything. Fix this by creating a .babelrc in your project directory:</p>
 </blockquote>
-<p>这一行代码设置段落宽度为 200px 宽，如果你设置了元素的背景颜色，那么效果是很明显的。接着，你添加内边距，外边距，边框增大段落的宽度值，如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">style</span>=<span class="value">"width: 200px; padding: 10px; margin: 20px;"</span>&gt;</span>wideness?<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [<span class="string">"es2015"</span>, <span class="string">"react"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>.babelrc</code> 现在是<strong>有点必要性</strong>，自从 Babel 默认不具备 ES2015 和 React 转换，<code>gulpfile.babel.js</code> 和 <a href="">mocha</a> 中通过 <code>require</code> hook 使用 Babel，不会进行任何操作。要修复这个问题请在你的项目目录创建一个 <code>.babelrc</code> 文件，包含这些内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [<span class="string">"es2015"</span>, <span class="string">"react"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>The visible element box is now 220 pixels wide since you’ve added 10 pixels of padding to the right and left of the content. The margins will now extend another 20 pixels to both sides for an overall element box width of 260 pixels.</p>
+<p>5.Stage 0 is now a separate preset, not an option. Previously, you enabled ES7 features like decorators and async/await by passing —stage 0 to babel. Now, you install and load the babel-preset-stage-0 package.</p>
 </blockquote>
-<p>元素盒子现在的可以看见的宽度是 220 px，因为分别添加了 10 px 内边距到内容的左边和右边。而外边距拓展了元素盒子 20px 的整体宽度，现在整个元素盒子的宽度是 260px。</p>
+<p><strong>Stage 0 现在是单独的 preset，不再是一个选项</strong>。以前，通过传递 —stage 0 给 babel 启用 ES7 的功能例如修饰符和 <code>async</code>/<code>await</code>。现在你需要安装和加载 <code>babel-preset-stage-0</code> 包。</p>
 <blockquote>
-<p>Understanding the hidden additions to width is critical. Most users think that width refers to the width of the visible element box, and that if they declare an element to have padding, borders, and a width, the value they supply for the width will be the distance from the outer left border edge to the outer right border edge. This is not the case in CSS. Keep this fact firmly in mind to avoid confusion later.</p>
+<p>6.The —external-helpers option is now a plugin. To avoid repeated inclusion of Babel’s helper functions, you’ll now need to install and apply the babel-plugin-transform-runtime package, and then require the babel-runtime package within your code (yes, even if you’re using the polyfill).</p>
 </blockquote>
-<p>最重要的是弄清楚隐藏的宽度。大部分使用者认为元素的宽度只是指元素盒子的可见宽度，如果他们声明了一个拥有内边距，边框，和宽度的元素盒子，他们提供的值只是从外左边缘到外右边缘的距离。在 CSS 中不仅如此。请牢记这一点避免在后面的章节产生困惑。</p>
+<p><code>-external-helpers</code> 选项现在是 plugin。为了避免反复包含 Babel 的 helper function，你现在需要安装和应用 <code>babel-plugin-transform-runtime</code> 包，然后 require <code>babel-runtion</code> 包到你的代码中 (是的，即使你在使用 polyfill)。</p>
 <blockquote>
-<p><small>As of this writing, the Box Model module of CSS includes proposals for ways to let authors choose whether width refers to the content width or the visible box width.</small></p>
+<p>And there you have it, you’re now up to speed on Babel 6’s packages, plugins, presets and options! But what about Webpack? What about passing presets via the CLI? I’ve tried to keep this list as succinct as possible, and to do so I’ve kept my Complete Guide to ES6 with Babel 6 as a separate series — covering the CLI, Webpack, Gulp and Mocha.</p>
 </blockquote>
-<p><small>在撰写此书时，CSS 的盒模型模块包含一个提议：能让使用者把宽度指定为内容宽度或盒子可见宽度。</small></p>
+<p>现在已经快速了解了 Babel 6 的包，plugin，preset 和 option！但关于 Webpack 呢？如何通过 CLI 传递 preset？为了保持文章的简洁风格，我把这些内容写在了 <a href="http://jamesknelson.com/the-complete-guide-to-es6-with-babel-6/" target="_blank" rel="external">Complete Guide to ES6 with Babel6</a> 作为独立的系列 - 包含 CLI，Webpack，Gulp 和 Mocha。</p>
+<h2 id="But_everything_moves_so_fast-_How_will_I_keep_up_to_date?">But everything moves so fast. How will I keep up to date?</h2><p>但一切进展都那么快，我该如何才能跟上脚步呢？</p>
 <blockquote>
-<p>Almost as simple is the rule that says that the sum of the horizontal components of a block-level element box in the normal flow always equals the width of the parent. Take two paragraphs within a div whose margins have been set to 1em. The content width (the value of width) of the paragraph, plus its left and right padding, borders, and margins, always add up to the width of the div’s content area.</p>
+<p>With ES2015 already standardised, there is no argument that Babel is a necessary tool for most JavaScript developers. But does the thought of integrating an entire platform for transforming JavaScript into every new project worry you a little bit? The speed at which the JavaScript ecosystem is growing can feel demoralising. But luckily, it doesn’t have to be that way!</p>
 </blockquote>
-<p>解释块级元素盒子的规则最简单的描述是：在正常流中他的水平部分的宽度总和总是与父元素的宽度相同。把两个段落放到已经设置了外边距为 1em 的 div 中。段落的内容宽度  (宽度的值) ，加上他的左右内边距，边框，和外边距，加起来总是等于 div 的内容区域的宽度。</p>
+<p>ES2015 已经实现标准化，没有参数的 Babel 对大部分开发者来说是必要的工具。但整合整个平台把 JavaScript 转换到新的项目你是否会有一点担心？JavaScript 生态系统的快速增长会然人感觉到有些泄气。但很幸运，不用这样做。</p>
 <blockquote>
-<p>Let’s say the width of the div is 30em, making the sum total of the content width, padding, borders, and margins of each paragraph 30em. In Figure 7-3, the “blank” space around the paragraphs is actually their margins. If the div had any padding, there would be even more blank space, but that isn’t the case here. I’ll discuss padding soon.</p>
+<p>The thing is that for most projects, scaling is a problem you’d like to have. And until you’re at that point, you’ll be more productive by focusing on a few important tools than trying to grasp everything.</p>
 </blockquote>
-<p>如果 div 的宽度是 30em，使每个有 30em 宽的段落的内容宽度，内边距，外边距，边框相加。如图 7-3 中，围绕着段落的 “空白” 空间实际上是他们的外边距。如果 div 有内边距，这里将会有更多空白空间，先不在这里介绍，我会在后面讨论内边距时说明。</p>
-<p><img src="./7-3.png" alt=""><br>图 7-3. 元素盒子的宽度与他们的父元素一样宽。</p>
-<h3 id="Horizontal_properties">Horizontal properties</h3><p>水平属性</p>
-<blockquote>
-<p>The “seven properties” of horizontal formatting are: margin-left, border-left, padding-left, width, padding-right, border-right, and margin-right. These properties, which are diagrammed in Figure 7-4, relate to the horizontal layout of block-level boxes.</p>
-</blockquote>
-<p>水平格式化的 “七个属性”：左外边距，左边框，左内边距，宽度，右内边距，右边框，右外边距。这些属性，在图 7-4，他们是关于块级盒子水平布局的。</p>
-<p><img src="./7-4.png" alt=""><br>图 7-4. 水平格式化的 “七个属性”</p>
-<blockquote>
-<p>The values of these seven properties must add up to the width of the element’s containing block, which is usually the value of width for a block element’s parent (since block-level elements nearly always have block-level elements for parents).</p>
-</blockquote>
-<p>这七个属性的值一定会添加到元素的容器块的宽度，他通常是块元素的父元素的宽度  (块级元素的上级元素几乎总是块级元素)。</p>
-<blockquote>
-<p>Of these seven properties, only three may be set to auto: the width of the element’s content and the left and right margins. The remaining properties must be set either to specific values or default to a width of zero. Figure 7-5 shows which parts of the box can take a value of auto and which cannot.</p>
-</blockquote>
-<p>这七个属性，只有三个能设为 auto：元素的内容的宽度和左右外边距。剩余的属性必须设置为指定值或默认的宽度 0。图 7-5 显示演示盒子的部分哪些可以设置为 auto 哪些不能。</p>
-<p><img src="./7-5.png" alt=""><br>图 7-5. 可以设置为 auto 的水平属性</p>
-<blockquote>
-<p>width must either be set to auto or a nonnegative value of some type. When you do use auto in horizontal formatting, different effects can result.</p>
-</blockquote>
-<p>宽度必须设置为 auto 或某类非负数的值 (marin 可以是负数)。当你在水平格式化使用 auto，会产生不同的效果。</p>
-<blockquote>
-<p><small>CSS allows browsers to set a minimum value for width; this is the value below which a block-level element’s width cannot drop. The value of this minimum can vary between browsers, as it is not defined in the specification.</small></p>
-</blockquote>
-<p>CSS 允许浏览器设置宽度的最小值；这个值能使块级元素的宽度无法抛弃。这个最小值在不同浏览器之间会有变化，因为他不是规范中定义的。</p>
-<h3 id="Using_auto">Using auto</h3><blockquote>
-<p>If you set width, margin-left, or margin-right to a value of auto, and give the remaining two properties specific values, then the property that is set to auto determines the length required to make the element box’s width equal to the parent element’s width. In other words, let’s say the sum of the seven properties must equal 400 pixels, no padding or borders are set, the right margin and width are set to 100px, and the left margin is set to auto. The left margin will be 200 pixels wide:</p>
-</blockquote>
-<p>如果你设置内容宽度了，左外边距或右外边距的值为 auto，并指定剩余的两个属性为指定值，然后设置为 auto 的属性会自动判断使元素盒子的宽度等于父元素的宽度所需要的长度。换句话说，假设这七个属性的总和为 400 px，不设置内边距或边框，右外边距和宽度设置为 100px,左外边距设置为 auto。那么左外边距的宽度将会是 200px：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: auto; margin-right: 100px;</span><br><span class="line">     width: 100px;&#125;   /* 'auto' left margin evaluates to 200px */</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>In a sense, auto can be used to make up the difference between everything else and the required total. However, what if all three of these properties are set to 100px and none of them are set to auto?</p>
-</blockquote>
-<p>在某种意义上，auto 可以被用作填充一切不同的东西之间需要的总和。不过，如果这三个属性都设置为 100px 而不是设置为 auto 呢？</p>
-<blockquote>
-<p>In the case where all three properties are set to something other than auto—or, in CSS terminology, when these formatting properties have been overconstrained— then margin-right is always forced to be auto. This means that if both margins and the width are set to 100px, then the user agent will reset the right margin to auto. The right margin’s width will then be set according to the rule that one auto value “fills in” the distance needed to make the element’s overall width equal that of its containing block. Figure 7-6 shows the result of the following markup:</p>
-</blockquote>
-<p>这种三个属性除了设置为 auto 之外的情况－或在 CSS 技术中，如果这个格式化属性已经超过约束条件－那么右外边距总是强制被设置为 auto。这意味着如果外边距和宽度都设置为 100px，那么用户代理会强制设置右外边距为 auto。右外边距的宽度将依照 “填充” 的规则自动设置一个距离值，使元素的总宽等于包含他的容器块的宽度。图 7-6 显示下面的 html 标记的结果：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: 100px; margin-right: 100px;</span><br><span class="line">     width: 100px;&#125;   /* right margin forced to be 200px */</span><br></pre></td></tr></table></figure>
-<p><img src="./7-6.png" alt=""><br>图 7-6. 覆盖右外边距的设置</p>
-<blockquote>
-<p><small>margin-right is forced to be auto only for left-to-right languages such as English. In right-to-left languages, everything is reversed, so margin-left is forced to be auto, not margin-right.</small></p>
-</blockquote>
-<p>强制设置右外边距为 auto 只发生在从左到右的语言例如英语。在右到左的语言，所有都是相反，例如强制左外边距为 auto，而不是右外边距。</p>
-<blockquote>
-<p>If both margins are set explicitly, and width is set to auto, then the value of width will be set to whatever value is needed to reach the required total (which is the content width of the parent element). The results of the following markup are shown in Figure 7-7:</p>
-</blockquote>
-<p>如果所有外边距都设置了明确值，而宽度设置为 auto，那么宽度的值会被设置为达到总宽所需要的大小  (父元素的内容宽度)。下面的标记的结果在图 7-7 ：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: 100px; margin-right: 100px; width: auto;&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="./7-7.png" alt=""><br>图 7-7. 自动宽度</p>
-<blockquote>
-<p>The case shown in Figure 7-7 is the most common since it is equivalent to setting the margins and not declaring anything for the width. The result of the following markup is exactly the same as that shown in Figure 7-7:</p>
-</blockquote>
-<p>图 7-7 的例子是最常用的方式他相当于设置了外边距并没声明任何宽度。下面的标记的结果也会产生图 7-7 的效果。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p &#123;margin-left: 100px; margin-right: 100px;&#125; /* same as before */</span><br></pre></td></tr></table></figure>
+<p>对于大部分项目都会遇到的伸缩问题，在你遇到这个问题时你会明白，通过关注一个最小最重要的工具你将更有效率，而不是试图抓住一切。</p>
+<p>One way to keep focussed on the tools which count is to join my Newsletter. You’ll receive one e-mail every couple weeks with information tailored to small apps using React. And in return for your e-mail, you’ll immediately receive three bonus print-optimised PDF cheatsheets – on React (see preview), ES6 and JavaScript promises. All for free!</p>
+<p>One more thing – I love hearing your questions, offers and opinions. If you have something to say, leave a comment or send me an e-mail at james@jamesknelson.com. I’m looking forward to hearing from you!</p>
 
       
     </div>
@@ -275,8 +237,6 @@
           
             <a href="/tags/前端/"> #前端 </a>
           
-            <a href="/tags/翻译/"> #翻译 </a>
-          
         </div>
       
 
@@ -284,13 +244,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/cijtdbkk50066erf77e6y2xk0/">Flexbox 布局  (二) Container</a>
+              <a href="/2016/cimgh4x0d0011y9jddtbkof48/">Webpack 入门</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/cijtdbkkz006eerf7agd1qyfd/">Flexbox 布局  (一) Container</a>
+              <a href="/2016/cimgh4xh6005qy9jdio5rzewh/">Grunt 项目脚手架</a>
             
           </div>
         </div>
@@ -306,8 +266,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/cijtdbkmx007ferf71ekb9zxe/"
-               data-title="Basic Visual Formatting (三)" data-url="http://yoursite.com/2016/cijtdbkmx007ferf71ekb9zxe/">
+          <div class="ds-thread" data-thread-key="2016/cimgh4xh2005iy9jdx1sflmrp/"
+               data-title="关于 Babel 6 你需要知道的 6 件事情" data-url="http://yoursite.com/2016/cimgh4xh2005iy9jdx1sflmrp/">
           </div>
         
       </div>
@@ -361,14 +321,14 @@
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -398,7 +358,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Block-Level_Elements"><span class="nav-number">1.</span> <span class="nav-text">Block-Level Elements</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Horizontal_Formatting"><span class="nav-number">1.1.</span> <span class="nav-text">Horizontal Formatting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Horizontal_properties"><span class="nav-number">1.1.1.</span> <span class="nav-text">Horizontal properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using_auto"><span class="nav-number">1.1.2.</span> <span class="nav-text">Using auto</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于_Babel_6_你需要知道的_6_件事情"><span class="nav-number">1.</span> <span class="nav-text">关于 Babel 6 你需要知道的 6 件事情</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#But_everything_moves_so_fast-_How_will_I_keep_up_to_date?"><span class="nav-number">1.1.</span> <span class="nav-text">But everything moves so fast. How will I keep up to date?</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

@@ -20,7 +20,7 @@
 
 
 
-  <meta name="keywords" content="前端,翻译," />
+  <meta name="keywords" content="前端," />
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-  <title> Flexbox 布局  (一) Container // Humyang </title>
+  <title> CSS Margin (一) 负 Margin // Humyang </title>
 </head>
 
 <body>
@@ -111,7 +111,7 @@
           
           
             
-              Flexbox 布局  (一) Container
+              CSS Margin (一) 负 Margin
             
           
         </h1>
@@ -119,14 +119,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2016-01-22
+          发表于 2016-01-13
         </span>
 
         
           <span class="post-category">
             &nbsp; | &nbsp; 分类于
             
-              <a href="/categories/CSS/">CSS</a>
+              <a href="/categories/前端/">前端</a>
 
               
               
@@ -134,7 +134,7 @@
               
 
             
-              <a href="/categories/CSS/布局/">布局</a>
+              <a href="/categories/前端/CSS/">CSS</a>
 
               
               
@@ -147,8 +147,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/cijtdbkkz006eerf7agd1qyfd/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cijtdbkkz006eerf7agd1qyfd/"></span>
+            <a href="/2016/cimgh4xjl007cy9jdrxpnb5ni/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cimgh4xjl007cy9jdrxpnb5ni/"></span>
             </a>
           </span>
           
@@ -162,182 +162,29 @@
       
 
       
-        <p>介绍 Flexbox 的概念，和 Container 能应用哪些属性。</p>
+        <p>简单总结了对负 margin 的理解，和一些用途。</p>
 <a id="more"></a>
 <hr>
-<h1 id="Background">Background</h1><blockquote>
-<p>The Flexbox Layout (Flexible Box) module (currently a W3C Last Call Working Draft) aims at providing a more efficient way to lay out, align and distribute space among items in a container, even when their size is unknown and/or dynamic (thus the word “flex”).</p>
-</blockquote>
-<p>Flexbox 布局  (Flexible 盒子) 模块  (当前是 W3C 最终草案)  皆在提供更灵活的布局方式，为对齐 Container 中的 Item 和分配空间，即使他们的尺寸是未知的或者动态的  (因此他被称为 flex)。</p>
+<h1 id="CSS_Margin_(一)_负_Margin">CSS Margin (一) 负 Margin</h1><p>偶然发现了两篇详细介绍 Marin 的文章：</p>
+<p><a href="http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/" target="_blank" rel="external">http://www.hicss.net/i-know-you-do-not-know-the-negative-margin/</a></p>
+<p><a href="http://www.hicss.net/do-not-tell-me-you-understand-margin/" target="_blank" rel="external">http://www.hicss.net/do-not-tell-me-you-understand-margin/</a></p>
+<p>因为学到了熟悉的内容但陌生的知识，所以做一下总结。</p>
+<h2 id="总结">总结</h2><p>Margin 主要影响到元素与周边元素的关系，不管传入正数负数，所以一定程度上可以替代 relative 和 absolute。</p>
+<p>这里对几种情况进行测试一下。</p>
+<h3 id="父子元素的关系">父子元素的关系</h3><p>首先测试父子关系的 div 元素。有三个 div，其中一个为父 div，两个子 div，它们 的 display 都是 block。</p>
+<p>下面第一个子 div 称为 A，第二个子 div 称为 B，主要修改 A 的 margin， B 主要作为参照物。</p>
+<h4 id="测试，_修改_A_的_margin：">测试， 修改 A 的 margin：</h4><p>此时三个 div 的 display 都是 block。</p>
+<p>修改 A 的 <code>margin: -10px 0 0 0;</code>，效果: 整体元素往上偏移。同理如果为正数则往下偏移。</p>
+<p>若 A 的 <code>margin-top</code> 为 10px,如果父 div 的 <code>margin-top</code> 大于 10 px，则按照父 div 的数值移动。这现象被称为<code>垂直外边距合并</code>。</p>
+<p>如果 A 和父 div 的正负数相反，则会进行相加，例如 A  <code>margin: -10px 0 0 0;</code>，父 <code>margin: 10px 0 0 0;</code>，那么元素 margin 被抵消，位置保持不变。</p>
 <blockquote>
-<p>The main idea behind the flex layout is to give the container the ability to alter its items’ width/height (and order) to best fill the available space (mostly to accommodate to all kind of display devices and screen sizes). A flex container expands items to fill available free space, or shrinks them to prevent overflow.</p>
+<p>设置 A 的 display 为 <strong>inline</strong>,这时 A 的 margin-top 和 margin－bottom 都不起作用了。同时设置 B 的 display 为 inline， A 的 margin-top 和 margin－bottom 也是没作用。<br>但是 margin-left 和 margin-right 还是有作用的。 margin-right 正负值不会改变 A 的位置，但如果正数过大会影响 B 的位置。<br>margin-left 正负数都可以影响 A 的位置。</p>
+<p>设置 A 的 display 为 <strong>inline-block</strong> 时， 修改 A 的 margin 不会影响父 div 的位置，但会影响同级元素的位置。</p>
 </blockquote>
-<p>flex 布局背后主要想法是能让 Container 可以更改他的 “Item” 的宽度/高度  (和顺序)，得到最合适的可用空间  (尽可能适应所有设备的屏幕尺寸)。flex Container 会展开他的 Item 以占据所有可用空间，或收缩他们防止溢出。</p>
-<blockquote>
-<p>Most importantly, the flexbox layout is direction-agnostic as opposed to the regular layouts (block which is vertically-based and inline which is horizontally-based). While those work well for pages, they lack flexibility (no pun intended) to support large or complex applications (especially when it comes to orientation changing, resizing, stretching, shrinking, etc.).</p>
-</blockquote>
-<p>最重要的，flexbox 布局是与方向无关的不是常规的布局  (块元素布局是基于垂直方向而内联元素基于水平方向)，虽然盒模型能良好的工作，但他们缺少一些灵活性  (不是双关) 支持大型或复杂的应用程序   (特别是当他面对页面方向更改，缩放，拉伸，收缩等)。</p>
-<blockquote>
-<p>Note: Flexbox layout is most appropriate to the components of an application, and small-scale layouts, while the Grid layout is intended for larger scale layouts.</p>
-</blockquote>
-<p>注意：Flexbox 布局最适合用到应用程序的组件，和小规模布局，而 Grid 布局更适合大规模布局。</p>
-<h1 id="Basics_&amp;_Terminology">Basics &amp; Terminology</h1><p>基础 &amp; 技术</p>
-<blockquote>
-<p>Since flexbox is a whole module and not a single property, it involves a lot of things including its whole set of properties. Some of them are meant to be set on the container (parent element, known as “flex container”) whereas the others are meant to be set on the children (said “flex items”).</p>
-</blockquote>
-<p>因为 flexbox 是一个完整的模块，他不仅仅只有一个属性，他涉及到包含整个属性集大量的操作。他们之中一些负责操作 Container   (父元素，例如 “flex container”) 而其他一些负责操作子元素  (“flex items”)。</p>
-<blockquote>
-<p>If regular layout is based on both block and inline flow directions, the flex layout is based on “flex-flow directions”. Please have a look at this figure from the specification, explaining the main idea behind the flex layout.</p>
-</blockquote>
-<p>如果传统布局是基于块和内联流方向的，那么 flex 布局则是基于 “flex-flow 方向”。请看下图，图中指明了规范，解释了 flex 布局背后的思想。</p>
-<p><img src="./flexbox.png" alt=""></p>
-<blockquote>
-<p>Basically, items will be laid out following either the main axis (from main-start to main-end) or the cross axis (from cross-start to cross-end).</p>
-</blockquote>
-<p>基本上， Item 将会随着 main axis 布局 (从 main-start 到 main-end) 或 cross axis  (从 cross-start 到 cross-end)。  </p>
-<blockquote>
-<ul>
-<li>main axis - The main axis of a flex container is the primary axis along which flex items are laid out. Beware, it is not necessarily horizontal; it depends on the flex-direction property (see below).</li>
-<li>main-start | main-end - The flex items are placed within the container starting from main-start and going to main-end.</li>
-<li>main size - A flex item’s width or height, whichever is in the main dimension, is the item’s main size. The flex item’s main size property is either the ‘width’ or ‘height’ property, whichever is in the main dimension.</li>
-<li>cross axis - The axis perpendicular to the main axis is called the cross axis. Its direction depends on the main axis direction.</li>
-<li>cross-start | cross-end - Flex lines are filled with items and placed into the container starting on the cross-start side of the flex container and going toward the cross-end side.</li>
-<li>cross size - The width or height of a flex item, whichever is in the cross dimension, is the item’s cross size. The cross size property is whichever of ‘width’ or ‘height’ that is in the cross dimension.</li>
-</ul>
-</blockquote>
-<ul>
-<li>main axis - flex Container 的主轴是基础的轴线， Container 内的 Item 沿着这条轴线布局。但注意，他不一定是水平的；他由 flex-direction 属性决定  (见下方)。</li>
-<li>main-start | main-end - Container 内的 flex Item 的位置从 main-start 开始到 main-end 结束。</li>
-<li>main size - flex Item 的宽度或高度，无论是否在 main dimension，他都是 Item 的主要尺寸。flex Item 的主要尺寸属性是 ‘width’ 或 ‘height’，无论是否处于 main dimension。</li>
-<li>cross axis - 与主轴垂直的轴线成为 cross axis，他的方向依赖主轴的方向。</li>
-<li>cross-start  | cross-end - 这个线条指示如何填充 Container 内的 Item ，从 cross-start 开始到 cross-end 结束。</li>
-<li>cross size - flex Item 的宽度和高度，无论是否处在 cross dimension，他都是 Item 的 cross size。cross size 属性无论是 ‘width’ 或 ‘height’ 都在 cross dimension。</li>
-</ul>
-<h1 id="Properties_for_the_Parent_(flex_container)">Properties for the Parent (flex container)</h1><p><img src="./flex-container.svg" alt=""></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>; <span class="comment">/* or inline-flex */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="display">display</h2><blockquote>
-<p>This defines a flex container; inline or block depending on the given value. It enables a flex context for all its direct children.</p>
-</blockquote>
-<p>该属性将元素定义为 flex Container ；依赖传入值变成内联或块级。设置后元素的直接子级全部变为的 flex 上下文。</p>
-<blockquote>
-<p>Note that CSS columns have no effect on a flex container.</p>
-</blockquote>
-<p>注意 CSS 列在不会影响 flex Container 。</p>
-<h2 id="flex-direction">flex-direction</h2><p><img src="./flex-direction1.svg" alt=""></p>
-<blockquote>
-<p>This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Flexbox is (aside from optional wrapping) a single-direction layout concept. Think of flex items as primarily laying out either in horizontal rows or vertical columns.</p>
-</blockquote>
-<p>这个属性构建 main-axis，因而定义 flex Item 方向的属性放到了 flex Container 中。Flexbox 是 (除了可选的 wrapping) 单方向的概念。记住 flex Item 的基础布局可以是水平的行或垂直的列。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex-direction</span>:<span class="value"> row | row-reverse | column | column-reverse</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>row (default): left to right in ltr; right to left in rtl</li>
-<li>row-reverse: right to left in ltr; left to right in rtl</li>
-<li>column: same as row but top to bottom</li>
-<li>column-reverse: same as row-reverse but bottom to top</li>
-</ul>
-</blockquote>
-<ul>
-<li>row  (默认值)：左到右  (从左到右的语言)；右到左  (右到左的语言)</li>
-<li>row-reverse：  右到左  (从左到右的语言)；左到右  (右到左的语言)</li>
-<li>column：与 row 相同但从顶部到底部</li>
-<li>column-reverse：与 row-reverse 相同但从底部到顶部</li>
-</ul>
-<h2 id="flex-wrap">flex-wrap</h2><p><img src="./flex-wrap.svg" alt=""></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span><span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">flex-wrap</span>:<span class="value"> nowrap | wrap | wrap-reverse</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>By default, flex items will all try to fit onto one line. You can change that and allow the items to wrap as needed with this property. Direction also plays a role here, determining the direction new lines are stacked in.</p>
-</blockquote>
-<p>默认情况，flex Item 首先会尝试将在一行放置所有 item。你可以根据需要更改这个属性使 Item 环绕。方向在这里也起到作用，决定新的线条的叠加方向。</p>
-<blockquote>
-<ul>
-<li>nowrap (default): single-line / left to right in ltr; right to left in rtl</li>
-<li>wrap: multi-line / left to right in ltr; right to left in rtl</li>
-<li>wrap-reverse: multi-line / right to left in ltr; left to right in rtl</li>
-</ul>
-</blockquote>
-<ul>
-<li>nowrap  (默认)：单行 / 左到右  (ltr)；右到左 (rtl)</li>
-<li>wrap：多行 / 左到右  (ltr)；右到左  (rtl)</li>
-<li>wrap-reverse：多行 / 右到左  (ltr)；左到右  (rtl)       </li>
-</ul>
-<h2 id="flex-flow_(Applies_to:_parent_flex_container_element)">flex-flow (Applies to: parent flex container element)</h2><blockquote>
-<p>This is a shorthand flex-direction and flex-wrap properties, which together define the flex container’s main and cross axes. Default is row nowrap.</p>
-</blockquote>
-<p>flex-direction 和 flex-wrap 属性的缩写，集合定义 flex Container 的 main 和 cross 轴。默认值是 row nowrap。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="rule"><span class="attribute">flex-flow</span>:<span class="value"> &lt;‘flex-direction’&gt; || &lt;‘flex-wrap’&gt;</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="justify-content">justify-content</h2><p><img src="./justify-content.svg" alt=""></p>
-<blockquote>
-<p>This defines the alignment along the main axis. It helps distribute extra free space left over when either all the flex items on a line are inflexible, or are flexible but have reached their maximum size. It also exerts some control over the alignment of items when they overflow the line.</p>
-</blockquote>
-<p>定义 main 轴的 Item 的对齐方式。这个属性帮助分配额外的自由空间，当线上的 flex Item 不够灵活或虽然灵活但达到最大尺寸。并且当 Item 超出了线的范围他也可以帮忙控制对齐。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">justify-content</span>:<span class="value"> flex-start | flex-end | center | space-between | space-around</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>flex-start (default): items are packed toward the start line</li>
-<li>flex-end: items are packed toward to end line</li>
-<li>center: items are centered along the line</li>
-<li>space-between: items are evenly distributed in the line; first item is on the start line, last item on the end line</li>
-<li>space-around: items are evenly distributed in the line with equal space around them. Note that visually the spaces aren’t equal, since all the items have equal space on both sides. The first item will have one unit of space against the container edge, but two units of space between the next item because that next item has its own spacing that applies.</li>
-</ul>
-</blockquote>
-<ul>
-<li>flex-start  (默认)： Item 从 start line 起包装</li>
-<li>flex-end： Item 从 end line 起包装</li>
-<li>center： Item 从 line 中心开始</li>
-<li>space-between： Item 尽可能占满 line，第一个 Item 在 start line ，最后一个 Item 在 end line</li>
-<li>space-around： Item 尽可能占满 line 并且彼此之间的距离相同。注意看起来是不相同的，因为所有的 Item 都有相同的空间在两侧，但第一个 Item 相对于 Container 只有一个单位的空间，但距离下一个 Item 有两个单位的空间因为下一个 Item 也有自己的单位空间。</li>
-</ul>
-<h2 id="align-items">align-items</h2><p><img src="./align-items.svg" alt=""></p>
-<blockquote>
-<p>This defines the default behaviour for how flex items are laid out along the cross axis on the current line. Think of it as the justify-content version for the cross-axis (perpendicular to the main-axis).</p>
-</blockquote>
-<p>定义 flex Item 在当前 line 如何沿着 cross aix 布局的默认行为。可以认为他是 justify-content 的 cross-axis 版本  (垂直于 main-axis)。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">align-items</span>:<span class="value"> flex-start | flex-end | center | baseline | stretch</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>flex-start: cross-start margin edge of the items is placed on the cross-start line</li>
-<li>flex-end: cross-end margin edge of the items is placed on the cross-end line</li>
-<li>center: items are centered in the cross-axis</li>
-<li>baseline: items are aligned such as their baselines align</li>
-<li>stretch (default): stretch to fill the container (still respect min-width/max-width)</li>
-</ul>
-</blockquote>
-<ul>
-<li>flex-start： Item 的 cross-start 外边距边缘放置 cross-start line</li>
-<li>flex-end：item 的 cross-end 外边距放置到 cross-end line</li>
-<li>center： Item 在 cross-axis 的中心</li>
-<li>baseline：对齐 items ，例如根据他们的 baseline 对齐</li>
-<li>stretch (默认) ：拉伸填充 Container   (仍遵循 min-width/max-width)</li>
-</ul>
-<h2 id="align-content">align-content</h2><p><img src="./align-content.svg" alt=""></p>
-<blockquote>
-<p>This aligns a flex container’s lines within when there is extra space in the cross-axis, similar to how justify-content aligns individual items within the main-axis.</p>
-</blockquote>
-<p>这个属性用作当 cross-axis 有额外的空间时对齐 Container 的 line，类似 justify-content 对齐 main-axis 中的单个 item。</p>
-<blockquote>
-<p>Note: this property has no effect when there is only one line of flex items.</p>
-</blockquote>
-<p>注意：当只有一条 flex Item 的 line 时这个属性不起作用。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">align-content</span>:<span class="value"> flex-start | flex-end | center | space-between | space-around | stretch</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>flex-start: lines packed to the start of the container</li>
-<li>flex-end: lines packed to the end of the container</li>
-<li>center: lines packed to the center of the container</li>
-<li>space-between: lines evenly distributed; the first line is at the start of the container while the last one is at the end</li>
-<li>space-around: lines evenly distributed with equal space around each line</li>
-<li>stretch (default): lines stretch to take up the remaining space</li>
-</ul>
-</blockquote>
-<ul>
-<li>flex-start： line 从 Container 的起始位置包装</li>
-<li>flex-end：line 从 Container 的结束位置包装</li>
-<li>center：line 在 Container 的中间包装</li>
-<li>space-between：line 尽可能分散；第一个 line 在 Container 的开始位置最后一个 line 在 Container 的结束位置</li>
-<li>space-around：line 尽可能分散并且彼此之间的空白空间相同</li>
-<li>stretch  (默认)：line 拉伸占据满剩余空间</li>
-</ul>
+<p>继续测试时才发现元素组合太多了，根本测试不完，理解原理才最关键，在后面的文章中学习。</p>
+<h3 id="负_margin_用途">负 margin 用途</h3><h4 id="负_margin_替代_relative/absolute">负 margin 替代 relative/absolute</h4><p>例如在 img 元素上显示另一个元素的内容，以前是用 relative 或 absolute 调整坐标的方式，现在也可以用负 margin 替代了。</p>
+<h4 id="Tab_选项卡">Tab 选项卡</h4><p>让元素上移一个像素点，使选项卡的下边界消失</p>
+<h4 id="鳞片式导航">鳞片式导航</h4><p>就是多个选项卡重叠在一起。</p>
 
       
     </div>
@@ -348,8 +195,6 @@
           
             <a href="/tags/前端/"> #前端 </a>
           
-            <a href="/tags/翻译/"> #翻译 </a>
-          
         </div>
       
 
@@ -357,13 +202,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/cijtdbkmx007ferf71ekb9zxe/">Basic Visual Formatting (三)</a>
+              <a href="/2016/cimgh4xjj0077y9jd5mo4i27d/">CSS Margin (二) Margin 与 block，inline 元素</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/cijtdbkmn007aerf7hy60kp6z/">Base Visual Formatting  (二)  Containing Block and Quick Refresher</a>
+              <a href="/2016/cimgh4xh8005uy9jd3ohb5e6e/">Grunt 介绍</a>
             
           </div>
         </div>
@@ -379,8 +224,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/cijtdbkkz006eerf7agd1qyfd/"
-               data-title="Flexbox 布局  (一) Container" data-url="http://yoursite.com/2016/cijtdbkkz006eerf7agd1qyfd/">
+          <div class="ds-thread" data-thread-key="2016/cimgh4xjl007cy9jdrxpnb5ni/"
+               data-title="CSS Margin (一) 负 Margin" data-url="http://yoursite.com/2016/cimgh4xjl007cy9jdrxpnb5ni/">
           </div>
         
       </div>
@@ -434,14 +279,14 @@
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -471,7 +316,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Background"><span class="nav-number">1.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basics_&_Terminology"><span class="nav-number">2.</span> <span class="nav-text">Basics & Terminology</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Properties_for_the_Parent_(flex_container)"><span class="nav-number">3.</span> <span class="nav-text">Properties for the Parent (flex container)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#display"><span class="nav-number">3.1.</span> <span class="nav-text">display</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-direction"><span class="nav-number">3.2.</span> <span class="nav-text">flex-direction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-wrap"><span class="nav-number">3.3.</span> <span class="nav-text">flex-wrap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex-flow_(Applies_to:_parent_flex_container_element)"><span class="nav-number">3.4.</span> <span class="nav-text">flex-flow (Applies to: parent flex container element)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#justify-content"><span class="nav-number">3.5.</span> <span class="nav-text">justify-content</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#align-items"><span class="nav-number">3.6.</span> <span class="nav-text">align-items</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#align-content"><span class="nav-number">3.7.</span> <span class="nav-text">align-content</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS_Margin_(一)_负_Margin"><span class="nav-number">1.</span> <span class="nav-text">CSS Margin (一) 负 Margin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#父子元素的关系"><span class="nav-number">1.1.1.</span> <span class="nav-text">父子元素的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试，_修改_A_的_margin："><span class="nav-number">1.1.1.1.</span> <span class="nav-text">测试， 修改 A 的 margin：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负_margin_用途"><span class="nav-number">1.1.2.</span> <span class="nav-text">负 margin 用途</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#负_margin_替代_relative/absolute"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">负 margin 替代 relative/absolute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tab_选项卡"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Tab 选项卡</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#鳞片式导航"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">鳞片式导航</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
