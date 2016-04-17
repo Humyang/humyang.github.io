@@ -1,0 +1,958 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> Redux (二) 快速使用 // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              Redux (二) 快速使用
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2016-04-16
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/Redux/">Redux</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/cin4kqs3r0005btjds643gktv/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/cin4kqs3r0005btjds643gktv/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>介绍如何快速上手 Redux。</p>
+<a id="more"></a>
+<hr>
+<h1 id="Redux_快速使用">Redux 快速使用</h1><p>上一篇文章用简单的文字介绍了 Action,Reducer，Store。</p>
+<p>现在配合代码详细介绍。</p>
+<h2 id="Action">Action</h2><p>Action 是原生的 JavaScript Object 类型，内部必须包含一个 type 属性，表明这个 Action 执行什么操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// action.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> ADD_MSG = <span class="string">'ADD_MSG'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// action creators</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">addMsg</span>(<span class="params">text,index</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        type:ADD_MSG,</span><br><span class="line">        text,</span><br><span class="line">        index,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里使用函数 <code>addMsg</code> 生成一个 Action，这样做的好处是可以动态修改 Action 的值。</p>
+<p>这个 Action 中有一个固定的属性 <code>type</code>，表明需要添加消息。</p>
+<p>剩下的属性可以自由定义，Reducer 会根据这些信息执行操作。</p>
+<p> <code>text,index</code> 是 ES 6 的写法，等同于<code>{text:text,index:index}</code>。</p>
+<h2 id="Reducer">Reducer</h2><p>Reducer 是纯函数，如  <code>(state, Action) =&gt; state</code>，通过  Action 将当前 State 转为下一个 State。</p>
+<p>一个应用程序只有一个根 Reducer。</p>
+<p>Reducer 执行完成后返回下一个 State，绝不允许直接改变当前 State。</p>
+<p>大型程序的不同模块想让不同函数 (Reducer) 处理，只能通过属性分隔。</p>
+<p>使用 ‘createStore’ 创建一个与 reducer 绑定的 Store，每次调用 Dispatch(Action)  都传递参数给 Reducer 并执行。</p>
+<p>Reducer 第一个参数是当前应用程序的 State，第二个参数是 Action 对象。</p>
+<p>下面的 State 由内容模块和历史纪录模块组成，分别由 ‘content’ 和 ‘history’ 函数生成。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// reducer/index.js</span><br><span class="line">import content from './content';</span><br><span class="line">import history from './history';</span><br><span class="line"></span><br><span class="line">export default function todoApp(state = 'INIT', action) &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        content: content(state.content, action),</span><br><span class="line">        history:history(state,action)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// reducer/content.js</span><br><span class="line">import &#123;</span><br><span class="line">    ADD_MSG,MOVE_TO_HISTORY</span><br><span class="line">&#125; from '../action';</span><br><span class="line"></span><br><span class="line">export default function content(state = [], action) &#123;</span><br><span class="line">    switch (action.type) &#123;</span><br><span class="line">        case ADD_MSG:</span><br><span class="line">            return [</span><br><span class="line">              ...state,</span><br><span class="line">              &#123;</span><br><span class="line">                  index: action.index + 1,</span><br><span class="line">                  text: action.text</span><br><span class="line">              &#125;</span><br><span class="line">            ]</span><br><span class="line">            case MOVE_TO_HISTORY:</span><br><span class="line"></span><br><span class="line">            return [&#123;text:''&#125;];</span><br><span class="line">        default:</span><br><span class="line">            return state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// store/index</span><br><span class="line">import rootReducer from '../reducer';</span><br><span class="line">const store = createStore(rootReducer,initialState);</span><br></pre></td></tr></table></figure>
+<p>Reducer 如果不执行必须返回当前 State。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    ADD_MSG</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'./action'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">inputBoard</span>(<span class="params">state = [], action</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">        <span class="keyword">case</span> ADD_MSG:</span><br><span class="line">        <span class="keyword">return</span> [</span><br><span class="line">          ...state,</span><br><span class="line">          &#123;</span><br><span class="line">              index: action.index + <span class="number">1</span>,</span><br><span class="line">              text: action.text</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="combineReducers">combineReducers</h3><p>Redux 提供了一个快速合并 Reducer 的函数 ‘combineReducers’</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">todoApp</span>(<span class="params">state = &#123;&#125;, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    visibilityFilter: visibilityFilter(state.visibilityFilter, action),</span><br><span class="line">    todos: todos(state.todos, action)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">const</span> todoApp = combineReducers(&#123;</span><br><span class="line">  visibilityFilter,</span><br><span class="line">  todos</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以指定不同的 Key</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> reducer = combineReducers(&#123;</span><br><span class="line">  a: doSomethingWithA,</span><br><span class="line">  b: processB,</span><br><span class="line">  c: c</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reducer</span>(<span class="params">state = &#123;&#125;, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    a: doSomethingWithA(state.a, action),</span><br><span class="line">    b: processB(state.b, action),</span><br><span class="line">    c: c(state.c, action)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ES_6_语法">ES 6 语法</h3><p>使用 ES 6 可以更近一步简化程序，因为 combineReducers 需要的是一个对象，可以使用 ES 6 的 ‘ * ‘ 导入所有内容到一个对象中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> reducers <span class="keyword">from</span> <span class="string">'./reducers'</span></span><br><span class="line"></span><br><span class="line">const todoApp = combineReducers(reducers)</span><br></pre></td></tr></table></figure>
+<h2 id="Store">Store</h2><p>Store 是连接 Action 和 Reducer 的桥梁。</p>
+<p>他的职责有：</p>
+<ul>
+<li>保存应用程序状态</li>
+<li>允许通过 getState() 获取状态</li>
+<li>运行通过 dispatch(action) 更新状态</li>
+<li>通过 subscribe(listener) 主持监听方法</li>
+<li>通过 subscribe(listener) 方法返回的监听器，清除监听方法。</li>
+</ul>
+<p>注意整个应用程序只有一个 Store，如果不同的数据相分别处理，请使用 <a href="http://redux.js.org/docs/basics/Reducers.html#splitting-reducers" target="_blank" rel="external">Reducer 组合</a> 的方式代替创建多个 Store。</p>
+<h3 id="创建_Store">创建 Store</h3><p>上面的章节中我们已经使用 <code>combineReducers()</code> 将多个 Reducer 合并成一个并且导出，现在我们使用这个 Reducer 创建 Store。<br>createStore 第二个参数可以传入 State 初始值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">import</span> todoApp <span class="keyword">from</span> <span class="string">'./reducers'</span></span><br><span class="line">let store = createStore(todoApp)</span><br></pre></td></tr></table></figure>
+<p>创建完成 Store 之后，我们就可以在任意位置使用 <code>getState</code>，<code>subscribe</code> 和 <code>dispatch</code> 了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; addTodo, completeTodo, setVisibilityFilter, VisibilityFilters &#125; <span class="keyword">from</span> <span class="string">'./actions'</span></span><br><span class="line"></span><br><span class="line">// Log the initial state</span><br><span class="line">console.log(store.getState())</span><br><span class="line"></span><br><span class="line">// Every time the state changes, log it</span><br><span class="line">// Note that subscribe() returns a function for unregistering the listener</span><br><span class="line">let unsubscribe = store.subscribe(() =&gt;</span><br><span class="line">  console.log(store.getState())</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">// Dispatch some actions</span><br><span class="line">store.dispatch(addTodo(<span class="string">'Learn about actions'</span>))</span><br><span class="line">store.dispatch(addTodo(<span class="string">'Learn about reducers'</span>))</span><br><span class="line">store.dispatch(addTodo(<span class="string">'Learn about store'</span>))</span><br><span class="line">store.dispatch(completeTodo(0))</span><br><span class="line">store.dispatch(completeTodo(1))</span><br><span class="line">store.dispatch(setVisibilityFilter(VisibilityFilters.SHOW_COMPLETED))</span><br><span class="line"></span><br><span class="line">// Stop listening to state updates</span><br><span class="line">unsubscribe()</span><br></pre></td></tr></table></figure>
+<h2 id="数据流">数据流</h2><p>Redux 程序遵循严格的单向数据流。</p>
+<p>这意味着应用程序内所有数据都拥有相同的生命周期模式，这样你的应用程序更加易懂和可预测，也确保了数据的标准化，你不再需要拷贝多个相同的数据彼此单独处理了。</p>
+<p>如果你仍不放心，阅读 <a href="http://redux.js.org/docs/introduction/Motivation.html" target="_blank" rel="external">Motivation</a> 和 <a href="https://medium.com/@dan_abramov/the-case-for-flux-379b7d1982c6" target="_blank" rel="external">The Case for Flux</a> 了解关于单向数据流完整的讨论。尽管 Redux 不完全于 Flux 一样，但他有相同的好处。</p>
+<p>Redux 中数据的生命周期有四步:</p>
+<ol>
+<li>调用 <code>store.dispatch(action)</code>。</li>
+</ol>
+<p>你可以在应用程序的任意位置调用 <code>dispatch</code>，包括组件内和 XHR 回调方法，甚至在定时器内。</p>
+<ol>
+<li>Redux Store 调用你传入 Reducer 方法。</li>
+</ol>
+<p>Store 会传递两个参数给 Reducer:当前 State 和 Action。</p>
+<p>注意 Reducer 是纯函数，他只用来计算下一个 State，他应该是完全可预测的，输入过的内容要在任意时候都能确保相同。他不应该执行任何有副作用的 API 例如 Router 转换，这些应该发生于 Action 被 Dispatch 之前。</p>
+<ol>
+<li>根 Reducer 可以合并多个 Reducer 的输出到单个 State 树。</li>
+</ol>
+<p>你的根 Reducer 的结构完全取决于你，Redux 提供了 <a href="http://redux.js.org/docs/api/combineReducers.html" target="_blank" rel="external">combineReducers()</a> 辅助函数将多个处理 State 树分支的 Reducer 组合成一个 Reducer。</p>
+<p>当你触发 Action 时，由 <code>combineReducers()</code> 返回的 Reducer 将会调用所有已组合的 Reducer，这些 Reducer 返回的结果会组合成一个单独的 State 树。</p>
+<ol>
+<li>Redux Store 更新由根 Reducer 返回的新的 State。</li>
+</ol>
+<p>现在新的树是应用程序的下一个 State！每个 <code>store.subscribe(listener)</code> 返回的监听器都会被调用；在监听器内能调用 store.getState() 获取当前 State。</p>
+<p>然后 UI 会根据新的 state 而被更新。如果你使用 React Redux，这等同于 React 中的 <code>component.setState(newState)</code> 被调用。</p>
+<h2 id="下一步">下一步</h2><p>现在你已经了解 Redux 的基础用法了，接下来我们准备配合 React 使用。</p>
+<blockquote>
+<p>更高级的使用者：如果你已经熟悉基础概念并完成了这个指南，不要忘记去<a href="http://redux.js.org/docs/advanced/index.html" target="_blank" rel="external">高级指南</a> 的 <a href="http://redux.js.org/docs/advanced/AsyncFlow.html" target="_blank" rel="external">async flow</a> 学习当中间件在 <a href="http://redux.js.org/docs/advanced/AsyncActions.html" target="_blank" rel="external">async action</a> 到达 reducer 之前是如何转换的。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/cin4kqs420009btjd6qfdthw1/">Redux (三) 与 React 共同工作</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/cin4kqrx00000btjdyf7w2u3v/">Redux (一) 介绍</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2016/cin4kqs3r0005btjds643gktv/"
+               data-title="Redux (二) 快速使用" data-url="http://yoursite.com/2016/cin4kqs3r0005btjds643gktv/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux_快速使用"><span class="nav-number">1.</span> <span class="nav-text">Redux 快速使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Action"><span class="nav-number">1.1.</span> <span class="nav-text">Action</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reducer"><span class="nav-number">1.2.</span> <span class="nav-text">Reducer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#combineReducers"><span class="nav-number">1.2.1.</span> <span class="nav-text">combineReducers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES_6_语法"><span class="nav-number">1.2.2.</span> <span class="nav-text">ES 6 语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Store"><span class="nav-number">1.3.</span> <span class="nav-text">Store</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建_Store"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建 Store</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据流"><span class="nav-number">1.4.</span> <span class="nav-text">数据流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下一步"><span class="nav-number">1.5.</span> <span class="nav-text">下一步</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62263979-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>
