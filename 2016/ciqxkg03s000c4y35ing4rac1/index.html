@@ -1,0 +1,967 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+
+
+  <title> Redux (五) Middleware // Humyang </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Humyang</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+     
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          首页
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              Redux (五) Middleware
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2016-07-22
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/前端/">前端</a>
+
+              
+              
+                ， 
+              
+
+            
+              <a href="/categories/前端/Redux/">Redux</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/ciqxkg03s000c4y35ing4rac1/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/ciqxkg03s000c4y35ing4rac1/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>介绍 Redux middleware 的原理</p>
+<a id="more"></a>
+<hr>
+<p><a href="http://redux.js.org/docs/advanced/Middleware.html" target="_blank" rel="external">原文地址</a></p>
+<h1 id="Middleware">Middleware</h1><p>你已经在 <a href="http://redux.js.org/docs/advanced/AsyncActions.html" target="_blank" rel="external">Async Action</a> 的例子对 middleware 有了一些了解。如果你使用过服务端的库如 <a href="http://expressjs.com/" target="_blank" rel="external">Express</a> 和 <a href="http://koajs.com/" target="_blank" rel="external">Koa</a>，你应该已经对 middleware 非常熟悉。在这些框架中，通过 middleware 使你可以在框架收到请求之前和响应请求这段时间做一些事情。例如，Express 或 Koa middleware 可以添加 CORS headers，logging，compression 和更多。middleware 最有用的功能是能以队列的方式组合多个 middleware。你可以在单独的项目中使用多个独立的第三方的 middleware。</p>
+<p>Redux 的 middleware 用于解决与 Express 或 Koa 不同的问题，但概念相似。他提供的第三方拓展了 dispatch action 后和到达 reducer 这段时间的处理。通过使用 Redux middleware 可以实现输出日志，异常捕获，编写异步 API，路由功能和其他更多。</p>
+<p>这篇文章首先带你深入理解 middleware 的概念，然后在结尾给出一些非常<a href="http://redux.js.org/docs/advanced/Middleware.html#seven-examples" target="_blank" rel="external">实用的例子</a>展示 middleware 的强大功能。当你感到困惑时，你可以来回切换对比两部分内容。</p>
+<h2 id="认识_Middleware">认识 Middleware</h2><p>middleware 可以用来做各种各样的事情，其中就包含异步 API 调用，弄清楚他的演变过程对于理解 middleware 非常重要。我会指引你走过 middleware 重构路程，我们以日志输出和异常捕获的 middleware 为例子。</p>
+<h3 id="日志问题">日志问题</h3><p>redux 的一个优点是 state 的变化是可预测的和透明的。每当一个 action 被 dispatch，新的 state 会被计算出来并保存。state 不能被自己更改，只能被特定的 action 经过 reducer 更改。</p>
+<p>有一个不方便的地方，如果我想为每个 dispatch 的 action 输出日志，并且同时输出计算之后的 state 值？有时程序会出现异常，我想在发生之前输出日志，察看是哪一个 action 引发的。</p>
+<p><img src="/images/2016/06/1-1.png" alt=""></p>
+<p>在 redux 要用什么途径实现？</p>
+<h3 id="尝试_#1：手动输出日志">尝试 #1：手动输出日志</h3><p>最原始的解决方案是在每个 dispatch 的调用位置前后手动输出日志，这不是实际的解决方案，但这是处理问题的第一步。</p>
+<blockquote>
+<p>注意<br>如果你使用 react-redux 或类似的绑定方式，你可能不会直接在组件访问 store 实例。为了下面章节的内容，请假设已经显示向组件传递 store。</p>
+</blockquote>
+<p>例如，你使用这段代码创建 todo 项：</p>
+<p><code>store.dispatch(addTodo(&#39;Use Redux&#39;))</code></p>
+<p>输出 action 和 state，你可以用这种方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> action = addTodo(<span class="string">'Use Redux'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'dispatching'</span>, action)</span><br><span class="line">store.dispatch(action)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'next state'</span>, store.getState())</span><br></pre></td></tr></table></figure>
+<p>达到了期望的效果，但你不会想写大量重复代码的。</p>
+<h3 id="尝试_#2：包装_Dispatch">尝试 #2：包装 Dispatch</h3><p>你可以用一个函数包装这段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dispatchAndLog</span>(<span class="params">store, action</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'dispatching'</span>, action)</span><br><span class="line">  store.dispatch(action)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'next state'</span>, store.getState())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>替换每个调用 <code>store.dispatch()</code> 的位置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dispatchAndLog(store, addTodo(<span class="string">'Use Redux'</span>))</span><br></pre></td></tr></table></figure>
+<p>我们本可在这里停下来，但每次添加新的功能时非常不方便。</p>
+<h3 id="尝试_#3：Monkeypatching_Dispatch">尝试 #3：Monkeypatching Dispatch</h3><p>如果我们替换 store 实例的 dispatch function 会怎么样？因为 Redux store 是原生的 object 带有<a href="http://redux.js.org/docs/api/Store.html" target="_blank" rel="external">少量方法</a>，而且我们写的是 JavaScript，因此我们可以用 monkeypatch <code>dispatch</code> 的方式实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> next = store.dispatch</span><br><span class="line">store.dispatch = <span class="function"><span class="keyword">function</span> <span class="title">dispatchAndLog</span>(<span class="params">action</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'dispatching'</span>, action)</span><br><span class="line">  <span class="keyword">let</span> result = next(action)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'next state'</span>, store.getState())</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里已经非常接近我们想要的功能！当我们 dispatch action 时，他可以保证日志正确的输出。Monkeypatching 的方式感觉不是很正确，但我们现在可以享受一会。</p>
+<h3 id="问题：异常捕获">问题：异常捕获</h3><p>如果我们想在 dispatch 中添加不仅一种处理怎么办？</p>
+<p>一种不同用途但实用的操作是在生产环境捕获 JavaScript 抛出的异常。全局的 <code>window.onerror</code> 事件不太可靠，因为在旧浏览器中他不提供堆栈信息，这无法让人知道错误为什么发生。</p>
+<p>因为他的作用不大，我们可以在 dispatch action 导致错误发生时，可以将导致错误发生的 action，当前 state，和堆栈追踪发送到异常捕获服务例如 <a href="https://getsentry.com/welcome/" target="_blank" rel="external">Sentry</a> 。这种方式更容易把错误告知开发者。</p>
+<p>无论如何，保存日志输出和异常报告功能分离是非常重要的。理想情况下我们想他们分别位于不同模块，甚至在不同的 packages。否则我们无法拥有一个健壮的生态系统。(暗示：我们将慢慢知道什么是 middleware！)</p>
+<p> 如果日志输出和异常报告彼此分离，他们可能像这样的：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">patchStoreToAddLogging</span>(<span class="params">store</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> next = store.dispatch</span><br><span class="line">  store.dispatch = <span class="function"><span class="keyword">function</span> <span class="title">dispatchAndLog</span>(<span class="params">action</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'dispatching'</span>, action)</span><br><span class="line">    <span class="keyword">let</span> result = next(action)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'next state'</span>, store.getState())</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">patchStoreToAddCrashReporting</span>(<span class="params">store</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> next = store.dispatch</span><br><span class="line">  store.dispatch = <span class="function"><span class="keyword">function</span> <span class="title">dispatchAndReportErrors</span>(<span class="params">action</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> next(action)</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">'Caught an exception!'</span>, err)</span><br><span class="line">      Raven.captureException(err, &#123;</span><br><span class="line">        extra: &#123;</span><br><span class="line">          action,</span><br><span class="line">          state: store.getState()</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="keyword">throw</span> err</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果这些 function 被发布为单独的 module，我们稍后可以使用他们对 store 打补丁：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">patchStoreToAddLogging(store)</span><br><span class="line">patchStoreToAddCrashReporting(store)</span><br></pre></td></tr></table></figure>
+<p>现在，还是不很优雅。</p>
+<h3 id="尝试_#4:隐藏_Monkeypatching">尝试 #4:隐藏 Monkeypatching</h3><p>Monkeypatching 是 hack 的行为。“根据喜好替换任何方法”，这是什么类型的 API？让我们从本质上修改。前面我们的 function 替换了 <code>store.dispatch</code>。如果他返回一个新的 dispatch function 代替会怎么样？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logger</span>(<span class="params">store</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> next = store.dispatch</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Previously:</span></span><br><span class="line">  <span class="comment">// store.dispatch = function dispatchAndLog(action) &#123;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">dispatchAndLog</span>(<span class="params">action</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'dispatching'</span>, action)</span><br><span class="line">    <span class="keyword">let</span> result = next(action)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'next state'</span>, store.getState())</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以在 Redux 内部提供一个辅助方法使我们可以应用实际的 monkeypatching，实现细节如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">applyMiddlewareByMonkeypatching</span>(<span class="params">store, middlewares</span>) </span>&#123;</span><br><span class="line">  middlewares = middlewares.slice()</span><br><span class="line">  middlewares.reverse()</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Transform dispatch function with each middleware.</span></span><br><span class="line">  middlewares.forEach(middleware =&gt;</span><br><span class="line">    store.dispatch = middleware(store)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以用他实现应用多个 middleware 如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">applyMiddlewareByMonkeypatching(store, [ logger, crashReporter ])</span><br></pre></td></tr></table></figure>
+<p>但这样还是 monkeypatching。</p>
+<p>事实上我们将他隐藏到了库中并不能改变这个事实。</p>
+<h3 id="尝试_#5:移除_Monkeypatching。">尝试 #5:移除 Monkeypatching。</h3><p>为什么我们还要覆盖 <code>dispatch</code>？当然，可以在稍后调用他，但也有另一个原因：每个 middleware 可以访问 (和调用) 前一个被包裹的 <code>store.dispatch</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logger</span>(<span class="params">store</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Must point to the function returned by the previous middleware:</span></span><br><span class="line">  <span class="keyword">let</span> next = store.dispatch</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">dispatchAndLog</span>(<span class="params">action</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'dispatching'</span>, action)</span><br><span class="line">    <span class="keyword">let</span> result = next(action)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'next state'</span>, store.getState())</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是最简单的 middleware 队列！</p>
+<p>但如果 <code>applyMiddlewareByMonkeypatching</code> 处理了第一个 middleware 后不直接绑定到 <code>store.dispatch</code>，<code>store.dispatch</code> 将会保持原始 <code>dispatch</code> function 的引用。然后第二个 middleware 也会绑定到原始的 dispatch function，这时直接使用 <code>store.dispatch</code> 就导致第一个 middleware 丢失。</p>
+<p>但这里有不同的方式启用队列。middleware 可以接收 <code>next()</code> 做为 dispatch function ，而不是直接从 store 实例读取。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logger</span>(<span class="params">store</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">wrapDispatchToAddLogging</span>(<span class="params">next</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">dispatchAndLog</span>(<span class="params">action</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'dispatching'</span>, action)</span><br><span class="line">      <span class="keyword">let</span> result = next(action)</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'next state'</span>, store.getState())</span><br><span class="line">      <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在是 “好好学习” 的时间，可能需要一段时间才能理解。function 的级连有些吓人。ES 6 的箭头 function 可以使他更直观：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> logger = store =&gt; next =&gt; action =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'dispatching'</span>, action)</span><br><span class="line">  <span class="keyword">let</span> result = next(action)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'next state'</span>, store.getState())</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> crashReporter = store =&gt; next =&gt; action =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> next(action)</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">'Caught an exception!'</span>, err)</span><br><span class="line">    Raven.captureException(err, &#123;</span><br><span class="line">      extra: &#123;</span><br><span class="line">        action,</span><br><span class="line">        state: store.getState()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">throw</span> err</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Redux middleware 就是这样实现的。</strong></p>
+<p>现在 middleware 使用 <code>next()</code> 作为 dispatch function，并返回一个 dispatch function，反过来充当下一个 middleware 的 <code>next()</code>，等等执行下去。这对访问一些 store 方法很方便例如 <code>getState()</code>，因为 <code>store</code> 是作为顶层参数所以始终可用。</p>
+<h3 id="尝试_#6：原生方式应用_Middleware">尝试 #6：原生方式应用 Middleware</h3><p>我们可以使用 <code>applyMiddleware()</code> 替代 <code>applyMiddlewareByMonkeypatching()</code>，他完全包裹了 <code>dispatch()</code> function，并返回所使用的 store 的副本：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Warning: Naïve implementation!</span></span><br><span class="line"><span class="comment">// That's *not* Redux API.</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">applyMiddleware</span>(<span class="params">store, middlewares</span>) </span>&#123;</span><br><span class="line">  middlewares = middlewares.slice()</span><br><span class="line">  middlewares.reverse()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> dispatch = store.dispatch</span><br><span class="line">  middlewares.forEach(middleware =&gt;</span><br><span class="line">    dispatch = middleware(store)(dispatch)</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.assign(&#123;&#125;, store, &#123; dispatch &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://redux.js.org/docs/api/applyMiddleware.html" target="_blank" rel="external">applyMiddleware ()</a> 的传送方式实现与 Redux 非常相似，但有三处重要的方面不一样：</p>
+<pre><code><span class="bullet">- </span>他只暴露 [<span class="link_label">store API</span>](<span class="link_url">http://redux.js.org/docs/api/Store.html</span>) 的子集给 middleware ：[<span class="link_label">dispatch(action)</span>](<span class="link_url">http://redux.js.org/docs/api/Store.html#dispatch</span>) 和 [<span class="link_label">getState()</span>](<span class="link_url">http://redux.js.org/docs/api/Store.html#getState</span>)。
+<span class="bullet">- </span>他有点言行不一，如果你在 middleware 调用 <span class="code">`store.dispatch(action)`</span> 而不是调用  <span class="code">`next(action)`</span>，action 实际会再次遍历整个 middleware 队列,包括当前 middleware。这对 asynchronous middleware 非常有用，例如我们[<span class="link_label">之前的文章所讨论</span>](<span class="link_url">http://redux.js.org/docs/advanced/AsyncActions.html</span>)。
+<span class="bullet">- </span>要确保你只应用 middleware 一次，他会运行在 <span class="code">`createStore()`</span> 而不是在 store 自身。替代了  <span class="code">`(store, middlewares) =&gt; store`</span>，他的签名是 <span class="code">`(...middlewares) =&gt; (createStore) =&gt; createStore`</span>。
+</code></pre><p>因为在 <code>createStore()</code> 使用前应用 function 太笨重，<code>createStore()</code> 最后一个参数是可选特定用来接收这样的 function。</p>
+<h3 id="最终实现">最终实现</h3><p>我们写好的 middleware：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> logger = store =&gt; next =&gt; action =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'dispatching'</span>, action)</span><br><span class="line">  <span class="keyword">let</span> result = next(action)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'next state'</span>, store.getState())</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> crashReporter = store =&gt; next =&gt; action =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> next(action)</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">'Caught an exception!'</span>, err)</span><br><span class="line">    Raven.captureException(err, &#123;</span><br><span class="line">      extra: &#123;</span><br><span class="line">        action,</span><br><span class="line">        state: store.getState()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">throw</span> err</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如何应用他们到 Redux store：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStore, combineReducers, applyMiddleware &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"></span><br><span class="line">let todoApp = combineReducers(reducers)</span><br><span class="line">let store = createStore(</span><br><span class="line">  todoApp,</span><br><span class="line">  // applyMiddleware() tells createStore() how to handle middleware</span><br><span class="line">  applyMiddleware(logger, crashReporter)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>就是这样！现在任何 dispatch 的 action 到 store 实例都会经过 <code>logger</code> 和 <code>crashReporter</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Will flow through both logger and crashReporter middleware!</span></span><br><span class="line">store.dispatch(addTodo(<span class="string">'Use Redux'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="redux-thunk_的总结">redux-thunk 的总结</h2><p>redux-thunk</p>
+<p>Any return value from the inner function will be available as the return value of dispatch itself.</p>
+<p>The thunk can be used to delay the dispatch of an action, or to dispatch only if a certain condition is met. The inner function receives the store methods dispatch and getState as parameters.</p>
+<h2 id="七个例子">七个例子</h2><p>如果你对上面的章节感到混乱，想知道还有哪些类似的写法。这个章节为你和我解决这个问题，帮助你快速解开困惑。</p>
+<p>下面每一个都是有效的 Redux middleware。他们不是都很有用，但至少它们读起来很愉快。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * Logs all actions and states after they are dispatched.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">const</span> logger = store =&gt; next =&gt; action =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.group(action.type)</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">'dispatching'</span>, action)</span><br><span class="line">  <span class="keyword">let</span> result = next(action)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'next state'</span>, store.getState())</span><br><span class="line">  <span class="built_in">console</span>.groupEnd(action.type)</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Sends crash reports as state is updated and listeners are notified.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">const</span> crashReporter = store =&gt; next =&gt; action =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> next(action)</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">'Caught an exception!'</span>, err)</span><br><span class="line">    Raven.captureException(err, &#123;</span><br><span class="line">      extra: &#123;</span><br><span class="line">        action,</span><br><span class="line">        state: store.getState()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">throw</span> err</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Schedules actions with &#123; meta: &#123; delay: N &#125; &#125; to be delayed by N milliseconds.</span><br><span class="line"> * Makes `dispatch` return a function to cancel the timeout in this case.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">const</span> timeoutScheduler = store =&gt; next =&gt; action =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (!action.meta || !action.meta.delay) &#123;</span><br><span class="line">    <span class="keyword">return</span> next(action)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> timeoutId = setTimeout(</span><br><span class="line">    () =&gt; next(action),</span><br><span class="line">    action.meta.delay</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">cancel</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    clearTimeout(timeoutId)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Schedules actions with &#123; meta: &#123; raf: true &#125; &#125; to be dispatched inside a rAF loop</span><br><span class="line"> * frame.  Makes `dispatch` return a function to remove the action from the queue in</span><br><span class="line"> * this case.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">const</span> rafScheduler = store =&gt; next =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> queuedActions = []</span><br><span class="line">  <span class="keyword">let</span> frame = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">loop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    frame = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (queuedActions.length) &#123;</span><br><span class="line">        next(queuedActions.shift())</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      maybeRaf()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">maybeRaf</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (queuedActions.length &amp;&amp; !frame) &#123;</span><br><span class="line">      frame = requestAnimationFrame(loop)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> action =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!action.meta || !action.meta.raf) &#123;</span><br><span class="line">      <span class="keyword">return</span> next(action)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    queuedActions.push(action)</span><br><span class="line">    maybeRaf()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">cancel</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      queuedActions = queuedActions.filter(a =&gt; a !== action)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Lets you dispatch promises in addition to actions.</span><br><span class="line"> * If the promise is resolved, its result will be dispatched as an action.</span><br><span class="line"> * The promise is returned from `dispatch` so the caller may handle rejection.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">const</span> vanillaPromise = store =&gt; next =&gt; action =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> action.then !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> next(action)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(action).then(store.dispatch)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Lets you dispatch special actions with a &#123; promise &#125; field.</span><br><span class="line"> *</span><br><span class="line"> * This middleware will turn them into a single action at the beginning,</span><br><span class="line"> * and a single success (or failure) action when the `promise` resolves.</span><br><span class="line"> *</span><br><span class="line"> * For convenience, `dispatch` will return the promise so the caller can wait.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">const</span> readyStatePromise = store =&gt; next =&gt; action =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (!action.promise) &#123;</span><br><span class="line">    <span class="keyword">return</span> next(action)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">makeAction</span>(<span class="params">ready, data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> newAction = <span class="built_in">Object</span>.assign(&#123;&#125;, action, &#123; ready &#125;, data)</span><br><span class="line">    <span class="keyword">delete</span> newAction.promise</span><br><span class="line">    <span class="keyword">return</span> newAction</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  next(makeAction(<span class="literal">false</span>))</span><br><span class="line">  <span class="keyword">return</span> action.promise.then(</span><br><span class="line">    result =&gt; next(makeAction(<span class="literal">true</span>, &#123; result &#125;)),</span><br><span class="line">    error =&gt; next(makeAction(<span class="literal">true</span>, &#123; error &#125;))</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Lets you dispatch a function instead of an action.</span><br><span class="line"> * This function will receive `dispatch` and `getState` as arguments.</span><br><span class="line"> *</span><br><span class="line"> * Useful for early exits (conditions over `getState()`), as well</span><br><span class="line"> * as for async control flow (it can `dispatch()` something else).</span><br><span class="line"> *</span><br><span class="line"> * `dispatch` will return the return value of the dispatched function.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">const</span> thunk = store =&gt; next =&gt; action =&gt;</span><br><span class="line">  <span class="keyword">typeof</span> action === <span class="string">'function'</span> ?</span><br><span class="line">    action(store.dispatch, store.getState) :</span><br><span class="line">    next(action)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// You can use all of them! (It doesn’t mean you should.)</span></span><br><span class="line"><span class="keyword">let</span> todoApp = combineReducers(reducers)</span><br><span class="line"><span class="keyword">let</span> store = createStore(</span><br><span class="line">  todoApp,</span><br><span class="line">  applyMiddleware(</span><br><span class="line">    rafScheduler,</span><br><span class="line">    timeoutScheduler,</span><br><span class="line">    thunk,</span><br><span class="line">    vanillaPromise,</span><br><span class="line">    readyStatePromise,</span><br><span class="line">    logger,</span><br><span class="line">    crashReporter</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/"> #前端 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/3015/FrontEndNavigation/">前端 EXAMPLE 导航</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/ciqxkg03900084y350d1h2q9j/">Redux (四) Async Actions</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2016/ciqxkg03s000c4y35ing4rac1/"
+               data-title="Redux (五) Middleware" data-url="http://yoursite.com/2016/ciqxkg03s000c4y35ing4rac1/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Humyang" />
+          <p class="site-author-name">Humyang</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">64</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/yspace" target="_blank">weibo</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Middleware"><span class="nav-number">1.</span> <span class="nav-text">Middleware</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#认识_Middleware"><span class="nav-number">1.1.</span> <span class="nav-text">认识 Middleware</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日志问题"><span class="nav-number">1.1.1.</span> <span class="nav-text">日志问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试_#1：手动输出日志"><span class="nav-number">1.1.2.</span> <span class="nav-text">尝试 #1：手动输出日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试_#2：包装_Dispatch"><span class="nav-number">1.1.3.</span> <span class="nav-text">尝试 #2：包装 Dispatch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试_#3：Monkeypatching_Dispatch"><span class="nav-number">1.1.4.</span> <span class="nav-text">尝试 #3：Monkeypatching Dispatch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题：异常捕获"><span class="nav-number">1.1.5.</span> <span class="nav-text">问题：异常捕获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试_#4:隐藏_Monkeypatching"><span class="nav-number">1.1.6.</span> <span class="nav-text">尝试 #4:隐藏 Monkeypatching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试_#5:移除_Monkeypatching。"><span class="nav-number">1.1.7.</span> <span class="nav-text">尝试 #5:移除 Monkeypatching。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试_#6：原生方式应用_Middleware"><span class="nav-number">1.1.8.</span> <span class="nav-text">尝试 #6：原生方式应用 Middleware</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终实现"><span class="nav-number">1.1.9.</span> <span class="nav-text">最终实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redux-thunk_的总结"><span class="nav-number">1.2.</span> <span class="nav-text">redux-thunk 的总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七个例子"><span class="nav-number">1.3.</span> <span class="nav-text">七个例子</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">Humyang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"humyang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62263979-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+</body>
+</html>
